@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About the Theme
+title: About EunmiÄá
 tags: [about, Jekyll, theme, moon]
 date: 2016-03-21
 comments: false
@@ -9,7 +9,7 @@ comments: false
 <center><a href="http://taylantatli.github.io/Moon"><b>Moon</b></a> is a minimal, one column jekyll theme.</center>
 
 ## Features
-* Miniìœ¼ã…—ã…Žë¡œã…“can focus on your content
+* Mini?¼ã…—?Žë¡œ?“can focus on your content
 * Responsive
 * Disqus integration
 * Syntax highlighting
