@@ -32,4 +32,4 @@ See a [live version of Moon](http://taylantatli.github.io/Moon) hosted on GitHub
 
 Check it out my beautiful projects.
       
-[Eunmi's ArtWorks](https://github.com/bonita/projects){: .btn}
+[Eunmi's ArtWorks](https://eunmik.github.io/bonita/projects/){: .btn}
