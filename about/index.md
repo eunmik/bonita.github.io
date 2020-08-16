@@ -6,10 +6,10 @@ date: 2016-03-21
 comments: false
 ---
     
-<center><a href="http://taylantatli.github.io/Moon"><b>Moon</b></a> is a minimal, one column jekyll theme.</center>
+<center><a href="https://eunmik.github.io/bonita/"><b>EunmiÄá</b></a> is a laid back and adventurous traveller.</center>
 
 ## Features
-* Mini?¼ã…—?Žë¡œ?“can focus on your content
+* Minian focus on your content
 * Responsive
 * Disqus integration
 * Syntax highlighting
