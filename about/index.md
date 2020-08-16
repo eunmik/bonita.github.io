@@ -1,26 +1,24 @@
 ---
 layout: page
-title: About EunmiÄá
+title: About Eunmi K
 tags: [about, Jekyll, theme, moon]
 date: 2016-03-21
 comments: false
 ---
     
-<center><a href="https://eunmik.github.io/bonita/"><b>EunmiÄá</b></a> is a laid back and adventurous traveller.</center>
+<center><a href="https://eunmik.github.io/bonita/"><b>Eunmi K</b></a> is a laid back and adventurous traveller.</center>
 
 ## Features
-* Minian focus on your content
-* Responsive
-* Disqus integration
-* Syntax highlighting
-* Optional post image
-* Social icons
-* Page for sharing projects
-* Optional background image
-* Simple navigation menu
-* MathJax support
+* Java
+* Python
+* HTML
+* JavaScript
+* Korean Speaking 
+* English Speaking
+* Spanish Speaking
+* Ocean lover
 
-## Preview
+## Photo 
 
 {% capture images %}
     https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png
@@ -30,8 +28,8 @@ comments: false
 
 See a [live version of Moon](http://taylantatli.github.io/Moon) hosted on GitHub.
 
-## Getting Started
+## Getting to know me 
 
-To learn how to install and use this theme check out the [Setup Guide](http://taylantatli.me/Moon/moon-theme/) for more information.
+Check it out my beautiful projects.
       
-[Install Moon](https://github.com/TaylanTatli/Moon){: .btn}
+[Eunmi's ArtWorks](https://github.com/bonita/projects){: .btn}
