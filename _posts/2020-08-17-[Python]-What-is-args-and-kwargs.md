@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [Python] What is *args and **kwargs?
+title: "[Python] What is *args and **kwargs?"
 date: 2020-08-17
 excerpt: "Let's learn about these two special syntaxes."
 tags: [python, code]
