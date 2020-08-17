@@ -27,7 +27,6 @@ def plus(param, *args, **kwargs):
   #1,2,3,1,2,3,1,2,3
   print(type(*args))
   #TypeError: type() takes 1 or 3 arguments
-
   print(kwargs)
   #{'elfd': 123, 'leof': True, 'alwkr': 'awer'}
   print(type(kwargs))
