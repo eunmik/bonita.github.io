@@ -9,8 +9,8 @@ comments: true
 
 
 <figure class="half">
-	<a href="/assets/img/fruit-waste-cover.png"><img src="/assets/img/fruit-waste-cover.png"></a>
-  <a href="/assets/img/fruit-waste-content.jpg"><img src="/assets/img/fruit-waste-content.jpg"></a>
+	<a href="https://eunmik.github.io/bonita/assets/img/fruit-waste-cover.png"><img src="https://eunmik.github.io/bonita/assets/img/fruit-waste-cover.png"></a>
+  <a href="https://eunmik.github.io/bonita/assets/img/fruit-waste-content.jpg"><img src="https://eunmik.github.io/bonita/assets/img/fruit-waste-content.jpg"></a>
 
 </figure>
 
