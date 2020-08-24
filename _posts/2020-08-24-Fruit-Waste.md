@@ -10,27 +10,39 @@ comments: true
 
 <figure>
 	<a href="/assets/img/fruit-waste-cover.png"><img src="/assets/img/fruit-waste-cover.png"></a>
-  <a href="/assets/img/fruit-waste-content.png"><img src="/assets/img/fruit-waste-content.png"></a>
+  <a href="/assets/img/fruit-waste-content.jpg"><img src="/assets/img/fruit-waste-content.png"></a>
 
 </figure>
 
 #### [알아보자] 과일 일쓰?음쓰?🍑🍉🍈 
 #### [DYK] fruits are food waste? or not? (English Version Below👇)
-⠀
-여름 대표 과일 수박🍉을 먹다가 수박 껍질이 음식물 쓰레기인지 일반 쓰레기인지 🤔 궁금해서 찾아보았습니다. 
-저처럼 헷갈려 하실 분들이 있을 것 같아서요!😏
 
-❗음식물 쓰레기❗
-🍎사과(씨, 껍질)
-🍉수박(씨, 껍질)(작게 잘라서)
-🍑복숭아 껍질
-🍊귤 껍질
-🍈멜론 껍질
-🥭망고 껍질
-🍇포도 껍질
-참외(씨, 껍질)
-🍓딸기 꼭지
-🍌바나나 껍질
+여름 대표 과일 수박🍉을 먹다가 수박 껍질이 음식물 쓰레기인지 일반 쓰레기인지🤔 궁금해서 찾아보았습니다.저처럼 헷갈려 하실 분들이 있을 것 같아서요!😏 
+
+❗음식물 쓰레기❗ 
+🍎사과(씨, 껍질)🍉수박(씨, 껍질)(작게 잘라서)🍑복숭아 껍질🍊귤 껍질🍈멜론 껍질🥭망고 껍질🍇포도 껍질참외(씨, 껍질)🍓딸기 꼭지🍌바나나 껍질
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ❗일반 쓰레기❗
 🍑복숭아씨
