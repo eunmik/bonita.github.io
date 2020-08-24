@@ -8,7 +8,7 @@ comments: true
 ---
 
 
-<figure>
+<figure class="half">
 	<a href="/assets/img/fruit-waste-cover.png"><img src="/assets/img/fruit-waste-cover.png"></a>
   <a href="/assets/img/fruit-waste-content.jpg"><img src="/assets/img/fruit-waste-content.jpg"></a>
 
