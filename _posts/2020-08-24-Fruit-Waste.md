@@ -7,11 +7,6 @@ tags: [environment, zerowaste]
 comments: true
 ---
 
-Here are some examples of what a post with images might look like. If you want to display two or three images next to each other responsively use `figure` with the appropriate `class`. Each instance of `figure` is auto-numbered and displayed in the caption.
-
-### Figures (for images or video)
-
-#### One Up
 
 <figure>
 	<a href="/assets/img/fruit-waste-cover.png"><img src="/assets/img/fruit-waste-cover.png"></a>
@@ -19,8 +14,8 @@ Here are some examples of what a post with images might look like. If you want t
 
 </figure>
 
-####[알아보자] 과일 일쓰?음쓰?🍑🍉🍈
-####[DYK] fruits are food waste? or not? (English Version Below👇)
+#### [알아보자] 과일 일쓰?음쓰?🍑🍉🍈 
+#### [DYK] fruits are food waste? or not? (English Version Below👇)
 ⠀
 여름 대표 과일 수박🍉을 먹다가
 수박 껍질이 음식물 쓰레기인지 일반 쓰레기인지 🤔
