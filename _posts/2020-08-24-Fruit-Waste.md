@@ -9,8 +9,8 @@ comments: true
 
 
 <figure class="half">
-	<a href="https://eunmik.github.io/bonita/assets/img/fruit-waste-cover.png"><img src="https://eunmik.github.io/bonita/assets/img/fruit-waste-cover.png"></a>
-  <a href="https://eunmik.github.io/bonita/assets/img/fruit-waste-content.jpg"><img src="https://eunmik.github.io/bonita/assets/img/fruit-waste-content.jpg"></a>
+    <img src="https://eunmik.github.io/bonita/assets/img/fruit-waste-cover.png">
+    <img src="https://eunmik.github.io/bonita/assets/img/fruit-waste-content.jpg">
 
 </figure>
 
@@ -20,7 +20,6 @@ comments: true
 여름 대표 과일 수박🍉을 먹다가 수박 껍질이 음식물 쓰레기인지 일반 쓰레기인지🤔 궁금해서 찾아보았습니다.
 
 저처럼 헷갈려 하실 분들이 있을 것 같아서요!😏 
-<br/><br/>
 <br/><br/>
 <ins>음식물 쓰레기</ins>
 
@@ -43,17 +42,11 @@ comments: true
 🍓딸기 꼭지
 
 🍌바나나 껍질
-
-
-
-
+<br/><br/>
 <ins>일반 쓰레기</ins>
 
 🍑복숭아씨, 🍍파인애플 껍질, 🥑아보카도(씨, 껍질), 🥥코코넛 껍질
-
-
-
-
+<br/><br/>
 잘 버리는 것도 중요하지만 쓰레기를 줄이기는 것도 정말 중요합니다.
 
 #zerowaste 가 되는 날까지 모두 파이팅!👍👍
@@ -66,15 +59,9 @@ comments: true
 While I was eating watermelon🍉, I was curious if the watermelon rinds are food waste or not? 🤔
 
 I thought there would be people who would be confused like me! 😏
-
-
-
-
+<br/><br/>
 This is on basis of Korean System.
-
-
-
-
+<br/><br/>
 <ins>Food Waste</ins>
 
 🍎Apple(seeds, peels)
@@ -96,10 +83,7 @@ Korean melon(seeds, peels)
 🍓Strawberry stem
 
 🍌Banana skins
-
-
-
-
+<br/><br/>
 <ins>Regular Garbage</ins>
 
 🍑Peach seeds
@@ -109,11 +93,7 @@ Korean melon(seeds, peels)
 🥑Avocado(seeds, peels)
 
 🥥Coconut shells
-
-
-
-
+<br/><br/>
 It is also important reduce waste as well as to throw it away properly.
 
 Let's do our best until #zerowaste👍👍
-
