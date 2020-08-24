@@ -48,14 +48,19 @@ comments: true
 
 
 
+
 <ins>일반 쓰레기</ins>
 
 🍑복숭아씨, 🍍파인애플 껍질, 🥑아보카도(씨, 껍질), 🥥코코넛 껍질
 
 
+
+
 잘 버리는 것도 중요하지만 쓰레기를 줄이기는 것도 정말 중요합니다.
 
 #zerowaste 가 되는 날까지 모두 파이팅!👍👍
+
+
 
 
 #### ---English Version
@@ -66,16 +71,48 @@ I thought there would be people who would be confused like me! 😏
 
 
 
+
 This is on basis of Korean System.
+
+
+
 
 <ins>Food Waste</ins>
 
-🍎Apple(seeds, peels), 🍉Watermelon(seeds, rinds in small pieces), 🍑Peach peels, 🍊Mandarin peels, 🍈Melon rinds, 🥭Mango peels, 🍇Grape skins, Korean melon(seeds, peels), 🍓Strawberry stem, 🍌Banana skins
+🍎Apple(seeds, peels)
+
+🍉Watermelon(seeds, rinds in small pieces)
+
+🍑Peach peels
+
+🍊Mandarin peels
+
+🍈Melon rinds
+
+🥭Mango peels
+
+🍇Grape skins
+
+Korean melon(seeds, peels)
+
+🍓Strawberry stem
+
+🍌Banana skins
+
+
 
 
 <ins>Regular Garbage</ins>
 
-🍑Peach seeds, 🍍Pineapple peels, 🥑Avocado(seeds, peels), 🥥Coconut shells
+🍑Peach seeds
+
+🍍Pineapple peels
+
+🥑Avocado(seeds, peels)
+
+🥥Coconut shells
+
+
 
 
 It is also important reduce waste as well as to throw it away properly.
