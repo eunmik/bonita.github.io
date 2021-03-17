@@ -11,14 +11,11 @@ comments: true
 Spring Security에서 JWT Token 설정을 하고 있다. 기본기가 많이 부족해서 설정을 하면서 여기저기 블로그/컬럼/공홈을 참고하며 하고 있는데 (정확히 내가 뭐하고 있는지 이해가 100%가 되지 않아서 슬푸다😢) 그게 문제인것 같다. Authorization Server만 적용 했을 때는 JWT Token에 아무 문제가 없었는데 Resource Server를 적용하는데 자꾸 header에 있는 JWT Token을 invalid access token이라고 return 한다. (Whyrano....!!!) 
 
 OAUTH2, Spring Security도 이해를 돕기위해 나중에 꼭 다시 정리해 올려봐야겠다. 
-
 오늘은 우선 Resource Server가 뭐길래 날 이렇게 힘들게 하는지 알아보기로 했다! 
 
 ## Resource Server 란?
 
 Resource Server는 OAUTH 2.0에서 사용하는 용어이다. Resource Server는 어플리케이션이 access token을 얻고 난 후에 인증된 요청을 처리한다. 즉, 사용자에게 리소스 사용을 허락하기 전에 토큰을 증명하는 것이다. 큰 규모 같은 경우에는 여러개의 resource server를 가지고 있을 수도 있다. 예를 들어, 구글 서비스 같은 경우에는 Google Cloud Platform, Google Maps, Google Drive, Youtube, 등 20개정도의 resource server를 가지고 있다. 각 각의 resource server들은 나눠져 있지만 모드 같은 authorization server를 사용하고 있다.
-
- 
 
 작은 규모인 경우 보편적으로 오직 하나의 resource server를 가지고 있고 종종 authorization server와 같은 base에서 설치되곤 한다. 
 
@@ -43,7 +40,7 @@ WWW-Authenticate 헤더는 최소 필요한 bearer token을 나타내는 Bearer 
 
 위 다이어그램에서 step 8을 보면 클라이언트 어플리케이션이 resource에 접근하기 위해 resource ㄴserver API를 호출할때, 우선 authorization server에 가서 요청에 있는 Authorization 헤더를 증명한다 그리고 나서 클라이언트에게 respone 한다. 
 
-참고한 자료 출처 : [https://www.oauth.com/oauth2-servers/the-resource-server/], [https://www.baeldung.com/spring-security-oauth-resource-server]
+참고한 자료 출처 : <https://www.oauth.com/oauth2-servers/the-resource-server/>, <https://www.baeldung.com/spring-security-oauth-resource-server>
 
 ## Resource Server Config
 
@@ -99,4 +96,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 }
 {% endhighlight %}
 
-참고 한 자료 출처 : [https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html5/#boot-features-security-oauth2-resource-server]
+참고 한 자료 출처 : <https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html5/#boot-features-security-oauth2-resource-server>
