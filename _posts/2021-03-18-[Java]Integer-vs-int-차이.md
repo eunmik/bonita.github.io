@@ -41,17 +41,26 @@ char, byte, short, int, long, flolat, double, boolean 등이 존재한다.
 
 ### Wrapper Class 종류
 | 기본타입(primitive type) | 래퍼클래스(wrapper class) |   |   |
+|-----------------------|----------------------|---|---|
+| byte                  | Byte                 |   |   |
+| char                  | Character            |   |   |
+| int                   | Integer              |   |   |
+| float                 | Float                |   |   |
+| double                | Double               |   |   |
+| boolean               | Boolean              |   |   |
+| long                  | Long                 |   |   |
+| short                 | Short                |   |   |
+
+| 기본타입(primitive type) | 래퍼클래스(wrapper class) |   |   |
 |----------------------|----------------------|---|---|
-|byte                  |Byte                  |   |   |
-|char                  |Character             |   |   |
-|int                   |Integer               |   |   |
-|float                 |Float                 |   |   |
-|double                |Double                |   |   |
-|boolean               |Boolean               |   |   |
-|long                  |Long                  |   |   |
-|short                 |Short                 |   |   |
-
-
+| byte                 | Byte                 |   |   |
+| char                 | Character            |   |   |
+| int                  | Integer              |   |   |
+| float                | Float                |   |   |
+| double               | Double               |   |   |
+| boolean              | Boolean              |   |   |
+| long                 | Long                 |   |   |
+| short                | Short                |   |   |
 ## Boxing과 UnBoxing
 
 <img src="https://eunmik.github.io/bonita/assets/img/210318-boxing-unboxing.png">
