@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "[Java] Integer vs int 차이"
-excerpt: "Interger와 int의 차이를 알아보자."
 date: 2021-03-17
+excerpt: "Interger와 int의 차이를 알아보자."
 tags: [java, Integer]
 comments: true
 ---
@@ -11,24 +11,21 @@ comments: true
 
 ### Primitive 자료형 - Wrapper 클래스 관계 
 
-    int : 
+int : 
+- primitive 자료형 (long, float, double ...),
+- 산술 연산이 가능하다.
+- null로 초기화 할 수 없다.
 
-    - primitive 자료형 (long, float, double ...),
-    - 산술 연산이 가능하다.
-    - null로 초기화 할 수 없다.
-
-    Integer :
-
-    - Wrapper 클래스 (객체),
-    - Unboxing을 하지 않으면 산술 연산이 불가능 하지만, null 값을 처리할 수 있다.
-    - null 값 처리가 용이하기 때문에 SQL과 연동할 경우 처리가 용이하다.
-    - DB에서 자료형이 정수형이지만 null 값이 필요한 경우 VO에서 Integer를 사용할 수 있다.
+Integer :
+- Wrapper 클래스 (객체),
+- Unboxing을 하지 않으면 산술 연산이 불가능 하지만, null 값을 처리할 수 있다.
+- null 값 처리가 용이하기 때문에 SQL과 연동할 경우 처리가 용이하다.
+- DB에서 자료형이 정수형이지만 null 값이 필요한 경우 VO에서 Integer를 사용할 수 있다.
 
 int size를 RequestParam(required = false)로 받을 때 null이면 아래와 같은 에러가 발생한다. 
-
 → Integer size로 바꾸니깐 해결
 
-```java
+```
 Optional int parameter 'size' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type
 ```
 

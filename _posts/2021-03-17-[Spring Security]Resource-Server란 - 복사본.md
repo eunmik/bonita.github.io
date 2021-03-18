@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "[Spring Security] Resource Server란"
-excerpt: "Spring Security의 Resource Server를 알아보자.."
 date: 2021-03-17
+excerpt: "Spring Security의 Resource Server를 알아보자.."
 tags: [spring-security, code, java]
 comments: true
 ---
