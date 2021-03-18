@@ -51,6 +51,13 @@ char, byte, short, int, long, flolat, double, boolean 등이 존재한다.
 |long                  |Long                  |
 |short                 |Short                 |
 
+| 기본타입(primitive type) | 래퍼클래스(wrapper class) |   |   |
+|----------------------|----------------------|---|---|
+| byte                 | Byte                 |   |   |
+|                      | dd                   |   |   |
+|                      |                      |   |   |
+|                      |                      |   |   |
+
 ## Boxing과 UnBoxing
 
 <img src="https://eunmik.github.io/bonita/assets/img/210318-boxing-unboxing.png">
