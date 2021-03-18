@@ -9,6 +9,12 @@ comments: true
 
 ## Integer vs int의 차이
 
+API를 만들면서 Controller에서 client에서 파라미터를 받았을 때 필수적인 파라미터가 아님에도 불구 하고 null이 들어오면 에러가 발생했다. 
+```
+Optional int parameter 'size' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type
+```
+파라미터 type을 int대신 Integer로 변경되니깐 해결이 되었다. 왜그런지 한번 알아보자! 
+
 ### Primitive 자료형 - Wrapper 클래스 관계 
 int : 
 - primitive 자료형 (long, float, double ...)
@@ -21,17 +27,10 @@ Integer :
 - null 값 처리가 용이하기 때문에 SQL과 연동할 경우 처리가 용이하다.
 - DB에서 자료형이 정수형이지만 null 값이 필요한 경우 VO에서 Integer를 사용할 수 있다.
 
-int size를 RequestParam(required = false)로 받을 때 null이면 아래와 같은 에러가 발생한다. 
-→ Integer size로 바꾸니깐 해결
-
-```
-Optional int parameter 'size' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type
-```
-
 ## 기본 자료형 (Primitive data type) 이란?
 
-실제 값을 갖는 자료형 으로 자바에서 여러 형태의 타입을 미리 정의하여 제공하는 것. 
-char, byte, short, int, long, flolat, double, boolean 등이 존재 
+실제 값을 갖는 자료형 으로 자바에서 여러 형태의 타입을 미리 정의하여 제공하는 것.
+char, byte, short, int, long, flolat, double, boolean 등이 존재한다.
 
 
 ## Wrapper 클래스 란?
