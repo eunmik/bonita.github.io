@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Data Structure] 스택(Stack), 큐(Queue), 힙(Heap) 이란? ?"
+title: "[Data Structure] 스택(Stack), 큐(Queue), 힙(Heap)이란?"
 date: 2021-03-20
 excerpt: "자료구조의 스택, 큐, 힙에 대해 알아보자."
 tags: [Stack, Queue, Heap, Data Structure]
