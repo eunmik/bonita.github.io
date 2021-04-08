@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[TDD] 2장 Junit and Hamcrest"
-date: 2021-04-02
+date: 2021-04-07
 excerpt: "TDD 개발을 위한 기본서2"
 tags: [Java, TDD]
 comments: true
