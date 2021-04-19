@@ -52,7 +52,7 @@ public void preorderTraversal(TreeNode root) {
 }
 ```
 
-![https://miro.medium.com/max/625/1*UGoV21qO6N8JED-ozsbXWw.gif](https://miro.medium.com/max/625/1*UGoV21qO6N8JED-ozsbXWw.gif)
+<img src="https://miro.medium.com/max/625/1*UGoV21qO6N8JED-ozsbXWw.gif">
 
 PreOrder Traversal
 
@@ -68,7 +68,7 @@ public void inorderTraversal(TreeNode root){
 }
 ```
 
-![https://miro.medium.com/max/625/1*bxQlukgMC9cGv_MFUllX2Q.gif](https://miro.medium.com/max/625/1*bxQlukgMC9cGv_MFUllX2Q.gif)
+<img src="https://miro.medium.com/max/625/1*bxQlukgMC9cGv_MFUllX2Q.gif">
 
 Inorder Traversal
 
@@ -84,7 +84,7 @@ public void postorderTraversal(TreeNode root) {
 }
 ```
 
-![https://miro.medium.com/max/625/1*UGrzA4qtLCaaCiNAKZyj_w.gif](https://miro.medium.com/max/625/1*UGrzA4qtLCaaCiNAKZyj_w.gif)
+<img src="https://miro.medium.com/max/625/1*UGrzA4qtLCaaCiNAKZyj_w.gif">
 
 PostOrder Traversal 
 
@@ -95,9 +95,9 @@ PostOrder Traversal
 - BFS (Beneath First Search, 너비 우선 탐색)
     - 구현 방법 : Queue
 
-![https://t1.daumcdn.net/cfile/tistory/2254723E588084F830](https://t1.daumcdn.net/cfile/tistory/2254723E588084F830)
+<img src="https://t1.daumcdn.net/cfile/tistory/2254723E588084F830">
 
-DFS vs BFS
+### DFS vs BFS
 
 ## DFS(Depth First Search, 깊이 우선 탐색)
 
@@ -140,7 +140,7 @@ backtrack을 한다
 u : 2 -> DFS(3)
 ```
 
-![https://media.geeksforgeeks.org/wp-content/uploads/20200507074112/ezgif.com-gif-maker61.gif](https://media.geeksforgeeks.org/wp-content/uploads/20200507074112/ezgif.com-gif-maker61.gif)
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20200507074112/ezgif.com-gif-maker61.gif">
 
 ```java
 Input: n = 4, e = 6 
@@ -150,7 +150,7 @@ Explanation:
 DFS Diagram:
 ```
 
-![https://media.geeksforgeeks.org/wp-content/uploads/20200507075041/ezgif.com-gif-maker7.gif](https://media.geeksforgeeks.org/wp-content/uploads/20200507075041/ezgif.com-gif-maker7.gif)
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20200507075041/ezgif.com-gif-maker7.gif">
 
 ### DFS FOR A GRAPH 예제
 
@@ -349,7 +349,7 @@ class ConnectedGraph {
 // This code is contributed by Aakash Hasija
 ```
 
-![https://ksshlee.github.io/assets/img/al_lib/2019_12_31/how_bfs_works.gif](https://ksshlee.github.io/assets/img/al_lib/2019_12_31/how_bfs_works.gif)
+<img src="https://ksshlee.github.io/assets/img/al_lib/2019_12_31/how_bfs_works.gif">
 
 ### BFS 시간 복잡도
 
