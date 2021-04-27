@@ -24,7 +24,17 @@ comments: true
 
 <img src="https://eunmik.github.io/bonita/assets/img/210331-telegram3.png">
 
-4. Java 코드를 작성 해 준다. 
+4. Chat Id가 얻기 위해 아래 URL을 접속한다. 
+```text
+https://api.telegram.org/bot{telegram_token_value}/getUpdates
+```
+그러면 아래와 같은 결과를 얻을 수 있다. 
+```text
+{"ok":true,"result":[{"update_id":805895515,
+"message":{"message_id":2,"from":{"id":1384798386,"is_bot":false,"first_name":"Eunmi","last_name":"Kong","language_code":"es"},"chat":{"id":1384798386,"first_name":"Eunmi","last_name":"Kong","type":"private"},"date":1619488553,"text":"hi"}}]}
+```
+
+5. Java 코드를 작성 해 준다. 
 
 ```java
 public static void funcTelegram(){
