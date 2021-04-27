@@ -28,8 +28,8 @@ comments: true
 
 ```java
 public static void funcTelegram(){
-        String Token = "1783392876:AAGv3A4vCQombGihQ2zf2SnnLBWHXlTwMFQ";
-        String chat_id = "1384798386";
+        String Token = "telegram_token_value";
+        String chat_id = "chat_id_value";
         String text = "el_abanico";
 
         BufferedReader in = null;
