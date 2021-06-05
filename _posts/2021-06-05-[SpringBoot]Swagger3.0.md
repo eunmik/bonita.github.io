@@ -3,7 +3,7 @@ layout: post
 title: "[SpringBoot] Swagger3.0 적용하기 "
 date: 2021-06-05
 excerpt: "SpringBoot에서 Swagger 3.0 적용해 보자 "
-tags: [SpringBoot, Swagger], OpenAPI]
+tags: [SpringBoot, Swagger, OpenAPI]
 comments: true
 ---
 
