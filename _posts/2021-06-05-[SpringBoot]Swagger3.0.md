@@ -6,6 +6,7 @@ excerpt: "SpringBoot에서 Swagger 3.0 적용해 보자 "
 tags: [SpringBoot, Swagger], OpenAPI]
 comments: true
 ---
+
 ## Swagger 란?
 
 REST API를 자동으로 문서화를 도와주는 오픈 소스 프레임 워크이다. 
