@@ -90,7 +90,7 @@ spring.security.user.password=user
 
 ## 3. 인증 API - Form 인증
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im2.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img2.JPG" />
 
 인증처리 관련된 객체가 생성되고 저장되는 과정 
 
@@ -105,7 +105,7 @@ spring.security.user.password=user
 9. 그 사용자는 인증 토큰으로 계속적으로 해당 자원에 접근하게 되고 
 10. Spring Security는 session에 저장된 인증토큰이 있으면 사용자가 인증된 사용자라고 인증을 유지한다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im3.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img3.JPG" />
 
 ```java
 import org.springframework.context.annotation.Configuration;
@@ -165,7 +165,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ## 4. Form Login 인증 필터 : UsernamePasswordAuthenticationFilter
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im4.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img4.JPG" />
 
 1. UserNamePasswordAuthenticationFilter - 인증처리를 담당하고 인증처리에 관련된 요청을 처리하는 Filter, 내부적으로 각각의 인증처리의 역할에 따라서 이 클래스를 활용해서 인증처리를 하게 된다. 현재 사용자의 요청 정보(URL)를 확인한다. 
 2. AntPathRequestMatcher - 현재 요청정보 URL이 "/login"으로 시작되는지 검사
@@ -181,11 +181,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 SecurityContext가 Session에도 저장 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im5.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img5.JPG" />
 
 ## 5. Logout 처리, LogoutFilter
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im6.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img6.JPG" />
 
 1. 클라이언트가 logout 요청을 한다 
 2. Spring Security가 그 요청을 받고 로그아웃 처리한다. 
@@ -194,7 +194,7 @@ SecurityContext가 Session에도 저장
     - 쿠키정보 삭제
 3. 로그인 페이지로 리다이렉트 한다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im7.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img7.JPG" />
 
 ```java
 @Configuration
@@ -233,7 +233,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im8.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img8.JPG" />
 
 1. LogoutFilter가 POST방식으로 요청 받아서 Logout 처리를 한다. 
 2. AntPathRequestMatcher - 현재 요청정보 URL이 "/logout"으로 시작되는지 검사
@@ -241,13 +241,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 4. LogoutFilter가 가지고 있는 몇개의 Filter중 SecurityContextLogoutHandler는 세션을 무효화, 쿠키 삭제, SecurityContext 객체를 삭제하고 인증객체도 null처리 한다. 
 5. Logout이 성공적으로 처리가 되면 SimpleUrlLogoutSuccessHandler로 /login페이지를 리다이렉트 하도록 처리 한다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im9.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img9.JPG" />
 
 ## 6. Remember Me 인증
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im10.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img10.JPG" />
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im11.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img11.JPG" />
 
 ```java
 @Configuration
@@ -297,7 +297,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ## 7. Remember Me 인증 필터 : RememberMeAuthenticationFilter
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210611-im12.JPG" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210611-img12.JPG" />
 
 1. RememberMeAuthenticationFilter는 사용자 요청을 받아서 인증을 처리하는 조건이 있다. 
     - Authentication이 null일 경우
