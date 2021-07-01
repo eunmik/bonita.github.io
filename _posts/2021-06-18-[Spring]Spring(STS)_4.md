@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring] Spring (STS) 4 시작하기 "
 date: 2021-06-18
-excerpt: "이클립에서 스프링4 프로젝트 시작하기"
+excerpt: "이클립스에서 스프링4 프로젝트 시작하기"
 tags: [Java, Spring, STS4, Eclipse]
 comments: true
 ---

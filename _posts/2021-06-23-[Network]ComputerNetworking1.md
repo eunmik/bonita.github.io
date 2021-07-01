@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Spring] Spring (STS) 4 시작하기 "
-date: 2021-06-18
-excerpt: "이클립에서 스프링4 프로젝트 시작하기"
-tags: [Java, Spring, STS4, Eclipse]
+title: "[Network] What Is the Internet?"
+date: 2021-06-23
+excerpt: "Computer Networking A Top Down Notch 7th (1)"
+tags: [Network, Internet]
 comments: true
 ---
 # Chapter 1 Computer Networks and the Internet
@@ -22,7 +22,7 @@ A packet switch takes a packet arriving on one of its incoming communication lin
 
 The sequence of packets traveling is known as a **route** or **path** through the network. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210623-img1.png" />
+<img src ="https://eunmik.github.io/bonita/assets/img/210623-img1.jpeg" />
 
 End systems access the Internet through **Internet Service Providers (ISPs)**.
 
