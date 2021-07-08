@@ -38,7 +38,7 @@ assertThat(테스트 대상, Matcher구문);
 assertThat("메시지", 테스트대상, Matcher구문); 
 ```
 
-<img src="https://eunmik.github.io/bonita/assets/img/210407-junit.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210407-junit.png">
 
 ## Junit5 vs Junit4
 

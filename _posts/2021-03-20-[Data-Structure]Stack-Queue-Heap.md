@@ -10,7 +10,7 @@ comments: true
 # 스택(Stack) 이란?
 쌓아 올린다는것을 의미 하며 차곡차곡 쌓아 올린 형태의 자료 구조를 말한다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210320-stack.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210320-stack.png">
 
 ## 스택의 특징
 
@@ -29,7 +29,7 @@ comments: true
 
 선입선출 방식의 자료 구조이다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210320-queue.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210320-queue.png">
 
 ## 큐의 특징
 
@@ -67,7 +67,7 @@ Arr에 index i에 있는 요소를 저장한다고 하면, 부모 노트는 Arr[
 왼쪽 자식 노드는 Arr[2*i] 이고 오른쪽 자식 노트는 Arr[2*i+1]로 접근할 수 있다. 
 root의 인덱스는 1이 될 것이다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210320-heap.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210320-heap.png">
 
 ## 힙의 종류
 
@@ -75,14 +75,14 @@ root의 인덱스는 1이 될 것이다.
     - 부모 노드의 키 값이 자식 노드의 키 값보다 크거나 같은 완전 이진 트리
     - key(부모 노드) >= key(자식 노드)\
 
-    <img src="https://eunmik.github.io/bonita/assets/img/210320-heap1.png">
+    <img src="https://eunmik.github.io/bonita.blog/assets/img/210320-heap1.png">
 
 
 - 최소 힙
     - 부모 노드의 키 값이 자식 노드의 키 값보다 작거나 같은 완전 이진 트리
     - key(부모 노드) <= key(자식 노드)
 
-<img src="https://eunmik.github.io/bonita/assets/img/210320-heap2.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210320-heap2.png">
 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210320-heap3.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210320-heap3.png">

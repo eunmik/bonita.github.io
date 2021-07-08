@@ -17,7 +17,7 @@ comments: true
 해시는 리소스를 이용하여 속도를 높인다 
 해시의 장점은 빠른 속도 이다
 
-<img src="https://eunmik.github.io/bonita/assets/img/210319-hash.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210319-hash.png">
 해시 충돌 : 해시 함수가 서로 다른 두 개의 이볅 값에 대해 동일한 출력값을 내는 상황을 의미한다. 
 해시 함수가 무한한 가짓수의 입력 값을 받아 유한한 가짓 수의 출력 값을 생성하는 경우, 충돌은 항상 존재한다. 
 

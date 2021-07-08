@@ -8,13 +8,13 @@ comments: true
 ---
 1. Eclipse에서 Help → Eclipse MarketPlace  → STS4 설치 하기 
 
-    <img src ="https://eunmik.github.io/bonita/assets/img/210618-img1.png" />
+    <img src ="https://eunmik.github.io/bonita.blog/assets/img/210618-img1.png" />
 
 2. Tomcat 서버를 설정한다. 
 
     2-1. Servers 화면에서 Click을 한 다음에 
 
-    <img src ="https://eunmik.github.io/bonita/assets/img/210618-img2.png" />
+    <img src ="https://eunmik.github.io/bonita.blog/assets/img/210618-img2.png" />
 
     2-2. Apache → Tomcat 8.5 선택 
 
@@ -26,11 +26,11 @@ comments: true
 
     Spring Legacy Project가 없으면 Market Places 에서 STS3을 설치한다. 
 
-    <img src ="https://eunmik.github.io/bonita/assets/img/210618-img3.png" />
+    <img src ="https://eunmik.github.io/bonita.blog/assets/img/210618-img3.png" />
 
     3-2.  Spring MVC Project 
 
-    <img src ="https://eunmik.github.io/bonita/assets/img/210618-img4.png" />
+    <img src ="https://eunmik.github.io/bonita.blog/assets/img/210618-img4.png" />
 
 4. pom.xml에서 버전을 확인 한다. 
 

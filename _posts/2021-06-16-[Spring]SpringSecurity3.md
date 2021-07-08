@@ -8,7 +8,7 @@ comments: true
 ---
 ## 1. 위임 필터 및 필터 빈 초기화 - DelegatingProxyChain, FilterChainProxy
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img1.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img1.JPG" />
 
 - Servlet Filter는 서블릿 스펙에 정의가 되어있는 기술 인데 스펙의 2.3 버전부터 도입이 되었다.
 - Servlet Filter의 역할은 어떤 요청이 있을 때 그 요청이 서블릿에 가기 전에 이 Filter에서 어떤 작업을 처리 하고 다시 요청을 전달 한다. 그리고 Servlet 자원에서 어떤 처리가 끝나게 되면 최종적으로 응답하기 전에 다시 Filter가 받아서 어떤 작업을 처리하고 나서 Filter가 클라이언트에 응답을 하게 된다.
@@ -19,13 +19,13 @@ comments: true
 - Spring Security는 사용자가 요청한 모든 요청에 대해서 Filter 기반으로 처리하고 있다.
 - Filter에서도 Spring Bean을 사용하고자 하는 요구사항이 생겼을 때 DelegatingFilterProxy는 Servlet Filter이고, 요청을 받아서 그 요청을 Spring에서 관리하는 Filter Bean에서 위임하는 역할을 한다. 이 클래스는 Servlet Filter이기 때문에 가장 먼저 요청을 받고 Spring 에게 전달한다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img2.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img2.JPG" />
 
 0번 Filter가 처리 되고 Filter Chain Proxy가 호출되고 1번 Filter가 호출되고 FilterChainProxy가 호출되고.. 반복 
 
 FilterChainProxy는 실질적으로 보안처리를 하는 시작점이고 DelegatingFilterProxy으로 부터 위임을 받고 보안 처리를 한다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img3.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img3.JPG" />
 
 1. 사용자가 처음 요청하게 되면 Container에서 가장먼저 요청을 받게 된다. 
 2. 요청에 의해서 각각의 Filter들이 처리가 되고 그 중에서 DelegatingFilterProxy가 요청을 받게 되면 요청 객체를 springSecurityFilterChain에 delegate request를 위임하게 된다. 
@@ -37,7 +37,7 @@ FilterChainProxy는 실질적으로 보안처리를 하는 시작점이고 Deleg
 
 ## 2. 필터 초기화와 다중 보안 설정
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img4.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img4.JPG" />
 
 - Sprint Security가 초기화 시
     - 설정에서 생성된 Filter가 이 객체안에 변수로 담기고 RequestMatcher 변수에 정보가 담긴 SecurityFilterChain 클래스가 생성이 된다.
@@ -45,14 +45,14 @@ FilterChainProxy는 실질적으로 보안처리를 하는 시작점이고 Deleg
     - 결론적으로 FilterChainProxy는 SecurityFilterChains 변수에 각각의 SecurityFilterChain 객체를 가지고 있다.
 - 사용자가 /admin으로 요청하게 되면 FilterChianProxy가 요청을 받아서 각각의 객체가 가지고 있는 RequestMatcher와 매칭이 되는지 확인을 하고 해당 Filter를 가지고 와서 인증/인가처리를 한다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img5.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img5.JPG" />
 
 1. 사용자가 /admin 자원에 접근을 요청하고 있다. 
 2. FilterChainProxy가 각각의 Filter를 보관하고 있다. 
 3. 필터를 선택할 때 요청 URL과 matches(매칭이 true가 되는지)를 한다. 
 4. 객체에 포함된 RequestMatcher의 정보와 요청 정보가 매치되는 필터를 가지고 와서 처리한다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img6.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img6.JPG" />
 
 ```java
 @Configuration
@@ -83,9 +83,9 @@ class SecurityConfig2 extends WebSecurityConfigurerAdapter{
 
 ## 3. 인증 개념 이해 - Authentication
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img7.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img7.JPG" />
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img8.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img8.JPG" />
 
 1. 사용자가 username+password로 인증을 하고 입력한 정보를 전달한다. 
 2. UsernamePasswordAuthenticationFilter가 정보를 받아서 username과 password를 추출한 다음
@@ -97,7 +97,7 @@ class SecurityConfig2 extends WebSecurityConfigurerAdapter{
 
 ## 4. 인증 저장소 - SecurityContextHolder, SecurityContext
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img9.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img9.JPG" />
 
 ThreadLocal이란? Thread는 Thread마다 고유하게 할당된 저장소가 있는데 그게 ThreaLocal이다. Thread간에 공유가 되지 않고 각 Thread에게만 할당된 저장소이다.
 
@@ -105,7 +105,7 @@ SecurityContext의 가장 주된 역할은 Authentication객체를 저장하는 
 
 Authentication authentication = SecurityContextHolder.getContext().getAuthentication() 구문은 어떤 메소드에서도 다 참조가 가능하도록 Spring Security가 제공하고 있다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img10.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img10.JPG" />
 
 1. 사용자가 로그인을 하면 Server에서 요청을 받는다. 
 2. Server에서 Thread를 생성한다. 이 Thread는 ThreadLocal이 할당된다. 
@@ -157,13 +157,13 @@ SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHRE
 
 ## 5. 인증 저장소 필터 - SecurityContextPersistenceFilter
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img11.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img11.JPG" />
 
 - SecurityContextPersistenceFilter는 익명사용자든 인증 시든 인증 후든 SecurityContext객체를 SecurityContextHolder에 저장하는 역할을 한다.
 - 그런데 익명사용자나 인증 시에는 새로운 SecurityContext객체를 생성하여 저장하고 인증 이후에는 Session에서 SecurityContext 객체를 꺼내서 저장한다.
 - 이 Filter는 FilterChainProxy에서 두번째에 위치하고 있다. SecurityContextHolder에 일단 저장해 놓고 그다음 필터들이 Holder에서 SecurityContext를 꺼내어서 참조할 수 있도록 두번째 위치에서 작업을 처리하고 있다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img12.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img12.JPG" />
 
 1. SecurityContextPersistenceFilter는 사용자가 인증을 받았던 안받았던 상관없이 매 요청마다 그 요청을 처리한다. 
 2. 내부적으로 HttpSecurityContextRepository가 있는데 이 클래스가 실제로 SecurityContext를 생성하고 조회하는 역할을 한다. 
@@ -179,9 +179,9 @@ SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHRE
         - 2-2. Session에 있는 SecurityContext를 꺼내서 SecurityContextHolder에 저장한다.
         - 2-3. 다음 필터로 이동하게 된다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img13.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img13.JPG" />
 
 - 인증을 받기 전에는 createSecurityContext (새로운 SecurityContext를 생성한다)
 - 최초로는 인증을 받기 전이기 때문에 Authentication이 null인 상태이다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210616-img14.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210616-img14.JPG" />

@@ -31,11 +31,11 @@ $ git config --global user.email 변경을 희망하는 이메일
 
 github 자격 증명을 삭제 한 후 일반 자격 증명 추가로 새로 추가한다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210325-gitbash.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210325-gitbash.png">
 
-<img src="https://eunmik.github.io/bonita/assets/img/210325-gitbash2.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210325-gitbash2.png">
 
-<img src="https://eunmik.github.io/bonita/assets/img/210325-gitbash3.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210325-gitbash3.png">
 
 인터넷 또는 네트워크 주소 : https://eunmik.github.com/eunmik
 

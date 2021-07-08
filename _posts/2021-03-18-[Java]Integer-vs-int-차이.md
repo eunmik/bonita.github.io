@@ -56,7 +56,7 @@ char, byte, short, int, long, flolat, double, boolean 등이 존재한다.
 
 ## Boxing과 UnBoxing
 
-<img src="https://eunmik.github.io/bonita/assets/img/210318-boxing-unboxing.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210318-boxing-unboxing.png">
 기본 타입의 값을 포장 객체로 만드는 과정을 박싱, 반대로 포장객체에서 기본 타입의 값을 얻어내는 과정을 언박싱
 
 ```java

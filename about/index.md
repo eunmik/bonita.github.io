@@ -6,7 +6,7 @@ date: 2016-03-21
 comments: false
 ---
     
-<center><a href="https://eunmik.github.io/bonita/"><b>Eunmi K</b></a> is a laid back and adventurous traveller.</center>
+<center><a href="https://eunmik.github.io/bonita.blog/"><b>Eunmi K</b></a> is a laid back and adventurous traveller.</center>
 
 ## Features
 * Java
@@ -32,4 +32,4 @@ See a [live version of Moon](http://taylantatli.github.io/Moon) hosted on GitHub
 
 Check it out my beautiful projects.
       
-[Eunmi's ArtWorks](https://eunmik.github.io/bonita/projects/){: .btn}
+[Eunmi's ArtWorks](https://eunmik.github.io/bonita.blog/projects/){: .btn}

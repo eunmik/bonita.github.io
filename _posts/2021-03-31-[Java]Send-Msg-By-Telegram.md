@@ -10,7 +10,7 @@ comments: true
 
 1. Telegram에서 BotFather를 찾는다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210331-telegram1.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210331-telegram1.png">
 
 2.  BotFather에게 새로운 bot 생성의 도움을 요청 한다. 
 
@@ -18,11 +18,11 @@ comments: true
 /newbot - 새로운 bot을 생성하기 위해 
 ```
 
-<img src="https://eunmik.github.io/bonita/assets/img/210331-telegram2.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210331-telegram2.png">
 
 3. 마지막 BotFather가 준 메세지에 있는 t.me/vivans_argos_bot을 누르면 새로운 대화창이 나온다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210331-telegram3.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210331-telegram3.png">
 
 4. Chat Id가 얻기 위해 아래 URL을 접속한다. 
 ```text

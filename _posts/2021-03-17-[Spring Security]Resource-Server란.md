@@ -33,11 +33,11 @@ Resource Server는 access token과 연관된 scopes을 알 필요가 있다. 서
 
 만약 access token이 요청된 resource의 접근 헌용이 되지 않거나 요청에 access token이 존재하지 않는다면 서버는 401 Response를 리턴해야하고 WWW-Authentiate 헤더를 response에 포함 시켜야 한다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210317-headers-401.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210317-headers-401.png">
 
 WWW-Authenticate 헤더는 최소 필요한 bearer token을 나타내는 Bearer 글자를 포함하고 있고 추가적인 정보를 가지고 있일 수도 있다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210317-diagram.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210317-diagram.png">
 
 위 다이어그램에서 step 8을 보면 클라이언트 어플리케이션이 resource에 접근하기 위해 resource ㄴserver API를 호출할때, 우선 authorization server에 가서 요청에 있는 Authorization 헤더를 증명한다 그리고 나서 클라이언트에게 respone 한다. 
 

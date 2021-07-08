@@ -13,7 +13,7 @@ comments: true
 
 하지만 하나의 프로세서도 프로그램이 multiple threads를 사용한다면 한번에 여러개의 액션을 수행할 수 있다. 하나의 자바 클래스는 프로세서의 타임슬라이스 시간을 번갈아가면서 사용할 여러개의 thread를 수행할 수 있다. 예를들어 프로그램이 유저에게 질문을 하고 대답을 기다린다. 그동안 CPU는 다른 어플리케이션 로직을 수행할 수 있다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210323-multithreading.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210323-multithreading.png">
 
 멀티 쓰레드를 만드는 프로그램의 가장 좋은 예는 웹 브라우저이다. 예를 들어, 브라우저에서 웹서핑을 하는 동안 파일을 다운로드 할 수 있다. 한 프로그램(브라우저)는 두개의 thread(browsing and downloading) 를 수평적으로 수행한다.
 

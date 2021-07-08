@@ -28,7 +28,7 @@ Swagger의 모든 reference는 **openapi**로 변경 되었다. 그러므로 버
 
 ### 구조 변화
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210605-swaggerdiff.png" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210605-swaggerdiff.png" />
 
 ### EndPoint URL 정의 변화
 
@@ -97,6 +97,6 @@ public class SwaggerConfig {
 
 http://localhost:1991/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
 
-<img src ="https://eunmik.github.io/bonita/assets/img/210605-swaggerui.png" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/210605-swaggerui.png" />
 
 

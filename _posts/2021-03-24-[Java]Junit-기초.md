@@ -14,7 +14,7 @@ comments: true
 - 자바 8 이상을 필요로 함.
 - 대체제: TestNG, Spock, ...
 
-<img src="https://eunmik.github.io/bonita/assets/img/210324-junit1.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210324-junit1.png">
 
 Platform: 테스트를 실행해주는 런처 제공. TestEngine API 제공.
 Jupiter: TestEngine API 구현체로 JUnit 5를 제공.
@@ -85,7 +85,7 @@ Vintage: JUnit 4와 3을 지원하는 TestEngine 구현체.
 
 Edit Configuration → Test Kind
 
-<img src="https://eunmik.github.io/bonita/assets/img/210324-junit2.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210324-junit2.png">
 
 메이븐에서 필터 활성화 하는 방법 pom.xml
 
@@ -269,11 +269,11 @@ JUnit은 테스트 메소드 마다 테스트 인스턴스를 새로 만든다.
 
 JUnit 설정 파일로, 클래스패스 루트 (src/test/resources/)에 넣어두면 적용된다.
 
-<img src="https://eunmik.github.io/bonita/assets/img/210324-junit3.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210324-junit3.png">
 
 Project Structure에서 Test Resources로 설정해주어야 한다. 
 
-<img src="https://eunmik.github.io/bonita/assets/img/210324-junit4.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210324-junit4.png">
 
 테스트 인스턴스 라이프사이클 설정
 junit.jupiter.testinstance.lifecycle.default = per_class
@@ -286,7 +286,7 @@ junit.jupiter.conditions.deactivate = org.junit.*DisabledCondition테스트 이�
 junit.jupiter.displayname.generator.default = \
 org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 
-<img src="https://eunmik.github.io/bonita/assets/img/210324-junit5.png">
+<img src="https://eunmik.github.io/bonita.blog/assets/img/210324-junit5.png">
 ## 확장 모델
 
 JUnit 4의 확장 모델은 @RunWith(Runner), TestRule, MethodRule.
