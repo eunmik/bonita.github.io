@@ -8,7 +8,7 @@ comments: true
 ---
 ## 6. 인증 흐름 이해 - Authentication Flow
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img1.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img1.JPG" />
 
 
 1. Client가 로그인 인증요청을 보낸다. 
@@ -34,7 +34,7 @@ comments: true
 
 ## 7. 인증 관리자 - AuthenticationManager
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img2.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img2.JPG" />
 
 - AuthenticationManager는 Filter로 부터 인증처리를 실제로 지시받는 첫번째 클래스이다.
 
@@ -49,7 +49,7 @@ comments: true
 
 ## 8. 인증 처리자 - AuthenticationProvider
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img3.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img3.JPG" />
 
 - AuthenticationProvider는 인증처리를 할 때 가장 핵심적인 역할을 하는 클래스이다.
 - ID, PWD를 받아서 검증을 하고 추가적인 검증을 처리 한다.
@@ -67,7 +67,7 @@ comments: true
 
 ## 9. 인가 개념 및 필터 이해 - Authorization, FilterSecurityInterceptor
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img4.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img4.JPG" />
 
 - 인가 처리란 인증을 받은 사용자가 자원에 접근할 수 있는 자격이 되는지 그 처리를 하는게 인가 영역이다.
 - 사용자가 어떤 자원에 접근하고자 할때 사용자가 Authentication을 받았는지 판단을 하고 (Authentication 영역)
@@ -75,7 +75,7 @@ comments: true
 
     (Authorization 영역) 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img5.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img5.JPG" />
 
 - 웹 계층
     - URL 요청에 따른 메뉴 혹은 화면단위의 레벨 보안
@@ -89,14 +89,14 @@ comments: true
 
 이 강좌에서는 도메인 계층에 대해서는 다루지 않는다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img6.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img6.JPG" />
 
 - FilterSecurityInterceptor는 인가처리를 담당하는 필터
 - 여러가지 보안 필터 중에서도 가장 마지막에 존재
 - 맨 마지막에 필터가 최종적으로 접근하고자 하는 자원에 대해 승인/거부를 판단
 - 이 필터까지 통과하게 되면 사용자가 원하는 자원에 접근이 가능하다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img7.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img7.JPG" />
 
 1. 사용자가 어떤 자원에 접근을 하기 위해 요청한다. 
 2. FilterSecurityInterceptor가 그 요청을 받아서 인증 여부를 체크 한다. 사용자가 인증객체를 가지고 있는 여부를 판단한다. 인증객체는 SecurityContext객체안에 저장하기 때문에 인증이 된 사용자라면 인증객체가 존재한다. 
@@ -106,11 +106,11 @@ comments: true
     - AccessDecisionVoter가 현재 사용자가 자원에 자격이 있는지 없는지 판단
 5. 심의 결과 값에 따라 AccessDeniedException을 발생하거나 접근을 허용한다. 
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img8.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img8.JPG" />
 
 ## 10. 인가 결정 심의자 - AccessDecisionManager, AccessDecisionVoter
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img9.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img9.JPG" />
 
 - FilterSecurityInterceptor 권한을 전반적으로 처리하는 필터에서 인증정보, 요청정보, 권한정보를 AccessDecisionManager에 전달해준다.
 - AccessDecisionManager는 사용자가 접근하고자 하는 자원에 허용할 것인지를 결정한다.
@@ -119,14 +119,14 @@ comments: true
     - ConsensusBased - 다수 표에 의해 최종 결정을 판단한다. 동수일 경우 기본은 접근허가이나 allowfEqualGrantedDeniedDecisions을 false로 설정할 경우 접근 거부로 결정 된다.
     - UnanimousBased - 모든 보터가 만장일치로 접근을 승인해야 하며 그렇지 않은 경우 접근을 거부한다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img10.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img10.JPG" />
 
 - 각각의 Voter 마다 사용자 요청에 의해서 현재 자원에 접근할 자격이 있는지 결정을 AccessDecisionManager에게 리턴하는 클래스
 - 접근 거부 → -1, 접근 보류 → 0
 - 결정방식의 값을 계산해서 AccessDecisionManager가 결정한다.
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img11.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img11.JPG" />
 
 ## 11. 스프링 시큐리티 필터 및 아키텍처 정리
 
-<img src ="https://eunmik.github.io/bonita/assets/img/2021/0624/img12.JPG" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0624/img12.JPG" />
