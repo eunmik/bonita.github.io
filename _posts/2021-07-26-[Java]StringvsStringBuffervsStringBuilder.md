@@ -1,77 +1,106 @@
 ---
 layout: post
-title: "[Java] 로그인 시도 횟수 제한하기"
-date: 2021-07-21
-excerpt: "로그인 시도 횟수를 제한하여 계정을 보호하자"
-tags: [Java, Login]
+title: "[Java] String vs StringBuffer vs StringBuilder"
+date: 2021-07-26
+excerpt: "String과 StringBuffer와 StringBuilder의 차이"
+tags: [Java, String, StringBuilder, StringBuffer]
 comments: true
 ---
-Spring JPA에서 Hibernate를 이용하여 DDL을 생성하여 Data Table을 자동으로 생성할 수 있다. 
 
-## DDL이란?
+```java
+public static void main(String[] args){
+    String stringValue1 = "TEST 1";
+    String stringValue2 = "TEST 2";
 
-데이터 정의어 (Data Definition Language, DDL) 
+    System.out.println("stringValue1: " + stringValue1.hashCode()); //-1823841245
+    System.out.println("stringValue2: " + stringValue2.hashCode()); //-1823841244
 
-데이터 베이스의 테이블 생성, 면경, 삭제를 담당하는 명령어 : 
+    stringValue1 = stringValue1 + stringValue2;
+    System.out.println("stringValue1: " + stringValue1.hashCode()); //833872391
 
-CREATE, ALTER, DROP, RENAME, TRUNCATE 
+    StringBuffer sb = new StringBuffer();
 
-## Hibernate 의 ddl-auto
+    System.out.println("sb: " + sb.hashCode()); //876563773
 
-Spring JPA에서 application.yaml에 JPA관련 설정 중 ddl을 자동으로 설정할 수 있는 기능이이다.
+    sb.append("TEST StringBuffer");
+    System.out.println("sb: " + sb.hashCode()); //876563773
+}
+```
 
-spring.jpa.hibernate.ddl-auto 
+같이 생성된 클래스의 주소값이 다르다. String은 새로운 값을 할당할 때 마다 새로 생성되기 때문이다. 이와 달리 StringBuffer는 값은 memory에 append 하는 방식으로 클래스를 직접 생성하지 않는다. 
 
-- hibernate란 jpa를 구현하여 사용하기 편리하도록 만든 구현체
-- ddl-auto 옵션 :
-    - none
-    - update : 테이블의 내용이 변경된 경우 자동으로 ddl 실행
-    - create : 프로그램 시작 시 create
-    - create-drop : 프로그램 시작시 create, 종료 시 drop
-    - validate : 테이블 내용이 변경되면 변경 내용을 출력하고 프로그램 종료, never update DB schema.  —> 음.. 정확히 어떨때 쓰는지 아직 모르겠다.
+논리적으로 따져보면 클래스가 생성될 때 method들과 variable도 같이 생성되는데, StringBuffer는 이런 시간을 사용하지 않는다. 
 
-ddl-auto 옵션 테스트 해보기 
+수십번 String이 더해지는 경우에는 각 String의 주소값이 stack에 쌓이고 클래스들은 Garbage Collector가 호출되기 전까지 heap에 지속적으로 쌓이게 된다. 메모리 관리적인 측면에서는 치명적이라고 볼 수 있다. 
 
-공통 : account table이 자동으로 생성된다. 
+---
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img1.png" />
+String class의 내부 구조를 보면 String에서 저장되는 문자열은 알고보면 char의 배열형태로 저장되며 이 값들은 외부에서 접근할 수 없도록 private으로 보호된다. 또한 final형이기 때문에 초기값으로 주어진 String의 값은 불변으로 바뀔 수가 없게 되는 것이다. (immutable)
 
-none 일 때 :
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0726/img1.png" />
 
-test 유저를 회원가입 했다. 
+---
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img2.png" />
+StringBuilder는 변경가능한 문자열(mutable)이지만 synchronization이 적용되지 않는다. 하지만 StringBuffer는 thread-safe라는 말에서처럼 변경가능하지만 multiple thread 환경에서 안전한 클래스라고 한다. 
 
-restart 후 데이터가 그대로 유지가 된다. 
+이것이 StringBuilder와 StringBuffer의 가장 큰 차이점이다. 
 
-update 일 때 : restart 후에도 데이터가 그대로 유지된다. 
+예를 들어, text를 수정해야하고 multiple threads를 사용하고 있다면 StringBuffer를 사용하는게 낫다. 만약 text를 수정해야하고 single thread를 사용한다면 StringBuilder를 사용하는게 낫다. 
 
-create 일 때 : 
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0726/img2.png" />
+---
 
-회원 한명을 생성 하고 
+StringBuilder Methods insert() vs append()
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img3.png" />
+- insert()는 StringBuilder의 특정 인덱스에 추가할 수 있도록 한다.
+- append()는 StringBuilder object의 마지막에 추가하도록 한다.
+- StringBuilder 마지막에 insert()를 한다면 append()와 시간복잡도 면에서 동일하다. (O(n))
 
-shutdown 후 
+```java
+public class StringBuilderDemo {
+    public static void main(String[] args){
+        String palindrome = "Dot saw I was Tod";
+        StringBuilder sb = new StringBuilder(palindrome);
+        sb.reverse(); // reverse it
+        System.out.println(sb); //doT saw I was toD
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img4.png" />
+        sb.append(" by Eunmi ");
+        sb.append("let it go ").append(true);
+        System.out.println(sb); //doT saw I was toD by Eunmi let it go true
+        
+        sb.insert(2, false);
+        sb.insert(sb.length(), "haha");
+        System.out.println(sb); // dofalseT saw I was toD by Eunmi let it go truehaha
+    }
+}
+```
 
-start 후 
+```java
+public class StringDemo {
+    public static void main(String[] args){
+        String palindrome = "Dot saw I was Tod";
+        int len = palindrome.length();
+        char[] tempCharArray = new char[len];
+        char[] charArray = new char[len];
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img5.png" />
+        //put original string in an array of chars
+        for (int i = 0; i < len; i++) {
+            tempCharArray[i] = palindrome.charAt(i);
+        }
 
-create-drop 일 때: 
+        //reverse array of chars
+        for (int j = 0; j < len; j++) {
+            charArray[j] = tempCharArray[len - 1 - j];
+        }
 
-회원 한명을 생성 하고 
+        String reversePalindrome = new String(charArray);
+        System.out.println(reversePalindrome); //doT saw I was toD
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img6.png" />
+    }
+}
+```
 
-shutdown 후 아예 테이블이 없어졌다 
+출처 [https://novemberde.github.io/2017/04/15/String_0.html](https://novemberde.github.io/2017/04/15/String_0.html), [https://www.atechdaily.com/posts/Difference-between-StringBuilder-insert-and-append-method](https://www.atechdaily.com/posts/Difference-between-StringBuilder-insert-and-append-method)
+[https://docs.oracle.com/javase/tutorial/java/data/buffers.html](https://docs.oracle.com/javase/tutorial/java/data/buffers.html)
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img7.png" />
 
-validate 일 떄 : 
-
-어플리케이션 시작할 때 테이블을 자동으로 생성해주지 않는다. 
-
-restart 후 데이터가 유지 된다.

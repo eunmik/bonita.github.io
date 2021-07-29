@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Java] 로그인 시도 횟수 제한하기"
-date: 2021-07-21
-excerpt: "로그인 시도 횟수를 제한하여 계정을 보호하자"
-tags: [Java, Login]
+title: "[Spring] jpa-hibernate-dll 옵션"
+date: 2021-07-22
+excerpt: "jpa-hibernate-dll 옵션 종류"
+tags: [jpa, hibernate]
 comments: true
 ---
 Spring JPA에서 Hibernate를 이용하여 DDL을 생성하여 Data Table을 자동으로 생성할 수 있다. 
