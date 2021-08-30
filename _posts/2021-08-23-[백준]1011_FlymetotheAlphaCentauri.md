@@ -12,7 +12,7 @@ comments: true
 문제 푼 시간 : 힌트 얻어서 풀었지만 그래도 3시간 이나 걸림.. 
 백준 난이도 : GOLD V 
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/79714d0d-f002-4f11-9d35-927b49617c46/Untitled.png)
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0823/img1.png" />
 
 ---
 
@@ -26,9 +26,9 @@ comments: true
 
 횟수가 나오는 숫자를 보면 (max * 2) -1, max * 2, max*2 +1 라는 수식이 적용이 된다. 
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fa92725d-17db-49fb-997a-1188d7ca8559/Untitled.png)
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0823/img2.png" />
 
-![ABCF3143-3760-45F8-B220-DE9E03F3579A.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bdb76527-ed98-43c3-9966-33d6361e96b9/ABCF3143-3760-45F8-B220-DE9E03F3579A.jpeg)
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0823/img3.png" />
 
 코드
 
@@ -38,11 +38,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-//https://www.acmicpc.net/problem/1011
-/**
- * 푼 날짜 : 2021-08-22
- * 푼 시간 : 21:05 ~ 21:40
- */
 public class FlymetotheAlphaCentauri {
     static int caseNum;
     static int[][] cases;
