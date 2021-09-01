@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Algorithm] 백준_14502 연구소"
-date: 2021-08-30
-excerpt: "백준 문제 14502"
-tags: [Java, Algorithm, 백준]
+title: "[Algorithm] 프로그래머스_메뉴리뉴얼"
+date: 2021-09-01
+excerpt: "프로그래머스 문제 메뉴리뉴얼"
+tags: [Java, Algorithm, 프로그래머스]
 comments: true
 ---
 
