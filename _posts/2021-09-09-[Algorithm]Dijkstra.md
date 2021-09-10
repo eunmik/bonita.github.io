@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Algorithm] 프로그래머스_메뉴리뉴얼"
-date: 2021-09-01
-excerpt: "프로그래머스 문제 메뉴리뉴얼"
-tags: [Java, Algorithm, 프로그래머스]
+title: "[Algorithm] Dijkstra 다익스트라 알고리즘"
+date: 2021-09-09
+excerpt: "최단경로 다익스트라 알고리즘"
+tags: [Java, Algorithm]
 comments: true
 ---
 
@@ -15,7 +15,7 @@ comments: true
 
 아래 백준 최단경로 문제를 예를들어 과정을 이해해 보도록 하겠다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img1.png" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img1.PNG" />
 
 출발 노드를 먼저 1로 설정한다.
 
@@ -27,13 +27,13 @@ comments: true
 
 각 노드의 최소 비용은 무한대(Integer.MAX_VALUE)로 설정한다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img2.png" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img2.PNG" />
 
 첫번째 출발 노드를 방문했고 자기 자신이기 때문에 dist[1]에는 최소 비용을 0으로 설정한다. 
 
 우선순위 큐에 넣어 놓은 첫번째 출발 노드의 destination과 weight를 확인한다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img3.png" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img3.PNG" />
 
 1번 노드의 인접한 노드 (2번째 노드) 에서 
 
@@ -52,7 +52,7 @@ if(d[next.destination] >= d[destination] + next.weight){
 
 갱신하고 비용이 짧은 순으로 찾을 수 있게 우선순위 큐에 add 한다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img4.png" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img4.PNG" />
 
 같은 방식으로 
 
@@ -68,7 +68,7 @@ dist[3] 보다 작으면 최소 비용 노드를 갱신한다.
 
 이런식으로 반복 하다보면 모든 노드에 대한 최소비용을 구할 수 있다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img5.png" />
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0909/img5.gif" />
 
 대표적인 최단경로 문제 
 
