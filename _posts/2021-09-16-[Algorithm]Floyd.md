@@ -58,7 +58,7 @@ comments: true
 
 이렇게 반복 하다보면 아래처럼 결과 값이 나온다. 
 
-![슬라이드9.PNG](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/766c7665-d55d-44e0-a3b1-c677782fa280/슬라이드9.png)
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img10.PNG" />
 
 Java Code :
 
