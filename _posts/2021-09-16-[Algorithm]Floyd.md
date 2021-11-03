@@ -67,7 +67,7 @@ public class floydWarshall {
     public static void main(String[] args){
         number = 4;
         INF = Integer.MAX_VALUE;
-        int[][] a = {{0, 5, INF, 8}, {7, 0, 9, INF}, {2, INF, 0, 4}, {INF, INF, 3, 0}};
+       // int[][] a = {{0, 5, INF, 8}, {7, 0, 9, INF}, {2, INF, 0, 4}, {INF, INF, 3, 0}}; -> brackets 안닫았다고 git 에러남.. 왜? 
         floydWarshall(a);
     }
     static int number;
