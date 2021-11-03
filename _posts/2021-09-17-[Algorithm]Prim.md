@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Algorithm] Floyd 플로이드 와샬 알고리즘"
+title: "[Algorithm] Prim 프림 알고리즘"
 date: 2021-09-15
-excerpt: "최소 비용 신장 트리 크루스칼 알고리즘"
-tags: ["Algorithm", "Kruskal", "Java"]
+excerpt: "프림 Prim 알고리즘"
+tags: ["Algorithm", "Prim", "Java"]
 comments: true
 ---
 
