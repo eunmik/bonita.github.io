@@ -1,3 +1,12 @@
+---
+layout: post
+title: "[AWS Hands-On] Break a Monolith Application into MSA"
+date: 2022-03-25
+excerpt: "AWS Hands-On"
+tags: ["AWS", "Hands-On"]
+comments: true
+---
+
 # [AWS Hands-On]Break a Monolith Application into MSA
 
 [Module One - Containerize the Monolith | AWS](https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-one/?nc1=h_ls)
@@ -16,7 +25,7 @@ In this page, all the steps I do  will be shared with lots of screenshots!
 
 In this module, you will build the container image for your monolithic node.js application and push it to Amazon Elastic Container Registry.
 
-![Untitled](%5BAWS%20Hands%2024db9/Untitled.png)
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/Untitled.png" />
 
 ## Step 1. Get Setup
 
@@ -56,7 +65,7 @@ git clone https://github.com/awslabs/amazon-ecs-nodejs-microservices.git
 
 ### 1. Select Create Repository (레파지토리 생성)
 
-![스크린샷 2022-03-22 오전 10.02.31.png](%5BAWS%20Hands%2024db9/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-03-22_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_10.02.31.png)
+<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-03-22_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_10.02.31.png">
 
 ### 2. On the Create repository page, enter the following name your repository: *api*.
 
