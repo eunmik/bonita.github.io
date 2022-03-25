@@ -7,7 +7,6 @@ tags: ["AWS", "Hands-On"]
 comments: true
 ---
 
-# [AWS Hands-On]Break a Monolith Application into MSA
 
 [Module One - Containerize the Monolith | AWS](https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-one/?nc1=h_ls)
 
