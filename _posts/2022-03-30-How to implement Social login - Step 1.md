@@ -63,6 +63,7 @@ To implement social login into my web service, it is required to register oauth 
 <aside>
 🔖 reference : 
 [https://deeplify.dev/back-end/spring/oauth2-social-login](https://deeplify.dev/back-end/spring/oauth2-social-login)
-https://antdev.tistory.com/70
+[https://antdev.tistory.com/70](https://antdev.tistory.com/70)
+[spring-boot-react-oauth2-social-login-demo](https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo)
 
 </aside>
