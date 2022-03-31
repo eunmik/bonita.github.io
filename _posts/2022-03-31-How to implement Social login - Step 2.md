@@ -351,9 +351,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 }
 ```
 
-<aside>
+
 🔖 reference
 [oauth2login-advanced.html](https://docs.spring.io/spring-security/site/docs/5.0.7.RELEASE/reference/html/oauth2login-advanced.html, "oauth2login")
 [spring-boot-react-oauth2-social-login-demo](https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo, "spring-boot-react-oauth2-social-login-demo")
 
-</aside>

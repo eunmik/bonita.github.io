@@ -44,8 +44,7 @@ class SocialLogin extends Component {
 }
 ```
 
-<aside>
+
 🔖 reference
 [spring-boot-react-oauth2-social-login-demo](https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo, "spring-boot-react-oauth2-social-login-demo")
 
-</aside>
