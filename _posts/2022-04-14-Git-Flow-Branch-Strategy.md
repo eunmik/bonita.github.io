@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "How to Debug React on VS Code"
-date: 2022-04-01
+title: "Git flow branch strategy"
+date: 2022-04-14
 excerpt: "How to Debug React on VS Code"
-tags: ["Debugging", "React", "VSCode"]
+tags: ["git", "strategy"]
 comments: true
 ---
 
