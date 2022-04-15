@@ -2,7 +2,7 @@
 layout: post
 title: "Git flow branch strategy"
 date: 2022-04-14
-excerpt: "How to Debug React on VS Code"
+excerpt: "Have you heard of git flow?"
 tags: ["git", "strategy"]
 comments: true
 ---
