@@ -82,7 +82,7 @@ comments: true
 
 
 💡 참고 링크 
-- [개발자 이력서 작성법 및 TIP](https://realdeveloper.pro/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B4%EB%A0%A5%EC%84%9C-%EC%9E%91%EC%84%B1%EB%B2%95, "개발자 이력서 작성법 및 TIP")
+- [개발자 이력서 작성법 및 TIP](https://realdeveloper.pro/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B4%EB%A0%A5%EC%84%9C-%EC%9E%91%EC%84%B1%EB%B2%95)
 - [이직 초보 어느 개발자의 이력서 만들기](https://techblog.woowahan.com/2531/, "이직 초보 어느 개발자의 이력서 만들기")
 - [카카오 합격 개발 이력서 1](https://f-lab.medium.com/%EC%B9%B4%EC%B9%B4%EC%98%A4-%ED%95%A9%EA%B2%A9-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B4%EB%A0%A5%EC%84%9C-1-by-f-lab-d7eff8e39422)
 
