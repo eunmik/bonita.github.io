@@ -9,7 +9,7 @@ comments: true
 
 2022.04.21
 
-[이력서 오픈 마이크 #1 메이커준 - 인프런 | 스토리](https://www.inflearn.com/pages/rejume-openmic-1, "이력서 오픈 마이크 - 인프런")
+[이력서 오픈 마이크 #1 메이커준 - 인프런](https://www.inflearn.com/pages/rejume-openmic-1, "이력서 오픈 마이크 #1 메이커준 - 인프런")
 
 인프런에서 기획하는 첫번째 오픈마이크! 좋은 기회로 참가할 수 있게 되었다. 
 
