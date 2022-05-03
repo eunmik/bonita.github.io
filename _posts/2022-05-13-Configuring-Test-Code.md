@@ -124,8 +124,6 @@ Unit Test를 작성하면서 지금까지는 발견하지 못했던 부분에서
 
 ## Integration Tests
 
-### 
-
 ```java
 import com.argos_labs.rpa.stu.ServiceConfiguration;
 import org.junit.jupiter.api.Test;
@@ -207,14 +205,7 @@ class AppScenarioEditorControllerTest {
 
 통합테스트에서 Service 클래스에서 Mapper가 가져오는 데이터에서 자꾸 NullPointerException이 났다. 그래서 통합테스트에서도 Unit Test처럼 Mock 객체를 만들어줘야 하는건가 고민했었다.
 
-```java---
-layout: post
-title: "[인프런 이력서 오픈 마이크] 2회차/회사가 원하는 사람 이해하기"
-date: 2022-04-29
-excerpt: "나는 회사가 원하는 역량 가지고 있는 사람일까?"
-tags: ["Resume", "Inflearn"]
-comments: true
----
+```java
 
 given(pcScenarioEditorMapper.select_company_code_from_scenario_hash_key(scenario.getHashKey(), null)).willReturn(scenario);
 given(pcScenarioEditorMapper.select_company_code_using_userId(authUserId)).willReturn("H0TQ9");
