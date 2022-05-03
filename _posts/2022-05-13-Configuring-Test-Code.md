@@ -102,7 +102,7 @@ class RestTemplateClientTest {
 
         ResponseEntity<UpdateResult> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer 16bd5cb6-72bf-43e1-a4e6-bb40e6400222");
+        headers.set("Authorization", "Bearer Authorization_code");
         when(testRestTemplate.exchange(this.config.licenseManagerUrl + LICENSE_UNREG_SCENARIO_URL_FORMAT, HttpMethod.DELETE, null, UpdateResult.class, userId, Integer.valueOf(scenarioId))).thenReturn(responseEntity);
 
         //when
@@ -166,11 +166,11 @@ class AppScenarioEditorControllerTest {
 
     public String getAccessToken(String configUrl) throws Exception {
         restTemplate = new RestTemplate();
-        String clientId = "sv-argos-user";
+        String clientId = "clientId";
         String grant_type = "password";
-        String userid = "test@vivans.net";
-        String password = "eed56d004b89799f66ccb1dea2a480b532ac1d1a57488173f18eb0ffa98a0a19";
-        String seed = "7fddd9a6c699e617c7a726c702f0d0b0a4faa3aff59d0c06246d7770532d53d3";
+        String userid = "test@test.com";
+        String password = "encoded_password";
+        String seed = "seed_value";
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.set("grant_type", grant_type);
@@ -181,7 +181,7 @@ class AppScenarioEditorControllerTest {
         parameters.set("username", userid);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.AUTHORIZATION, "Basic c3YtYXJnb3MtdXNlcjo2ZWRhNzc2MGEwNjA2YTZhNThhNDZmYjk5ZDJkZWQwNg==");
+        headers.set(HttpHeaders.AUTHORIZATION, "Basic Authorization_Code");
 
         HttpEntity request = new HttpEntity(parameters, headers);
 
@@ -206,9 +206,8 @@ class AppScenarioEditorControllerTest {
 통합테스트에서 Service 클래스에서 Mapper가 가져오는 데이터에서 자꾸 NullPointerException이 났다. 그래서 통합테스트에서도 Unit Test처럼 Mock 객체를 만들어줘야 하는건가 고민했었다.
 
 ```java
-
 given(pcScenarioEditorMapper.select_company_code_from_scenario_hash_key(scenario.getHashKey(), null)).willReturn(scenario);
-given(pcScenarioEditorMapper.select_company_code_using_userId(authUserId)).willReturn("H0TQ9");
+given(pcScenarioEditorMapper.select_company_code_using_userId(authUserId)).willReturn("ABCD");
 ```
 
 하지만 문제의 원인은! 단위 테스틑 Mock 객체를 사용함으로써 실제 데이터를 사용하는게 아니라 가짜로 정의한 데이터와 bean 객체를 사용하는데 통합테스트에서는 실제 애플리케이션이 작동되는 flow를 확인 하기 위해 실제 데이터를 사용한다. 
