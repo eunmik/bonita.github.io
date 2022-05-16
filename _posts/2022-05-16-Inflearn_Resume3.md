@@ -32,7 +32,8 @@ comments: true
 
 일단 내가 제출한 이력서를 먼저 공개하자면.. (부끄부끄)
 
-[이력서 2022.04 버전] ("https://eunmik.github.io/bonita.blog/resume_202204/", "이력서")
+[이력서 2022.04 버전](https://eunmik.github.io/bonita.blog/resume_202204/, "이력서")
+
 
 ## 내가 받은 피드백
 
