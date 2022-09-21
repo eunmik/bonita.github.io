@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
-baseurl: "/bonita.github.io"
-url: "https://eunmik.github.io"
+baseurl: "https://eunmik.github.io/bonita.github.io"
+url: "https://eunmik.github.io/bonita.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 title: Bonita's Botari                                    # site's title
