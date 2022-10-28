@@ -23,7 +23,7 @@ comments: true
     2. 그 값을 맨 앞에 위치한 값과 교체한다(패스(pass))
     3. 맨 처음 위치를 뺀 나머지 리스트를 같은 방법으로 교체한다. 
 
-    <img src="https://eunmik.github.io/bonita.blog/assets/img/210321-selection.gif">
+    <img src="../assets/img/210321-selection.gif">
 
 시간 복잡도 : Θ(n2)
 
@@ -48,7 +48,7 @@ void bubbleSort(int[] arr) {
 }
 ```
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/210321-bubble.gif">
+<img src="../assets/img/210321-bubble.gif">
 
 시간 복잡도 : O(n^{2})
 
@@ -76,7 +76,7 @@ void insertionSort(int[] arr)
 }
 ```
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/210321-insertion.gif">
+<img src="../assets/img/210321-insertion.gif">
 
 시간 복잡도 : О(n2)
 
@@ -111,7 +111,7 @@ void insertionSort(int[] arr)
     }
     ```
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/210321-quick.gif">
+<img src="../assets/img/210321-quick.gif">
 
 시간 복잡도 : O(N * logN) 
 
@@ -124,7 +124,7 @@ void insertionSort(int[] arr)
     3. 가장 큰 수(루트에 위치)를 가장 작은 수와 교환한다.
     4. 2와 3을 반복한다. 
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/210321-heap.gif">
+<img src="../assets/img/210321-heap.gif">
 
 시간 복잡도 : O(log n)
 
@@ -147,10 +147,10 @@ void insertionSort(int[] arr)
     4. 결합(combine) : 두 부분 리스트를 다시 하나의 정렬된 리스트로 합병한다. 이때 정렬 결과가 임시배열에 저장된다.
     5. 복사(copy) : 임시 배열에 저장된 결과를 원래 배열에 복사한다.
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/210321-merge.gif">
+<img src="../assets/img/210321-merge.gif">
 
 시간 복잡도 : 
 
 ## 시간 복잡도
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/210321-complexity.png">
+<img src="../assets/img/210321-complexity.png">

@@ -9,8 +9,8 @@ comments: true
 
 
 <figure class="half">
-    <img src="https://eunmik.github.io/bonita.blog/assets/img/fruit-waste-cover.png">
-    <img src="https://eunmik.github.io/bonita.blog/assets/img/fruit-waste-content.jpg">
+    <img src="../assets/img/fruit-waste-cover.png">
+    <img src="../assets/img/fruit-waste-content.jpg">
 
 </figure>
 

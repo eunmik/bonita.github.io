@@ -109,10 +109,10 @@ class BinarySearch {
     - 이렇게 큰 탐색 범위를 보면 가장 먼저 **이진 탐색**을 떠올려야 합니다.
 - 문제에서 제시된 예시를 통해 그림으로 이해해 봅시다.
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/binary_search_0.png"> </br>
-<img src="https://eunmik.github.io/bonita.blog/assets/img/binary_search_1.png"> </br>
-<img src="https://eunmik.github.io/bonita.blog/assets/img/binary_search_2.png"> </br>
-<img src="https://eunmik.github.io/bonita.blog/assets/img/binary_search_3.png"> </br>
+<img src="../assets/img/binary_search_0.png"> </br>
+<img src="../assets/img/binary_search_1.png"> </br>
+<img src="../assets/img/binary_search_2.png"> </br>
+<img src="../assets/img/binary_search_3.png"> </br>
 
 - 이러한 이진 탐색 과정을 반복하면 답을 도출할 수 있습니다.
 - 중간점의 값은 시간이 지날 수록 '**최적화된 값**'이 되기 때문에, 과정을 반복하면서 얻을 수 있는 떡의 길이 합이 필요한 떡의 길이보다 크거나 같을 때마다 **중간점의 값을 기록**하면 됩니다.
@@ -137,4 +137,4 @@ N개의 원소를 포함하고 있는 수열이 오름차순으로 정렬되어 
     - 하지만 데이터가 정렬되어 있기 때문에 이진 탐색을 수행할 수 있습니다.
 - 특정 값이 등장하는 첫 번째 위치와 마지막 위치를 찾아 위치 차이를 계산해 문제를 해결할 수 있습니다.
 
-<img src="https://eunmik.github.io/bonita.blog/assets/img/binary_search_4.png"> </br>
+<img src="../assets/img/binary_search_4.png"> </br>
