@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "https://eunmik.github.io/bonita.github.io"
+baseurl: ""
 url: "https://eunmik.github.io/bonita.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
