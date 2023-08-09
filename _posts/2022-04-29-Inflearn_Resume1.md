@@ -19,19 +19,19 @@ comments: true
 
  
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0429/Untitled.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0429/Untitled.png">
 
 메이커준 님이 정해준 대로 그룹이 나눠 졌는데 우리 그룹은 총 3명이 었고 2명이 백엔드 1명이 프론트엔드 개발자 였다. 인프런에서 진행 하는 행사인 만큼 개발자를 준비하는 사람들이 모였다. 
 
 스프레드 시트에 실시간으로 작성 하면서 서로의 생각을 공유하는 방식이 었는데 다른 그룹들의 의견도 시트를 통해서 확인할 수 있어서 신박한 방식이라고 생각이 들었다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0429/Untitled%201.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0429/Untitled%201.png">
 
 피곤하다고 하니깐 그거에 대해 코멘트도 달아주시고 쏘 스윗...🍬
 
 **좋은 이력서 vs 좋지 않은 이력서 그 차이를 만드는 키워드**에서 아래와 같이 다양한 키워드가 나왔다.  
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0429/Untitled%202.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0429/Untitled%202.png">
 
 개인적으로 이번 시간에서 아마 가장 인상적이 었던 부분이었는데, 이력서에서는 주로 내가 한 것이 들어난 이력서가 보통이다. 근데 한 것이 아닌 **‘잘 하는것’**이 드러나는 이력서가 더 매력적이라는 것이다. 
 

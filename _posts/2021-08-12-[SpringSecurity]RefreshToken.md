@@ -12,7 +12,7 @@ comments: true
 
 refresh token은 사용자 어플리케이션이 다시 로그인 할 필요 없이 새로운 access token을 발급 하도록 해주는 자격증명 artifact 이다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0812/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0812/img1.png" />
 
 사용자는 refresh token이 유효한 이상 새로운 access token을 받을 수 있다. 
 

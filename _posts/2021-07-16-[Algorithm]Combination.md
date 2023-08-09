@@ -82,7 +82,7 @@ public static void main(String[] args){
     }
 ```
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0716/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0716/img1.png" />
 
 ## 2. 조합 구하기
 
@@ -150,7 +150,7 @@ public class NumberOfCases {
 }
 ```
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0716/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0716/img2.png" />
 
 ### 재귀 이용해 구현
 
@@ -183,7 +183,7 @@ depth == n 이 되면 모든 인덱스를 다 보았으므로 (배열의 끝에 
     }
 ```
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0716/img3.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0716/img3.png" />
 
 ### visited배열을 쓰지 않고 정수 변수 index로 판별해 구해보기
 
@@ -218,4 +218,4 @@ target+1이 nCr에서 n-1 → n-2 → n-3 → ... → 1 까지 가는 역할을 
     }
 ```
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0716/img4.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0716/img4.png" />

@@ -168,7 +168,7 @@ Spring Security에서 반환하는 에러 메시지는 아래처럼 형식이 �
         }
     }
     ```
-    <img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0803/img1.png" />
+    <img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0803/img1.png" />
 
 
     출처 : https://medium.com/@beladiyahardik7/spring-security-custom-oauth2exception-in-spring-b35a62af4d34

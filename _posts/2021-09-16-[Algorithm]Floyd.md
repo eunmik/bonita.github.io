@@ -10,7 +10,7 @@ comments: true
 
 다익스트라 알고리즘은 가장 적은 비용을 하나씩 선택해야 했다면 플로이드 와샬 알고리즘은 기본적으로 '거쳐가는 정점'을 기준으로 알고리즘을 수행한다는 특징이 있다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img1.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img1.PNG" />
 
 위와 같은 그래프가 존재한다고 했을때 각각의 정점이 다른 정점으로 가는 비용을 이차원 배열로 초기화 했다.
 
@@ -18,7 +18,7 @@ comments: true
 
 노드1을 거쳐가는 경우로 과정을 설명해 보자면
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img2.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img2.PNG" />
 
 1을 거쳐가는 경우에는 총 6가지 공간만 갱신해주면 된다. 
 
@@ -30,23 +30,23 @@ comments: true
 
 **X에서 Y로 가는 최소 비용 VS X에서 노드N으로 가는 비용 + 노드N에서 Y로 가는 비용**
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img3.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img3.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img4.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img4.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img5.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img5.PNG" />
 
 [2,3]의 최소비용을 구할 때 [2,1] + [1,3]의 값과 [2,3]을 비교했을 때 더 작은 값으로 교체가 된다. 
 
 7 + INF < 9  ⇒ FALSE, 그니깐 값은 [2,3]의 값이 그대로 유지된다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img6.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img6.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img7.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img7.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img8.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img8.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img9.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img9.PNG" />
 
 [2,4]의 최소비용을 구할 때는 
 
@@ -58,7 +58,7 @@ comments: true
 
 이렇게 반복 하다보면 아래처럼 결과 값이 나온다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0916/img10.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0916/img10.PNG" />
 
 Java Code :
 

@@ -197,4 +197,4 @@ public class TestController {
 
 ### 5. Controller를 호출할 때 a 값 없이 호출 하면 메시지가 return 된다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210621-img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210621-img1.png" />

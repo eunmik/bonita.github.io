@@ -16,7 +16,7 @@ comments: true
 
 1회차 처럼 2회차에서도 엑셀 시트에 체크인 점수로 자신의 컨디션을 표현하면서 시작하였다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0429/Untitled%203.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0429/Untitled%203.png">
 
 나의 피곤함이 묻어져 나오는 점수 5점..... 🤣 퇴근하고 무언가 한다는 것은 정말 대단한 것이여... 
 

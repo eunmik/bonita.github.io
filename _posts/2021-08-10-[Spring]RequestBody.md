@@ -12,7 +12,7 @@ HttpMessageConverter는 Http request message를 연관된 java ovject로 변환�
 
 여기에서는 요청이 있을 때 JSON을 java object로 변환한다. spring boot가 자동적으로 설정 하기 때문에 jackson이 클래스에 있으면, MappingJackson2MessageConverter가 사용된다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0810/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0810/img1.png" />
 
 ### @RequestBody를 사용한 모습
 

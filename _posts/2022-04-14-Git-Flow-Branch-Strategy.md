@@ -29,7 +29,7 @@ reference :
 
 When the source code in the `develop` branch reachs a stable point and is ready to be released, all of the changes should be mereged back into `master` somehow and then tagged with a release number.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled.png">
 
 ## Supporting branches
 
@@ -63,7 +63,7 @@ $ git push origin develop
 
 The `--no-ff` flag cuases the merge to always create a new commit object, event if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature. Compare: 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled%201.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%201.png">
 
 ### Release branches
 
@@ -85,10 +85,10 @@ Branch naming convention: `hotfix-*`
 
 Hotfix branches are very much like release branches in that they are also meant to prepare for a new production release, albeit unplanned. When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled%202.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%202.png">
 
 The one exception to the rule here is that, **when a release branch currently exists, the hotfix changes need to be merged into that release branch, instead of `develop`.**
 
 Comprehensive flowchart: 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled%203.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%203.png">

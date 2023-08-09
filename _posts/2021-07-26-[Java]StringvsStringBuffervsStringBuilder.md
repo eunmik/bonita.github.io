@@ -37,7 +37,7 @@ public static void main(String[] args){
 
 String class의 내부 구조를 보면 String에서 저장되는 문자열은 알고보면 char의 배열형태로 저장되며 이 값들은 외부에서 접근할 수 없도록 private으로 보호된다. 또한 final형이기 때문에 초기값으로 주어진 String의 값은 불변으로 바뀔 수가 없게 되는 것이다. (immutable)
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0726/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0726/img1.png" />
 
 ---
 
@@ -47,7 +47,7 @@ StringBuilder는 변경가능한 문자열(mutable)이지만 synchronization이 
 
 예를 들어, text를 수정해야하고 multiple threads를 사용하고 있다면 StringBuffer를 사용하는게 낫다. 만약 text를 수정해야하고 single thread를 사용한다면 StringBuilder를 사용하는게 낫다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0726/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0726/img2.png" />
 ---
 
 StringBuilder Methods insert() vs append()

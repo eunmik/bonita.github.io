@@ -12,7 +12,7 @@ comments: true
 문제 푼 시간 : 힌트 얻어서 풀었지만 그래도 3시간 이나 걸림.. 
 백준 난이도 : GOLD V 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0823/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0823/img1.png" />
 
 ---
 
@@ -26,9 +26,9 @@ comments: true
 
 횟수가 나오는 숫자를 보면 (max * 2) -1, max * 2, max*2 +1 라는 수식이 적용이 된다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0823/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0823/img2.png" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0823/img3.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0823/img3.png" />
 
 코드
 

@@ -169,8 +169,8 @@ Caused by: java.lang.IllegalStateException: Ambiguous @ExceptionHandler method m
 이유는 CustomExceptionHandler가 ResponseEntityExceptionHandler를 상속 받고 있는데 
 그 클래스에 이미 MissingServletRequestParameterException에 대한 내용이 있기 때문이다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0709/img1.png" />
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0709/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0709/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0709/img2.png" />
 
 
 그래서 재정의가 필요한 것이다. 

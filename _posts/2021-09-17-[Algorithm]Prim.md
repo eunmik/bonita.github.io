@@ -21,23 +21,23 @@ comments: true
 
 프림 알고리즘은 이를 위해 트리와 이 정점을 연결하는 간선의 최소 가중치를 저장하는 배열 minWeight[]를 유지한다. 이 배열은 트리에 정점을 새로 추가할 때마다 이 정점에 인접한 간선들을 순회하면서 갱신하게 된다. 이렇게 하면 추가할 새 정점을 찾는 작업은 O(|V|)만에 할 수 있고, 모든 간선은 두번씩만 검사되므로 *(간선 (u,v)는 u를 트리에 추가했을 때 한 번, v를 트리에 추가했을 때 한번 검사)* 전체 시간 복잡도는 $O(|V|^2+|E|)$가 된다. 거의 모든 정점들 사이에 간선이 있는 밀집 그래프의 경우 프림알고리즘은 크루스칼보다 빠르게 동작한다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0917/img1.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0917/img1.PNG" />
 
 맨처음에 시작할 정점에 대한 destination과weight값을 Priority Queue에 넣어준다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0917/img2.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0917/img2.PNG" />
 
 PriorityQueue에서 꺼내서 current.destination과 인접한 정점들을 PriorityQueue에 넣어준다. 
 
 visited[current.destination]을 True로 해준다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0917/img3.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0917/img3.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0917/img4.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0917/img4.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0917/img5.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0917/img5.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0917/img6.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0917/img6.PNG" />
 
 같은 방식으로 다른 정점들을 방문한다. 
 

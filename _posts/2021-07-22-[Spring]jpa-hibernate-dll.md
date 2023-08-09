@@ -34,13 +34,13 @@ ddl-auto 옵션 테스트 해보기
 
 공통 : account table이 자동으로 생성된다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0722/img1.png" />
 
 none 일 때 :
 
 test 유저를 회원가입 했다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0722/img2.png" />
 
 restart 후 데이터가 그대로 유지가 된다. 
 
@@ -50,25 +50,25 @@ create 일 때 :
 
 회원 한명을 생성 하고 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img3.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0722/img3.png" />
 
 shutdown 후 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img4.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0722/img4.png" />
 
 start 후 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img5.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0722/img5.png" />
 
 create-drop 일 때: 
 
 회원 한명을 생성 하고 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img6.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0722/img6.png" />
 
 shutdown 후 아예 테이블이 없어졌다 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0722/img7.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0722/img7.png" />
 
 validate 일 떄 : 
 

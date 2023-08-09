@@ -24,7 +24,7 @@ In this page, all the steps I do  will be shared with lots of screenshots!
 
 In this module, you will build the container image for your monolithic node.js application and push it to Amazon Elastic Container Registry.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/Untitled.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled.png" />
 
 ## Step 1. Get Setup
 
@@ -64,17 +64,17 @@ git clone https://github.com/awslabs/amazon-ecs-nodejs-microservices.git
 
 ### 1. Select Create Repository (레파지토리 생성)
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.02.31.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.02.31.png">
 
 ### 2. On the Create repository page, enter the following name your repository: *api*.
 
 **⚐ Note:** Under **Tag immutability**, leave the default settings.
 
-![스크린샷 2022-03-22 오전 10.06.25.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.06.25.png">
+![스크린샷 2022-03-22 오전 10.06.25.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.06.25.png">
 
 ### 3. Select **Create repository**.
 
-![스크린샷 2022-03-22 오전 10.08.29.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.08.29.png">
+![스크린샷 2022-03-22 오전 10.08.29.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.08.29.png">
 
 ## Step 4. Build & Push the Docker image
 
@@ -86,26 +86,26 @@ git clone https://github.com/awslabs/amazon-ecs-nodejs-microservices.git
 
 - Add Users on IAM Console Page
 
-![스크린샷 2022-03-22 오전 10.12.57.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.12.57.png">
+![스크린샷 2022-03-22 오전 10.12.57.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.12.57.png">
 
 - type user name and select AWS credential type (this time, I chose Access Key)
     
-    ![스크린샷 2022-03-22 오전 10.13.55.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.13.55.png">
+    ![스크린샷 2022-03-22 오전 10.13.55.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.13.55.png">
     
 - select how to set permissions : add user to group, copy permissions from existing user, or attach existing policies directly
     
     I created admin group with AdministratorAccess 
     
-    ![스크린샷 2022-03-22 오전 10.14.52.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.14.52.png">
+    ![스크린샷 2022-03-22 오전 10.14.52.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.14.52.png">
     
 - skip add tags
 - select create user
     
-    ![스크린샷 2022-03-22 오전 10.16.24.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.16.24.png">
+    ![스크린샷 2022-03-22 오전 10.16.24.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.16.24.png">
     
 - save Access Key ID and secret access key to configure aws cli
     
-    ![스크린샷 2022-03-22 오전 10.17.00.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.17.00.png">
+    ![스크린샷 2022-03-22 오전 10.17.00.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.17.00.png">
     
 - configure aws cli
     
@@ -113,7 +113,7 @@ git clone https://github.com/awslabs/amazon-ecs-nodejs-microservices.git
     aws configure 
     ```
     
-    ![스크린샷 2022-03-22 오전 10.19.01.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.19.01.png">
+    ![스크린샷 2022-03-22 오전 10.19.01.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.19.01.png">
     
 
 ### 2. Docker Log in
@@ -210,13 +210,13 @@ dfed9ca1db03: Pushed
 
 If you navigate to your Amazon ECR repository, you should see your image tagged *v1*.
 
-![스크린샷 2022-03-22 오전 10.34.25.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.34.25.png">
+![스크린샷 2022-03-22 오전 10.34.25.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.34.25.png">
 
 # Module 2 : Deploy the Monolith
 
 In this module, you will use Amazon Elastic Container Service (Amazon ECS) to instantiate a managed cluster of EC2 compute instances and deploy your image as a container running on the cluster.
 
-![Untitled]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/Untitled%201.png">
+![Untitled]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled%201.png">
 
 ## Step 1. Launch an ECS Cluster using AWS CloudFormation
 
@@ -226,11 +226,11 @@ Create an Amazon ECS cluster deployed behind an Application Load Balancer.
 
 [](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/)
 
-![스크린샷 2022-03-22 오후 7.43.17.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.43.17.png">
+![스크린샷 2022-03-22 오후 7.43.17.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.43.17.png">
 
 ### 2. **Upload a template file** and choose the [ecs.yml](https://github.com/awslabs/amazon-ecs-nodejs-microservices/blob/master/2-containerized/infrastructure/ecs.yml) file from the GitHub project at *amazon-ecs-nodejs-microservice/2-containerized/infrastructure/ecs.yml* then select **Next**.
 
-![스크린샷 2022-03-22 오후 7.45.52.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.45.52.png">
+![스크린샷 2022-03-22 오후 7.45.52.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.45.52.png">
 
 ### 3. For the stack name, enter *BreakTheMonolith-Demo*. Verify that the other parameters have the following values:
 
@@ -238,21 +238,21 @@ Create an Amazon ECS cluster deployed behind an Application Load Balancer.
 2. InstanceType = *t2.micro*
 3. MaxSize = *2*
 
-![스크린샷 2022-03-22 오후 7.47.20.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.47.20.png">
+![스크린샷 2022-03-22 오후 7.47.20.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.47.20.png">
 
 ### 3. For configure stack options and advanced options, keep them default and Select Next
 
 ### 4. Tick the check box and Create stack
 
-![스크린샷 2022-03-22 오후 7.48.44.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.48.44.png">
+![스크린샷 2022-03-22 오후 7.48.44.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.48.44.png">
 
 You will see your stack with the status CREATE_IN_PROGRESS
 
-![스크린샷 2022-03-22 오후 7.49.23.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.49.23.png">
+![스크린샷 2022-03-22 오후 7.49.23.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.49.23.png">
 
 After few minutes (maybe about 5 minutes) you can check the progress 
 
-![스크린샷 2022-03-22 오후 7.51.43.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.51.43.png">
+![스크린샷 2022-03-22 오후 7.51.43.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.51.43.png">
 
 Or You can use command line to create stack
 
@@ -268,45 +268,45 @@ Or You can use command line to create stack
 
 [https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2#/clusters](https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2#/clusters)
 
-![스크린샷 2022-03-22 오후 7.55.59.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.55.59.png">
+![스크린샷 2022-03-22 오후 7.55.59.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.55.59.png">
 
 - Select the cluster **BreakTheMonolith-Demo**, then select the **Tasks** tab to verify that there are no tasks running.
 
-![스크린샷 2022-03-22 오후 8.00.50.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.00.50.png">
+![스크린샷 2022-03-22 오후 8.00.50.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.00.50.png">
 
 - Select the **ECS Instances** tab to verify there are two Amazon EC2 instances created by the AWS CloudFormation template.
 
-![스크린샷 2022-03-22 오후 8.02.12.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.02.12.png">
+![스크린샷 2022-03-22 오후 8.02.12.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.02.12.png">
 
 ## Step 3. Write a Task Definition
 
 ### 1. Select Task Denitions
 
-![스크린샷 2022-03-22 오후 8.05.18.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.05.18.png">
+![스크린샷 2022-03-22 오후 8.05.18.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.05.18.png">
 
 ### 2. Create new Task Denition and Select launch type EC2
 
-![스크린샷 2022-03-22 오후 8.06.43.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.06.43.png">
+![스크린샷 2022-03-22 오후 8.06.43.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.06.43.png">
 
 ### 3. Enter task definition name : api
 
-![스크린샷 2022-03-22 오후 8.08.16.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.08.16.png">
+![스크린샷 2022-03-22 오후 8.08.16.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.08.16.png">
 
 ### 4. Add Container
 
-![스크린샷 2022-03-22 오후 8.11.55.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.11.55.png">
+![스크린샷 2022-03-22 오후 8.11.55.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.11.55.png">
 
 Scroll down to ENVIRONMENT
 
-![스크린샷 2022-03-22 오후 8.12.20.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.12.20.png">
+![스크린샷 2022-03-22 오후 8.12.20.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.12.20.png">
 
-![스크린샷 2022-03-22 오후 8.13.03.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.13.03.png">
+![스크린샷 2022-03-22 오후 8.13.03.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.13.03.png">
 
 ### 5. Create
 
-![스크린샷 2022-03-22 오후 8.13.47.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.13.47.png">
+![스크린샷 2022-03-22 오후 8.13.47.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.13.47.png">
 
-![스크린샷 2022-03-22 오후 8.14.31.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.14.31.png">
+![스크린샷 2022-03-22 오후 8.14.31.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.14.31.png">
 
 ## Step 4. Configure the Application Load Balancer : Target Group
 
@@ -317,7 +317,7 @@ The [Application Load Balancer (ALB)](http://docs.aws.amazon.com/elasticloadbal
 
 [https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers:sort=loadBalancerName](https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers:sort=loadBalancerName)
 
-![스크린샷 2022-03-22 오후 8.19.10.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.19.10.png">
+![스크린샷 2022-03-22 오후 8.19.10.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.19.10.png">
 
 ### 2. Configure the ALB Target Group
 
@@ -325,7 +325,7 @@ The [Application Load Balancer (ALB)](http://docs.aws.amazon.com/elasticloadbal
 
 1. create target group 
 
-![스크린샷 2022-03-22 오후 8.21.55.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.21.55.png">
+![스크린샷 2022-03-22 오후 8.21.55.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.21.55.png">
 
 1. Configure the following Target Group parameters (for the parameters not listed below, keep the default values):
 - For the **Target group name**, enter *api*.
@@ -335,7 +335,7 @@ The [Application Load Balancer (ALB)](http://docs.aws.amazon.com/elasticloadbal
     
     This is most likely NOT your default VPC
     
-    ![스크린샷 2022-03-22 오후 8.23.51.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.23.51.png">
+    ![스크린샷 2022-03-22 오후 8.23.51.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.23.51.png">
     
 - Access the **Advanced health check settings** and edit the following parameters as needed:
     - For **Healthy threshold**, enter *2*.
@@ -343,7 +343,7 @@ The [Application Load Balancer (ALB)](http://docs.aws.amazon.com/elasticloadbal
     - For **Timeout**, enter *5*.
     - For **Interval**, enter *6*.
         
-        ![스크린샷 2022-03-22 오후 8.24.48.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.24.48.png">
+        ![스크린샷 2022-03-22 오후 8.24.48.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.24.48.png">
         
 - Create
 
@@ -355,13 +355,13 @@ The ALB [listener](http://docs.aws.amazon.com/elasticloadbalancing/latest/appli
 
 ### 1. add Listener
 
-![스크린샷 2022-03-22 오후 8.27.21.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.27.21.png">
+![스크린샷 2022-03-22 오후 8.27.21.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.27.21.png">
 
 ### 2. create
 
-![스크린샷 2022-03-22 오후 8.28.12.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.28.12.png">
+![스크린샷 2022-03-22 오후 8.28.12.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.28.12.png">
 
-![스크린샷 2022-03-22 오후 8.28.45.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.28.45.png">
+![스크린샷 2022-03-22 오후 8.28.45.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.28.45.png">
 
 ## Step 6. Deploy the Monolith as a Service
 
@@ -371,23 +371,23 @@ Deploy the monolith as a service into the cluster.
 
 ### 1. Creae Service
 
-![스크린샷 2022-03-22 오후 8.30.18.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.30.18.png">
+![스크린샷 2022-03-22 오후 8.30.18.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.30.18.png">
 
 ### 2. Configure service
 
-![스크린샷 2022-03-22 오후 8.31.03.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.31.03.png">
+![스크린샷 2022-03-22 오후 8.31.03.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.31.03.png">
 
 ### 3. Configure Load balancing
 
-![스크린샷 2022-03-22 오후 8.32.19.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.32.19.png">
+![스크린샷 2022-03-22 오후 8.32.19.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.32.19.png">
 
 ### 4. Add container to load balancer
 
-![스크린샷 2022-03-22 오후 8.33.39.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.33.39.png">
+![스크린샷 2022-03-22 오후 8.33.39.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.33.39.png">
 
 ### 5. Review and Create
 
-![스크린샷 2022-03-22 오후 8.34.57.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.34.57.png">
+![스크린샷 2022-03-22 오후 8.34.57.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.34.57.png">
 
 ## Step 7. Test your Monolith
 
@@ -397,9 +397,9 @@ Validate your deployment by checking if the service is available from the intern
 
 Copy DNS and paste into a new browser
 
-![스크린샷 2022-03-22 오후 8.39.57.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.39.57.png">
+![스크린샷 2022-03-22 오후 8.39.57.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.39.57.png">
 
-![스크린샷 2022-03-22 오후 8.37.12.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.37.12.png">
+![스크린샷 2022-03-22 오후 8.37.12.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.37.12.png">
 
 **See Each Part of the Service:** The node.js application routes traffic to each worker based on the URL. To see a worker, simply add the worker name *api/[worker-name]* to the end of the DNS Name as follows:
 
@@ -413,7 +413,7 @@ You can also add a record number at the end of the URL to drill down to a partic
 
 In this module, you will break the node.js application into several interconnected services and push each service's image to an Amazon Elastic Container Registry (Amazon ECR) repository.
 
-![Untitled]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/Untitled%202.png">
+![Untitled]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled%202.png">
 
 ## Step 1. Provision the ECR Repositories
 
@@ -421,9 +421,9 @@ In the previous two modules, you deployed your application as a monolith using a
 
 - make three more repositories (users, posts, threads)
 
-![스크린샷 2022-03-22 오후 10.23.48.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.23.48.png">
+![스크린샷 2022-03-22 오후 10.23.48.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.23.48.png">
 
-![스크린샷 2022-03-22 오후 10.24.28.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.24.28.png">
+![스크린샷 2022-03-22 오후 10.24.28.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.24.28.png">
 
 ## Step 2. Build and Push Images for Each Service
 
@@ -467,7 +467,7 @@ In the previous two modules, you deployed your application as a monolith using a
     
     In this module, you will deploy your node.js application as a set of interconnected services behind an Application Load Balancer (ALB). Then, you will use the ALB to seamlessly shift traffic from the monolith to the microservices.
     
-    ![Untitled]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/Untitled%203.png">
+    ![Untitled]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled%203.png">
     
 
 ## Step 1. Write Task Definition for your Services
@@ -476,9 +476,9 @@ You will deploy three new services to the cluster that you launched in [Module 
 
 - create task using JSON Configuration for each task (users, posts, threads)
     
-    ![스크린샷 2022-03-22 오후 10.49.07.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.49.07.png">
+    ![스크린샷 2022-03-22 오후 10.49.07.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.49.07.png">
     
-    ![스크린샷 2022-03-22 오후 10.46.04.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.46.04.png">
+    ![스크린샷 2022-03-22 오후 10.46.04.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.46.04.png">
     
     ```bash
     {
@@ -521,7 +521,7 @@ As in [Module 2](https://aws.amazon.com/getting-started/hands-on/break-monolith
     aws elbv2 create-target-group --region us-west-2 --name threads  --healthy-threshold-count 2 --unhealthy-threshold-count 2 --health-check-timeout-seconds 5 --health-check-interval-seconds 6 --protocol HTTP --port 80 --vpc-id vpc-0a2ebb545b80b6307
     ```
     
-    ![스크린샷 2022-03-23 오전 10.16.46.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_10.16.46.png">
+    ![스크린샷 2022-03-23 오전 10.16.46.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_10.16.46.png">
     
 
 ## Step 3. Configure Listener Rules
@@ -534,13 +534,13 @@ Right now, all four of your services (monolith and your three microservices) are
 
 1. click View/edit rules under Listeners tab
 
-![스크린샷 2022-03-23 오전 10.20.31.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_10.20.31.png">
+![스크린샷 2022-03-23 오전 10.20.31.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_10.20.31.png">
 
 1. Insert Rule
 
-![스크린샷 2022-03-23 오전 11.22.57.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.22.57.png">
+![스크린샷 2022-03-23 오전 11.22.57.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.22.57.png">
 
-![스크린샷 2022-03-23 오전 11.26.14.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.26.14.png">
+![스크린샷 2022-03-23 오전 11.26.14.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.26.14.png">
 
 ## Step 4. Deploy your Monolith
 
@@ -550,23 +550,23 @@ Deploy the three microservices (posts, threads, and users) to your cluster. Repe
 
 ### 1. Select Create on Services Tab
 
-![스크린샷 2022-03-23 오전 11.28.24.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.28.24.png">
+![스크린샷 2022-03-23 오전 11.28.24.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.28.24.png">
 
 ### 2. Configure service
 
-![스크린샷 2022-03-23 오전 11.30.17.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.30.17.png">
+![스크린샷 2022-03-23 오전 11.30.17.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.30.17.png">
 
 ### 3. Configure load balancing
 
-![스크린샷 2022-03-23 오전 11.31.50.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.31.50.png">
+![스크린샷 2022-03-23 오전 11.31.50.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.31.50.png">
 
 ### 4. Add container to load balance
 
-![스크린샷 2022-03-23 오전 11.33.12.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.33.12.png">
+![스크린샷 2022-03-23 오전 11.33.12.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.33.12.png">
 
 ### 5. Create
 
-![스크린샷 2022-03-23 오후 1.02.25.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.02.25.png">
+![스크린샷 2022-03-23 오후 1.02.25.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.02.25.png">
 
 ## Step 5. Switch Over Traffic to your Microservices
 
@@ -576,27 +576,27 @@ Your microservices are now running, but all traffic is still flowing to your mon
 
 ### 1.  Edit Listener
 
-![스크린샷 2022-03-23 오후 1.16.57.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.16.57.png">
+![스크린샷 2022-03-23 오후 1.16.57.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.16.57.png">
 
 ### 2. Delete api Rule
 
-![스크린샷 2022-03-23 오후 1.17.40.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.17.40.png">
+![스크린샷 2022-03-23 오후 1.17.40.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.17.40.png">
 
 ### 3. Update default Rule to forward to drop-traffic
 
-![스크린샷 2022-03-23 오후 1.19.30.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.19.30.png">
+![스크린샷 2022-03-23 오후 1.19.30.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.19.30.png">
 
-![스크린샷 2022-03-23 오후 1.21.49.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.21.49.png">
+![스크린샷 2022-03-23 오후 1.21.49.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.21.49.png">
 
 ### Disable the Monolith
 
 1. Update api Service
 
-![스크린샷 2022-03-23 오후 1.22.53.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.22.53.png">
+![스크린샷 2022-03-23 오후 1.22.53.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.22.53.png">
 
 1. Change Number of tasks to 0
 
-![스크린샷 2022-03-23 오후 1.23.38.png]<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.23.38.png">
+![스크린샷 2022-03-23 오후 1.23.38.png]<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.23.38.png">
 
 **You have now fully transitioned your node.js from the monolith to microservices, without any downtime!**
 

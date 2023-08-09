@@ -33,4 +33,4 @@ Spring Boot에서 MultiPartFile은 아래처럼 사용한다.
 
 ## Postman에서 MultipartFile 보내기
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0813/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0813/img1.png" />

@@ -13,16 +13,16 @@ comments: true
 
 한편, 에러(Error)는 시스템에 무엇인가 비정상적인 상황이 발생한 경우에 사용된다. 주로 자바 가상머신에서 발생시키는 것이며 에외와 반대로 이를 애플리케이션 코드에서 잡으려고 하면 안된다. (사실 잡아도 방법이 없다.) 에러의 예로는 OutOfMemoryError, ThreadDeath, StackOVerflowError 등이 있다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0711/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0711/img1.png" />
 ## 예외 구분
 
 Exception은 Checked Exception과 Unchecked Exception으로 구분 할 수 있는데, 간단하게 RuntimeException을 상속하지 않는 클래스는 Checked Exception, 반대로 상속한 클래스는 Unchecked Exception으로 분류할 수 있다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0711/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0711/img2.png" />
 
 여기서 RuntimeException은 Exception 클래스의 서브 클래스 이기 때문에 Exception의 일종이기도 하지만 자바에서는 RuntimeException과 이를 상속한 클래스를 조금 특별하게 취급한다. 명시적으로 예외 처리를 하지 않아도 되기 때문이다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0711/img3.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0711/img3.png" />
 
  
 

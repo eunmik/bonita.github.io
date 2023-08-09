@@ -24,7 +24,7 @@ AnonymousAuthenticationFilter는
 
 인증을 받지 않은 사용자는 null로 처리하는게 아니라 별도의 Anonymous 객체를 생성하여 처리한다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img1.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img1.JPG" />
 
 1. 사용자가 요청을 하면 AnonymoiusAuthenticationFilter가 요청을 받는다. 
 2. 현재 요청하고 있는 사용자가 인증객체가 있는지 없는지 부터 판단 
@@ -54,7 +54,7 @@ isAnonymous()가 true일 때 로그인 메뉴를 보이게 하고
 
 Spring Security는 두가지 전략으로 동접을 제어하고 있다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img2.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img2.JPG" />
 
 최대 세션 허용 개수를 초과할 경우 
 
@@ -70,7 +70,7 @@ Spring Security는 두가지 전략으로 동접을 제어하고 있다.
     - 사용자 2가 동일 한 계정으로 로그인 하면 인증에 실패함으로서 세션 생성 실패
     - 사용자 2의 로그인을 차단하는 전략
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img3.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img3.JPG" />
 
 ```java
 http
@@ -97,7 +97,7 @@ exception : Maximum sessions of 1 for this principal exceeded
 
 ### 세션 고정 보호
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img4.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img4.JPG" />
 
 세션 고정 공격
 
@@ -112,7 +112,7 @@ exception : Maximum sessions of 1 for this principal exceeded
 
 사용자가 공격자가 심은 쿠키로 접속하더라도 인증 할 때마다 새로운 세션/쿠키가 생성된다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img5.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img5.JPG" />
 
 changeSessionId() : 기본값, 세션 ID만 변경이 된다.  서블렛 3.1 이상
 
@@ -128,17 +128,17 @@ http
 
 ### 세션 정책
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img6.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img6.JPG" />
 
 JWT 가 Stateless 방식 이다. 
 
 ## 10. 세션 제어 필터 : SessionManagementFilter, ConcurrentSessionFilter
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img7.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img7.JPG" />
 
 앞의 배웠던 4가지의 핵심적인 기능을 SessionManagementFilter가 하고 있다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img8.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img8.JPG" />
 
 SessionManagementFilter와 마찬가지로 ConcurrentSessionFilter도 동시적 세션 제어를 하고 있다.
 
@@ -146,7 +146,7 @@ SessionManagementFilter와 마찬가지로 ConcurrentSessionFilter도 동시적 
 
 세션이 만료되었을 경우 즉시 만료 처리 시켜 버린다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img9.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img9.JPG" />
 
 1. 사용자가 로그인을 시도 한다. 
 2. 다른 사용자가 동일한 계정으로 세션을 생성한 상태이다. 
@@ -156,7 +156,7 @@ SessionManagementFilter와 마찬가지로 ConcurrentSessionFilter도 동시적 
 6. 확인할 때 SessionManagementFilter에서 이전 사용자 세션을 만료 했던 그 설정을 참조한다. 
 7. 즉시 그 사용자 세션을 만료하고 오류 페이지를 응답한다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img10.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img10.JPG" />
 
 조건 : 최대 세션 허용 개수가 1
 
@@ -185,11 +185,11 @@ SessionManagementFilter와 마찬가지로 ConcurrentSessionFilter도 동시적 
 
 ## 11. 권한 설정과 표현식
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img11.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img11.JPG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img12.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img12.JPG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img13.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img13.JPG" />
 
 Role User 권한을 가지고 있는 사용자가 anonymous() 자원에 접근이 가능한가? NO 
 
@@ -223,7 +223,7 @@ SpEL : Spring Expression Language 스프링 표현식
 
 ## 12. 예외 처리 및 요청 캐시 필터 : ExceptionTranslationFilter, RequestCacheAwareFilter
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img14.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img14.JPG" />
 
 이 예외는 과연 누가 발생 시키는가? FilterSecurityInterceptorFilter 이다. 
 
@@ -237,7 +237,7 @@ try-catch로 감싸서 이 FilterSecurityInterceptor를 호출하고 있다.
 
 그렇기 때문에 FilterSecurityInterceptor에서 생기는 인증 예외와  인가 예외는 ExceptionTranslationFilter로 throw 하고 있다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img15.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img15.JPG" />
 
 1. 사용자가 /user 자원에 접근을 시도하고 있다. 
 2. 인증을 받지 않고 바로 /user 자원에 접근하고 /user는 인증된 사용자만 접근할 수 있을 때 
@@ -254,7 +254,7 @@ try-catch로 감싸서 이 FilterSecurityInterceptor를 호출하고 있다.
 5. AccessDeniedHandler는 denied 페이지로 이동한다. 
 6. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img16.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img16.JPG" />
 
 ```java
 http //인증정책
@@ -294,12 +294,12 @@ http
         ;
 ```
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img17.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img17.JPG" />
 
 ## 13. 사이트 간 요청 위조 - CSRF, CsrtFilter
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img18.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img18.JPG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210614-img19.JPG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210614-img19.JPG" />
 
 서버가 발급한 토큰을 가지고와야지 시큐리티는 발급한 토큰을 검사를 한다. 

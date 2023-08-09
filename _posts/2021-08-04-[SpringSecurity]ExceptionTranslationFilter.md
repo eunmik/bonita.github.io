@@ -6,7 +6,7 @@ excerpt: "Spring Security에서 발생하는 AccessDeniedException, Authenticati
 tags: [Java, Oauth2, Spring Security, Exception]
 comments: true
 ---
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0804/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0804/img1.png" />
 
 Debugging 걸어서 흐름을 한번 그려보았는데 아닐수도 있다....... 나도 다른 블로거들 처럼 작동 원리를 이해하고 싶다!!! 
 
@@ -178,5 +178,5 @@ AccessDeniedException과 AuthenticationException을 처리하는 필터이다.
 - 인증 과정 중 AuthenticationException이 발생한다면, AuthenticationEntryPoint를 실행하여 인증을 유도한다.
 - 인가 과정 중 AccessDeniedException예외가 발생하면 먼저 현재 Authentication이 익명 사용자인지 확인한다. 만약 익명이라면 AuthenticationEntryPoint를 실행하여 인증을 유도하고 아니라면 AccessDeniedHandler에게 위임한다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0804/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0804/img1.png" />
 ExceptionTranslationFilter.handleSpringSecurityException

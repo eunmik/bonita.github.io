@@ -29,4 +29,4 @@ Embeded Redis를 죽이기 위해선 프로세스를 찾아서 kill 해야한다
 
 1. 작업관리자에서 해당 프로세스를 끝낸다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0809/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0809/img1.png" />

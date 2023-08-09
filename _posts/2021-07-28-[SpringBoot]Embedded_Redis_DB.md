@@ -192,4 +192,4 @@ Redis같은 InMemory DB 설명은 나중에!
 
     그러면 데이터가 생성되거나 검색될 때마다 로그를 확인할 수 있다. 
 
-    <img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0728/img1.png" />
+    <img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0728/img1.png" />

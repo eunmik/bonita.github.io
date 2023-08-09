@@ -26,7 +26,7 @@ comments: true
 
 크루스칼 과정을 본다면
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img1.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img1.PNG" />
 
 일단 모든 노드를 최대한 적은 비용으로 '연결만' 시키면 되기 때문에 **모든 간선 정보를 오름차순**으로 정렬한 뒤에 비용이 적은 간선부터 차근차근 그래프에 포함시키면 된다. 
 
@@ -40,29 +40,29 @@ comments: true
 
 최소 비용 신장 트리에서는 사이클이 발생하면 안된다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img2.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img2.PNG" />
 
 첫번째 간선을 선택하여 연결한다.  1 ↔ 7  비용은 12
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img3.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img3.PNG" />
 
 두번 째 간선을 선택하여 연결한다. 4 ↔ 7 비용은 13. 누적 합은 25 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img4.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img4.PNG" />
 
 세번 째 간선을 선택하여 연결한다. 1 ↔ 5 비용은 17. 누적 합은 42 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img5.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img5.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img6.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img6.PNG" />
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img7.PNG" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img7.PNG" />
 
 반복 하다가 1 ↔ 4 일 때는 사이클이 만들어 지기 때문에 안된다. parent node가 동일하기 때문에 무시하고 넘어 간다. 
 
 이렇게 계속 반복 하다보면 값이 나온다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img8.gif" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img8.gif" />
 
 Java Code : 
 
@@ -156,7 +156,7 @@ public class Kruskal {
 ```
 
 ##다익스트라 vs 크루스칼 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0915/img9.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img9.png" />
 
 출처 : [18. 크루스칼 알고리즘](https://m.blog.naver.com/ndb796/221230994142)
 [다익스트라 vs 크루스칼](https://buddev.tistory.com/21)

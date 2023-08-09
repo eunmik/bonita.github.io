@@ -29,7 +29,7 @@ Authentication(인증) 이란 시스템이 사용자가 시스템에 접근 가�
 - 브라우즈 세션을 종료하는거 말고는 로그아웃 방법이 없다.
 - cross-site request forgery (CSRF)에 취약하다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0708/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0708/img1.png" />
 
 
 ## Digest Authentication
@@ -52,7 +52,7 @@ OAuth (Open Authentication/Authorization) 는 인증을 위한 표준 프로토�
 
 토큰 기반 인증은 인증할 때 access token을 발행한다. 이 토큰은 사용되는 에코시스템에 따라 다양한 형태로 사용될 수 있다. 클라이언트는 사용자아이디와 패스워드를 access token을 얻기 위해 입력 할 수 있다. 클라이언트가 이 토큰을 갖고 있고 매 요청마다 서버에 보낸다. 클라이언트가 보낸 매 요청이 진행되는 동안, 서버는 HTTP는 stateless이기 때문에 클라이언트가 이미 인증이 되었는지 알지 못한다. 그래서 그 토큰을 통해 클라이언트가 인증이 되었는지 확인한다. 그리고나서 요청된 자원에 접근을 제공한다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0708/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0708/img2.png" />
 
 ## Digest 인증 구현하기
 

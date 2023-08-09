@@ -10,7 +10,7 @@ comments: true
 
 여러 개의 노드가 존재할 때 두 개의 노드를 선택해서, 현재 이 두 노드가 서로 같은 그래프에 속하는지 판별하는 알고리즘 이다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0914/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0914/img1.png" />
 
 위와 같이 모드 연결되지 않고 각자 자기 자신만을 집합의 원소로 가지고 있을 때는 
 
@@ -20,17 +20,17 @@ comments: true
 
 즉, 자신이 어떤한 부모에 포함되어 있는지를 의미한다.
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0914/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0914/img2.png" />
 
 1과 2가 연결이 되었을 때는 2번째 인덱스의 값에 '1'이 들어간다. 부모를 합칠 때는 일반적으로더 작은 값쪽으로 합친다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0914/img3.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0914/img3.png" />
 
 2와 3도 연결이 되어있다면 1과 3은 부모가 각각 1과 2로 다르기 때문에 '부모 노드'만 보고는 한번에 파악할 수 없다. 그래서 재귀 함수가 사용된다. 
 
 3의 부모를 찾기 위해서 3이 가르키고 있는 2를 찾는다. 2의 부모가 1을 가리키고 있으므로 결과적으로 3의 부모는 1이 되는구나 라고 파악할 수 있다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0914/img4.gif" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0914/img4.gif" />
 
 Java Code: 
 

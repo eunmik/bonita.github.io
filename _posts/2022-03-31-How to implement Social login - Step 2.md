@@ -9,7 +9,7 @@ comments: true
 
 Google OAuth2 Login API Flow
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0331/Untitled.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0331/Untitled.png">
 
 # Spring Boot + Social Login
 
@@ -212,7 +212,7 @@ public class OAuth2UserInfoFactory {
 }
 ```
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0331/Untitled%201.png">
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0331/Untitled%201.png">
 
 ## OAuth 2.0 Login - Advanced Configuration
 

@@ -13,14 +13,14 @@ comments: true
 문제 푼 시간 : 저번에 풀었던 (or 답을 봤던) 문제인데 여전히 못풀음.. 힌트 보고 3시간걸림
 프로그래머스 난이도 : LEVEL 2
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0901/img1.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0901/img1.png" />
 
 문제 풀이 : 
 
 1. 주어진 코스 개수에 맞게 손님이 주문한 단품 요리를 조합한다. 
 2. dfs 함수를 만들어서 재귀호출을 한다. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/2021/0901/img2.png" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/2021/0901/img2.png" />
 
 1. cnt가 코스 갯수와 일치하면 map에 집어 넣는다. 
 2. map에 넣기 전에 str을 정렬 시켜준다. ("XY", "YX" 이런 상황 때문에) 

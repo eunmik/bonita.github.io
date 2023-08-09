@@ -10,7 +10,7 @@ comments: true
 
 1. Make launch.json right under root directory
     
-   <img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled.png">
+   <img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled.png">
     
     ```java
     {
@@ -35,16 +35,16 @@ comments: true
     npm start
     ```
     
-   <img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled%201.png">
+   <img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%201.png">
     
 
 1. makes some breakpoints 
     
-   <img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled%202.png">
+   <img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%202.png">
     
 
 1. On Run and Debug tab, launch configuration. 
     
     Select Play Button. 
     
-   <img src ="https://eunmik.github.io/bonita.blog/assets/img/2022/0401/Untitled%203.png">
+   <img src ="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%203.png">

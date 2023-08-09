@@ -22,7 +22,7 @@ A packet switch takes a packet arriving on one of its incoming communication lin
 
 The sequence of packets traveling is known as a **route** or **path** through the network. 
 
-<img src ="https://eunmik.github.io/bonita.blog/assets/img/210623-img1.jpeg" />
+<img src ="https://eunmik.github.io/bonita.github.io/assets/img/210623-img1.jpeg" />
 
 End systems access the Internet through **Internet Service Providers (ISPs)**.
 
