@@ -1,0 +1,62 @@
+I"(<h1 id="telegram에-메시지-보내기">Telegram에 메시지 보내기</h1>
+
+<ol>
+  <li>Telegram에서 BotFather를 찾는다.</li>
+</ol>
+
+<p><img src="../assets/img/210331-telegram1.png" /></p>
+
+<ol>
+  <li>BotFather에게 새로운 bot 생성의 도움을 요청 한다.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/newbot - 새로운 bot을 생성하기 위해 
+</code></pre></div></div>
+
+<p><img src="../assets/img/210331-telegram2.png" /></p>
+
+<ol>
+  <li>마지막 BotFather가 준 메세지에 있는 t.me/vivans_argos_bot을 누르면 새로운 대화창이 나온다.</li>
+</ol>
+
+<p><img src="../assets/img/210331-telegram3.png" /></p>
+
+<ol>
+  <li>Chat Id가 얻기 위해 아래 URL을 접속한다.
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.telegram.org/bot{telegram_token_value}/getUpdates
+</code></pre></div>    </div>
+    <p>그러면 아래와 같은 결과를 얻을 수 있다.</p>
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"ok":true,"result":[{"update_id":805895515,
+"message":{"message_id":2,"from":{"id":1384798386,"is_bot":false,"first_name":"Eunmi","last_name":"Kong","language_code":"es"},"chat":{"id":1384798386,"first_name":"Eunmi","last_name":"Kong","type":"private"},"date":1619488553,"text":"hi"}}]}
+</code></pre></div>    </div>
+  </li>
+  <li>Java 코드를 작성 해 준다.</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">funcTelegram</span><span class="o">(){</span>
+        <span class="nc">String</span> <span class="nc">Token</span> <span class="o">=</span> <span class="s">"telegram_token_value"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">chat_id</span> <span class="o">=</span> <span class="s">"chat_id_value"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"el_abanico"</span><span class="o">;</span>
+
+        <span class="nc">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="no">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="no">URL</span><span class="o">(</span><span class="s">"https://api.telegram.org/bot"</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="s">"/sendmessage?chat_id="</span> <span class="o">+</span> <span class="n">chat_id</span> <span class="o">+</span> <span class="s">"&amp;text="</span> <span class="o">+</span> <span class="n">text</span><span class="o">);</span>
+
+            <span class="nc">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+            <span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+            <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">(),</span> <span class="s">"UTF-8"</span><span class="o">));</span>
+            <span class="nc">String</span> <span class="n">line</span><span class="o">;</span>
+
+            <span class="k">while</span><span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">in</span> <span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="k">try</span> <span class="o">{</span> <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();}</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+</code></pre></div></div>
+:ET

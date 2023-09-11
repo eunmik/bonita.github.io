@@ -2,7 +2,7 @@
 layout: post
 title: "[Python] py 파일을 exe 실행 파일로 변환"
 date: 2021-09-10
-excerpt: "pyinstaller"
+categories: [Language, Python]
 tags: [Python]
 comments: true
 ---

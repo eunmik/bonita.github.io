@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] Rest Template 사용하기"
 date: 2021-07-27
-excerpt: "Rest Template 사용하기"
+categories: [Language, Java]
 tags: [Java, Rest Template]
 comments: true
 ---

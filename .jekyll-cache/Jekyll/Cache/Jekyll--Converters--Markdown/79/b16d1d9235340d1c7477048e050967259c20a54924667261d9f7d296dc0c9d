@@ -1,0 +1,67 @@
+I"<p><a href="https://www.acmicpc.net/problem/1011">1011번: Fly me to the Alpha Centauri</a></p>
+
+<p>문제 푼 날짜 : 2021-08-23
+문제 푼 시간 : 힌트 얻어서 풀었지만 그래도 3시간 이나 걸림.. 
+백준 난이도 : GOLD V</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0823/img1.png" /></p>
+
+<hr />
+
+<p>알고리즘으로 구현하는 문제라기 보단 공식을 발견해야 하는 문제 였다.</p>
+
+<p>제곱근을 이용해서 규칙을 적용하는데 제곱근을 까먹어서 멍청이가 된 기분이었다….</p>
+
+<p>표를 그려보면 뭔가 규칙같은게 보인다.</p>
+
+<p>이동거리가 저렇게 나오는 이유는 바로 아래 그림으로 설명했다.</p>
+
+<p>횟수가 나오는 숫자를 보면 (max * 2) -1, max * 2, max*2 +1 라는 수식이 적용이 된다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0823/img2.png" /></p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0823/img3.png" /></p>
+
+<p>코드</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.StringTokenizer</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlymetotheAlphaCentauri</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="n">caseNum</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">cases</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">));</span>
+        <span class="nc">StringTokenizer</span> <span class="n">st</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringTokenizer</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+        <span class="n">caseNum</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+        <span class="n">cases</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">caseNum</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">cases</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">st</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringTokenizer</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">(),</span> <span class="s">" "</span><span class="o">);</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">;</span> <span class="n">j</span><span class="o">++){</span>
+                <span class="n">cases</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">testCase</span> <span class="o">:</span> <span class="n">cases</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">testCase</span><span class="o">));</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">testCase</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">testCase</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">-</span> <span class="n">testCase</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+
+        <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">dist</span><span class="o">);</span>
+
+        <span class="k">if</span><span class="o">(</span><span class="n">max</span> <span class="o">==</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">dist</span><span class="o">))</span> <span class="o">{</span> <span class="c1">//제곱근이 정확히 떨어질 때</span>
+            <span class="k">return</span> <span class="n">max</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">dist</span> <span class="o">&lt;=</span> <span class="o">(</span><span class="n">max</span><span class="o">*</span><span class="n">max</span><span class="o">)+</span><span class="n">max</span><span class="o">){</span>
+            <span class="k">return</span> <span class="n">max</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">max</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

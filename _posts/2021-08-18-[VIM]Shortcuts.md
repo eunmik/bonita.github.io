@@ -2,7 +2,7 @@
 layout: post
 title: "[VIM] 단축키 모음 "
 date: 2021-08-18
-excerpt: "내가 자주쓰는 VIM 단축키 모음"
+categories: [etc]
 tags: [Shortcuts, VIM, Linux]
 comments: true
 ---

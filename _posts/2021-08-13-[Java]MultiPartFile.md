@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] MultiPartFile 이란?"
 date: 2021-08-13
-excerpt: "File은 어떻게 전송해야 할까?"
+categories: [Language, Java]
 tags: [Spring Security, Refresh Token]
 comments: true
 ---

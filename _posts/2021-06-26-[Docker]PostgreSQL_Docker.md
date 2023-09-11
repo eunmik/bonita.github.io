@@ -2,7 +2,7 @@
 layout: post
 title: "[Docker]PostgreSQL 도커 설치 "
 date: 2021-06-26
-excerpt: "Docker에 PostgreSQL 설치하기"
+categories: [Tool, Docker]
 tags: [Docker, PostgreSQL]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring Boot] 자바 예외 구분: Checked Exception, Unchecked Exception"
 date: 2021-07-11
-excerpt: "Checked Exception vs. Unchecked Exception"
+categories: [Language, Spring]
 tags: [SprintBoot, Java, Exception, Unchecked, Checked]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "[Data Structure] Hash란?"
 date: 2021-03-19
-excerpt: "자료구조의 해시에 대해 알아보자."
+categories: [CS, Data Structure]
 tags: [Hash, Data Structure]
 comments: true
 ---

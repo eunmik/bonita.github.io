@@ -2,7 +2,7 @@
 layout: post
 title: "[Network] What Is the Internet?"
 date: 2021-06-23
-excerpt: "Computer Networking A Top Down Notch 7th (1)"
+categories: [CS, Network]
 tags: [Network, Internet]
 comments: true
 ---

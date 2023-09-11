@@ -1,0 +1,154 @@
+I"EJ<p><strong>크루스칼 알고리즘</strong>은 가장 적은 비용으로 모든 노드를 연결하기 위해 사용하는 알고리즘 이다.</p>
+
+<p>다시 말해 최소 비용 신장 트리 (Spanning Tree) 를 만들기 위한 대표적인 알고리즘이라고 할 수 있다.</p>
+
+<p>여기서 말하는 <strong>신장트리 (Spannig Tree)</strong>는 원래 그래프의 정점 전부와 간선의 부분 집합으로 구성된 부분 그래프이다. 이때 스패닝 트리에 포함된 간선들은 정점점들을 트리형태로 전부 연결해야 한다.</p>
+
+<p>트리 형태여야 한다는 말은 선택된 간선들이 사이클이 이루지 않는다는 의미이며, 정점들이 꼭 부모-자식 관계로 연결될 필요는 없다는데 유의한다.</p>
+
+<p>가중치 그래프의 스패팅 트리 중 가중치의 합이 가장 작은 트리를 찾는 문제를 최소 스패닝 트리 문제라고 한다. 즉, 최소 스패닝 트리 문제는 그래프의 연결성을 그대로 유지하는 가장 ‘저렴한’ 그래프를 찾는 문제라고 할 수 있다.</p>
+
+<p>크루스칼 알고리즘은 그래프의 모든 간선을 가중치의 오름차순으로 정렬한 뒤, 스패닝 트리에 하나씩 추가해 간다. 물론 가중치가 작다고 해서 무조건 간선을 트리에 더하는 것은 아니다. 자칫 하다가는 선택한 간선들이 사이클을 이룰 수 있기 때문이다. 따라서 결과적으로 사이클이 생기는 간선은 고려에서 제외 해야 한다.</p>
+
+<p>흔히 여러개의 도시가 있을 때 도시를 도로를 이용해 연결하고자 할 때 비용을 최소한으로 하고자 할 때 실제로 적용되는 알고리즘이다.</p>
+
+<p>크루스칼 알고리즘의 핵심은 간선 숫자는 노드의 갯수에서 하나를 뺀 숫자이다. E = V - 1</p>
+
+<p>크루스칼 과정을 본다면</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img1.PNG" /></p>
+
+<p>일단 모든 노드를 최대한 적은 비용으로 ‘연결만’ 시키면 되기 때문에 <strong>모든 간선 정보를 오름차순</strong>으로 정렬한 뒤에 비용이 적은 간선부터 차근차근 그래프에 포함시키면 된다.</p>
+
+<p>모든 간선들의 정보를 모드 저장 한 다음에 거리(비용)을 기준으로 오름차순으로 정렬을 수행했다.</p>
+
+<p>다음의 알고리즘에 맞게 그래프를 연결하면 가장 적은 비용으로 모든 노드를 연결한 그래프인 ‘최소 비용 신장 트리(Spannig Tree)가 만들어 진다.</p>
+
+<ol>
+  <li>정렬된 순서에 맞게 그래프에 포함 시킨다.</li>
+  <li>포함시키기 전에는 사이클 테이블을 확인 한다.</li>
+  <li>사이클을 형성하는 경우 간선을 포함시키지 않는다.</li>
+</ol>
+
+<p>최소 비용 신장 트리에서는 사이클이 발생하면 안된다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img2.PNG" /></p>
+
+<p>첫번째 간선을 선택하여 연결한다.  1 ↔ 7  비용은 12</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img3.PNG" /></p>
+
+<p>두번 째 간선을 선택하여 연결한다. 4 ↔ 7 비용은 13. 누적 합은 25</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img4.PNG" /></p>
+
+<p>세번 째 간선을 선택하여 연결한다. 1 ↔ 5 비용은 17. 누적 합은 42</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img5.PNG" /></p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img6.PNG" /></p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img7.PNG" /></p>
+
+<p>반복 하다가 1 ↔ 4 일 때는 사이클이 만들어 지기 때문에 안된다. parent node가 동일하기 때문에 무시하고 넘어 간다.</p>
+
+<p>이렇게 계속 반복 하다보면 값이 나온다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img8.gif" /></p>
+
+<p>Java Code :</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sun.awt.windows.WPrinterJob</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Kruskal</span> <span class="o">{</span>
+    <span class="c1">//부모 노드를 가져옴</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getParent</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">==</span> <span class="n">x</span><span class="o">){</span>
+            <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">getParent</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]);</span>
+    <span class="o">}</span>
+
+    <span class="c1">//부모 노드를 병합</span>
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">unionParent</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">){</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">getParent</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">a</span><span class="o">);</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">getParent</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">){</span>
+            <span class="n">parent</span><span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+        <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+            <span class="n">parent</span><span class="o">[</span><span class="n">b</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">//같은 부모를 가지는 지 확인</span>
+    <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">findParent</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">){</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">getParent</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">a</span><span class="o">);</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">getParent</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">b</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="o">){</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Edge</span> <span class="kd">implements</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="nc">Edge</span><span class="o">&gt;{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">distance</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">Edge</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">,</span> <span class="kt">int</span> <span class="n">distance</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">distance</span> <span class="o">=</span> <span class="n">distance</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">Edge</span> <span class="n">e1</span><span class="o">){</span>
+            <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">distance</span><span class="o">,</span> <span class="n">e1</span><span class="o">.</span><span class="na">distance</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">11</span><span class="o">;</span>
+
+        <span class="nc">PriorityQueue</span><span class="o">&lt;</span><span class="nc">Edge</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PriorityQueue</span><span class="o">&lt;&gt;();</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">12</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">28</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">67</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">17</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">24</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">62</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">20</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">37</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">13</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">45</span><span class="o">));</span>
+        <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">73</span><span class="o">));</span>
+
+        <span class="c1">//간선의 비용으로 오름차순 정렬</span>
+
+        <span class="c1">//각 정점이 포함된 그래프가 어디인지 저장</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">set</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="nc">Edge</span> <span class="n">edge</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(!</span><span class="n">findParent</span><span class="o">(</span><span class="n">set</span><span class="o">,</span> <span class="n">edge</span><span class="o">.</span><span class="na">node</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">edge</span><span class="o">.</span><span class="na">node</span><span class="o">[</span><span class="mi">1</span><span class="o">])){</span>
+                <span class="n">sum</span> <span class="o">+=</span> <span class="n">edge</span><span class="o">.</span><span class="na">distance</span><span class="o">;</span>
+                <span class="n">unionParent</span><span class="o">(</span><span class="n">set</span><span class="o">,</span> <span class="n">edge</span><span class="o">.</span><span class="na">node</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">,</span> <span class="n">edge</span><span class="o">.</span><span class="na">node</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sum</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>##다익스트라 vs 크루스칼 
+<img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0915/img9.png" /></p>
+
+<p>출처 : <a href="https://m.blog.naver.com/ndb796/221230994142">18. 크루스칼 알고리즘</a>
+<a href="https://buddev.tistory.com/21">다익스트라 vs 크루스칼</a></p>
+:ET

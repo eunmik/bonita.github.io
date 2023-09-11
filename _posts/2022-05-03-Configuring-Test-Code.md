@@ -2,7 +2,7 @@
 layout: post
 title: "실무에서 Test Code를 적용하면서..."
 date: 2022-05-03
-excerpt: "테스트 코드의 중요성을 깨닫게 된 계기"
+categories: [Language, Java]
 tags: ["Junit5", "TestCode"]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "[MyBatis] resultType=boolean"
 date: 2021-08-06
-excerpt: "resultType이 boolean일 때"
+categories: [Language, Spring]
 tags: [mybatis, sql]
 comments: true
 ---

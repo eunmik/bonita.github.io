@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] LocalDateTime 이란 "
 date: 2021-04-27
-excerpt: "SpringBoot에서 LocalDateTime 사용할 때 "
+categories: [Language, Java]
 tags: [Algorithm, BinarySearch]
 comments: true
 ---

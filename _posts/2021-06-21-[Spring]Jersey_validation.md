@@ -2,7 +2,7 @@
 layout: post
 title: "[Jersey] JAX-RA Bean Validation "
 date: 2021-06-21
-excerpt: "Jersey에서 Bean Validation을 해보자."
+categories: [Language, Spring]
 tags: [Jersey, JAX-RS, Java, Spring, STS4, Eclipse]
 comments: true
 ---

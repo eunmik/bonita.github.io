@@ -1,0 +1,95 @@
+I"�/<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+    <span class="nc">String</span> <span class="n">stringValue1</span> <span class="o">=</span> <span class="s">"TEST 1"</span><span class="o">;</span>
+    <span class="nc">String</span> <span class="n">stringValue2</span> <span class="o">=</span> <span class="s">"TEST 2"</span><span class="o">;</span>
+
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"stringValue1: "</span> <span class="o">+</span> <span class="n">stringValue1</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span> <span class="c1">//-1823841245</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"stringValue2: "</span> <span class="o">+</span> <span class="n">stringValue2</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span> <span class="c1">//-1823841244</span>
+
+    <span class="n">stringValue1</span> <span class="o">=</span> <span class="n">stringValue1</span> <span class="o">+</span> <span class="n">stringValue2</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"stringValue1: "</span> <span class="o">+</span> <span class="n">stringValue1</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span> <span class="c1">//833872391</span>
+
+    <span class="nc">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"sb: "</span> <span class="o">+</span> <span class="n">sb</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span> <span class="c1">//876563773</span>
+
+    <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"TEST StringBuffer"</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"sb: "</span> <span class="o">+</span> <span class="n">sb</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span> <span class="c1">//876563773</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>같이 생성된 클래스의 주소값이 다르다. String은 새로운 값을 할당할 때 마다 새로 생성되기 때문이다. 이와 달리 StringBuffer는 값은 memory에 append 하는 방식으로 클래스를 직접 생성하지 않는다.</p>
+
+<p>논리적으로 따져보면 클래스가 생성될 때 method들과 variable도 같이 생성되는데, StringBuffer는 이런 시간을 사용하지 않는다.</p>
+
+<p>수십번 String이 더해지는 경우에는 각 String의 주소값이 stack에 쌓이고 클래스들은 Garbage Collector가 호출되기 전까지 heap에 지속적으로 쌓이게 된다. 메모리 관리적인 측면에서는 치명적이라고 볼 수 있다.</p>
+
+<hr />
+
+<p>String class의 내부 구조를 보면 String에서 저장되는 문자열은 알고보면 char의 배열형태로 저장되며 이 값들은 외부에서 접근할 수 없도록 private으로 보호된다. 또한 final형이기 때문에 초기값으로 주어진 String의 값은 불변으로 바뀔 수가 없게 되는 것이다. (immutable)</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0726/img1.png" /></p>
+
+<hr />
+
+<p>StringBuilder는 변경가능한 문자열(mutable)이지만 synchronization이 적용되지 않는다. 하지만 StringBuffer는 thread-safe라는 말에서처럼 변경가능하지만 multiple thread 환경에서 안전한 클래스라고 한다.</p>
+
+<p>이것이 StringBuilder와 StringBuffer의 가장 큰 차이점이다.</p>
+
+<p>예를 들어, text를 수정해야하고 multiple threads를 사용하고 있다면 StringBuffer를 사용하는게 낫다. 만약 text를 수정해야하고 single thread를 사용한다면 StringBuilder를 사용하는게 낫다.</p>
+
+<h2><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0726/img2.png" /></h2>
+
+<p>StringBuilder Methods insert() vs append()</p>
+
+<ul>
+  <li>insert()는 StringBuilder의 특정 인덱스에 추가할 수 있도록 한다.</li>
+  <li>append()는 StringBuilder object의 마지막에 추가하도록 한다.</li>
+  <li>StringBuilder 마지막에 insert()를 한다면 append()와 시간복잡도 면에서 동일하다. (O(n))</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringBuilderDemo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">palindrome</span> <span class="o">=</span> <span class="s">"Dot saw I was Tod"</span><span class="o">;</span>
+        <span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">(</span><span class="n">palindrome</span><span class="o">);</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">reverse</span><span class="o">();</span> <span class="c1">// reverse it</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span> <span class="c1">//doT saw I was toD</span>
+
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">" by Eunmi "</span><span class="o">);</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"let it go "</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span> <span class="c1">//doT saw I was toD by Eunmi let it go true</span>
+        
+        <span class="n">sb</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">sb</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="s">"haha"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span> <span class="c1">// dofalseT saw I was toD by Eunmi let it go truehaha</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringDemo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">palindrome</span> <span class="o">=</span> <span class="s">"Dot saw I was Tod"</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">palindrome</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">tempCharArray</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">len</span><span class="o">];</span>
+        <span class="kt">char</span><span class="o">[]</span> <span class="n">charArray</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">len</span><span class="o">];</span>
+
+        <span class="c1">//put original string in an array of chars</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">tempCharArray</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">palindrome</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">//reverse array of chars</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">charArray</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">tempCharArray</span><span class="o">[</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="o">];</span>
+        <span class="o">}</span>
+
+        <span class="nc">String</span> <span class="n">reversePalindrome</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">charArray</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">reversePalindrome</span><span class="o">);</span> <span class="c1">//doT saw I was toD</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>출처 <a href="https://novemberde.github.io/2017/04/15/String_0.html">https://novemberde.github.io/2017/04/15/String_0.html</a>, <a href="https://www.atechdaily.com/posts/Difference-between-StringBuilder-insert-and-append-method">https://www.atechdaily.com/posts/Difference-between-StringBuilder-insert-and-append-method</a>
+<a href="https://docs.oracle.com/javase/tutorial/java/data/buffers.html">https://docs.oracle.com/javase/tutorial/java/data/buffers.html</a></p>
+
+:ET

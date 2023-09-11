@@ -1,0 +1,99 @@
+I"b<ol>
+  <li>
+    <p>Eclipse에서 Help → Eclipse MarketPlace  → STS4 설치 하기</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210618-img1.png" /></p>
+  </li>
+  <li>
+    <p>Tomcat 서버를 설정한다.</p>
+
+    <p>2-1. Servers 화면에서 Click을 한 다음에</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210618-img2.png" /></p>
+
+    <p>2-2. Apache → Tomcat 8.5 선택</p>
+
+    <p>2-3. Browse로 Tomcat이 설치된 디렉토리를 선택</p>
+  </li>
+  <li>
+    <p>프로젝트 생성하기</p>
+
+    <p>3-1. File → New → Spring Legacy Project</p>
+
+    <p>Spring Legacy Project가 없으면 Market Places 에서 STS3을 설치한다.</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210618-img3.png" /></p>
+
+    <p>3-2.  Spring MVC Project</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210618-img4.png" /></p>
+  </li>
+  <li>
+    <p>pom.xml에서 버전을 확인 한다.</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;properties&gt;</span>
+ 		<span class="nt">&lt;java-version&gt;</span>1.7<span class="nt">&lt;/java-version&gt;</span>
+ 		<span class="nt">&lt;org.springframework-version&gt;</span>4.0.0.RELEASE<span class="nt">&lt;/org.springframework-version&gt;</span>
+ 		<span class="nt">&lt;org.aspectj-version&gt;</span>1.6.10<span class="nt">&lt;/org.aspectj-version&gt;</span>
+ 		<span class="nt">&lt;org.slf4j-version&gt;</span>1.6.6<span class="nt">&lt;/org.slf4j-version&gt;</span>
+ 	<span class="nt">&lt;/properties&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>서버에서 기동이 되는지 확인한다. Run As → Run on Server</li>
+  <li>
+    <p>JDBC Tests를 위해 Oracle Driver를 설치한다.</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!-- JDBC --&gt;</span>
+ 		<span class="nt">&lt;dependency&gt;</span>
+ 		    <span class="nt">&lt;groupId&gt;</span>com.oracle.database.jdbc<span class="nt">&lt;/groupId&gt;</span>
+ 		    <span class="nt">&lt;artifactId&gt;</span>ojdbc6<span class="nt">&lt;/artifactId&gt;</span>
+ 		    <span class="nt">&lt;version&gt;</span>11.2.0.4<span class="nt">&lt;/version&gt;</span>
+ 		<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><a href="http://jdbctests.java">JDBCTests.java</a></p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">package</span> <span class="nn">org.epis.outdoor</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">fail</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">lombok.extern.log4j.Log4j</span><span class="o">;</span>
+
+ <span class="nd">@Log4j</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JDBCTests</span> <span class="o">{</span>
+ 	<span class="kd">static</span> <span class="o">{</span>
+ 		<span class="k">try</span> <span class="o">{</span>
+ 			<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="o">);</span>
+ 		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+ 			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+ 		<span class="o">}</span>
+ 	<span class="o">}</span>
+    	
+ 	<span class="nd">@Test</span>
+ 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testConnection</span><span class="o">()</span> <span class="o">{</span>
+ 		<span class="k">try</span><span class="o">(</span>
+ 			<span class="nc">Connection</span> <span class="n">con</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">"jdbc:oracle:thin:@175.203.84.105:51521:orcl"</span><span class="o">,</span> <span class="s">"smartfarm"</span><span class="o">,</span> <span class="s">"smartfarm"</span><span class="o">)){</span>
+ 			<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">con</span><span class="o">);</span>
+ 		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+ 			<span class="n">fail</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+ 		<span class="o">}</span>
+ 	<span class="o">}</span>
+
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>7-1. Run As → JUnit Test</p>
+
+    <p>7-2. Output</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="no">INFO</span> <span class="o">:</span> <span class="n">org</span><span class="o">.</span><span class="na">epis</span><span class="o">.</span><span class="na">outdoor</span><span class="o">.</span><span class="na">JDBCTests</span> <span class="o">-</span> <span class="n">oracle</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">driver</span><span class="o">.</span><span class="na">T4CConnection</span><span class="err">@</span><span class="mi">5</span><span class="n">cc96746</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+:ET

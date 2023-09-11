@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] Http Authentication 이란?"
 date: 2021-07-08
-excerpt: "Http 인증을 알아보고 구현해 보자."
+categories: [Language, Java]
 tags: [Http, Authentication, Digest, Basic]
 comments: true
 ---

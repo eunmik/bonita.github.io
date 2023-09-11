@@ -2,7 +2,7 @@
 layout: post
 title: "How to use git flow"
 date: 2022-04-15
-excerpt: "Let's check git flow commands"
+categories: [Tool, Git]
 tags: ["git", "git flow"]
 comments: true
 ---

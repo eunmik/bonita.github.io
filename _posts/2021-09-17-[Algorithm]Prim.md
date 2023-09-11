@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] Prim 프림 알고리즘"
 date: 2021-09-15
-excerpt: "프림 Prim 알고리즘"
+categories: [CS, Algorithm]
 tags: ["Algorithm", "Prim", "Java"]
 comments: true
 ---

@@ -1,10 +1,12 @@
 ---
-layout: post
 title: "[Python] What is *args and **kwargs?"
 date: 2020-08-17
-excerpt: "Let's learn about these two special syntaxes."
+categories: [Language, Python]
 tags: [python, code]
 comments: true
+pin: true
+math: true
+mermaid: true
 ---
 
 

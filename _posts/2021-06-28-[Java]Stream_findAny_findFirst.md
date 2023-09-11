@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] Stream().findAny vs findFirst() "
 date: 2021-06-28
-excerpt: "Java8에 두가지 메소드"
+categories: [Language, Java]
 tags: [Java, Stream]
 comments: true
 ---

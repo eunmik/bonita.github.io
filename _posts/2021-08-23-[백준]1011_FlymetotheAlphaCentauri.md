@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] 백준_1011 Fly me to the Alpha Centauri"
 date: 2021-08-23
-excerpt: "백준 문제 1011"
+categories: [CS, Algorithm]
 tags: [Java, Algorithm, 백준]
 comments: true
 ---

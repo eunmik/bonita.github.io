@@ -1,0 +1,338 @@
+I"+<p>Google OAuth2 Login API Flow</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0331/Untitled.png" /></p>
+
+<h1 id="spring-boot--social-login">Spring Boot + Social Login</h1>
+
+<h2 id="dependency-requirement">Dependency Requirement</h2>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>io.jsonwebtoken<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>jjwt-api<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;version&gt;</span>0.11.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>io.jsonwebtoken<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>jjwt-impl<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;version&gt;</span>0.11.2<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>io.jsonwebtoken<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>jjwt-jackson<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;version&gt;</span>0.11.2<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.security<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-security-oauth2-client<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<h2 id="applicationyml">application.yml</h2>
+
+<p>add registration information and provider information to application.yml</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">security</span><span class="pi">:</span>
+      <span class="na">oauth2</span><span class="pi">:</span>
+        <span class="na">client</span><span class="pi">:</span>
+          <span class="na">registration</span><span class="pi">:</span>
+            <span class="na">google</span><span class="pi">:</span>
+              <span class="na">clientId</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT ID*</span>
+              <span class="na">clientSecret</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT SECRET*</span>
+              <span class="na">redirectUri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/oauth2/callback/{registrationId}"</span>
+              <span class="na">scope</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="s">email</span>
+                <span class="pi">-</span> <span class="s">profile</span>
+            <span class="na">facebook</span><span class="pi">:</span>
+              <span class="na">clientId</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT ID*</span>
+              <span class="na">clientSecret</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT SECRET*</span>
+              <span class="na">redirectUri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/oauth2/callback/{registrationId}"</span>
+              <span class="na">scope</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="s">email</span>
+                <span class="pi">-</span> <span class="s">public_profile</span>
+            <span class="na">github</span><span class="pi">:</span>
+              <span class="na">clientId</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT ID*</span>
+              <span class="na">clientSecret</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT SECRET*</span>
+              <span class="na">redirectUri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/oauth2/callback/{registrationId}"</span>
+              <span class="na">scope</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="s">user:email</span>
+                <span class="pi">-</span> <span class="s">read:user</span>
+            <span class="na">naver</span><span class="pi">:</span>
+              <span class="na">client-id</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT ID*</span>
+              <span class="na">clientSecret</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT SECRET*</span>
+              <span class="na">client-authentication-method</span><span class="pi">:</span> <span class="s">post</span>
+              <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
+              <span class="na">scope</span><span class="pi">:</span> <span class="s">name,email,profile_image</span>
+              <span class="na">client-name</span><span class="pi">:</span> <span class="s">Naver</span>
+              <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/oauth2/callback/{registrationId}"</span>
+            <span class="na">kakao</span><span class="pi">:</span>
+              <span class="na">client-id</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT ID*</span>
+              <span class="na">clientSecret</span><span class="pi">:</span> <span class="nv">*YOUR</span> <span class="s">CLIENT SECRET*</span>
+              <span class="na">client-authentication-method</span><span class="pi">:</span> <span class="s">post</span>
+              <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
+              <span class="na">scope</span><span class="pi">:</span> <span class="s">profile_nickname,account_email,profile_image</span>
+              <span class="na">client-name</span><span class="pi">:</span> <span class="s">Kakao</span>
+              <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/oauth2/callback/{registrationId}"</span>
+
+          <span class="na">provider</span><span class="pi">:</span>
+            <span class="na">facebook</span><span class="pi">:</span>
+              <span class="na">authorizationUri</span><span class="pi">:</span> <span class="s">https://www.facebook.com/v3.0/dialog/oauth</span>
+              <span class="na">tokenUri</span><span class="pi">:</span> <span class="s">https://graph.facebook.com/v3.0/oauth/access_token</span>
+              <span class="na">userInfoUri</span><span class="pi">:</span> <span class="s">https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)</span>
+            <span class="na">naver</span><span class="pi">:</span>
+              <span class="na">authorization-uri</span><span class="pi">:</span> <span class="s">https://nid.naver.com/oauth2.0/authorize</span>
+              <span class="na">token-uri</span><span class="pi">:</span> <span class="s">https://nid.naver.com/oauth2.0/token</span>
+              <span class="na">user-info-uri</span><span class="pi">:</span> <span class="s">https://openapi.naver.com/v1/nid/me</span>
+              <span class="na">user-name-attribute</span><span class="pi">:</span> <span class="s">response</span>
+            <span class="na">kakao</span><span class="pi">:</span>
+              <span class="na">authorization-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/authorize</span>
+              <span class="na">token-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/token</span>
+              <span class="na">user-info-uri</span><span class="pi">:</span> <span class="s">https://kapi.kakao.com/v2/user/me</span>
+              <span class="na">user-name-attribute</span><span class="pi">:</span> <span class="s">id</span>
+</code></pre></div></div>
+
+<h2 id="configuration">Configuration</h2>
+
+<h3 id="securityconfigjava">SecurityConfig.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span>
+<span class="nd">@EnableGlobalMethodSecurity</span><span class="o">(</span>
+        <span class="n">securedEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span>
+        <span class="n">jsr250Enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span>
+        <span class="n">prePostEnabled</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
+
+	<span class="o">...</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+			     <span class="o">...</span>
+                <span class="o">.</span><span class="na">oauth2Login</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">authorizationEndpoint</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">baseUri</span><span class="o">(</span><span class="s">"/oauth2/authorize"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">authorizationRequestRepository</span><span class="o">(</span><span class="n">cookieAuthorizationRequestRepository</span><span class="o">())</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">redirectionEndpoint</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">baseUri</span><span class="o">(</span><span class="s">"/oauth2/callback/*"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">userInfoEndpoint</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">userService</span><span class="o">(</span><span class="n">customOAuth2UserService</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">successHandler</span><span class="o">(</span><span class="n">oAuth2AuthenticationSuccessHandler</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">failureHandler</span><span class="o">(</span><span class="n">oAuth2AuthenticationFailureHandler</span><span class="o">);</span>
+
+        <span class="c1">// Add our custom Token based authentication filter</span>
+        <span class="n">http</span><span class="o">.</span><span class="na">addFilterBefore</span><span class="o">(</span><span class="n">tokenAuthenticationFilter</span><span class="o">(),</span> <span class="nc">UsernamePasswordAuthenticationFilter</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="authproviderjava">AuthProvider.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span>  <span class="nc">AuthProvider</span> <span class="o">{</span>
+    <span class="n">local</span><span class="o">,</span>
+    <span class="n">facebook</span><span class="o">,</span>
+    <span class="n">google</span><span class="o">,</span>
+    <span class="n">github</span><span class="o">,</span>
+    <span class="n">naver</span><span class="o">,</span>
+    <span class="n">kakao</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="googleoauth2userinfojava">GoogleOAuth2UserInfo.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GoogleOAuth2UserInfo</span> <span class="kd">extends</span> <span class="nc">OAuth2UserInfo</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">GoogleOAuth2UserInfo</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">attributes</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">attributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"sub"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">attributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"name"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">attributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"email"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getImageUrl</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">attributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"picture"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="oauth2userinfofactoryjava">OAuth2UserInfoFactory.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OAuth2UserInfoFactory</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">OAuth2UserInfo</span> <span class="nf">getOAuth2UserInfo</span><span class="o">(</span><span class="nc">String</span> <span class="n">registrationId</span><span class="o">,</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">registrationId</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="nc">AuthProvider</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">toString</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">GoogleOAuth2UserInfo</span><span class="o">(</span><span class="n">attributes</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">registrationId</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="nc">AuthProvider</span><span class="o">.</span><span class="na">facebook</span><span class="o">.</span><span class="na">toString</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">FacebookOAuth2UserInfo</span><span class="o">(</span><span class="n">attributes</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">registrationId</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="nc">AuthProvider</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">toString</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">GithubOAuth2UserInfo</span><span class="o">(</span><span class="n">attributes</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">registrationId</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="nc">AuthProvider</span><span class="o">.</span><span class="na">naver</span><span class="o">.</span><span class="na">toString</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">NaverOAuth2UserInfo</span><span class="o">(</span><span class="n">attributes</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">registrationId</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="nc">AuthProvider</span><span class="o">.</span><span class="na">kakao</span><span class="o">.</span><span class="na">toString</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">KakaoOAuth2UserInfo</span><span class="o">(</span><span class="n">attributes</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">OAuth2AuthenticationProcessingException</span><span class="o">(</span><span class="s">"Sorry! Login with "</span> <span class="o">+</span> <span class="n">registrationId</span> <span class="o">+</span> <span class="s">" is not supported yet."</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0331/Untitled%201.png" /></p>
+
+<h2 id="oauth-20-login---advanced-configuration">OAuth 2.0 Login - Advanced Configuration</h2>
+
+<p><code class="language-plaintext highlighter-rouge">http.oauth2Login()</code>  provides a number of configuration options for customizing OAuth2.0 Login.</p>
+
+<p><code class="language-plaintext highlighter-rouge">oauth2Login().authorizationEndpoint()</code> allows configuring the Authorization Endpoint.</p>
+
+<p>Authorization Endpoint is used by the client to obtain authorization from the resource owner via user-agent redirection.</p>
+
+<p><code class="language-plaintext highlighter-rouge">oauth2Login().tokenEndpoint()</code> allows configuring the Token Endpoint.</p>
+
+<p>Token Endpoint is used by the client to exchange an authorization grant for an access token, typically with client authentication.</p>
+
+<p>Redirection Endpoint is used by the authorization server to return responses containing authorization credentials to the client via the resource owner user-agent.</p>
+
+<h2 id="authorization-endpoint">Authorization Endpoint</h2>
+
+<h3 id="authorizationrequestrepositiory"><code class="language-plaintext highlighter-rouge">AuthorizationRequestRepositiory</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">AuthorizationRequestRepository</code> is responsible for the persistence of the <code class="language-plaintext highlighter-rouge">OAuth2AuthorizationRequest</code> from the time toe Authorization Request is initiated to the time the Authorization Response is received (the callback).</p>
+
+<p>The default implementation of <code class="language-plaintext highlighter-rouge">AuthorizationRequestRepository</code> is <code class="language-plaintext highlighter-rouge">HttpSessionOAuth2AuthorizationRequestRepository</code>, which sotres the <code class="language-plaintext highlighter-rouge">OAuth2AuthorizationRequest</code> in the <code class="language-plaintext highlighter-rouge">HttpSession</code>.</p>
+
+<p>If you would like to provide a custom implementation of <code class="language-plaintext highlighter-rouge">AuthorizationRequestRepository</code> that stores the attributes of <code class="language-plaintext highlighter-rouge">OAuth2AuthorizationReuqest</code> in a <code class="language-plaintext highlighter-rouge">Cookie</code>, configure it as shown in the following example:</p>
+
+<p>SecurityConfig.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">HttpCookieOAuth2AuthorizationRequestRepository</span> <span class="nf">cookieAuthorizationRequestRepository</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">HttpCookieOAuth2AuthorizationRequestRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+						<span class="o">.</span><span class="na">oauth2Login</span><span class="o">()</span>
+                 <span class="o">.</span><span class="na">authorizationEndpoint</span><span class="o">()</span>
+                 <span class="o">.</span><span class="na">baseUri</span><span class="o">(</span><span class="s">"/oauth2/authorize"</span><span class="o">)</span>
+                 <span class="o">.</span><span class="na">authorizationRequestRepository</span><span class="o">(</span><span class="n">cookieAuthorizationRequestRepository</span><span class="o">())</span>
+</code></pre></div></div>
+
+<p>HttpCookieOAuth2AuthorizationRequestRepository.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HttpCookieOAuth2AuthorizationRequestRepository</span> <span class="kd">implements</span> <span class="nc">AuthorizationRequestRepository</span><span class="o">&lt;</span><span class="nc">OAuth2AuthorizationRequest</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME</span> <span class="o">=</span> <span class="s">"oauth2_auth_request"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">REDIRECT_URI_PARAM_COOKIE_NAME</span> <span class="o">=</span> <span class="s">"redirect_uri"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">cookieExpireSeconds</span> <span class="o">=</span> <span class="mi">180</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">OAuth2AuthorizationRequest</span> <span class="nf">loadAuthorizationRequest</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">saveAuthorizationRequest</span><span class="o">(</span><span class="nc">OAuth2AuthorizationRequest</span> <span class="n">authorizationRequest</span><span class="o">,</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+				<span class="o">...</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">OAuth2AuthorizationRequest</span> <span class="nf">removeAuthorizationRequest</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeAuthorizationRequestCookies</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+				<span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="redirection-endpoint">Redirection Endpoint</h2>
+
+<p>The Redirection Endpoint is used by the Authorization Server for returning the Authorization Response (which contains the authorization credentials) to the client via the Resource Owner user-agent.</p>
+
+<p>The default Authorization Response baseUri (redirection endpoint) id /login/oauth2/code/*, which is defined in OAuth2LoginAuthenticationFilter.DEFAULT_FILTER_PROCESSES_URI.</p>
+
+<p>If you would like to customize the Authorization Response baseUri, configure it as shown in the following example:</p>
+
+<p>SecurityConfig.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">oauth2Login</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">redirectionEndpoint</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">baseUri</span><span class="o">(</span><span class="s">"/oauth2/callback/*"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="userinfo-endpoint">UserInfo Endpoint</h2>
+
+<h3 id="oauth-20-userservice">OAuth 2.0 UserService</h3>
+
+<p><code class="language-plaintext highlighter-rouge">DefaultOAuth2UserService</code> is an implementation of an <code class="language-plaintext highlighter-rouge">OAuth2UserService</code> that supports standard OAuth 2.0 Providers.</p>
+
+<p>If the default implementation does not suit your needs, you can define your own implementation of <code class="language-plaintext highlighter-rouge">OAuth2UserService</code> of standard OAuth 2.0 Provider’s.</p>
+
+<p>The following configuration demonstrates how to configure a custom <code class="language-plaintext highlighter-rouge">OAuth2UserService</code>:</p>
+
+<p>SecurityConfig.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">CustomUserDetailsService</span> <span class="n">customUserDetailsService</span><span class="o">;</span>
+
+<span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+	        <span class="o">.</span><span class="na">oauth2Login</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">userInfoEndpoint</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">userService</span><span class="o">(</span><span class="n">customOAuth2UserService</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p>CustomUserDetailsService.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomUserDetailsService</span> <span class="kd">implements</span> <span class="nc">UserDetailsService</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="nc">UserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="nd">@Transactional</span>
+    <span class="kd">public</span> <span class="nc">UserDetails</span> <span class="nf">loadUserByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="nc">UsernameNotFoundException</span> <span class="o">{</span>
+		   <span class="o">...</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Transactional</span>
+    <span class="kd">public</span> <span class="nc">UserDetails</span> <span class="nf">loadUserById</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+			<span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>🔖 reference
+<a href="https://docs.spring.io/spring-security/site/docs/5.0.7.RELEASE/reference/html/oauth2login-advanced.html," title="oauth2login">oauth2login-advanced.html</a>
+<a href="https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo," title="spring-boot-react-oauth2-social-login-demo">spring-boot-react-oauth2-social-login-demo</a></p>
+
+:ET

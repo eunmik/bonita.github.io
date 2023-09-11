@@ -1,0 +1,172 @@
+I"D8<h1 id="내부-정렬internal-sorting">내부 정렬(internal Sorting)</h1>
+
+<p>데이터의 쿠기가 주 기억장소 용량보다 적을 경우 기억장소를 활용하여 정렬하는 방법
+→ 버블 정렬, 삽입 정렬, 선택 정렬, 퀵 정렬, 쉘 정렬, 힙 정렬</p>
+
+<h2 id="내부-정렬의-종류-">내부 정렬의 종류 :</h2>
+<h2 id="선택-정렬selection-sort">선택 정렬(Selection Sort)</h2>
+
+<ul>
+  <li>입력 배열 (정렬되지 않은 값들) 이외에 다른 추가 메모리를 요구하지 않는다.</li>
+  <li>해당 순서에 원소를 넣을 위치는 이미 정해져 있고, 어떤 원소를 넣을지 선택하는 알고리즘</li>
+  <li>제자리 정렬 알고리즘의 하나</li>
+  <li>다음과 같은 순서로 이루어진다.
+    <ol>
+      <li>주어진 리스트 중에 최소 값을 찾는다.</li>
+      <li>그 값을 맨 앞에 위치한 값과 교체한다(패스(pass))</li>
+      <li>맨 처음 위치를 뺀 나머지 리스트를 같은 방법으로 교체한다.</li>
+    </ol>
+
+    <p><img src="../assets/img/210321-selection.gif" /></p>
+  </li>
+</ul>
+
+<p>시간 복잡도 : Θ(n2)</p>
+
+<h2 id="버블-정렬bubble-sort">버블 정렬(Bubble Sort)</h2>
+
+<ul>
+  <li>두 인접한 원소를 검사하여 정렬하는 방법</li>
+  <li>코드가 단순하기 때문에 자주 사용 된다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">bubbleSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span> <span class="mi">1</span> <span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]&lt;</span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">])</span> <span class="o">{</span>
+				<span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+				<span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+				<span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">arr</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="../assets/img/210321-bubble.gif" /></p>
+
+<p>시간 복잡도 : O(n^{2})</p>
+
+<h2 id="삽입-정렬insertion-sort">삽입 정렬(insertion sort)</h2>
+
+<ul>
+  <li>자료 배열의 모든 요소를 앞에서부터 차례대로 이미 정렬된 배열 부분과 비교하여, 자신의 위치를 찾아 삽입하는 정렬</li>
+  <li>선택정렬, 거품 정렬과 비교하여 빠르다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">insertionSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">)</span>
+<span class="o">{</span>
+
+   <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">;</span> <span class="n">index</span><span class="o">++){</span>
+
+      <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+      <span class="kt">int</span> <span class="n">aux</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+
+      <span class="k">while</span><span class="o">(</span> <span class="o">(</span><span class="n">aux</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span> <span class="n">arr</span><span class="o">[</span><span class="n">aux</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">temp</span> <span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+
+         <span class="n">arr</span><span class="o">[</span><span class="n">aux</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">aux</span><span class="o">];</span>
+         <span class="n">aux</span><span class="o">--;</span>
+      <span class="o">}</span>
+      <span class="n">arr</span><span class="o">[</span><span class="n">aux</span> <span class="o">+</span> <span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="../assets/img/210321-insertion.gif" /></p>
+
+<p>시간 복잡도 : О(n2)</p>
+
+<h2 id="퀵-정렬quick-sort">퀵 정렬(quick sort)</h2>
+
+<ul>
+  <li>대표적인 분할 정복 알고리즘</li>
+  <li>다음과 같은 순서로 이루어진다.
+    <ol>
+      <li>리스트 가운데서 하나의 원소를 고른다. 이렇게 고른 원소를 피벗이라고 한다.</li>
+      <li>피벗 앞에는 피벗보다 값이 작은 모든 원소들이 오고, 피벗 뒤에는 피벗보다 값이 큰 모든 원소들이 오도록 피벗을 기준으로 리스트를 둘로 나눈다. 이렇게 리스트를 둘로 나누는 것을 분할이라고 한다. 분할을 마친 뒤에 피벗은 더 이상 움직이지 않는다.</li>
+      <li>분활된 두 개의 작은 리스트에 대해 재귀적으로 이 과정을 반복한다. 재귀는 리스트의 크기가 0이나 1이 될 때까지 반복된다.</li>
+    </ol>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">left</span><span class="o">,</span> <span class="kt">int</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">,</span> <span class="n">pivot</span><span class="o">,</span> <span class="n">tmp</span><span class="o">;</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">i</span> <span class="o">=</span> <span class="n">left</span><span class="o">;</span>   <span class="n">j</span> <span class="o">=</span> <span class="n">right</span><span class="o">;</span>
+          <span class="n">pivot</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[(</span><span class="n">left</span><span class="o">+</span><span class="n">right</span><span class="o">)/</span><span class="mi">2</span><span class="o">];</span>
+          <span class="c1">//분할 과정</span>
+          <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+              <span class="k">while</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="n">j</span><span class="o">--;</span>
+              <span class="c1">// 이 부분에서 arr[j-1]에 접근해서 익셉션 발생가능함.</span>
+              <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="n">i</span><span class="o">++;</span>
+
+              <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+              <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+              <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+          <span class="o">}</span>
+          <span class="c1">//정렬 과정</span>
+          <span class="n">quickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+          <span class="n">quickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">right</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><img src="../assets/img/210321-quick.gif" /></p>
+
+<p>시간 복잡도 : O(N * logN)</p>
+
+<h2 id="힙-정렬heap-sort">힙 정렬(heap sort)</h2>
+
+<ul>
+  <li>최대 힙 트리나 최소 힙 트리를 구성해 정렬을 하는 방법</li>
+  <li>다음과 같은 순서로 이루어 진다.
+    <ol>
+      <li>n개의 노드에 대한 완전 이진 트리를 구성한다. 이 때 루트 노드부터 부모노드, 왼쪽 자식노드, 오른쪽 자식노드 순으로 구성한다.</li>
+      <li>최대 힙을 구성한다. 최대 힙이란 부모노드가 자식노드보다 큰 트리를 말하는데, 단말 노드를 자식노드로 가진 부모노드부터 구성하며 아래부터 루트까지 올라오며 순차적으로 만들어 갈 수 있다.</li>
+      <li>가장 큰 수(루트에 위치)를 가장 작은 수와 교환한다.</li>
+      <li>2와 3을 반복한다.</li>
+    </ol>
+  </li>
+</ul>
+
+<p><img src="../assets/img/210321-heap.gif" /></p>
+
+<p>시간 복잡도 : O(log n)</p>
+
+<h1 id="외부-정렬external-sorting">외부 정렬(external sorting)</h1>
+
+<p>데이터의 크기가 주기억장소의 용량보다 클 경우 외부 기억장치(디스크, 테이프 등)를 사용하여 정렬하는 방법</p>
+
+<p>→ 머지 정렬</p>
+
+<h2 id="합병-정렬merge-sort">합병 정렬(Merge Sort)</h2>
+
+<ul>
+  <li>비교 기반 정렬 알고리즘이다.</li>
+  <li>합병 정렬의 개념은 다음과 같다.
+    <ol>
+      <li>정렬되지 않은 리스트를 각각 하나의 원소만 포함하는 n개의 부분리스트로 분할한다. (한 원소만 든 리스트는 정렬된 것과 같으므로)</li>
+      <li>부분리스트가 하나만 남을 때까지 반복해서 병합하며 정렬된 부분리스트를 생성한다. 마지막 남은 부분리스트가 정렬된 리스트이다.</li>
+    </ol>
+  </li>
+  <li>흔히 쓰이는 하향식 2-way 합병 정렬은 다음과 같이 작동한다.
+    <ol>
+      <li>리스트의 길이가 1 이하이면 이미 정렬된 것으로 본다. 그렇지 않은 경우에는</li>
+      <li>분할(divide) : 정렬되지 않은 리스트를 절반으로 잘라 비슷한 크기의 두 부분 리스트로 나눈다.</li>
+      <li>정복(conquer) : 각 부분 리스트를 재귀적으로 합병 정렬을 이용해 정렬한다.</li>
+      <li>결합(combine) : 두 부분 리스트를 다시 하나의 정렬된 리스트로 합병한다. 이때 정렬 결과가 임시배열에 저장된다.</li>
+      <li>복사(copy) : 임시 배열에 저장된 결과를 원래 배열에 복사한다.</li>
+    </ol>
+  </li>
+</ul>
+
+<p><img src="../assets/img/210321-merge.gif" /></p>
+
+<p>시간 복잡도 :</p>
+
+<h2 id="시간-복잡도">시간 복잡도</h2>
+
+<p><img src="../assets/img/210321-complexity.png" /></p>
+:ET

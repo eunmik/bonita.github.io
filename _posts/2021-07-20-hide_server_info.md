@@ -2,7 +2,7 @@
 layout: post
 title: "NGINX/TOMCAT SERVER 정보 숨기기"
 date: 2021-07-20
-excerpt: "서버 버전 정보를 노출시키면 안된다. "
+categories: [Tool, WAS]
 tags: [NGINX, TOMCAT]
 comments: true
 ---

@@ -1,0 +1,641 @@
+I"%�<table>
+  <tbody>
+    <tr>
+      <td>[Module One - Containerize the Monolith</td>
+      <td>AWS](https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-one/?nc1=h_ls)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="overview">Overview</h1>
+
+<p>In this Hands-On Tutorial, I am going to follow step by step to understand how to break a Montolith Application into Microservices.</p>
+
+<p>With this tutorial, a monolithic node.js application will be deployed to a Docker container which I can also understand how docker works.</p>
+
+<p>and then I will decouple the application into microservices without any <strong>DOWNTIME.</strong></p>
+
+<p>In this page, all the steps I do  will be shared with lots of screenshots!</p>
+
+<h1 id="module-1---containerize-the-monolith">Module 1 - Containerize the Monolith</h1>
+
+<p>In this module, you will build the container image for your monolithic node.js application and push it to Amazon Elastic Container Registry.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled.png" /></p>
+
+<h2 id="step-1-get-setup">Step 1. Get Setup</h2>
+
+<h3 id="1-have-a-aws-account">1. Have a AWS Account</h3>
+
+<h3 id="2-install-docker-macos">2. Install Docker (macOS)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install</span> <span class="nt">--cask</span> docker
+</code></pre></div></div>
+
+<p>–cask : to install GUI application</p>
+
+<h3 id="3-install-aws-cli-macos">3. Install AWS CLI (macOS)</h3>
+
+<p><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Installing or updating the latest version of the AWS CLI</a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"https://awscli.amazonaws.com/AWSCLIV2.pkg"</span> <span class="nt">-o</span> <span class="s2">"AWSCLIV2.pkg"</span>
+<span class="nb">sudo </span>installer <span class="nt">-pkg</span> ./AWSCLIV2.pkg <span class="nt">-target</span> /
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% aws <span class="nt">--version</span>
+aws-cli/2.4.27 Python/3.8.8 Darwin/21.4.0 exe/x86_64 prompt/off
+</code></pre></div></div>
+
+<h2 id="step-2-download--open-the-project">Step 2. Download &amp; Open the project</h2>
+
+<p><a href="https://github.com/awslabs/amazon-ecs-nodejs-microservices">https://github.com/awslabs/amazon-ecs-nodejs-microservices</a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/awslabs/amazon-ecs-nodejs-microservices.git
+</code></pre></div></div>
+
+<h2 id="step-3-provision-a-repository">Step 3. Provision a Repository</h2>
+
+<h3 id="1-select-create-repository-레파지토리-생성">1. Select Create Repository (레파지토리 생성)</h3>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.02.31.png" /></p>
+
+<h3 id="2-on-the-create-repository-page-enter-the-following-name-your-repositoryapi">2. On the Create repository page, enter the following name your repository: <em>api</em>.</h3>
+
+<p><strong>⚐ Note:</strong> Under <strong>Tag immutability</strong>, leave the default settings.</p>
+
+<p>![스크린샷 2022-03-22 오전 10.06.25.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.06.25.png" /></p>
+
+<h3 id="3-selectcreate-repository">3. Select <strong>Create repository</strong>.</h3>
+
+<p>![스크린샷 2022-03-22 오전 10.08.29.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.08.29.png" /></p>
+
+<h2 id="step-4-build--push-the-docker-image">Step 4. Build &amp; Push the Docker image</h2>
+
+<h3 id="use-the-terminal-to-authenticate-docker-log-in"><strong>Use the terminal to authenticate Docker log in:</strong></h3>
+
+<h3 id="1-configure-your-authentication-if-its-your-first-time-to-use-aws-cli">1. configure your authentication (if it’s your first time to use aws cli)</h3>
+
+<p><a href="https://us-east-1.console.aws.amazon.com/iamv2/home"></a></p>
+
+<ul>
+  <li>Add Users on IAM Console Page</li>
+</ul>
+
+<p>![스크린샷 2022-03-22 오전 10.12.57.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.12.57.png" /></p>
+
+<ul>
+  <li>
+    <p>type user name and select AWS credential type (this time, I chose Access Key)</p>
+
+    <p>![스크린샷 2022-03-22 오전 10.13.55.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.13.55.png" /></p>
+  </li>
+  <li>
+    <p>select how to set permissions : add user to group, copy permissions from existing user, or attach existing policies directly</p>
+
+    <p>I created admin group with AdministratorAccess</p>
+
+    <p>![스크린샷 2022-03-22 오전 10.14.52.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.14.52.png" /></p>
+  </li>
+  <li>skip add tags</li>
+  <li>
+    <p>select create user</p>
+
+    <p>![스크린샷 2022-03-22 오전 10.16.24.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.16.24.png" /></p>
+  </li>
+  <li>
+    <p>save Access Key ID and secret access key to configure aws cli</p>
+
+    <p>![스크린샷 2022-03-22 오전 10.17.00.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.17.00.png" /></p>
+  </li>
+  <li>
+    <p>configure aws cli</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  aws configure 
+</code></pre></div>    </div>
+
+    <p>![스크린샷 2022-03-22 오전 10.19.01.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.19.01.png" /></p>
+  </li>
+</ul>
+
+<h3 id="2-docker-log-in">2. Docker Log in</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws ecr get-login-password <span class="nt">--region</span> us-west-2 | docker login <span class="nt">--username</span> AWS <span class="nt">--password-stdin</span> 431072036772.dkr.ecr.us-west-2.amazonaws.com/api
+</code></pre></div></div>
+
+<p>If the authentication was successful, you will receive the confirmation message: <strong>Login Succeeded</strong>.</p>
+
+<h3 id="3-build-the-image">3. Build the image</h3>
+
+<p>move to the directory ~/amazon-ecs-nodejs-microservices/2-containerized/services/api</p>
+
+<p>To build the image, run the following command in the terminal: <em>docker build -t api</em> .</p>
+
+<p><strong>⚐ Note:</strong> <strong>The period (</strong>.<em>*) after </em>api* is needed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> api <span class="nb">.</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>+] Building 22.9s <span class="o">(</span>9/9<span class="o">)</span> FINISHED                                                                                                                             
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile                                                                                                     0.2s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 149B                                                                                                                     0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore                                                                                                                        0.1s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 2B                                                                                                                          0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/mhart/alpine-node:7.10.1                                                                                      3.7s
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load build context                                                                                                                        0.1s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 3.69kB                                                                                                                      0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>1/4] FROM docker.io/mhart/alpine-node:7.10.1@sha256:d334920c966d440676ce9d1e6162ab544349e4a4359c517300391c877bcffb8c                                7.6s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> resolve docker.io/mhart/alpine-node:7.10.1@sha256:d334920c966d440676ce9d1e6162ab544349e4a4359c517300391c877bcffb8c                                0.0s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> sha256:d334920c966d440676ce9d1e6162ab544349e4a4359c517300391c877bcffb8c 740B / 740B                                                               0.0s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> sha256:54c58132ca42ed07226e0bf19282863c6aa0ce53205baa1d90242d5ccf01491d 6.27kB / 6.27kB                                                           0.0s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> sha256:019300c8a437a2d60248f27c206795930626dfe7ddc0323d734143bd5eb131a6 1.97MB / 1.97MB                                                           0.5s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> sha256:c44ae64c93a279c2790c6c2a1e2a153dcae72c4e9396ee0752d76f2c04321d74 17.43MB / 17.43MB                                                         2.6s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> extracting sha256:019300c8a437a2d60248f27c206795930626dfe7ddc0323d734143bd5eb131a6                                                                1.8s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> extracting sha256:c44ae64c93a279c2790c6c2a1e2a153dcae72c4e9396ee0752d76f2c04321d74                                                                4.5s
+ <span class="o">=&gt;</span> <span class="o">[</span>2/4] WORKDIR /srv                                                                                                                                   0.4s
+ <span class="o">=&gt;</span> <span class="o">[</span>3/4] ADD <span class="nb">.</span> <span class="nb">.</span>                                                                                                                                        0.1s
+ <span class="o">=&gt;</span> <span class="o">[</span>4/4] RUN npm <span class="nb">install                                                                                                                               </span>10.2s
+ <span class="o">=&gt;</span> exporting to image                                                                                                                                   0.5s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> exporting layers                                                                                                                                  0.5s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> writing image sha256:023ee736e7eb3a93a1c1d0a265de19dd4979b982b718b7cdb48a97885ceb10bf                                                             0.0s 
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/api
+</code></pre></div></div>
+
+<h3 id="4-tag-the-image">4. Tag the Image</h3>
+
+<p>After the build completes, tag the image so you can push it to the repository: </p>
+
+<p><strong>⚐ Note:</strong> Replace the <em>[account-ID]</em> and <em>[region]</em> placeholders with your specific information.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag api:latest <span class="o">[</span>account-ID].dkr.ecr.[region].amazonaws.com/api:v1
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag api:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/api:v1
+</code></pre></div></div>
+
+<p>you check if the images is built successfully following command <em>docker images</em></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker images
+REPOSITORY                                         TAG       IMAGE ID       CREATED         SIZE
+431072036772.dkr.ecr.us-west-2.amazonaws.com/api   v1        023ee736e7eb   3 minutes ago   59.9MB
+api                                                latest    023ee736e7eb   3 minutes ago   59.9MB
+</code></pre></div></div>
+
+<h3 id="5-push-the-image-to-the-repository">5. Push the Image to the Repository</h3>
+
+<p>Push the image to Amazon ECR by running: </p>
+
+<p><strong>⚐ Note:</strong> replace the [account-ID] and [region] placeholders with your specific information.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push <span class="o">[</span>account-id].dkr.ecr.[region].amazonaws.com/api:v1
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/api:v1
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The push refers to repository <span class="o">[</span>431072036772.dkr.ecr.us-west-2.amazonaws.com/api]
+dfed9ca1db03: Pushed 
+43fccc911ce1: Pushed 
+5f70bf18a086: Pushed 
+3e893534526a: Pushed 
+040fd7841192: Pushed
+</code></pre></div></div>
+
+<p>If you navigate to your Amazon ECR repository, you should see your image tagged <em>v1</em>.</p>
+
+<p>![스크린샷 2022-03-22 오전 10.34.25.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.34.25.png" /></p>
+
+<h1 id="module-2--deploy-the-monolith">Module 2 : Deploy the Monolith</h1>
+
+<p>In this module, you will use Amazon Elastic Container Service (Amazon ECS) to instantiate a managed cluster of EC2 compute instances and deploy your image as a container running on the cluster.</p>
+
+<p>![Untitled]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled%201.png" /></p>
+
+<h2 id="step-1-launch-an-ecs-cluster-using-aws-cloudformation">Step 1. Launch an ECS Cluster using AWS CloudFormation</h2>
+
+<p>Create an Amazon ECS cluster deployed behind an Application Load Balancer.</p>
+
+<h3 id="1-go-to-aws-cloudformation-console-and-click-create-stack">1. Go to AWS CloudFormation Console and Click Create stack</h3>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/"></a></p>
+
+<p>![스크린샷 2022-03-22 오후 7.43.17.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.43.17.png" /></p>
+
+<h3 id="2-upload-a-template-fileand-choose-theecsymlfile-from-the-github-project-atamazon-ecs-nodejs-microservice2-containerizedinfrastructureecsymlthen-selectnext">2. <strong>Upload a template file</strong> and choose the <a href="https://github.com/awslabs/amazon-ecs-nodejs-microservices/blob/master/2-containerized/infrastructure/ecs.yml">ecs.yml</a> file from the GitHub project at <em>amazon-ecs-nodejs-microservice/2-containerized/infrastructure/ecs.yml</em> then select <strong>Next</strong>.</h3>
+
+<p>![스크린샷 2022-03-22 오후 7.45.52.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.45.52.png" /></p>
+
+<h3 id="3-for-the-stack-name-enterbreakthemonolith-demo-verify-that-the-other-parameters-have-the-following-values">3. For the stack name, enter <em>BreakTheMonolith-Demo</em>. Verify that the other parameters have the following values:</h3>
+
+<ol>
+  <li>Desired Capacity = <em>2</em></li>
+  <li>InstanceType = <em>t2.micro</em></li>
+  <li>MaxSize = <em>2</em></li>
+</ol>
+
+<p>![스크린샷 2022-03-22 오후 7.47.20.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.47.20.png" /></p>
+
+<h3 id="3-for-configure-stack-options-and-advanced-options-keep-them-default-and-select-next">3. For configure stack options and advanced options, keep them default and Select Next</h3>
+
+<h3 id="4-tick-the-check-box-and-create-stack">4. Tick the check box and Create stack</h3>
+
+<p>![스크린샷 2022-03-22 오후 7.48.44.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.48.44.png" /></p>
+
+<p>You will see your stack with the status CREATE_IN_PROGRESS</p>
+
+<p>![스크린샷 2022-03-22 오후 7.49.23.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.49.23.png" /></p>
+
+<p>After few minutes (maybe about 5 minutes) you can check the progress</p>
+
+<p>![스크린샷 2022-03-22 오후 7.51.43.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.51.43.png" /></p>
+
+<p>Or You can use command line to create stack</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> aws cloudformation deploy \
+   --template-file infrastructure/ecs.yml \
+   --region [region] \
+   --stack-name BreakTheMonolith-Demo \
+   --capabilities CAPABILITY_NAMED_IAM
+</code></pre></div></div>
+
+<h2 id="step-2-check-your-cluster-is-running">Step 2. Check your cluster is running</h2>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2#/clusters">https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2#/clusters</a></p>
+
+<p>![스크린샷 2022-03-22 오후 7.55.59.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_7.55.59.png" /></p>
+
+<ul>
+  <li>Select the cluster <strong>BreakTheMonolith-Demo</strong>, then select the <strong>Tasks</strong> tab to verify that there are no tasks running.</li>
+</ul>
+
+<p>![스크린샷 2022-03-22 오후 8.00.50.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.00.50.png" /></p>
+
+<ul>
+  <li>Select the <strong>ECS Instances</strong> tab to verify there are two Amazon EC2 instances created by the AWS CloudFormation template.</li>
+</ul>
+
+<p>![스크린샷 2022-03-22 오후 8.02.12.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.02.12.png" /></p>
+
+<h2 id="step-3-write-a-task-definition">Step 3. Write a Task Definition</h2>
+
+<h3 id="1-select-task-denitions">1. Select Task Denitions</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.05.18.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.05.18.png" /></p>
+
+<h3 id="2-create-new-task-denition-and-select-launch-type-ec2">2. Create new Task Denition and Select launch type EC2</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.06.43.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.06.43.png" /></p>
+
+<h3 id="3-enter-task-definition-name--api">3. Enter task definition name : api</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.08.16.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.08.16.png" /></p>
+
+<h3 id="4-add-container">4. Add Container</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.11.55.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.11.55.png" /></p>
+
+<p>Scroll down to ENVIRONMENT</p>
+
+<p>![스크린샷 2022-03-22 오후 8.12.20.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.12.20.png" /></p>
+
+<p>![스크린샷 2022-03-22 오후 8.13.03.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.13.03.png" /></p>
+
+<h3 id="5-create">5. Create</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.13.47.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.13.47.png" /></p>
+
+<p>![스크린샷 2022-03-22 오후 8.14.31.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.14.31.png" /></p>
+
+<h2 id="step-4-configure-the-application-load-balancer--target-group">Step 4. Configure the Application Load Balancer : Target Group</h2>
+
+<p>The <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html">Application Load Balancer (ALB)</a>
+ lets your service accept incoming traffic. The ALB automatically routes traffic to container instances running on your cluster using them as a <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html">target group</a></p>
+
+<h3 id="1-check-vpc-name">1. Check VPC Name</h3>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers:sort=loadBalancerName">https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers:sort=loadBalancerName</a></p>
+
+<p>![스크린샷 2022-03-22 오후 8.19.10.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.19.10.png" /></p>
+
+<h3 id="2-configure-the-alb-target-group">2. Configure the ALB Target Group</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>[Module Two - Deploy the Monolith</td>
+      <td>AWS](https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-two/)</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>create target group</li>
+</ol>
+
+<p>![스크린샷 2022-03-22 오후 8.21.55.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.21.55.png" /></p>
+
+<ol>
+  <li>Configure the following Target Group parameters (for the parameters not listed below, keep the default values):
+    <ul>
+      <li>For the <strong>Target group name</strong>, enter <em>api</em>.</li>
+      <li>For the <strong>Protocol</strong>, select <strong>HTTP</strong>.</li>
+      <li>For the <strong>Port</strong>, enter <em>80</em>.</li>
+      <li>For the VPC, select the value that matches the one from the Load Balancer description. .</li>
+    </ul>
+
+    <p>This is most likely NOT your default VPC</p>
+
+    <p>![스크린샷 2022-03-22 오후 8.23.51.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.23.51.png" /></p>
+  </li>
+</ol>
+
+<ul>
+  <li>Access the <strong>Advanced health check settings</strong> and edit the following parameters as needed:
+    <ul>
+      <li>For <strong>Healthy threshold</strong>, enter <em>2</em>.</li>
+      <li>For <strong>Unhealthy threshold</strong>, enter <em>2</em>.</li>
+      <li>For <strong>Timeout</strong>, enter <em>5</em>.</li>
+      <li>
+        <p>For <strong>Interval</strong>, enter <em>6</em>.</p>
+
+        <p>![스크린샷 2022-03-22 오후 8.24.48.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.24.48.png" /></p>
+      </li>
+    </ul>
+  </li>
+  <li>Create</li>
+</ul>
+
+<h2 id="step-5-configure-the-application-load-balancer--listener">Step 5. Configure the Application Load Balancer : Listener</h2>
+
+<p>The ALB <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html">listener</a> checks for incoming connection requests to your ALB.</p>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers:">https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers</a></p>
+
+<h3 id="1-add-listener">1. add Listener</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.27.21.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.27.21.png" /></p>
+
+<h3 id="2-create">2. create</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.28.12.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.28.12.png" /></p>
+
+<p>![스크린샷 2022-03-22 오후 8.28.45.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.28.45.png" /></p>
+
+<h2 id="step-6-deploy-the-monolith-as-a-service">Step 6. Deploy the Monolith as a Service</h2>
+
+<p>Deploy the monolith as a service into the cluster.</p>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2">https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2</a></p>
+
+<h3 id="1-creae-service">1. Creae Service</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.30.18.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.30.18.png" /></p>
+
+<h3 id="2-configure-service">2. Configure service</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.31.03.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.31.03.png" /></p>
+
+<h3 id="3-configure-load-balancing">3. Configure Load balancing</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.32.19.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.32.19.png" /></p>
+
+<h3 id="4-add-container-to-load-balancer">4. Add container to load balancer</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.33.39.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.33.39.png" /></p>
+
+<h3 id="5-review-and-create">5. Review and Create</h3>
+
+<p>![스크린샷 2022-03-22 오후 8.34.57.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.34.57.png" /></p>
+
+<h2 id="step-7-test-your-monolith">Step 7. Test your Monolith</h2>
+
+<p>Validate your deployment by checking if the service is available from the internet and pinging it.</p>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers:sort=loadBalancerName"></a></p>
+
+<p>Copy DNS and paste into a new browser</p>
+
+<p>![스크린샷 2022-03-22 오후 8.39.57.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.39.57.png" /></p>
+
+<p>![스크린샷 2022-03-22 오후 8.37.12.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_8.37.12.png" /></p>
+
+<p><strong>See Each Part of the Service:</strong> The node.js application routes traffic to each worker based on the URL. To see a worker, simply add the worker name <em>api/[worker-name]</em> to the end of the DNS Name as follows:</p>
+
+<ul>
+  <li>http://<em>[DNS name]</em>/api/users</li>
+  <li>http://<em>[DNS name]</em>/api/threads</li>
+  <li>http://<em>[DNS name]</em>/api/posts</li>
+</ul>
+
+<p>You can also add a record number at the end of the URL to drill down to a particular record. For example: <em>http://[DNS name]/api/posts/1</em> or <em>http://[DNS name]/api/users/2</em></p>
+
+<h1 id="module-3--break-the-monolith">Module 3 : Break the Monolith</h1>
+
+<p>In this module, you will break the node.js application into several interconnected services and push each service’s image to an Amazon Elastic Container Registry (Amazon ECR) repository.</p>
+
+<p>![Untitled]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled%202.png" /></p>
+
+<h2 id="step-1-provision-the-ecr-repositories">Step 1. Provision the ECR Repositories</h2>
+
+<p>In the previous two modules, you deployed your application as a monolith using a single service and a single container image repository. To deploy the application as three microservices, you will need to provision three repositories (one for each service) in Amazon ECR.</p>
+
+<ul>
+  <li>make three more repositories (users, posts, threads)</li>
+</ul>
+
+<p>![스크린샷 2022-03-22 오후 10.23.48.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.23.48.png" /></p>
+
+<p>![스크린샷 2022-03-22 오후 10.24.28.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.24.28.png" /></p>
+
+<h2 id="step-2-build-and-push-images-for-each-service">Step 2. Build and Push Images for Each Service</h2>
+
+<ul>
+  <li>
+    <p>Build Images</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker build <span class="nt">-t</span> <span class="o">[</span>service-name] ./[service-name]
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker build <span class="nt">-t</span> posts ./posts
+  docker build <span class="nt">-t</span> <span class="nb">users</span> ./users
+  docker build <span class="nt">-t</span> threads ./threads
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Tag Images</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker tag <span class="o">[</span>service-name]:latest <span class="o">[</span>account-ID].dkr.ecr.[region].amazonaws.com/[service-name]:v1
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker tag posts:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/posts:v1
+  docker tag <span class="nb">users</span>:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/users:v1
+  docker tag threads:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/threads:v1
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Push Images</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker push <span class="o">[</span>account-id].dkr.ecr.[region].amazonaws.com/[service-name]:v1
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/posts:v1
+  docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/threads:v1
+  docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/users:v1
+</code></pre></div>    </div>
+
+    <p># Module 4 : Deploy Microservices</p>
+
+    <p>In this module, you will deploy your node.js application as a set of interconnected services behind an Application Load Balancer (ALB). Then, you will use the ALB to seamlessly shift traffic from the monolith to the microservices.</p>
+
+    <p>![Untitled]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/Untitled%203.png" /></p>
+  </li>
+</ul>
+
+<h2 id="step-1-write-task-definition-for-your-services">Step 1. Write Task Definition for your Services</h2>
+
+<p>You will deploy three new services to the cluster that you launched in <a href="https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-two/">Module 2</a>. Like Module 2, you will write <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html">Task Definitions</a> for each service.</p>
+
+<ul>
+  <li>
+    <p>create task using JSON Configuration for each task (users, posts, threads)</p>
+
+    <p>![스크린샷 2022-03-22 오후 10.49.07.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.49.07.png" /></p>
+
+    <p>![스크린샷 2022-03-22 오후 10.46.04.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.46.04.png" /></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">{</span>
+      <span class="s2">"containerDefinitions"</span>: <span class="o">[</span>
+          <span class="o">{</span>
+              <span class="s2">"name"</span>: <span class="s2">"[service-name]"</span>,
+              <span class="s2">"image"</span>: <span class="s2">"[account-id].dkr.ecr.[region].amazonaws.com/[service-name]:[tag]"</span>,
+              <span class="s2">"memoryReservation"</span>: <span class="s2">"256"</span>,
+              <span class="s2">"cpu"</span>: <span class="s2">"256"</span>,
+              <span class="s2">"essential"</span>: <span class="nb">true</span>,
+              <span class="s2">"portMappings"</span>: <span class="o">[</span>
+                  <span class="o">{</span>
+                      <span class="s2">"hostPort"</span>: <span class="s2">"0"</span>,
+                      <span class="s2">"containerPort"</span>: <span class="s2">"3000"</span>,
+                      <span class="s2">"protocol"</span>: <span class="s2">"tcp"</span>
+                  <span class="o">}</span>
+              <span class="o">]</span>
+          <span class="o">}</span>
+      <span class="o">]</span>,
+      <span class="s2">"volumes"</span>: <span class="o">[]</span>,
+      <span class="s2">"networkMode"</span>: <span class="s2">"bridge"</span>,
+      <span class="s2">"placementConstraints"</span>: <span class="o">[]</span>,
+      <span class="s2">"family"</span>: <span class="s2">"[service-name]"</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="step-2-configure-the-application-load-balancer--target-group">Step 2. Configure the Application Load Balancer : Target Group</h2>
+
+<p>As in <a href="https://aws.amazon.com/getting-started/hands-on/break-monolith-app-microservices-ecs-docker-ec2/module-two/">Module 2</a>
+, configure a target group for each service (posts, threads, and users). A target group allows traffic to correctly reach a specified service. You will configure the target groups using AWS CLI</p>
+
+<ul>
+  <li>
+    <p>Configure the target group</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  aws elbv2 create-target-group <span class="nt">--region</span> <span class="o">[</span>region] <span class="nt">--name</span> <span class="o">[</span>service-name] <span class="nt">--healthy-threshold-count</span> 2 <span class="nt">--unhealthy-threshold-count</span> 2 <span class="nt">--health-check-timeout-seconds</span> 5 <span class="nt">--health-check-interval-seconds</span> 6 <span class="nt">--protocol</span> HTTP <span class="nt">--port</span> 80 <span class="nt">--vpc-id</span> <span class="o">[</span>vpc-attribute] 
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  aws elbv2 create-target-group <span class="nt">--region</span> us-west-2 <span class="nt">--name</span> threads  <span class="nt">--healthy-threshold-count</span> 2 <span class="nt">--unhealthy-threshold-count</span> 2 <span class="nt">--health-check-timeout-seconds</span> 5 <span class="nt">--health-check-interval-seconds</span> 6 <span class="nt">--protocol</span> HTTP <span class="nt">--port</span> 80 <span class="nt">--vpc-id</span> vpc-0a2ebb545b80b6307
+</code></pre></div>    </div>
+
+    <p>![스크린샷 2022-03-23 오전 10.16.46.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_10.16.46.png" /></p>
+  </li>
+</ul>
+
+<h2 id="step-3-configure-listener-rules">Step 3. Configure Listener Rules</h2>
+
+<p>The <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html">listener</a> checks for incoming connection requests to your ALB in order to route traffic appropriately.</p>
+
+<p>Right now, all four of your services (monolith and your three microservices) are running behind the same load balancer. To make the transition from monolith to microservices, you will start routing traffic to your microservices and stop routing traffic to your monolith.</p>
+
+<h3 id="update-listenr-rules">Update Listenr rules</h3>
+
+<ol>
+  <li>click View/edit rules under Listeners tab</li>
+</ol>
+
+<p>![스크린샷 2022-03-23 오전 10.20.31.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_10.20.31.png" /></p>
+
+<ol>
+  <li>Insert Rule</li>
+</ol>
+
+<p>![스크린샷 2022-03-23 오전 11.22.57.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.22.57.png" /></p>
+
+<p>![스크린샷 2022-03-23 오전 11.26.14.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.26.14.png" /></p>
+
+<h2 id="step-4-deploy-your-monolith">Step 4. Deploy your Monolith</h2>
+
+<p>Deploy the three microservices (posts, threads, and users) to your cluster. Repeat these steps for each of your three microservices:</p>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/ecs/home?region=us-west-2#/clusters/BreakTheMonolith-Demo-ECSCluster-o8iQP3xrqL4M/services"></a></p>
+
+<h3 id="1-select-create-on-services-tab">1. Select Create on Services Tab</h3>
+
+<p>![스크린샷 2022-03-23 오전 11.28.24.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.28.24.png" /></p>
+
+<h3 id="2-configure-service-1">2. Configure service</h3>
+
+<p>![스크린샷 2022-03-23 오전 11.30.17.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.30.17.png" /></p>
+
+<h3 id="3-configure-load-balancing-1">3. Configure load balancing</h3>
+
+<p>![스크린샷 2022-03-23 오전 11.31.50.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.31.50.png" /></p>
+
+<h3 id="4-add-container-to-load-balance">4. Add container to load balance</h3>
+
+<p>![스크린샷 2022-03-23 오전 11.33.12.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_11.33.12.png" /></p>
+
+<h3 id="5-create-1">5. Create</h3>
+
+<p>![스크린샷 2022-03-23 오후 1.02.25.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.02.25.png" /></p>
+
+<h2 id="step-5-switch-over-traffic-to-your-microservices">Step 5. Switch Over Traffic to your Microservices</h2>
+
+<p>Your microservices are now running, but all traffic is still flowing to your monolith service. To reroute traffic to the microservices, take the following steps to update the listener rules:</p>
+
+<p><a href="https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#LoadBalancers:sort=loadBalancerName"></a></p>
+
+<h3 id="1--edit-listener">1.  Edit Listener</h3>
+
+<p>![스크린샷 2022-03-23 오후 1.16.57.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.16.57.png" /></p>
+
+<h3 id="2-delete-api-rule">2. Delete api Rule</h3>
+
+<p>![스크린샷 2022-03-23 오후 1.17.40.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.17.40.png" /></p>
+
+<h3 id="3-update-default-rule-to-forward-to-drop-traffic">3. Update default Rule to forward to drop-traffic</h3>
+
+<p>![스크린샷 2022-03-23 오후 1.19.30.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.19.30.png" /></p>
+
+<p>![스크린샷 2022-03-23 오후 1.21.49.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.21.49.png" /></p>
+
+<h3 id="disable-the-monolith">Disable the Monolith</h3>
+
+<ol>
+  <li>Update api Service</li>
+</ol>
+
+<p>![스크린샷 2022-03-23 오후 1.22.53.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.22.53.png" /></p>
+
+<ol>
+  <li>Change Number of tasks to 0</li>
+</ol>
+
+<p>![스크린샷 2022-03-23 오후 1.23.38.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오후_1.23.38.png" /></p>
+
+<p><strong>You have now fully transitioned your node.js from the monolith to microservices, without any downtime!</strong></p>
+
+<h2 id="step-6-validate-your-deployment"><strong>Step 6. Validate your Deployment</strong></h2>
+
+<ul>
+  <li>http://[DNS name]/api/users</li>
+  <li>http://[DNS name]/api/threads</li>
+  <li>http://[DNS name]/api/posts</li>
+</ul>
+:ET

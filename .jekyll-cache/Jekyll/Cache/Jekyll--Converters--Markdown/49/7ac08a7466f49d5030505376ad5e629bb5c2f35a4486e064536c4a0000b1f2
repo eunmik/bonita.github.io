@@ -1,0 +1,51 @@
+I"{<p>Webhook을  setup해야하는 경우가 생겼는데 처음 들어봤다… 그래서 한 번 알아보기로 했다! 
+해외 블로그의 내용을 번역한 내용이라서 
+오역이 있을 수 있지만 나만 볼 수 있는 블로그니깐 괜찮아🤣</p>
+
+<hr />
+
+<p>우리의 뇌를 생각하면, 계속적으로 우리의 몸 전체에 메시지를 보낸다. 
+우리가 먹어야하거나, 자야학거나, 가스렌지에서 손을 때야한다는것을 우리에게 알려준다. 
+우리가 계속 뇌에 우리가 배고픈지, 아픈지, 피곤한지 물어봐야 한다고 생각해보자. 우리의 삶은 unmanageable 할 것이다.</p>
+
+<p>다행히도, 웹 개발 프로젝트에서도 이와 같은 자동&amp;알림 시스템이 있다. 그것은 Webhook 이다. 
+우리는 아마 인지하지 못하고 꽤 사용하고 있었을 수도 있다.</p>
+
+<h1 id="webhook-이란">WebHook 이란?</h1>
+
+<p>Webhook(웹훅)이란, 서버에서 어떠한 작업이 수행 되었을 때 해당 작업이 수행되었음을 HTTP POST로 알리는 개념을 말한다. Webhook을 구현한 웹 어플리케이션은, 특정 작업이 수행될 때 URL에 대해 POST 방식으로 요청을 생성한다. 이  때, url(콜 백url)은 웹 어플리케이션을 사용하는 유저가 자신의 URL을 지정할 수 있다.</p>
+
+<p>간단히 말해서, webhooks는 어플리케이션 사이에서 자동으로 커뮤니케이션 하는 방법이다.</p>
+
+<ul>
+  <li>MailChimp는 webhook를 웹사이트에서 뉴스레터로 사용자들을 회원가입 하기 위해 사용한다.</li>
+  <li>Paypal은 고객이 지불을 할때 accounting 앱에 말해 주기 위해 사용한다.</li>
+  <li>Shopify는 commer system을 최신으로 유지하기위해 webhooks를 사용한다. 그래소 사용자가 수동으로 새로운 트랜잭션의 디테일을 입력할 필요가 없다.</li>
+</ul>
+
+<p>예를 들어 브라우저 알림을 생각 해보자.</p>
+
+<p>브라우저(subject)가 사용자(observer)에게 이메일 도착 같은 이벤트가 나타날 때 알림을 보낸다. 이 같은 동적인 subject와 observer간의 통신이 event-driven systems에서 비동기의 장접을 쉽게 사용할 수 있게 해준다. 이것을 마스터 하면, 사용자 교류같은 많은 user cases들을 더 쉽게 관리할 수 있다.</p>
+
+<p>서버에게 상태가 변했는지 계속 물어보는 대신에, 사용자가 이렇게 말할 수 있다 : 
+“상태가 변하면 너가 나에게 말해줘!”</p>
+
+<p>이러한 상호작용이 더 효육적이지만 처음에 이해하기가 살짝 어려울 수도 있다. 
+이 지식을 우리의 주제인 webhook으로 전환 해보자. 
+observer 패턴은 어떤 event-driven systems에 사용될 수 있지만 webhooks은 <strong>웹(the web)</strong>으로 제한이 된다. 이것은 거의 모든 케이스가 무조건 web protocol-HTTP을 통해서 통신해야 한다는 것을 의미한다.</p>
+
+<h1 id="webhook은-어떻게-작동하는-것일까">webhook은 어떻게 작동하는 것일까?</h1>
+
+<p>주어진 이벤트가 발생하면 webhook에 URL을 등록할 수 있다. 이게 UI나 API를 통한 첫번째 스텝이다. 만들어진 route는 이벤트가 발생하면 실행 되기 위한 로직을 가지고 있다. 
+이 방법은, 시스템이 실행하기위해 무엇이 필요한지 알 필요가 없고 오직 알리기 위한 route만 가지고 있으면 된다.</p>
+
+<p><img src="https://snipcart.com/media/203941/webhook-explained-3.png?width=800&amp;format=webp&amp;quality=80&amp;upscale=false" /></p>
+
+<p>모든게 decoupled 되어있기 때문에 아주 강력하다. 선택된 URL을 통해 알람을 받는 System B는 다른 시스템에서 이벤트가 발생했다는것을 알 뿐만 아니라 반응할 수도 있다. 
+로직을 가지고 있는 route는 HTTP POST request를 통해 접근 가능해야 한다. 
+왜 POST request일까? 자세하게는 request에 body를 포함할 수 있는 기능을 제공하기 때문이다. 대게 간단한 JSON object이지만 XML도 될 수 있다. 
+body에서 직관적으로 무슨 이벤트가 발생했는지에 대한 정보를 찾을 수 있을 것이다. 게다가 어떤 사용자가 발생시켰는지, 몇시에, 다른 이벤트 정보 들에 대해서도 알 수 있다. 
+webhook은 public이거나 private일 수 있기 때문에 강력하다. 여기서 Private은 특정 시스템 계정의 사용자만이 webhook을 등록할 수 있다는 뜻이다. 아무나 그 계정의 이벤트에 접근할 수 있다.</p>
+
+<p>출처 : <a href="https://snipcart.com/blog/what-are-webhooks-explained-example">https://snipcart.com/blog/what-are-webhooks-explained-example</a></p>
+:ET

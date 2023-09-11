@@ -1,0 +1,166 @@
+I"�H<p>Spring Security에서 반환하는 에러 메시지는 아래처럼 형식이 달라서 필요한 데이터가 있을때는 코드를 작성해 줘야한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+    <span class="s">"error"</span><span class="o">:</span> <span class="s">"invalid_grant"</span><span class="o">,</span>
+    <span class="s">"error_description"</span><span class="o">:</span> <span class="s">"Invalid username or password"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Oauth2Exception을 상속받은 class를 만든다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.annotation.JsonSerialize</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.common.exceptions.OAuth2Exception</span><span class="o">;</span>
+
+ <span class="nd">@JsonSerialize</span><span class="o">(</span><span class="n">using</span>  <span class="o">=</span> <span class="nc">CustomOauthExceptionSerializer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomOauthException</span> <span class="kd">extends</span> <span class="nc">OAuth2Exception</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="nf">CustomOauthException</span><span class="o">(</span><span class="nc">String</span> <span class="n">msg</span><span class="o">){</span>
+         <span class="kd">super</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>@JsonSerialize : marshalling 과정에서 custom serializer를 사용하도록 지정한다.</p>
+
+    <p>marshalling과 serialization은 차이가 있다. serialization은 객체를 byte stream으로 변환하는 것 만을 의미하는 반면 marshalling은 객체를 저장이나 전송을 위해 적당한 자료형태로 변형하는것을 의미한다.</p>
+
+    <p>Jackson 라이브러리의 StdSerializer를 상속하여 custom serializer를 만들 수 있다.</p>
+  </li>
+  <li>
+    <p>JsonSerialize 어노테이션을 추가 했기 때문에 우리는 CustomOauthExceptionSerializer를 사용할 것이다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonGenerator</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.SerializerProvider</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ser.std.StdSerializer</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.json.JSONObject</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+ <span class="c1">//Oauth2Exception을 Customizing 하기 위한 클래스</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomOauthExceptionSerializer</span> <span class="kd">extends</span> <span class="nc">StdSerializer</span><span class="o">&lt;</span><span class="nc">CustomOauthException</span><span class="o">&gt;</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="nf">CustomOauthExceptionSerializer</span><span class="o">(){</span>
+         <span class="kd">super</span><span class="o">(</span><span class="nc">CustomOauthException</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">serialize</span><span class="o">(</span><span class="nc">CustomOauthException</span> <span class="n">value</span><span class="o">,</span> <span class="nc">JsonGenerator</span> <span class="n">jsonGenerator</span><span class="o">,</span> <span class="nc">SerializerProvider</span> <span class="n">serializerProvider</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">{</span>
+         <span class="nc">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+         <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+         <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"login_attempts"</span><span class="o">,</span> <span class="o">(</span><span class="nc">Integer</span><span class="o">)</span> <span class="n">json</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"login_attempts"</span><span class="o">));</span>
+         <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"IP_login_attempts"</span><span class="o">,</span> <span class="o">(</span><span class="nc">Integer</span><span class="o">)</span> <span class="n">json</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"IP_login_attempts"</span><span class="o">));</span>
+
+         <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeStartObject</span><span class="o">();</span>
+         <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeObjectField</span><span class="o">(</span><span class="s">"timestamp"</span><span class="o">,</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
+         <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeNumberField</span><span class="o">(</span><span class="s">"status"</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="na">getHttpErrorCode</span><span class="o">());</span>
+         <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeObjectField</span><span class="o">(</span><span class="s">"error"</span><span class="o">,</span> <span class="n">value</span><span class="o">.</span><span class="na">getOAuth2ErrorCode</span><span class="o">());</span>
+         <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeObjectField</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="n">json</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"message"</span><span class="o">));</span>
+         <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeObjectField</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="n">map</span><span class="o">);</span>
+         <span class="k">if</span><span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="na">getAdditionalInformation</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+             <span class="k">for</span> <span class="o">(</span><span class="nc">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">:</span> <span class="n">value</span><span class="o">.</span><span class="na">getAdditionalInformation</span><span class="o">().</span><span class="na">entrySet</span><span class="o">())</span> <span class="o">{</span>
+                 <span class="nc">String</span> <span class="n">key</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">();</span>
+                 <span class="nc">String</span> <span class="n">add</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">();</span>
+                 <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeStringField</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">add</span><span class="o">);</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+         <span class="n">jsonGenerator</span><span class="o">.</span><span class="na">writeEndObject</span><span class="o">();</span>
+
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>CustomOauthException를 Oauth2 Config에 설정한다. (WebResponseExceptionTranslator를 설정해주는 건데 따로 class를 만들어서 적용할 수도 있다.)</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Configuration</span>
+ <span class="nd">@EnableAuthorizationServer</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationServerConfig</span> <span class="kd">extends</span> <span class="nc">AuthorizationServerConfigurerAdapter</span> <span class="o">{</span>
+
+ 	<span class="nd">@Override</span>
+ 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">AuthorizationServerEndpointsConfigurer</span> <span class="n">endpoints</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+ 		<span class="n">endpoints</span>
+ 				<span class="o">.</span><span class="na">authenticationManager</span><span class="o">(</span><span class="n">authenticationManager</span><span class="o">)</span>
+ 				<span class="o">.</span><span class="na">tokenStore</span><span class="o">(</span><span class="n">tokenStore</span><span class="o">())</span>
+ 				<span class="o">.</span><span class="na">userDetailsService</span><span class="o">(</span><span class="n">userDetailsService</span><span class="o">())</span>
+ 				<span class="c1">//for authentication error exception</span>
+ 				<span class="o">**.</span><span class="na">exceptionTranslator</span><span class="o">(</span><span class="n">exception</span> <span class="o">-&gt;</span> <span class="o">{</span>
+
+ 					<span class="k">if</span> <span class="o">(</span><span class="n">exception</span> <span class="k">instanceof</span> <span class="nc">OAuth2Exception</span><span class="o">)</span> <span class="o">{</span>
+ 						<span class="nc">OAuth2Exception</span> <span class="n">oAuth2Exception</span> <span class="o">=</span> <span class="o">(</span><span class="nc">OAuth2Exception</span><span class="o">)</span> <span class="n">exception</span><span class="o">;</span>
+ 						<span class="k">return</span> <span class="nc">ResponseEntity</span>
+ 								<span class="o">.</span><span class="na">status</span><span class="o">(</span><span class="n">oAuth2Exception</span><span class="o">.</span><span class="na">getHttpErrorCode</span><span class="o">())</span>
+ 								<span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomOauthException</span><span class="o">(</span><span class="n">oAuth2Exception</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()));</span>
+ 					<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+ 						<span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">();</span>
+ 					<span class="o">}</span>
+
+ 				<span class="o">});**</span>
+
+ 	<span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>따로 class를 만들어서 적용할 경우</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.common.exceptions.OAuth2Exception</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomWebResponseExceptionTranslator</span> <span class="kd">implements</span> <span class="nc">WebResponseExceptionTranslator</span> <span class="o">{</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">OAuth2Exception</span><span class="o">&gt;</span> <span class="nf">translate</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">exception</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">exception</span> <span class="k">instanceof</span> <span class="nc">OAuth2Exception</span><span class="o">)</span> <span class="o">{</span>
+             <span class="nc">OAuth2Exception</span> <span class="n">oAuth2Exception</span> <span class="o">=</span> <span class="o">(</span><span class="nc">OAuth2Exception</span><span class="o">)</span> <span class="n">exception</span><span class="o">;</span>
+             <span class="k">return</span> <span class="nc">ResponseEntity</span>
+                     <span class="o">.</span><span class="na">status</span><span class="o">(</span><span class="n">oAuth2Exception</span><span class="o">.</span><span class="na">getHttpErrorCode</span><span class="o">())</span>
+                     <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomOauthException</span><span class="o">(</span><span class="n">oAuth2Exception</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()));</span>
+         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">();</span>
+         <span class="o">}</span>
+
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>AuthorizationServerConfig.java</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Bean</span>
+ 	<span class="kd">public</span> <span class="nc">WebResponseExceptionTranslator</span> <span class="nf">webResponseExceptionTranslator</span><span class="o">(){</span>
+ 		<span class="k">return</span> <span class="k">new</span> <span class="nf">CustomWebResponseExceptionTranslator</span><span class="o">();</span>
+ 	<span class="o">}</span>
+
+ 	<span class="nd">@Override</span>
+ 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">AuthorizationServerEndpointsConfigurer</span> <span class="n">endpoints</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+ 		<span class="n">endpoints</span>
+ 				<span class="o">.</span><span class="na">authenticationManager</span><span class="o">(</span><span class="n">authenticationManager</span><span class="o">)</span>
+ 				<span class="o">.</span><span class="na">tokenStore</span><span class="o">(</span><span class="n">tokenStore</span><span class="o">())</span>
+ 				<span class="o">.</span><span class="na">userDetailsService</span><span class="o">(</span><span class="n">userDetailsService</span><span class="o">())</span>
+ 				<span class="c1">//for authentication error exception</span>
+ 				<span class="o">.</span><span class="na">exceptionTranslator</span><span class="o">(</span><span class="n">webResponseExceptionTranslator</span><span class="o">());</span>
+ 	<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>적용 후 나오는 에러 메시지는 아래와 같다</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">{</span>
+     <span class="s">"timestamp"</span><span class="o">:</span> <span class="s">"2021-07-29T11:07:42.427"</span><span class="o">,</span>
+     <span class="s">"status"</span><span class="o">:</span> <span class="mi">400</span><span class="o">,</span>
+     <span class="s">"error"</span><span class="o">:</span> <span class="s">"invalid_request"</span><span class="o">,</span>
+     <span class="s">"message"</span><span class="o">:</span> <span class="s">"Credentials Failed."</span><span class="o">,</span>
+     <span class="s">"data"</span><span class="o">:</span> <span class="o">{</span>
+         <span class="s">"IP_login_attempts"</span><span class="o">:</span> <span class="mi">1</span><span class="o">,</span>
+         <span class="s">"login_attempts"</span><span class="o">:</span> <span class="mi">1</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0803/img1.png" /></p>
+
+    <p>출처 : https://medium.com/@beladiyahardik7/spring-security-custom-oauth2exception-in-spring-b35a62af4d34</p>
+  </li>
+</ol>
+:ET

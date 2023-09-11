@@ -2,7 +2,7 @@
 layout: post
 title: "[Java]Telegram으로 메시지 보내기"
 date: 2021-03-31
-excerpt: "Java에서 Telegram으로 메시지를 보내 보자!"
+categories: [Language, Java]
 tags: [Java, Telegram]
 comments: true
 ---

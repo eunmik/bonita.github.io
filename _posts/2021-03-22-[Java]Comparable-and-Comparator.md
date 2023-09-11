@@ -2,8 +2,8 @@
 layout: post
 title: "[Java]Comparable vs Comparator"
 date: 2021-03-22
-excerpt: "Comparable 인터페이스와 Comparator 인터페이스를 활용해 보자."
-tags: [Algorithm, Selection, Insertion, Heap, Bubble, Merge]
+categories: [Language, Java]
+tags: [Java]
 comments: true
 ---
 알고리즘 스터디를 하면서 다른 사람들이 쓴 코드를 접하게 됬는데,

@@ -2,7 +2,7 @@
 layout: post
 title: "[Clean Code] 예외 처리"
 date: 2021-07-12
-excerpt: "Clean Code책에 나온 예외처리 내용"
+categories: [Language, Java]
 tags: [Java, Exception, Try-Catch]
 comments: true
 ---

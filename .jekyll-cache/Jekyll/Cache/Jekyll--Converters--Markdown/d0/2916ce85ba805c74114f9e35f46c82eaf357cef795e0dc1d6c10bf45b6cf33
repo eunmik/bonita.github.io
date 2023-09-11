@@ -1,0 +1,193 @@
+I"
+E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중 하나인 Redis를 사용해 보았다.</p>
+
+<p>Redis는 RDBMS가 아니라  Key-Value 구조 데이터인 NoSQL이다.</p>
+
+<p>Redis같은 InMemory DB 설명은 나중에!</p>
+
+<p>스프링부트에서 Redis를 사용하려면</p>
+
+<ol>
+  <li>
+    <p>pom.xml에 라이브러리를 추가한다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&lt;!--</span> <span class="nc">Redis</span> <span class="o">:</span> <span class="n">inmemory</span> <span class="no">DB</span> <span class="o">--&gt;</span>
+     <span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+       <span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+       <span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">redis</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+     <span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
+ 		<span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+ 			<span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">it</span><span class="o">.</span><span class="na">ozimov</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+ 			<span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">embedded</span><span class="o">-</span><span class="n">redis</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+ 			<span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">0.7</span><span class="o">.</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span>
+ 			<span class="o">&lt;</span><span class="n">scope</span><span class="o">&gt;</span><span class="n">compile</span><span class="o">&lt;/</span><span class="n">scope</span><span class="o">&gt;</span>
+ 		<span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>application.yaml 파일에 redis db 정보 설정한다.  embedded db 니깐 host는 127.0.0.1</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="err">##</span><span class="n">redis</span>
+ <span class="nl">spring:</span>
+   <span class="nl">redis:</span>
+     <span class="nl">lettuce:</span>
+       <span class="nl">pool:</span>
+         <span class="n">max</span><span class="o">-</span><span class="nl">active:</span> <span class="mi">10</span>
+         <span class="n">max</span><span class="o">-</span><span class="nl">idle:</span> <span class="mi">10</span>
+     <span class="nl">port:</span> <span class="mi">6379</span>
+     <span class="nl">host:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+   <span class="nl">main:</span>
+     <span class="n">allow</span><span class="o">-</span><span class="n">bean</span><span class="o">-</span><span class="n">definition</span><span class="o">-</span><span class="nl">overriding:</span> <span class="kc">true</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Redis 설정을 위한 자바 클래스를 만든다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.connection.RedisConnectionFactory</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.core.RedisTemplate</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.core.StringRedisTemplate</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.repository.configuration.EnableRedisRepositories</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.serializer.StringRedisSerializer</span><span class="o">;</span>
+
+ <span class="nd">@Configuration</span>
+ <span class="nd">@EnableRedisRepositories</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisConfig</span> <span class="o">{</span>
+
+ 		<span class="c1">// Thread-safe factory of Redis connections.</span>
+     <span class="nd">@Bean</span>
+     <span class="kd">public</span> <span class="nc">RedisConnectionFactory</span> <span class="nf">redisConnectionFactory</span><span class="o">()</span> <span class="o">{</span>
+ 				<span class="c1">//Connection factory creating Lettuce-based(Redis client) connections. </span>
+ 				<span class="c1">//This factory creates a new LettuceConnection on each call to getConnection(). </span>
+         <span class="nc">LettuceConnectionFactory</span> <span class="n">lettuceConnectionFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LettuceConnectionFactory</span><span class="o">();</span>
+         <span class="k">return</span> <span class="n">lettuceConnectionFactory</span><span class="o">;</span>
+     <span class="o">}</span>
+    		
+ 		<span class="c1">//Helper class that simplifies Redis data access code.</span>
+     <span class="nd">@Bean</span>
+     <span class="kd">public</span> <span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">redisTemplate</span><span class="o">()</span> <span class="o">{</span>
+         <span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RedisTemplate</span><span class="o">&lt;&gt;();</span>
+         <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setConnectionFactory</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">());</span>
+         <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
+         <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setValueSerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
+         <span class="k">return</span> <span class="n">redisTemplate</span><span class="o">;</span>
+     <span class="o">}</span>
+    		
+ 		<span class="c1">//String-focused extension of RedisTemplate. </span>
+     <span class="nd">@Bean</span>
+     <span class="kd">public</span> <span class="nc">StringRedisTemplate</span> <span class="nf">stringRedisTemplate</span><span class="o">()</span> <span class="o">{</span>
+         <span class="nc">StringRedisTemplate</span> <span class="n">stringRedisTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringRedisTemplate</span><span class="o">();</span>
+         <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">setKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
+         <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">setValueSerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
+         <span class="n">stringRedisTemplate</span><span class="o">.</span><span class="na">setConnectionFactory</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">());</span>
+         <span class="k">return</span> <span class="n">stringRedisTemplate</span><span class="o">;</span>
+     <span class="o">}</span>
+
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">redis.embedded.RedisServer</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">javax.annotation.PostConstruct</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.annotation.PreDestroy</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+ <span class="nd">@Slf4j</span>
+ <span class="nd">@Configuration</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisServerConfig</span> <span class="o">{</span>
+     <span class="kd">private</span> <span class="nc">RedisServer</span> <span class="n">redisServer</span><span class="o">;</span>
+
+     <span class="kd">public</span> <span class="nf">RedisServerConfig</span><span class="o">(</span><span class="nd">@Value</span><span class="o">(</span><span class="s">"${spring.redis.port}"</span><span class="o">)</span> <span class="kt">int</span> <span class="n">redisPort</span><span class="o">)</span> <span class="o">{</span>
+
+         <span class="n">redisServer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RedisServer</span><span class="o">(</span><span class="n">redisPort</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="nd">@PostConstruct</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startRedis</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+          <span class="n">redisServer</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+     <span class="o">}</span>
+
+     <span class="nd">@PreDestroy</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stopRedis</span><span class="o">()</span> <span class="o">{</span>
+
+         <span class="n">redisServer</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Redis DB를 사용하기 위해서는 Entity에 @RedisHash 어노테이션이 필요하다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">lombok.Data</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.core.RedisHash</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.data.redis.core.index.Indexed</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">javax.persistence.*</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+
+ <span class="nd">@Data</span>
+ <span class="nd">@Entity</span>
+ <span class="nd">@Table</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"userinfo_login"</span><span class="o">)</span>
+ <span class="nd">@RedisHash</span><span class="o">(</span><span class="s">"UserLogin"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserLogin</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">587852912349881733L</span><span class="o">;</span>
+
+     <span class="nd">@Id</span>
+     <span class="nd">@Indexed</span>
+     <span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span> <span class="c1">//userId</span>
+     <span class="kd">private</span> <span class="kt">int</span> <span class="n">loginAttempts</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">lockedTime</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="nc">Boolean</span> <span class="n">isLocked</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="nc">String</span> <span class="n">failReason</span><span class="o">;</span>
+
+     <span class="kd">public</span> <span class="nf">UserLogin</span><span class="o">(){</span>
+
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="nf">UserLogin</span><span class="o">(</span><span class="nc">String</span> <span class="n">userId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">loginAttempts</span><span class="o">,</span> <span class="nc">LocalDateTime</span> <span class="n">lockedTime</span><span class="o">,</span> <span class="nc">Boolean</span> <span class="n">isLocked</span><span class="o">,</span> <span class="nc">String</span> <span class="n">failReason</span><span class="o">){</span>
+
+         <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">userId</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">loginAttempts</span> <span class="o">=</span> <span class="n">loginAttempts</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">lockedTime</span> <span class="o">=</span> <span class="n">lockedTime</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">isLocked</span> <span class="o">=</span> <span class="n">isLocked</span><span class="o">;</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">failReason</span> <span class="o">=</span> <span class="n">failReason</span><span class="o">;</span>
+
+     <span class="o">}</span>
+
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li>@Id 어노테이션 붙은 변수의 이름이 Id가 아니면 @Id가없다고 에러가 난다.</li>
+      <li>@Indexed 어노테이션을 붙이지 않으면 검색할 때 찾지 못한다.</li>
+      <li>@RedisHash는 Redis Hash에 저장할때 구분하기 위한 마크 같은 것이다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Repository 생성한다.  CrudRepository는 Redis 전용 Repositorys는 아니다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Repository</span>
+ <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserLoginRepository</span>  <span class="kd">extends</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="nc">UserLogin</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="o">{</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Redis DB에 데이터가 잘 들어오는지 확인 하기 위해서는 cmd 창에서 아래 명령어를 친다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&gt;</span> <span class="n">telnet</span> <span class="n">localhost</span> <span class="mi">6379</span>
+ <span class="o">&gt;</span> <span class="n">monitor</span> 
+
+</code></pre></div>    </div>
+
+    <p>그러면 데이터가 생성되거나 검색될 때마다 로그를 확인할 수 있다.</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0728/img1.png" /></p>
+  </li>
+</ol>
+:ET

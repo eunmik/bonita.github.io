@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] String vs StringBuffer vs StringBuilder"
 date: 2021-07-26
-excerpt: "String과 StringBuffer와 StringBuilder의 차이"
+categories: [Language, Java]
 tags: [Java, String, StringBuilder, StringBuffer]
 comments: true
 ---

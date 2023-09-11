@@ -1,0 +1,209 @@
+I"�C<h2 id="1-위임-필터-및-필터-빈-초기화---delegatingproxychain-filterchainproxy">1. 위임 필터 및 필터 빈 초기화 - DelegatingProxyChain, FilterChainProxy</h2>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img1.JPG" /></p>
+
+<ul>
+  <li>Servlet Filter는 서블릿 스펙에 정의가 되어있는 기술 인데 스펙의 2.3 버전부터 도입이 되었다.</li>
+  <li>Servlet Filter의 역할은 어떤 요청이 있을 때 그 요청이 서블릿에 가기 전에 이 Filter에서 어떤 작업을 처리 하고 다시 요청을 전달 한다. 그리고 Servlet 자원에서 어떤 처리가 끝나게 되면 최종적으로 응답하기 전에 다시 Filter가 받아서 어떤 작업을 처리하고 나서 Filter가 클라이언트에 응답을 하게 된다.</li>
+  <li>요청에 대한 최종적인 접근 전과 후에 이 Filter가 어떤 처리를 할 수 있도록 우리가 Filter를 사용할 수 있다.</li>
+  <li>Servlet Filter는 서블릿 컨테이너에서 생성이 되고 실행이 된다. 그렇기 때문에 이 Filter는 Spring에서 만든 Bean을 Injection해서 사용하거나 Spring에서 사용하는 기술을 이 Servlet Filter에서는 사용할 수 없다.</li>
+  <li>
+    <p>실행되는 위치가 Filter는 Servlet Container고 Spring Bean은 Spring Container이기 때문이다.</p>
+  </li>
+  <li>Spring Security는 사용자가 요청한 모든 요청에 대해서 Filter 기반으로 처리하고 있다.</li>
+  <li>Filter에서도 Spring Bean을 사용하고자 하는 요구사항이 생겼을 때 DelegatingFilterProxy는 Servlet Filter이고, 요청을 받아서 그 요청을 Spring에서 관리하는 Filter Bean에서 위임하는 역할을 한다. 이 클래스는 Servlet Filter이기 때문에 가장 먼저 요청을 받고 Spring 에게 전달한다.</li>
+</ul>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img2.JPG" /></p>
+
+<p>0번 Filter가 처리 되고 Filter Chain Proxy가 호출되고 1번 Filter가 호출되고 FilterChainProxy가 호출되고.. 반복</p>
+
+<p>FilterChainProxy는 실질적으로 보안처리를 하는 시작점이고 DelegatingFilterProxy으로 부터 위임을 받고 보안 처리를 한다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img3.JPG" /></p>
+
+<ol>
+  <li>사용자가 처음 요청하게 되면 Container에서 가장먼저 요청을 받게 된다.</li>
+  <li>요청에 의해서 각각의 Filter들이 처리가 되고 그 중에서 DelegatingFilterProxy가 요청을 받게 되면 요청 객체를 springSecurityFilterChain에 delegate request를 위임하게 된다.</li>
+  <li>실제로는 DelegatingFilterProxy가 등록 될 때 springSecurityFilterChain이름으로 등록한다.</li>
+  <li>springSecurityFilterChain의 이름을 가진 Bean이 바로 FilterChainProxy 이다.</li>
+  <li>스프링에서는 FilterChainProxy를 Bean으로 등록할 때 springSecurityFilterChain이라는 이름으로 등록한다.</li>
+  <li>그러면 DelegatingFilterProxy가 FilterChainProxy를 (동일한 이름으로) 찾게 되는 거고 이 필터 bean에서 delegate request을 하게 된다.</li>
+  <li>FilterChainProxy는 자기가 관리하는 각각의 Filter들로 보안처리를 한다. 그리고 보안처리가 다 되고 나면 최종 자원(DispatchertServlet)에 요청을 전달한다.</li>
+</ol>
+
+<h2 id="2-필터-초기화와-다중-보안-설정">2. 필터 초기화와 다중 보안 설정</h2>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img4.JPG" /></p>
+
+<ul>
+  <li>Sprint Security가 초기화 시
+    <ul>
+      <li>설정에서 생성된 Filter가 이 객체안에 변수로 담기고 RequestMatcher 변수에 정보가 담긴 SecurityFilterChain 클래스가 생성이 된다.</li>
+      <li>각각이 생성된 객체를 FilterChainProxy가 SecurityFilterChains라는 리스트 변수에 저장한다.</li>
+      <li>결론적으로 FilterChainProxy는 SecurityFilterChains 변수에 각각의 SecurityFilterChain 객체를 가지고 있다.</li>
+    </ul>
+  </li>
+  <li>사용자가 /admin으로 요청하게 되면 FilterChianProxy가 요청을 받아서 각각의 객체가 가지고 있는 RequestMatcher와 매칭이 되는지 확인을 하고 해당 Filter를 가지고 와서 인증/인가처리를 한다.</li>
+</ul>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img5.JPG" /></p>
+
+<ol>
+  <li>사용자가 /admin 자원에 접근을 요청하고 있다.</li>
+  <li>FilterChainProxy가 각각의 Filter를 보관하고 있다.</li>
+  <li>필터를 선택할 때 요청 URL과 matches(매칭이 true가 되는지)를 한다.</li>
+  <li>객체에 포함된 RequestMatcher의 정보와 요청 정보가 매치되는 필터를 가지고 와서 처리한다.</li>
+</ol>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img6.JPG" /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span> <span class="c1">//웹보안 활성화를 위한 어노테이션</span>
+<span class="nd">@Order</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
+		<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span>  <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">antMatcher</span><span class="o">(</span><span class="s">"/admin/**"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">httpBasic</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="nd">@Order</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="nd">@Configuration</span>
+<span class="kd">class</span> <span class="nc">SecurityConfig2</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span><span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+        <span class="n">http</span>
+                    <span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">permitAll</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">formLogin</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="3-인증-개념-이해---authentication">3. 인증 개념 이해 - Authentication</h2>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img7.JPG" /></p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img8.JPG" /></p>
+
+<ol>
+  <li>사용자가 username+password로 인증을 하고 입력한 정보를 전달한다.</li>
+  <li>UsernamePasswordAuthenticationFilter가 정보를 받아서 username과 password를 추출한 다음</li>
+  <li>Authentication이라는 객체를 하나 생성한다.</li>
+  <li>AuthenticationManager가 인증객체를 가지고 인증처리를 한다.</li>
+  <li>인증에 성공하게 되면 인증 전에 만든 Authentication과 동일한 Type의 Authentication 객체를 만든다.</li>
+  <li>Principal에는 최종적으로 인증에 성공한 User객체를 담는다.</li>
+  <li>SecurityContextHodler안에 SecurityContext안에 Authentication 객체를 저장하고 전역적으로 사용할 수 있다.</li>
+</ol>
+
+<h2 id="4-인증-저장소---securitycontextholder-securitycontext">4. 인증 저장소 - SecurityContextHolder, SecurityContext</h2>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img9.JPG" /></p>
+
+<p>ThreadLocal이란? Thread는 Thread마다 고유하게 할당된 저장소가 있는데 그게 ThreaLocal이다. Thread간에 공유가 되지 않고 각 Thread에게만 할당된 저장소이다.</p>
+
+<p>SecurityContext의 가장 주된 역할은 Authentication객체를 저장하는 저장소이다.</p>
+
+<p>Authentication authentication = SecurityContextHolder.getContext().getAuthentication() 구문은 어떤 메소드에서도 다 참조가 가능하도록 Spring Security가 제공하고 있다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img10.JPG" /></p>
+
+<ol>
+  <li>사용자가 로그인을 하면 Server에서 요청을 받는다.</li>
+  <li>Server에서 Thread를 생성한다. 이 Thread는 ThreadLocal이 할당된다.</li>
+  <li>이 Thread가 인증 처리를 하면 Authentication 객체가 생성된다.</li>
+  <li>인증이 실패하게 되면 SecurityContextHolder.clearContext()로 SecurityContext를 null로 초기화 한다.</li>
+  <li>인증에 성공하게 되면 최종적으로 인증에 성공한 인증객체를 담는다.
+    <ul>
+      <li>SecurityContexHolder가 ThreadLocal 의 객체를 가지고 있고 ThreadLocal이 SecurityContext를 담고 있는 것이다.</li>
+    </ul>
+  </li>
+  <li>최종적으로는 SecurityContextHolder가 HttpSession에 SPRING_SECURITY_CONTEXT라고 저장이 된다.</li>
+</ol>
+
+<p>TestController.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span> <span class="o">{</span>
+
+    <span class="nd">@GetMapping</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">index</span><span class="o">(</span><span class="nc">HttpSession</span> <span class="n">session</span><span class="o">){</span>
+
+        <span class="nc">Authentication</span> <span class="n">authentication</span> <span class="o">=</span> <span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getAuthentication</span><span class="o">();</span>
+        <span class="nc">SecurityContext</span> <span class="n">context</span> <span class="o">=</span> <span class="o">(</span><span class="nc">SecurityContext</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="nc">HttpSessionSecurityContextRepository</span><span class="o">.</span><span class="na">SPRING_SECURITY_CONTEXT_KEY</span><span class="o">);</span>
+        <span class="nc">Authentication</span> <span class="n">authentication1</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getAuthentication</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">((</span><span class="n">authentication</span> <span class="o">==</span> <span class="n">authentication1</span><span class="o">)</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="o">);</span> <span class="c1">//true이다. </span>
+
+        <span class="k">return</span> <span class="s">"home"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/thread"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">thread</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="nc">Authentication</span> <span class="n">authentication</span> <span class="o">=</span> <span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getAuthentication</span><span class="o">();</span> <span class="c1">//authentication = null 이다.</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+        <span class="o">).</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">return</span> <span class="s">"thread"</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>securityconfig.java MODE를 변경할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">setStrategyName</span><span class="o">(</span><span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">MODE_INHERITABLETHREADLOCAL</span><span class="o">)</span>
+<span class="o">;</span>
+</code></pre></div></div>
+
+<h2 id="5-인증-저장소-필터---securitycontextpersistencefilter">5. 인증 저장소 필터 - SecurityContextPersistenceFilter</h2>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img11.JPG" /></p>
+
+<ul>
+  <li>SecurityContextPersistenceFilter는 익명사용자든 인증 시든 인증 후든 SecurityContext객체를 SecurityContextHolder에 저장하는 역할을 한다.</li>
+  <li>그런데 익명사용자나 인증 시에는 새로운 SecurityContext객체를 생성하여 저장하고 인증 이후에는 Session에서 SecurityContext 객체를 꺼내서 저장한다.</li>
+  <li>이 Filter는 FilterChainProxy에서 두번째에 위치하고 있다. SecurityContextHolder에 일단 저장해 놓고 그다음 필터들이 Holder에서 SecurityContext를 꺼내어서 참조할 수 있도록 두번째 위치에서 작업을 처리하고 있다.</li>
+</ul>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img12.JPG" /></p>
+
+<ol>
+  <li>SecurityContextPersistenceFilter는 사용자가 인증을 받았던 안받았던 상관없이 매 요청마다 그 요청을 처리한다.</li>
+  <li>내부적으로 HttpSecurityContextRepository가 있는데 이 클래스가 실제로 SecurityContext를 생성하고 조회하는 역할을 한다.
+    <ul>
+      <li>인증 전이면
+        <ul>
+          <li>2-1. 새로운 SecurityContext를 생성한다. Session에서 SecurityContext를 있는지 여부를 확인하는데 인증 전에는 session에는 SecurityContext가 없다. 인증객체는 null이다.</li>
+          <li>2-2. 인증을 시도하는 시점에 AuthFilter가 인증을 처리 한다.</li>
+          <li>2-3. 인증이 성공되면 AuthFilter가 SecurityContextHolder안에서 SecurityContext객체 안에 인증에 성공한 결과를 저정한 Authentication객체를 저장한다.</li>
+          <li>2-4. 최종적으로 Client에 응답하는 시점에 SecurityContextPersistenceFilter가 SecurityContext를 Session에 저장한다.</li>
+          <li>2-5. SecurityContextHolder에서 SecurityContext를 제거 시킨다.</li>
+          <li>2-6. 최종적으로 Client에게 응답한다.</li>
+        </ul>
+      </li>
+      <li>인증 후이면
+        <ul>
+          <li>2-1. Session에서 SecurityContext 객체가 있는지 확인한다. 있다.</li>
+          <li>2-2. Session에 있는 SecurityContext를 꺼내서 SecurityContextHolder에 저장한다.</li>
+          <li>2-3. 다음 필터로 이동하게 된다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img13.JPG" /></p>
+
+<ul>
+  <li>인증을 받기 전에는 createSecurityContext (새로운 SecurityContext를 생성한다)</li>
+  <li>최초로는 인증을 받기 전이기 때문에 Authentication이 null인 상태이다.</li>
+</ul>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img14.JPG" /></p>
+:ET

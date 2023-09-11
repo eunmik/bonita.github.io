@@ -1,0 +1,44 @@
+I"Ü<ol>
+  <li>
+    <p>Make launch.json right under root directory</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled.png" /></p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">{</span>
+     <span class="s">"version"</span><span class="o">:</span> <span class="s">"0.2.0"</span><span class="o">,</span>
+     <span class="s">"configurations"</span><span class="o">:</span> <span class="o">[</span>
+         <span class="o">{</span>
+             <span class="s">"type"</span><span class="o">:</span> <span class="s">"chrome"</span><span class="o">,</span>
+             <span class="s">"request"</span><span class="o">:</span> <span class="s">"launch"</span><span class="o">,</span>
+             <span class="s">"name"</span><span class="o">:</span> <span class="s">"Launch Chrome against localhost"</span><span class="o">,</span>
+             <span class="s">"url"</span><span class="o">:</span> <span class="s">"http://localhost:3000"</span><span class="o">,</span>
+             <span class="s">"webRoot"</span><span class="o">:</span> <span class="s">"${workspaceFolder}/src"</span><span class="o">,</span>
+             <span class="s">"remoteRoot"</span><span class="o">:</span> <span class="s">"D:\\personal\\IdeaProjects\\wherehaveubeen\\react-social\\.vscode\\launch.json"</span><span class="o">,</span>
+    
+         <span class="o">}</span>
+     <span class="o">]</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>start project on terminal</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">npm</span> <span class="n">start</span>
+</code></pre></div>    </div>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%201.png" /></p>
+  </li>
+  <li>
+    <p>makes some breakpoints</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%202.png" /></p>
+  </li>
+  <li>
+    <p>On Run and Debug tab, launch configuration.</p>
+
+    <p>Select Play Button.</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%203.png" /></p>
+  </li>
+</ol>
+:ET

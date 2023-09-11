@@ -2,7 +2,7 @@
 layout: post
 title: "How to Debug React on VS Code"
 date: 2022-04-01
-excerpt: "How to Debug React on VS Code"
+categories: [etc]
 tags: ["Debugging", "React", "VSCode"]
 comments: true
 ---

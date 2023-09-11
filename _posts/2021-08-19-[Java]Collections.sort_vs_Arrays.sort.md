@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] Collections.sort vs Arrays.sort "
 date: 2021-08-20
-excerpt: "Java에서 정렬하는 방법"
+categories: [Language, Java]
 tags: [Java, sort]
 comments: true
 ---

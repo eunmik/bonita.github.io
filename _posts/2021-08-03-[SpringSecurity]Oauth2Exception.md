@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring Security] Oauth2 Exception 처리"
 date: 2021-08-03
-excerpt: "Spring Security에서 발생하는 Oauth2 Exception 처리"
+categories: [Language, Spring]
 tags: [Java, Oauth2, Spring Security, Exception]
 comments: true
 ---

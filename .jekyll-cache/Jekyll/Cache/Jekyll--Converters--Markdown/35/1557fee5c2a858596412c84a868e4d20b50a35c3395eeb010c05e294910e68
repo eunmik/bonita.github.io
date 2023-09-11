@@ -1,0 +1,95 @@
+I"�;<h2 id="refresh-token-이란">Refresh Token 이란?</h2>
+
+<p>보안의 이유로, access token은 짧은 시간동안만 유효하다.  유효시간이 끝나면, 사용자 어플리케이션은 refresh token으로 access token을 갱신(refresh) 할 수 있다.</p>
+
+<p>refresh token은 사용자 어플리케이션이 다시 로그인 할 필요 없이 새로운 access token을 발급 하도록 해주는 자격증명 artifact 이다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0812/img1.png" /></p>
+
+<p>사용자는 refresh token이 유효한 이상 새로운 access token을 받을 수 있다.</p>
+
+<h2 id="refresh-token을-사용할-때">Refresh Token을 사용할 때</h2>
+
+<p>필수 파라미터 :</p>
+
+<p>grant_type : refresh_token으로 설정 되어야 한다.</p>
+
+<p>refresh_token : 전에 사용자한테 발급된 refresh token이다.</p>
+
+<p>처음에 token을 발급 받을 때</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">curl</span><span class="w"> </span><span class="err">--location</span><span class="w"> </span><span class="err">--request</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="err">'http://localhost:</span><span class="mi">8083</span><span class="err">/oauth/token'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--header</span><span class="w"> </span><span class="err">'Authorization:</span><span class="w"> </span><span class="err">Basic</span><span class="w"> </span><span class="err">c</span><span class="mi">3</span><span class="err">YtYXJnb</span><span class="mi">3</span><span class="err">MtdXNlcjo</span><span class="mi">2</span><span class="err">ZWRhNzc</span><span class="mi">2</span><span class="err">MGEwNjA</span><span class="mi">2</span><span class="err">YTZhNThhNDZmYjk</span><span class="mi">5</span><span class="err">ZDJkZWQwNg=='</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--header</span><span class="w"> </span><span class="err">'Content-Type:</span><span class="w"> </span><span class="err">application/x-www-form-urlencoded'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--header</span><span class="w"> </span><span class="err">'Cookie:</span><span class="w"> </span><span class="err">JSESSIONID=</span><span class="mi">7</span><span class="err">CDE</span><span class="mi">43176</span><span class="err">D</span><span class="mi">086328E067</span><span class="err">D</span><span class="mi">5461762</span><span class="err">EB</span><span class="mi">98</span><span class="err">'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'grant_type=password'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'scope=read'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'client_id=sv-argos-user'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'auth_type=local'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'userid=em.kong</span><span class="mi">2210</span><span class="err">@gmail.com'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'username=em.kong</span><span class="mi">2210</span><span class="err">@gmail.com'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'password=</span><span class="mi">73221</span><span class="err">f</span><span class="mi">4</span><span class="err">eb</span><span class="mi">4</span><span class="err">f</span><span class="mi">718</span><span class="err">f</span><span class="mi">0</span><span class="err">dbd</span><span class="mi">9e027</span><span class="err">f</span><span class="mi">3</span><span class="err">f</span><span class="mi">069</span><span class="err">b</span><span class="mi">928</span><span class="err">cef</span><span class="mi">38</span><span class="err">fd</span><span class="mi">4</span><span class="err">ca</span><span class="mi">7</span><span class="err">a</span><span class="mi">59</span><span class="err">b</span><span class="mi">0</span><span class="err">c</span><span class="mi">118328</span><span class="err">f</span><span class="mi">26</span><span class="err">ad</span><span class="mi">2</span><span class="err">e'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'seed=db</span><span class="mi">2</span><span class="err">cd</span><span class="mi">4</span><span class="err">f</span><span class="mi">4</span><span class="err">d</span><span class="mi">1814</span><span class="err">ebcd</span><span class="mi">2</span><span class="err">c</span><span class="mi">99232</span><span class="err">d</span><span class="mi">9</span><span class="err">eabcb</span><span class="mi">5</span><span class="err">a</span><span class="mi">4</span><span class="err">b</span><span class="mi">974650</span><span class="err">d</span><span class="mi">0</span><span class="err">ec</span><span class="mi">96</span><span class="err">b</span><span class="mi">2</span><span class="err">b</span><span class="mi">462</span><span class="err">a</span><span class="mi">229</span><span class="err">bf</span><span class="mi">7</span><span class="err">d</span><span class="mi">287</span><span class="err">'</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"985ad63e-cbc8-4b52-993e-48406579a286"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fdeaec58-790c-45d8-9ada-6dbd0b037731"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3599</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>refresh token으로 access token 갱신 했을 때</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">curl</span><span class="w"> </span><span class="err">--location</span><span class="w"> </span><span class="err">--request</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="err">'http://localhost:</span><span class="mi">8083</span><span class="err">/oauth/token'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--header</span><span class="w"> </span><span class="err">'Authorization:</span><span class="w"> </span><span class="err">Basic</span><span class="w"> </span><span class="err">c</span><span class="mi">3</span><span class="err">YtYXJnb</span><span class="mi">3</span><span class="err">MtdXNlcjo</span><span class="mi">2</span><span class="err">ZWRhNzc</span><span class="mi">2</span><span class="err">MGEwNjA</span><span class="mi">2</span><span class="err">YTZhNThhNDZmYjk</span><span class="mi">5</span><span class="err">ZDJkZWQwNg=='</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--header</span><span class="w"> </span><span class="err">'Content-Type:</span><span class="w"> </span><span class="err">application/x-www-form-urlencoded'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--header</span><span class="w"> </span><span class="err">'Cookie:</span><span class="w"> </span><span class="err">JSESSIONID=</span><span class="mi">7</span><span class="err">CDE</span><span class="mi">43176</span><span class="err">D</span><span class="mi">086328E067</span><span class="err">D</span><span class="mi">5461762</span><span class="err">EB</span><span class="mi">98</span><span class="err">'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'grant_type=refresh_token'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'client_id=sv-argos-user'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'seed=db</span><span class="mi">2</span><span class="err">cd</span><span class="mi">4</span><span class="err">f</span><span class="mi">4</span><span class="err">d</span><span class="mi">1814</span><span class="err">ebcd</span><span class="mi">2</span><span class="err">c</span><span class="mi">99232</span><span class="err">d</span><span class="mi">9</span><span class="err">eabcb</span><span class="mi">5</span><span class="err">a</span><span class="mi">4</span><span class="err">b</span><span class="mi">974650</span><span class="err">d</span><span class="mi">0</span><span class="err">ec</span><span class="mi">96</span><span class="err">b</span><span class="mi">2</span><span class="err">b</span><span class="mi">462</span><span class="err">a</span><span class="mi">229</span><span class="err">bf</span><span class="mi">7</span><span class="err">d</span><span class="mi">287</span><span class="err">'</span><span class="w"> </span><span class="err">\</span><span class="w">
+</span><span class="err">--data-urlencode</span><span class="w"> </span><span class="err">'refresh_token=fdeaec</span><span class="mi">58-790</span><span class="err">c</span><span class="mi">-45</span><span class="err">d</span><span class="mi">8-9</span><span class="err">ada</span><span class="mi">-6</span><span class="err">dbd</span><span class="mi">0</span><span class="err">b</span><span class="mi">037731</span><span class="err">'</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ca5e0a5e-9961-47fa-ad2a-fc060e93fc2f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fdeaec58-790c-45d8-9ada-6dbd0b037731"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3599</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>access token 갱신할 때 refresh token도 갱신하고 싶다면</p>
+
+<p>Authorization Server Config에 reuseRefreshTokens을 false로 설정해 주면 된다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">@Override</span><span class="w">
+	</span><span class="err">public</span><span class="w"> </span><span class="err">void</span><span class="w"> </span><span class="err">configure(AuthorizationServerEndpointsConfigurer</span><span class="w"> </span><span class="err">endpoints)</span><span class="w"> </span><span class="err">throws</span><span class="w"> </span><span class="err">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+
+		</span><span class="err">endpoints</span><span class="w">
+				</span><span class="err">.allowedTokenEndpointRequestMethods(HttpMethod.GET</span><span class="p">,</span><span class="w"> </span><span class="err">HttpMethod.POST)</span><span class="w">
+				</span><span class="err">.authenticationManager(authenticationManager)</span><span class="w">
+				</span><span class="err">.tokenStore(tokenStore())</span><span class="w">
+				</span><span class="err">.reuseRefreshTokens(</span><span class="kc">false</span><span class="err">)</span><span class="w">
+				</span><span class="err">.userDetailsService(userDetailsService())</span><span class="w">
+				</span><span class="err">//for</span><span class="w"> </span><span class="err">authentication</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">exception</span><span class="w">
+				</span><span class="err">.exceptionTranslator(webResponseExceptionTranslator());</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>refresh token으로 access token을 갱신하고</p>
+
+<p>다시 같은 refresh tokne으로 호출 하면 아래처럼 refresh token이 만료된것을 확인할 수 있다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-08-11T08:07:56.977+0000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Internal Server Error"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid refresh token: 31b42f1f-f1c7-449a-81e2-a530544097f8"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/oauth/token"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+:ET

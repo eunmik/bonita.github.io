@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] Union-Find 합집합 찾기 알고리즘"
 date: 2021-09-14
-excerpt: "합집합 찾기 알고리즘"
+categories: [CS, Algorithm]
 tags: ["Algorithm", "Union-Find", "Java"]
 comments: true
 ---

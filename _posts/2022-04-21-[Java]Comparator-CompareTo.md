@@ -2,7 +2,7 @@
 layout: post
 title: "[JAVA] Comparator and CompareTo"
 date: 2022-04-21
-excerpt: "What is comparator and compareto? How to use them?"
+categories: [Language, Java]
 tags: ["java", "comparator", "compareTo"]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring Boot] Exception 처리"
 date: 2021-07-09
-excerpt: "Spring Boot에서 Exception은 어떻게 처리할까?"
+categories: [Language, Spring]
 tags: [SpringBoot, Exception, ControllerAdvice]
 comments: true
 ---

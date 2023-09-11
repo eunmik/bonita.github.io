@@ -1,0 +1,168 @@
+I"K<p>알고리즘 스터디를 하면서 다른 사람들이 쓴 코드를 접하게 됬는데,
+내가 몰랐던 기능들을 사용하여 아주 간단하게 코드를 작성 한다. 
+너무 멋있어……😎
+그래서 오늘은 정렬 문제를 풀면서 알아낸 Comparator을 알아보자!</p>
+
+<h1 id="java-comparable-comparator">Java Comparable Comparator</h1>
+
+<p>자바에서 배열이나 리스트를 정렬 할 때 java.util.Arrays 클래스의 sort() 메서드로 간편하게 정렬할 수 있다.</p>
+
+<h2 id="배열의-오름차순-정렬">배열의 오름차순 정렬</h2>
+
+<p>Arrays.sort()메서드의 매개값으로 기본 타입 배열이나 String 배열을 지정해주면 자동으로 오름차순 정렬이 된다.</p>
+
+<h3 id="기본-타입-배열-오름차순-정렬">기본 타입 배열 오름차순 정렬</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sort</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">arr</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span><span class="mi">23</span><span class="o">,</span><span class="mi">33</span><span class="o">,</span><span class="mi">15</span><span class="o">,</span><span class="mi">17</span><span class="o">,</span><span class="mi">19</span><span class="o">};</span>
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+        
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"["</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s">"]"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[4][15][17][19][23][33]</p>
+
+<h3 id="string-배열-오름차순-정렬">String 배열 오름차순 정렬</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sort</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">arr</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="s">"apple"</span><span class="o">,</span><span class="s">"orange"</span><span class="o">,</span><span class="s">"banana"</span><span class="o">,</span><span class="s">"pear"</span><span class="o">,</span><span class="s">"peach"</span><span class="o">,</span><span class="s">"melon"</span><span class="o">};</span>
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+        
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">i</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"["</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s">"]"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[apple][banana][melon][orange][peach][pear]</p>
+
+<h2 id="배열의-내림차순-정렬">배열의 내림차순 정렬</h2>
+
+<p>배열을 내림차순으로 정렬할 때는 Collections 클래스의 reverseOrder()함수를 사용하면 된다. 만약 기본 타입 배열을 내림차순으로 정렬하고 싶다면 기본 타입의 배열을 래퍼클래스로 만들어 Comparator를 두번째 인사에 넣어주어야 역순으로 정렬할 수 있다.</p>
+
+<h3 id="기본-타입-배열-내림차순-정렬">기본 타입 배열 내림차순 정렬</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sort</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+        <span class="nc">Integer</span> <span class="n">arr</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span><span class="mi">23</span><span class="o">,</span><span class="mi">33</span><span class="o">,</span><span class="mi">15</span><span class="o">,</span><span class="mi">17</span><span class="o">,</span><span class="mi">19</span><span class="o">};</span>
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="nc">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
+        
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"["</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s">"]"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[33][23][19][17][15][4]</p>
+
+<h3 id="string-배열-내림차순-정렬">String 배열 내림차순 정렬</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sort</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">arr</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="s">"apple"</span><span class="o">,</span><span class="s">"orange"</span><span class="o">,</span><span class="s">"banana"</span><span class="o">,</span><span class="s">"pear"</span><span class="o">,</span><span class="s">"peach"</span><span class="o">,</span><span class="s">"melon"</span><span class="o">};</span>
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="nc">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
+        
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">i</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"["</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s">"]"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[pear][peach][orange][melon][banana][apple]</p>
+
+<h2 id="배열-일부분만-정렬">배열 일부분만 정렬</h2>
+
+<p>Arrays.sort(0 메서드의 매개값으로 배열, 시작 index, 끝을 넣어주면 일부분만 정렬할 수 있다</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">arr</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span><span class="mi">23</span><span class="o">,</span><span class="mi">33</span><span class="o">,</span><span class="mi">15</span><span class="o">,</span><span class="mi">17</span><span class="o">,</span><span class="mi">19</span><span class="o">};</span>
+
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span> <span class="c1">// 0,1,2,3 요소만 정렬</span>
+        
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">:</span> <span class="n">arr</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"["</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s">"]"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[4][15][23][33][17][19]</p>
+
+<h2 id="객체-배열-정렬">객체 배열 정렬</h2>
+
+<p>객체로만 이루어진 배열의 경우에는 객체 클래스가 Comparable 인터페이스의 cpmareTo() 메서드를 구현하고 있어야 정렬이 된다.</p>
+
+<p>Comparable 인터페이스의 compareTo() 메서드를 통해 인자로 넘어온 같은 타입의 다른 객체와 대소 비교가 가능하다.</p>
+
+<p>메서드를 호출하는 객체가 인자로 넘어온 객체보다 작을 경우에는 음수를 리턴하고, 크기가 동일하다면 0, 클 경우에는 양수를 리턴해야 한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Player</span> <span class="kd">implements</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="nc">Player</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">score</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Player</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Getters, Setters 생략</span>
+	  <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">Player</span> <span class="n">o</span><span class="o">){</span>
+			<span class="k">return</span> <span class="n">o</span><span class="o">.</span><span class="na">getScore</span><span class="o">()</span> <span class="o">-</span> <span class="n">getScore</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sort</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Player</span><span class="o">&gt;</span> <span class="n">players</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+			<span class="n">players</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Player</span><span class="o">(</span><span class="s">"Alice"</span><span class="o">,</span> <span class="mi">899</span><span class="o">));</span>
+			<span class="n">players</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Player</span><span class="o">(</span><span class="s">"Bob"</span><span class="o">,</span> <span class="mi">982</span><span class="o">));</span>
+			<span class="n">players</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Player</span><span class="o">(</span><span class="s">"Chloe"</span><span class="o">,</span> <span class="mi">1090</span><span class="o">));</span>
+			<span class="n">players</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Player</span><span class="o">(</span><span class="s">"Dale"</span><span class="o">,</span> <span class="mi">982</span><span class="o">));</span>
+			<span class="n">players</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Player</span><span class="o">(</span><span class="s">"Eric"</span><span class="o">,</span> <span class="mi">1018</span><span class="o">));</span>
+			<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">players</span><span class="o">);</span>
+		<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="comparator-객체-사용">Comparator 객체 사용</h2>
+
+<p>만약 정렬 대상 클래스의 코드를 직접 수정할 수 없는경우에는 어떻게 객체의 정렬 기준을 정의할 수 있을까? 또는 정렬하고자 하는 객체에 이미 존재하고 있는 정렬 기준과 다른 정렬 기준으로 정렬하고 싶을 때는 어떻게 해야 할까?</p>
+
+<p>이 때 필요한 것이 바로 Comparator 인터페이스이다.</p>
+
+<p>Comparator 인터페이스의 구현체를 Arrays.sort()나 Collections.sort()와 같은 정렬 메서드의 추가 인자로 넘기면 정렬 기준을 누락된 클래스의 객체나 기존 정렬 기준을 무시하고 새로운 정렬 기준으로 객체를 정렬 할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">Player</span><span class="o">&gt;</span> <span class="n">comparator</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">Player</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">Player</span> <span class="n">a</span><span class="o">,</span> <span class="nc">Player</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">b</span><span class="o">.</span><span class="na">getScore</span><span class="o">()</span> <span class="o">-</span> <span class="n">a</span><span class="o">.</span><span class="na">getScore</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+
+<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">players</span><span class="o">,</span> <span class="n">comparator</span><span class="o">);</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">players</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="o">.</span><span class="na">getScore</span><span class="o">()</span> <span class="o">-</span> <span class="n">a</span><span class="o">.</span><span class="na">getScore</span><span class="o">());</span>
+</code></pre></div></div>
+:ET

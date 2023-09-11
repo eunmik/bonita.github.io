@@ -1,0 +1,88 @@
+I"E<p>Currently I am working alone on RPA API project. At first I didn’t realize for the need of git strategy for Gitlab (we are using Github) but as time passes, even though I am the only one who pushes to and pulls from main branches, I sometimes have conflicts and get confused.</p>
+
+<p>Even before I started to work here, there was only one person who manages the project. So no strategy was made.</p>
+
+<p><strong>Better late than never!</strong></p>
+
+<p>While I was googling about git strategy, Google showed me the way : GIt FLow</p>
+
+<h1 id="git-branch-model">Git branch model</h1>
+
+<p>reference :</p>
+
+<p><a href="https://nvie.com/posts/a-successful-git-branching-model/#supporting-branches," title="A successful Git branching model">A successful Git branching model</a></p>
+
+<h2 id="the-main-branches">The main branches</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">master</code></li>
+  <li><code class="language-plaintext highlighter-rouge">develop</code></li>
+</ul>
+
+<p>When the source code in the <code class="language-plaintext highlighter-rouge">develop</code> branch reachs a stable point and is ready to be released, all of the changes should be mereged back into <code class="language-plaintext highlighter-rouge">master</code> somehow and then tagged with a release number.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled.png" /></p>
+
+<h2 id="supporting-branches">Supporting branches</h2>
+
+<ul>
+  <li>Features branches</li>
+  <li>Release branches</li>
+  <li>Hotfix branches</li>
+</ul>
+
+<h3 id="feature-branches">Feature branches</h3>
+
+<p>May branch off from : develop</p>
+
+<p>Must merge back into : develop</p>
+
+<p>Branch naming convention: anything except <code class="language-plaintext highlighter-rouge">master</code>, <code class="language-plaintext highlighter-rouge">develop</code>, <code class="language-plaintext highlighter-rouge">release-*</code>, or <code class="language-plaintext highlighter-rouge">hotfix-*</code></p>
+
+<p>Feature branches are used to develop new features for the upcoming or a distant future release. The essence of a feature branch is that it exists as long as the feature is in development, but will eventually be merged back into <code class="language-plaintext highlighter-rouge">develop</code> or discarded.</p>
+
+<p>Feature branches typically exist in developer repos only, not in <code class="language-plaintext highlighter-rouge">origin</code>.</p>
+
+<p><strong>Incorporating a finished feature on develop</strong></p>
+
+<p>Finished features may be merged into the develop branch to definitely add them to the upcoming release :</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span> <span class="nx">git</span> <span class="nx">checkout</span> <span class="nx">develop</span>
+<span class="nx">$</span> <span class="nx">git</span> <span class="nx">merge</span> <span class="o">--</span><span class="nx">no</span><span class="o">-</span><span class="nx">ff</span> <span class="nx">myfeature</span>
+<span class="nx">$</span> <span class="nx">git</span> <span class="nx">branch</span> <span class="o">-</span><span class="nx">d</span> <span class="nx">myfeature</span>
+<span class="nx">Delete</span> <span class="nx">branch</span> <span class="nx">myfeature</span>
+<span class="nx">$</span> <span class="nx">git</span> <span class="nx">push</span> <span class="nx">origin</span> <span class="nx">develop</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">--no-ff</code> flag cuases the merge to always create a new commit object, event if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature. Compare:</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%201.png" /></p>
+
+<h3 id="release-branches">Release branches</h3>
+
+<p>May branch off from : <code class="language-plaintext highlighter-rouge">develop</code></p>
+
+<p>Must merge back into: <code class="language-plaintext highlighter-rouge">develop</code> and <code class="language-plaintext highlighter-rouge">master</code></p>
+
+<p>Branch naming conveiton: <code class="language-plaintext highlighter-rouge">release-*</code></p>
+
+<p>Release branches support preparation of a new production release. The key moment to branch off a new release branch from develop is when develop (almost) reflects the desired state of the new release. It is exactly at the start of a release branch that the upcoming release gets assigned a version number —not any earlier.</p>
+
+<h3 id="hotfix-branches">Hotfix branches</h3>
+
+<p>May branch off from: <code class="language-plaintext highlighter-rouge">master</code></p>
+
+<p>Must merge back into: <code class="language-plaintext highlighter-rouge">develop</code> and <code class="language-plaintext highlighter-rouge">master</code></p>
+
+<p>Branch naming convention: <code class="language-plaintext highlighter-rouge">hotfix-*</code></p>
+
+<p>Hotfix branches are very much like release branches in that they are also meant to prepare for a new production release, albeit unplanned. When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%202.png" /></p>
+
+<p>The one exception to the rule here is that, <strong>when a release branch currently exists, the hotfix changes need to be merged into that release branch, instead of <code class="language-plaintext highlighter-rouge">develop</code>.</strong></p>
+
+<p>Comprehensive flowchart:</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%203.png" /></p>
+:ET

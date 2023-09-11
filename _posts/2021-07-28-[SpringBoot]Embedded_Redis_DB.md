@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring Boot] Embedded Redis DB 설정"
 date: 2021-07-28
-excerpt: "Embedded Redis DB 사용해보기"
+categories: [Language, Spring]
 tags: [Java, Redis, Spring Boot]
 comments: true
 ---

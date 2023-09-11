@@ -2,7 +2,7 @@
 layout: post
 title: "[Github] Github bash 터미널 계정 바꾸는 방법"
 date: 2021-03-25
-excerpt: "Github bash에서 사용하는 터미널 계정을 바꿔보자"
+categories: [Tool, Git]
 tags: [Github, Git]
 comments: true
 ---

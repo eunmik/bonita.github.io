@@ -1,0 +1,135 @@
+I"�<h1 id="what-is-java-comparator">What is Java Comparator?</h1>
+
+<p>Java Comparator is a interface for sorting Java objects. Comparators can be passed to a sort method (such as Collections.sort or Arrays.sort) to allow precise control over the sort order.</p>
+
+<h2 id="compare-method">Compare Method</h2>
+
+<p>Method <code class="language-plaintext highlighter-rouge">compare</code> compares its two arguments for order and returns a negative integer, zero, or a positive integer as the first argument is less than, equil to, or greater than the second.</p>
+
+<h3 id="parameters-">Parameters :</h3>
+
+<p>o1 - the first object to be compared.</p>
+
+<p>o2 - the second object to be compared.</p>
+
+<h3 id="returns-">Returns :</h3>
+
+<p>a negative integer : the first argument is less than the second.</p>
+
+<p>zero : the first argument is equal to the second</p>
+
+<p>a positive integer : the first argument is greater than the second.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Returns</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>negative integer</td>
+      <td>the first argument should be on the left</td>
+    </tr>
+    <tr>
+      <td>zero</td>
+      <td>the first argument and the second argument are the same</td>
+    </tr>
+    <tr>
+      <td>positive integer</td>
+      <td>the first argument should be on the right</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="example-caebcd">Example [c,a,eb,cd]</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">String</span> <span class="n">o1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">o2</span><span class="o">.</span><span class="na">length</span><span class="o">()){</span>
+                    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span> <span class="c1">//sort ascending </span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="k">return</span>  <span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>o1</th>
+      <th>o2</th>
+      <th>return</th>
+      <th>meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>a</td>
+      <td>psotivie</td>
+      <td>c should be on the right</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>c</td>
+      <td>nagative</td>
+      <td>a should be on the left</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td>eb</td>
+      <td>negative</td>
+      <td>c should be on the left</td>
+    </tr>
+    <tr>
+      <td>eb</td>
+      <td>cd</td>
+      <td>positive</td>
+      <td>eb should be on the right</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Result</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">c</span><span class="o">,</span> <span class="n">cd</span><span class="o">,</span> <span class="n">eb</span><span class="o">]</span>
+</code></pre></div></div>
+
+<h1 id="what-is-java-string-compareto">What is Java String compareTo()?</h1>
+
+<p>The Java String compareTo() method is used for comparing two strings lesicographically. Each character of both the strings is converted inta a Unicode value for comparison. If both the strings are equal then this method returns 0 else it returns positive or negative value.</p>
+
+<h3 id="example">Example</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+	<span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"Cow"</span><span class="o">;</span> 
+	<span class="c1">//This is an empty string</span>
+	<span class="nc">String</span> <span class="n">str2</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+	<span class="nc">String</span> <span class="n">str3</span> <span class="o">=</span> <span class="s">"Goat"</span><span class="o">;</span>
+		
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">str2</span><span class="o">));</span>
+
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">str3</span><span class="o">));</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Output</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">3</span>
+<span class="o">-</span><span class="mi">4</span>
+</code></pre></div></div>
+
+<p>reference :</p>
+
+<p>[The Java String compareTo(),returns positive or negative value](https://beginnersbook.com/2013/12/java-string-compareto-method-example/#:~:text=The%20Java%20String%20compareTo(),returns%20positive%20or%20negative%20value, “”).</p>
+
+<p>[Comparator.html#compare-T-T-](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#compare-T-T-, “”)</p>
+:ET

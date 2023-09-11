@@ -1,0 +1,93 @@
+I"i <h1 id="oauth2-resource-server-란">OAUTH2 Resource Server 란?</h1>
+
+<p>Spring Security에서 JWT Token 설정을 하고 있다. 기본기가 많이 부족해서 설정을 하면서 여기저기 블로그/컬럼/공홈을 참고하며 하고 있는데 (정확히 내가 뭐하고 있는지 이해가 100%가 되지 않아서 슬푸다😢) 그게 문제인것 같다. Authorization Server만 적용 했을 때는 JWT Token에 아무 문제가 없었는데 Resource Server를 적용하는데 자꾸 header에 있는 JWT Token을 invalid access token이라고 return 한다. (Whyrano….!!!)</p>
+
+<p>OAUTH2, Spring Security도 이해를 돕기위해 나중에 꼭 다시 정리해 올려봐야겠다. 
+오늘은 우선 Resource Server가 뭐길래 날 이렇게 힘들게 하는지 알아보기로 했다!</p>
+
+<h2 id="resource-server-란">Resource Server 란?</h2>
+
+<p>Resource Server는 OAUTH 2.0에서 사용하는 용어이다. Resource Server는 어플리케이션이 access token을 얻고 난 후에 인증된 요청을 처리한다. 즉, 사용자에게 리소스 사용을 허락하기 전에 토큰을 증명하는 것이다. 큰 규모 같은 경우에는 여러개의 resource server를 가지고 있을 수도 있다. 예를 들어, 구글 서비스 같은 경우에는 Google Cloud Platform, Google Maps, Google Drive, Youtube, 등 20개정도의 resource server를 가지고 있다. 각 각의 resource server들은 나눠져 있지만 모드 같은 authorization server를 사용하고 있다.</p>
+
+<p>작은 규모인 경우 보편적으로 오직 하나의 resource server를 가지고 있고 종종 authorization server와 같은 base에서 설치되곤 한다.</p>
+
+<p>Resource server는 access token가 있는 HTTP Authorization header를 가지고 있는 어플리케이션으로부터 요청을 받게 될 것이다. Resource server는 요청을 진행 시킬지 말지 결정을 위해 access  token을 증명해야 할 필요가 있다. token은 Autorization server의해 발행되었다.</p>
+
+<p>토큰의 증명은 아래 나열된 몇가지로 결정이 된다.</p>
+
+<ul>
+  <li>설정된 autorrizaiton server에서 발행된 토큰인가?</li>
+  <li>토큰이 아직 유효한가?</li>
+  <li>사용하고자 하는 resource server인가?</li>
+  <li>요청된 리소스에 접근할 수 있는 인증을 토큰이 가지고 있는가?</li>
+</ul>
+
+<p>Resource Server는 access token과 연관된 scopes을 알 필요가 있다. 서버는 만약 access token에 있는 scope list에 요청을 수행하기위해 필요한 scope이 포함되어 있지 않는다면 요청을 거부해야 한다.</p>
+
+<p>만약 access token이 요청된 resource의 접근 헌용이 되지 않거나 요청에 access token이 존재하지 않는다면 서버는 401 Response를 리턴해야하고 WWW-Authentiate 헤더를 response에 포함 시켜야 한다.</p>
+
+<p><img src="../assets/img/210317-headers-401.png" /></p>
+
+<p>WWW-Authenticate 헤더는 최소 필요한 bearer token을 나타내는 Bearer 글자를 포함하고 있고 추가적인 정보를 가지고 있일 수도 있다.</p>
+
+<p><img src="../assets/img/210317-diagram.png" /></p>
+
+<p>위 다이어그램에서 step 8을 보면 클라이언트 어플리케이션이 resource에 접근하기 위해 resource ㄴserver API를 호출할때, 우선 authorization server에 가서 요청에 있는 Authorization 헤더를 증명한다 그리고 나서 클라이언트에게 respone 한다.</p>
+
+<p>참고한 자료 출처 : <a href="https://www.oauth.com/oauth2-servers/the-resource-server/">https://www.oauth.com/oauth2-servers/the-resource-server/</a>, <a href="https://www.baeldung.com/spring-security-oauth-resource-server">https://www.baeldung.com/spring-security-oauth-resource-server</a></p>
+
+<h2 id="resource-server-config">Resource Server Config</h2>
+
+<p>@EnableResourceServer를 선언하여 Resource Server임을 알려주어야 한다. 
+이 Config에서는 각 리소스에 대한 접근 권한을 설정해 줄 수 있다. 
+auto configuration(jar dependency를 기준으로 Spring 어플리케이션을 자동으로 설정을 해주는 것) 을 사용과 jwt를 사용하기위해 library가 필요하다. 
+(2.4.0 RELEASE 부터는 @EnableAutorizationServer, @EnableReosurceServer 어노테이션이 Deprecated가 되어있는데 어떻게 Migration 해야되는지 잘 모르겠다 😥)</p>
+
+<h3 id="pomxml">pom.xml</h3>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.security.oauth<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-security-oauth2<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>2.3.8.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.security<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-security-jwt<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;version&gt;</span>1.1.1.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre></figure>
+
+<p>최소한의 resource server configuration은</p>
+
+<ul>
+  <li>dependency가 포함된다</li>
+  <li>@EnableResourceServer 어노테이션이 포함된다.</li>
+  <li>beare 토큰을 인증하기위한 strategy가 명시된다.</li>
+</ul>
+
+<p>아래는 Resource Server Config의 예제이다.</p>
+
+<h3 id="reseourceserverconfigjava">ReseourceServerConfig.java</h3>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@Configuration</span>
+<span class="nd">@EnableResourceServer</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ResourceServerConfig</span> <span class="kd">extends</span> <span class="nc">ResourceServerConfigurerAdapter</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">ResourceServerSecurityConfigurer</span> <span class="n">resources</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">resources</span><span class="o">.</span><span class="na">tokenStore</span><span class="o">(</span><span class="n">tokenStore</span><span class="o">()).</span><span class="na">resourceId</span><span class="o">(</span><span class="s">"SPRING_BOOT"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">headers</span><span class="o">().</span><span class="na">frameOptions</span><span class="o">().</span><span class="na">disable</span><span class="o">().</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">()</span>
+        <span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>참고 한 자료 출처 : <a href="https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html5/#boot-features-security-oauth2-resource-server">https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/html5/#boot-features-security-oauth2-resource-server</a></p>
+:ET

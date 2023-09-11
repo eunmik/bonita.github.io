@@ -2,7 +2,8 @@
 layout: post
 title: "[Algorithm] DFS, BFS란? "
 date: 2021-04-19
-excerpt: "DFS, BFS란? "
+categories: [CS, Algorithm]
+
 tags: [Algorithm, DFS, BFS]
 comments: true
 ---

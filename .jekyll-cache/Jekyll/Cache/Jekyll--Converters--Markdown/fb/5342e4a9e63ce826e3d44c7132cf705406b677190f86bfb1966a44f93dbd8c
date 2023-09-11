@@ -1,0 +1,93 @@
+I"�<h2 id="integer-vs-int의-차이">Integer vs int의 차이</h2>
+
+<p>API를 만들면서 Controller에서 client에서 파라미터를 받았을 때 필수적인 파라미터가 아님에도 불구 하고 null이 들어오면 에러가 발생했다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Optional int parameter 'size' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type
+</code></pre></div></div>
+<p>파라미터 type을 int대신 Integer로 변경되니깐 해결이 되었다. 왜그런지 한번 알아보자!</p>
+
+<h3 id="primitive-자료형---wrapper-클래스-관계">Primitive 자료형 - Wrapper 클래스 관계</h3>
+<p>int :</p>
+<ul>
+  <li>primitive 자료형 (long, float, double …)</li>
+  <li>산술 연산이 가능하다.</li>
+  <li>null로 초기화 할 수 없다.</li>
+</ul>
+
+<p>Integer :</p>
+<ul>
+  <li>Wrapper 클래스 (객체),</li>
+  <li>Unboxing을 하지 않으면 산술 연산이 불가능 하지만, null 값을 처리할 수 있다.</li>
+  <li>null 값 처리가 용이하기 때문에 SQL과 연동할 경우 처리가 용이하다.</li>
+  <li>DB에서 자료형이 정수형이지만 null 값이 필요한 경우 VO에서 Integer를 사용할 수 있다.</li>
+</ul>
+
+<h2 id="기본-자료형-primitive-data-type-이란">기본 자료형 (Primitive data type) 이란?</h2>
+
+<p>실제 값을 갖는 자료형 으로 자바에서 여러 형태의 타입을 미리 정의하여 제공하는 것.
+char, byte, short, int, long, flolat, double, boolean 등이 존재한다.</p>
+
+<h2 id="wrapper-클래스-란">Wrapper 클래스 란?</h2>
+
+<p>자바의 자료형은 크게 기본 타입과 참조 타입(class, interface) 으로 나누는데 
+기본타입의 데이터를 객체로 표현해야 하는 경우가 있다. 
+이럴때 기본 자료 타입을 객체로 다루기 위해서 사용하는 클래스 들을 래퍼 클래스라고 한다.</p>
+
+<h3 id="wrapper-class-종류">Wrapper Class 종류</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>기본타입(primitive type)</th>
+      <th>래퍼클래스(wrapper class)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>byte</td>
+      <td>Byte</td>
+    </tr>
+    <tr>
+      <td>char</td>
+      <td>Character</td>
+    </tr>
+    <tr>
+      <td>int</td>
+      <td>Integer</td>
+    </tr>
+    <tr>
+      <td>float</td>
+      <td>Float</td>
+    </tr>
+    <tr>
+      <td>double</td>
+      <td>Double</td>
+    </tr>
+    <tr>
+      <td>boolean</td>
+      <td>Boolean</td>
+    </tr>
+    <tr>
+      <td>long</td>
+      <td>Long</td>
+    </tr>
+    <tr>
+      <td>short</td>
+      <td>Short</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="boxing과-unboxing">Boxing과 UnBoxing</h2>
+
+<p><img src="../assets/img/210318-boxing-unboxing.png" />
+기본 타입의 값을 포장 객체로 만드는 과정을 박싱, 반대로 포장객체에서 기본 타입의 값을 얻어내는 과정을 언박싱</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Wrapper_Ex</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
+        <span class="nc">Integer</span> <span class="n">num</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="mi">17</span><span class="o">);</span> <span class="c1">// 박싱</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">intValue</span><span class="o">();</span> <span class="c1">//언박싱</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

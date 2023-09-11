@@ -1,0 +1,157 @@
+I"�;<h1 id="algorithm-이분-탐색">[Algorithm] 이분 탐색</h1>
+
+<h2 id="이진-탐색-알고리즘">이진 탐색 알고리즘</h2>
+
+<ul>
+  <li>순차 탐색 : 리스트 안에 있는 특정한 데이터를 찾기 위해 앞에서부터 데이터를 확인하는 방법</li>
+  <li>이진 탐색 : 정렬되어 있는 리스트에서 탐색 범위를 절반씩 좁혀가며 데이터를 탐색하는 방법
+    <ul>
+      <li>이진 탐색은 시작점, 끝점, 중간점을 이용하여 탐색 범위를 설정합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbpv9gL%2FbtqEChu74lV%2FFuil3yXTuDmv2us2tPOoT1%2Fimg.gif" /></p>
+
+<h2 id="이진-탐색의-시간-복잡도">이진 탐색의 시간 복잡도</h2>
+
+<ul>
+  <li>단계마다 탐색 범위를 2로 나누는 것과 동일하므로 연산 횟수는 $log_2 N$에 비례합니다.</li>
+  <li>예를 들어 초기 데이터 개수가 32개일 때, 이성적으로 1단계를 거치면 16개 가량의 데이터만 납습니다.
+    <ul>
+      <li>2단계를 거치면 8개가량의 데이터만 남습니다.</li>
+      <li>3단계를 거치면 4개 가량의 데이터만 남습니다.</li>
+    </ul>
+  </li>
+  <li>다시 말해 이진 탐색은 탐색 범위를 절반씩 줄이며, 시간 복잡도는 $O(logN)$을 보장합니다.</li>
+</ul>
+
+<h2 id="이진-탐색-코드-java">이진 탐색 코드 (JAVA)</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Java implementation of recursive Binary Search</span>
+<span class="kd">class</span> <span class="nc">BinarySearch</span> <span class="o">{</span>
+    <span class="c1">// Returns index of x if it is present in arr[l..</span>
+    <span class="c1">// r], else return -1</span>
+    <span class="kt">int</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="kt">int</span> <span class="n">arr</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&gt;=</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="o">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span>
+ 
+            <span class="c1">// If the element is present at the</span>
+            <span class="c1">// middle itself</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">==</span> <span class="n">x</span><span class="o">)</span>
+                <span class="k">return</span> <span class="n">mid</span><span class="o">;</span>
+ 
+            <span class="c1">// If element is smaller than mid, then</span>
+            <span class="c1">// it can only be present in left subarray</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">x</span><span class="o">)</span>
+                <span class="k">return</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">);</span>
+ 
+            <span class="c1">// Else the element can only be present</span>
+            <span class="c1">// in right subarray</span>
+            <span class="k">return</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">r</span><span class="o">,</span> <span class="n">x</span><span class="o">);</span>
+        <span class="o">}</span>
+ 
+        <span class="c1">// We reach here when element is not present</span>
+        <span class="c1">// in array</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+ 
+    <span class="c1">// Driver method to test above</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span>
+    <span class="o">{</span>
+        <span class="nc">BinarySearch</span> <span class="n">ob</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BinarySearch</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">arr</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">40</span> <span class="o">};</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="na">binarySearch</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element not present"</span><span class="o">);</span>
+        <span class="k">else</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Element found at index "</span> <span class="o">+</span> <span class="n">result</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="cm">/* This code is contributed by Rajat Mishra */</span>
+</code></pre></div></div>
+
+<h2 id="파라메트릭-서치parametric-search">파라메트릭 서치(Parametric Search)</h2>
+
+<ul>
+  <li><strong>파라메트릭 서치</strong>란 최적화된 문제를 결정 문제(‘예’ 혹은 ‘아니오’)로 바꾸어 해결하는 기법입니다.
+    <ul>
+      <li>예시: 특정한 조건을 만족하는 가장 알맞는 값을 빠르게 찾는 최적화 문제</li>
+    </ul>
+  </li>
+  <li>일반적으로 코딩테스트에서 파라메트릭 서치 문제는 <strong>이진 탐색을 이용하여 해결</strong>할 수 있습니다.</li>
+</ul>
+
+<h2 id="동빈나-이진-탐색-연습-문제">동빈나 이진 탐색 연습 문제</h2>
+
+<h3 id="-떡볶이-떡-만들기"><문제> 떡볶이 떡 만들기</문제></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>떡볶이 떡 만들기
+오늘 동빈이는 여행 가신 부모님을 대신해서 떡집 일을 하기로 했습니다.
+동빈이네 떡볶이 떡은 재밌게도 떡볶이 떡의 길이가 일정하지 않습니다.
+대신에 한 봉지 안에 들어가는 떡의 총 길이는 절단기로 잘라서 맞춰줍니다.
+절단기에 높이(H)를 지정하면 줄지어진 떡을 한 번에 절답합니다.
+높이가H보다 긴 떡온H위의 부분이 잘릴 것이고,낮은 떡은 잘리지 않습니다.
+예를 들어 높이가19, 14, 10, 17cm인 떡이 나란히 있고 절단기 높이를15cm로 지정하면 자른 뒤 떡의 높이는15,14,10,15cm가 될 것입니다.잘린 떡의 길이는 차례대로4,0,0,2cm입니다.
+손닙은6cm만큼의 길이를 가져갑니다. 손님이 왔을 때 요청한 총 길이가M일 때 적어도M만큼의 떡을 얻기 위해 절단기에 설정할 수 있는 높이의 최댓값을 구하는 프로그램을 작성하세요.
+
+입력 조건
+첫째 줄에 떡의 개수N과 요청한 떡의 길이M이 주어집니다.
+ (1 &lt;= N &lt;= 1,000,000 1&lt;=M&lt;=2,000,000,000)
+둘째 줄에는 떡의 개별 높이가 주어집니다.
+떡 높이의 총합은 항상M이상이므로,손님은 필요한 양만큼 떡을 사갈 수 있습니다.
+높이는10억보다 작거나 같은 양의 정수 또는0입니다.
+</code></pre></div></div>
+
+<h3 id="문제-해결-아이디어">문제 해결 아이디어</h3>
+
+<ul>
+  <li>적절한 높이를 찾을 때 까지 이진 탐색을 수행하여 높이 H를 반복해서 조정하면 됩니다.</li>
+  <li>‘현재 이 높이로 자르면 조건을 만족할 수 있는가?’를 확인한 뒤에 조건의 만족 여부(‘예’ 혹은 ‘아니오’)에 따라서 탐색 범위를 좁혀서 해결할 수 있습니다.</li>
+  <li>절단기의 높이는 0부터 10억까지의 정수 중 하나입니다.
+    <ul>
+      <li>이렇게 큰 탐색 범위를 보면 가장 먼저 <strong>이진 탐색</strong>을 떠올려야 합니다.</li>
+    </ul>
+  </li>
+  <li>문제에서 제시된 예시를 통해 그림으로 이해해 봅시다.</li>
+</ul>
+
+<p><img src="../assets/img/binary_search_0.png" /> &lt;/br&gt;
+<img src="../assets/img/binary_search_1.png" /> &lt;/br&gt;
+<img src="../assets/img/binary_search_2.png" /> &lt;/br&gt;
+<img src="../assets/img/binary_search_3.png" /> &lt;/br&gt;</p>
+
+<ul>
+  <li>이러한 이진 탐색 과정을 반복하면 답을 도출할 수 있습니다.</li>
+  <li>중간점의 값은 시간이 지날 수록 ‘<strong>최적화된 값</strong>‘이 되기 때문에, 과정을 반복하면서 얻을 수 있는 떡의 길이 합이 필요한 떡의 길이보다 크거나 같을 때마다 <strong>중간점의 값을 기록</strong>하면 됩니다.</li>
+</ul>
+
+<h3 id="-정렬된-배열에서-특정-수의-개수-구하기"><문제> 정렬된 배열에서 특정 수의 개수 구하기</문제></h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">N개의</span> <span class="n">원소를</span> <span class="n">포함하고</span> <span class="n">있는</span> <span class="n">수열이</span> <span class="n">오름차순으로</span> <span class="n">정렬되어</span> <span class="n">있습니다</span><span class="o">.</span> <span class="n">이때</span> <span class="n">이</span> <span class="n">수열에서</span> <span class="nc">X가</span> <span class="n">등장하는</span> <span class="n">횟수를</span> <span class="n">계산하세요</span><span class="o">.</span> <span class="n">예를</span> <span class="n">들어</span> <span class="n">수열</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">}</span><span class="n">이</span> <span class="n">있을</span> <span class="n">때</span> <span class="n">x</span><span class="o">=</span><span class="mi">2</span><span class="n">라면</span><span class="o">,</span> <span class="n">현재</span> <span class="n">수열에서</span> <span class="n">값이</span> <span class="mi">2</span><span class="n">인</span> <span class="n">원소가</span> <span class="mi">4</span><span class="n">개이므로</span> <span class="mi">4</span><span class="n">를</span> <span class="n">출력합니다</span><span class="o">.</span> 
+<span class="n">단</span><span class="o">,</span> <span class="n">이문제는</span> <span class="n">시간</span> <span class="n">복잡도O</span><span class="o">(</span><span class="n">logN</span><span class="o">)</span><span class="n">으로</span> <span class="n">알고리즘을</span> <span class="n">설계하지</span> <span class="n">않으면</span> <span class="n">시간</span> <span class="n">초과</span> <span class="n">판정을</span> <span class="n">받습니다</span><span class="o">.</span> 
+
+<span class="n">입력</span> <span class="n">조건</span>
+<span class="n">첫째줄에서</span> <span class="nc">N과</span> <span class="n">x가</span> <span class="n">정수</span> <span class="n">형태로</span> <span class="n">공백으로</span> <span class="n">구본되어</span> <span class="n">입력됩니다</span><span class="o">.</span>
+<span class="n">둘째줄에</span> <span class="nc">N개의</span> <span class="n">원소가</span> <span class="n">정수</span> <span class="n">형태로</span> <span class="n">공백으로</span> <span class="n">구분되어</span> <span class="n">입력됩니다</span><span class="o">.</span> 
+<span class="n">수열의</span> <span class="n">원소</span> <span class="n">중에서</span> <span class="n">값이</span> <span class="n">x인</span> <span class="n">원소의</span> <span class="n">개수를</span> <span class="n">출력합니다</span><span class="o">.</span> 
+<span class="n">단</span><span class="o">,</span> <span class="n">값이</span> <span class="n">x인</span> <span class="n">원소가</span> <span class="n">하나도</span> <span class="n">없다면</span> <span class="o">-</span><span class="mi">1</span><span class="n">을</span> <span class="n">출력합니다</span><span class="o">.</span> 
+</code></pre></div></div>
+
+<h3 id="문제-해결-아이디어-1">문제 해결 아이디어</h3>
+
+<ul>
+  <li>시간 복잡도 $O(logN)$으로 동작하는 알고리즘을 요구하고 있습니다.
+    <ul>
+      <li>일반적인 선형 탐색로는 시간 초과 판정을 받습니다.</li>
+      <li>하지만 데이터가 정렬되어 있기 때문에 이진 탐색을 수행할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li>특정 값이 등장하는 첫 번째 위치와 마지막 위치를 찾아 위치 차이를 계산해 문제를 해결할 수 있습니다.</li>
+</ul>
+
+<p><img src="../assets/img/binary_search_4.png" /> &lt;/br&gt;</p>
+:ET

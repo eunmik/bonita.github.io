@@ -2,7 +2,7 @@
 layout: post
 title: "[Java]MultiThreading"
 date: 2021-03-23
-excerpt: "한 프로그램에서 동시에 여러가지 일 시키기"
+categories: [Language, Java]
 tags: [Java, Thread, MultiThread]
 comments: true
 ---

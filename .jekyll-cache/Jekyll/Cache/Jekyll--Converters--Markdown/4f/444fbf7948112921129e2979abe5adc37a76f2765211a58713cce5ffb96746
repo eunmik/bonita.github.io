@@ -1,0 +1,65 @@
+I"P<h1 id="chapter-1-computer-networks-and-the-internet">Chapter 1 Computer Networks and the Internet</h1>
+
+<h3 id="11-what-is-the-internet">1.1 What Is the Internet?</h3>
+
+<p>The internet is a computer network that interconnects billions of computing devices throughout the world. All of these devices are called <strong>hosts</strong> or <strong>end systems</strong>. (computers, smartphones, tablets, laptops, etc.)</p>
+
+<p>End Systems are connected together by a network of <strong>communication links</strong>(coaxial cable, copper wire, optical fiber, and radio spectrum) and <strong>packet switches(</strong>.</p>
+
+<p>Transmitting data with the transmission rate means the estimated time to send the data to another destination can differ depends on the transmission rate.</p>
+
+<p>A packet is a small segment of a larger message/data. The sending end system segments the data to packets and then sent through the network to the destination end system, where they are reassembled into the original data.</p>
+
+<p>A packet switch takes a packet arriving on one of its incoming communication links and forward that packet on one of its outgoing communication links. <strong>routers</strong> and <strong>link-layer switches</strong>.</p>
+
+<p>The sequence of packets traveling is known as a <strong>route</strong> or <strong>path</strong> through the network.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210623-img1.jpeg" /></p>
+
+<p>End systems access the Internet through <strong>Internet Service Providers (ISPs)</strong>.</p>
+
+<p>ISPs provide a variety of types of network access to the end systems.</p>
+
+<p>End systems, packet switches, and other pieces of the Internet run protocols that control the sending and receiving of information within the Internet.</p>
+
+<p>The Transmission Control Protocol (TCP) and the Internet Protocol (IP) are two of the most important protocols in the Internet.</p>
+
+<p>End systems attached to the Internet provide a socket interface that specifies how a program running on one end system asks the Internet infrastructure to deliver data to a specific destination program running on another end system.</p>
+
+<p>This Internet socket interface is a set of rules that the sending program must follow so that the Internet ca n deliver the data to the destination program.</p>
+
+<p>Human Protocol (for easy understanding) dictates that one first offer a greeting (“Hi”) to initiate communication with someone else. The typical response to a “Hi” is a returned “Hi” message.</p>
+
+<p>There are specific messages we send, and specific actions we take in response to the received reply messages or other events.</p>
+
+<p>It takes two (or more) communicating entities running the same protocol in order to accomplish a task.</p>
+
+<p>A protocol defines the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or receipt of a message or other event.</p>
+
+<blockquote>
+  <p>📘 모르는 단어들</p>
+
+  <p>the nuts and bolts : the basic practical details</p>
+
+  <p>jargon : 전문용어</p>
+
+  <p>prominent : important, famous</p>
+
+  <p>analogous : 유사한</p>
+
+  <p>precursor : a person or a thing comes before another of the same kind</p>
+
+  <p>notable : in particular, especially</p>
+
+  <p>faciliate : make easy or easier</p>
+
+  <p>analogy : a comparison between two things, typically for the purpose of explanation or clarification</p>
+
+  <p>buzzword : 유행어</p>
+
+  <p>notion : a conception of or belief about something</p>
+
+  <p>intellectually : in a way that relates to the Internet</p>
+</blockquote>
+
+:ET

@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] 이진 탐색/이분 탐색이란? "
 date: 2021-04-26
-excerpt: "이진탐색, 이분 탐색란? "
+categories: [CS, Algorithm]
 tags: [Algorithm, BinarySearch]
 comments: true
 ---

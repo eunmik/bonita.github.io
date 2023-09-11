@@ -1,0 +1,94 @@
+I"�.<p>친구가 만든 똥피하기 게임을 exe파일로 만들어달라는 부탁을 받았다. 
+한번도 해보진 않았지만…!! 만들어서 보내주었다. 뿌듯해 ☺</p>
+
+<ol>
+  <li>py파일을 exe 파일로 만들어 주기 위한 pyinstaller 패키지를 설치 한다.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">pyinstaller</span>
+</code></pre></div></div>
+
+<ol>
+  <li>pyinstaller를 사용해서 exe 파일을 만든다.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pyinstaller</span> <span class="o">-</span><span class="n">F</span> <span class="n">game</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div></div>
+
+<ol>
+  <li>실행했을 때 아래와 같은 메시지가 나온다면 데이터 경로가 문제일 수 있다.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pygame</span> <span class="mf">2.0</span><span class="p">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">SDL</span> <span class="mf">2.0</span><span class="p">.</span><span class="mi">14</span><span class="p">,</span> <span class="n">Python</span> <span class="mf">3.8</span><span class="p">.</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">Hello</span> <span class="k">from</span> <span class="n">the</span> <span class="n">pygame</span> <span class="n">community</span><span class="p">.</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">pygame</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">contribute</span><span class="p">.</span><span class="n">html</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s">"game.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">51</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="nb">TypeError</span><span class="p">:</span> <span class="n">expected</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span> <span class="ow">or</span> <span class="n">os</span><span class="p">.</span><span class="n">PathLike</span> <span class="nb">object</span><span class="p">,</span> <span class="ow">not</span> <span class="n">_io</span><span class="p">.</span><span class="n">BytesIO</span>
+<span class="p">[</span><span class="mi">132844</span><span class="p">]</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">script</span> <span class="s">'game'</span> <span class="n">due</span> <span class="n">to</span> <span class="n">unhandled</span> <span class="n">exception</span><span class="err">!</span>
+</code></pre></div></div>
+
+<ol>
+  <li>py에 사용되는 이미지 파일을 spec 파일에 더 해준다.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- mode: python ; coding: utf-8 -*-
+</span>
+<span class="n">block_cipher</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Analysis</span><span class="p">([</span><span class="s">'D:</span><span class="se">\\</span><span class="s">personal</span><span class="se">\\</span><span class="s">python_from_ym</span><span class="se">\\</span><span class="s">game.py'</span><span class="p">],</span>
+             <span class="n">pathex</span><span class="o">=</span><span class="p">[</span><span class="s">'C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">user</span><span class="se">\\</span><span class="s">AppData</span><span class="se">\\</span><span class="s">Local</span><span class="se">\\</span><span class="s">Packages</span><span class="se">\\</span><span class="s">PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0</span><span class="se">\\</span><span class="s">LocalCache</span><span class="se">\\</span><span class="s">local-packages</span><span class="se">\\</span><span class="s">Python38</span><span class="se">\\</span><span class="s">Scripts'</span><span class="p">],</span>
+             <span class="n">binaries</span><span class="o">=</span><span class="p">[],</span>
+             <span class="n">datas</span><span class="o">=</span><span class="p">[],</span>
+             <span class="n">hiddenimports</span><span class="o">=</span><span class="p">[],</span>
+             <span class="n">hookspath</span><span class="o">=</span><span class="p">[],</span>
+             <span class="n">hooksconfig</span><span class="o">=</span><span class="p">{},</span>
+             <span class="n">runtime_hooks</span><span class="o">=</span><span class="p">[],</span>
+             <span class="n">excludes</span><span class="o">=</span><span class="p">[],</span>
+             <span class="n">win_no_prefer_redirects</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+             <span class="n">win_private_assemblies</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+             <span class="n">cipher</span><span class="o">=</span><span class="n">block_cipher</span><span class="p">,</span>
+             <span class="n">noarchive</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+             
+<span class="o">**</span><span class="n">a</span><span class="p">.</span><span class="n">datas</span> <span class="o">+=</span> <span class="p">[(</span><span class="s">'background.png'</span><span class="p">,</span> <span class="s">'D:</span><span class="se">\\</span><span class="s">personal</span><span class="se">\\</span><span class="s">python_from_ym</span><span class="se">\\</span><span class="s">background.png'</span><span class="p">,</span> <span class="s">"DATA"</span><span class="p">)]</span>
+<span class="n">a</span><span class="p">.</span><span class="n">datas</span> <span class="o">+=</span> <span class="p">[(</span><span class="s">'character.png'</span><span class="p">,</span> <span class="s">'D:</span><span class="se">\\</span><span class="s">personal</span><span class="se">\\</span><span class="s">python_from_ym</span><span class="se">\\</span><span class="s">character.png'</span><span class="p">,</span> <span class="s">"DATA"</span><span class="p">)]</span>
+<span class="n">a</span><span class="p">.</span><span class="n">datas</span> <span class="o">+=</span> <span class="p">[(</span><span class="s">'atti.png'</span><span class="p">,</span> <span class="s">'D:</span><span class="se">\\</span><span class="s">personal</span><span class="se">\\</span><span class="s">python_from_ym</span><span class="se">\\</span><span class="s">atti.png'</span><span class="p">,</span> <span class="s">"DATA"</span><span class="p">)]</span><span class="o">**</span>
+
+<span class="n">pyz</span> <span class="o">=</span> <span class="n">PYZ</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">pure</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">zipped_data</span><span class="p">,</span>
+             <span class="n">cipher</span><span class="o">=</span><span class="n">block_cipher</span><span class="p">)</span>
+
+<span class="n">exe</span> <span class="o">=</span> <span class="n">EXE</span><span class="p">(</span><span class="n">pyz</span><span class="p">,</span>
+          <span class="n">a</span><span class="p">.</span><span class="n">scripts</span><span class="p">,</span>
+          <span class="n">a</span><span class="p">.</span><span class="n">binaries</span><span class="p">,</span>
+          <span class="n">a</span><span class="p">.</span><span class="n">zipfiles</span><span class="p">,</span>
+          <span class="n">a</span><span class="p">.</span><span class="n">datas</span><span class="p">,</span>  
+          <span class="p">[],</span>
+          <span class="n">name</span><span class="o">=</span><span class="s">'game'</span><span class="p">,</span>
+          <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+          <span class="n">bootloader_ignore_signals</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+          <span class="n">strip</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+          <span class="n">upx</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+          <span class="n">upx_exclude</span><span class="o">=</span><span class="p">[],</span>
+          <span class="n">runtime_tmpdir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+          <span class="n">console</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+          <span class="n">disable_windowed_traceback</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+          <span class="n">target_arch</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+          <span class="n">codesign_identity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+          <span class="n">entitlements_file</span><span class="o">=</span><span class="bp">None</span> <span class="p">)</span>
+</code></pre></div></div>
+
+<ol>
+  <li>py 코드에서는 절대경로로 찾을 수 있도록 아래 코드를 추가한다.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">os</span> 
+
+<span class="k">def</span> <span class="nf">resource_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s">'_MEIPASS'</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">_MEIPASS</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">"."</span><span class="p">),</span> <span class="n">relative_path</span><span class="p">)</span>
+
+<span class="n">background</span> <span class="o">=</span> <span class="n">pygame</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">resource_path</span><span class="p">(</span><span class="s">"background.png"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>출처 : <a href="https://datatofish.com/executable-pyinstaller/">https://datatofish.com/executable-pyinstaller/</a></p>
+:ET

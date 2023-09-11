@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring] Spring Security 기본 API 및 Filter 이해 (1) "
 date: 2021-06-11
-excerpt: "Spring Security의 기본 이해 1탄"
+categories: [Language, Spring]
 tags: [Java, Spring, Spring Security]
 comments: true
 ---

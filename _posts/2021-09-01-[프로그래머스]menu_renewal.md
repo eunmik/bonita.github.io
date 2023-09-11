@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] 프로그래머스_메뉴리뉴얼"
 date: 2021-09-01
-excerpt: "프로그래머스 문제 메뉴리뉴얼"
+categories: [CS, Algorithm]
 tags: [Java, Algorithm, 프로그래머스]
 comments: true
 ---

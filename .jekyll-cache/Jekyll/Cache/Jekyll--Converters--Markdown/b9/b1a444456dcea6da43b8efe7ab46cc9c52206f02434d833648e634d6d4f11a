@@ -1,0 +1,318 @@
+I"`�<h2 id="http-인증-이란">HTTP 인증 이란?</h2>
+
+<p>Authentication(인증) 이란 시스템이 사용자가 시스템에 접근 가능한 허용을 가지고 있는지 없는지 결정하는 프로세스이다. HTTP는 액세스 제어와 인증을 위한 프레임워크를 제공한다.</p>
+
+<h2 id="http-인증-종류">HTTP 인증 종류</h2>
+
+<ul>
+  <li>BASIC : 가장 일반적인 이증 방식</li>
+  <li>Digest</li>
+  <li>Oauth</li>
+  <li>Token-based</li>
+</ul>
+
+<h2 id="basic-authentication">Basic Authentication</h2>
+
+<p>서버가 지정된 영역에 인증이 필요하다는 것을 헤더에 담아서 다시 보낸다. 사용자는 브라우저가 연결 한 아이디와 패스워드 (username + “:” +password)와 base62 인코드를 제공한다. 암호화된 String은 Authorization 헤더에 담아서 브라우저에서 각 요청 마다 보내진다.</p>
+
+<p>상대적으로 간단한 프로토콜이고 모든 주 브라우저에서 지원한다. 그러나 이 인증을 사옹하면 몇가지 단점이 있다.</p>
+
+<ul>
+  <li>사용자 Credentials 를 요청에 보낸다.</li>
+  <li>Credentails는 플레인 텍스트이다.</li>
+  <li>매 요청에 Credentials을 보낸다.</li>
+  <li>브라우즈 세션을 종료하는거 말고는 로그아웃 방법이 없다.</li>
+  <li>cross-site request forgery (CSRF)에 취약하다.</li>
+</ul>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0708/img1.png" /></p>
+
+<h2 id="digest-authentication">Digest Authentication</h2>
+
+<p>Digest는 암호화 되지 않은 HTTP 기본 access 인증을 대체하려고 하지만 public-key나 Kerberos 인증 같이 강한 인증 프로토콜을 대체하지는 않는다.</p>
+
+<p>Digest는 사용자의 request를 네트워크 서버에서 받은 다음에 domain controller로 전송하는 인증 방식이다.</p>
+
+<p>Domain Controller는 digest session key라는 특별한 key를 처음 요청을 받은 서버에 보낸다.</p>
+
+<p>사용자는 그리고 암호화된 Response를 서버에 보낸다. 만약 사용자의 response가 올바른 형식이라면 서버는 사용자가 접근을 하도록 허용한다.</p>
+
+<p>그러나 이 인증의 단점은 digest access authentication은 클라이언트가 서버의 아이덴티티를 증멸할 수 있는 메커니즘을 제공하지 않는다.</p>
+
+<h2 id="oauth-authentication">OAuth Authentication</h2>
+
+<p>OAuth (Open Authentication/Authorization) 는 인증을 위한 표준 프로토콜이다. 구글, 페이스북, 카카오 등에서 제공하는 Authorization Server를 통해 회원 정보를 인증하고 Access Token을 발급 받는다.  비밀번호(credentials)를 사용하지 않고 한 사이트에 저장된 리소스를 다른 사이트에서 사용하도록 허용한다.</p>
+
+<h2 id="token-based-authentication">Token Based Authentication</h2>
+
+<p>토큰 기반 인증은 인증할 때 access token을 발행한다. 이 토큰은 사용되는 에코시스템에 따라 다양한 형태로 사용될 수 있다. 클라이언트는 사용자아이디와 패스워드를 access token을 얻기 위해 입력 할 수 있다. 클라이언트가 이 토큰을 갖고 있고 매 요청마다 서버에 보낸다. 클라이언트가 보낸 매 요청이 진행되는 동안, 서버는 HTTP는 stateless이기 때문에 클라이언트가 이미 인증이 되었는지 알지 못한다. 그래서 그 토큰을 통해 클라이언트가 인증이 되었는지 확인한다. 그리고나서 요청된 자원에 접근을 제공한다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0708/img2.png" /></p>
+
+<h2 id="digest-인증-구현하기">Digest 인증 구현하기</h2>
+
+<h3 id="client쪽-http-authentication-구현">Client쪽 Http Authentication 구현</h3>
+
+<h3 id="basic-authentication-1">Basic Authentication</h3>
+
+<p>CustomBasicAuthWebSecurityConfig.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.crypto.password.NoOpPasswordEncoder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.crypto.password.PasswordEncoder</span><span class="o">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomBasicAuthWebSecurityConfig</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span>
+ <span class="o">{</span>
+
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">AuthenticationManagerBuilder</span> <span class="n">auth</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">auth</span><span class="o">.</span><span class="na">inMemoryAuthentication</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">withUser</span><span class="o">(</span><span class="s">"username"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="n">passwordEncoder</span><span class="o">().</span><span class="na">encode</span><span class="o">(</span><span class="s">"password"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">roles</span><span class="o">(</span><span class="s">"USER"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">//return new BCryptPasswordEncoder();</span>
+        <span class="k">return</span> <span class="nc">NoOpPasswordEncoder</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+        <span class="n">http</span> <span class="o">.</span><span class="na">antMatcher</span><span class="o">(</span><span class="s">"/**"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">()</span>
+                <span class="c1">// httpBasic authentication</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">().</span><span class="na">httpBasic</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="digest-authentication-1">Digest Authentication</h3>
+
+<p>CustomDigestAuthWebSecurityConfig.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.core.annotation.Order</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.userdetails.UserDetailsService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.crypto.password.NoOpPasswordEncoder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.crypto.password.PasswordEncoder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.web.authentication.www.DigestAuthenticationFilter</span><span class="o">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="nd">@EnableGlobalMethodSecurity</span><span class="o">(</span><span class="n">prePostEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">securedEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">jsr250Enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomDigestAuthWebSecurityConfig</span><span class="c1">//extends WebSecurityConfigurerAdapter</span>
+<span class="o">{</span>
+
+    <span class="nd">@Configuration</span>
+    <span class="nd">@Order</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AdminSecurityConfiguration</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span>
+    <span class="o">{</span>
+        <span class="c1">// Configure DigestAuthenticationEntryPoint</span>
+        <span class="kd">private</span> <span class="nc">DigestAuthenticationEntryPoint</span> <span class="nf">getDigestEntryPoint</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">DigestAuthenticationEntryPoint</span> <span class="n">digestEntryPoint</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DigestAuthenticationEntryPoint</span><span class="o">();</span>
+            <span class="n">digestEntryPoint</span><span class="o">.</span><span class="na">setRealmName</span><span class="o">(</span><span class="s">"admin"</span><span class="o">);</span>
+            <span class="n">digestEntryPoint</span><span class="o">.</span><span class="na">setKey</span><span class="o">(</span><span class="s">"somedigestkey"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">digestEntryPoint</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">// PasswordEncoder Bean</span>
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">()</span> <span class="o">{</span>
+            <span class="c1">//return new BCryptPasswordEncoder();</span>
+
+            <span class="k">return</span> <span class="nc">NoOpPasswordEncoder</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="c1">//Configure authentication manager</span>
+
+        <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">AuthenticationManagerBuilder</span> <span class="n">auth</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+            <span class="n">auth</span><span class="o">.</span><span class="na">inMemoryAuthentication</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">withUser</span><span class="o">(</span><span class="s">"username"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="n">passwordEncoder</span><span class="o">().</span><span class="na">encode</span><span class="o">(</span><span class="s">"password"</span><span class="o">))</span>
+                    <span class="o">.</span><span class="na">roles</span><span class="o">(</span><span class="s">"USER"</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">//default UserDetailsService configured by  UserDetailsServiceAutoConfiguration</span>
+
+        <span class="nd">@Bean</span>
+        <span class="kd">public</span> <span class="nc">UserDetailsService</span> <span class="nf">userDetailsServiceBean</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">userDetailsServiceBean</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="c1">// Configure  DigestAuthenticationFilter.</span>
+        <span class="c1">// Notice the we are injecting userDetailsService and DigestAuthenticationEntryPoint</span>
+
+        <span class="kd">private</span> <span class="nc">DigestAuthenticationFilter</span> <span class="nf">getDigestAuthFilter</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+            <span class="nc">DigestAuthenticationFilter</span> <span class="n">digestFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DigestAuthenticationFilter</span><span class="o">();</span>
+
+            <span class="n">digestFilter</span><span class="o">.</span><span class="na">setUserDetailsService</span><span class="o">(</span><span class="n">userDetailsServiceBean</span><span class="o">());</span>
+
+            <span class="n">digestFilter</span><span class="o">.</span><span class="na">setAuthenticationEntryPoint</span><span class="o">(</span><span class="n">getDigestEntryPoint</span><span class="o">());</span>
+            <span class="k">return</span> <span class="n">digestFilter</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">//Notice that we are configuring / admin/ * * for the SecurityFilterChain</span>
+        <span class="c1">// added DigestAuthenticationFilter, also configured the EntryPoint authentication.</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+            <span class="n">http</span><span class="o">.</span><span class="na">antMatcher</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span>
+                    <span class="n">addFilter</span><span class="o">(</span><span class="n">getDigestAuthFilter</span><span class="o">()).</span><span class="na">exceptionHandling</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">authenticationEntryPoint</span><span class="o">(</span><span class="n">getDigestEntryPoint</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">and</span><span class="o">().</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">().</span><span class="na">authorizeRequests</span><span class="o">().</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="server쪽-http-인증-요청-구현">Server쪽 Http 인증 요청 구현</h2>
+
+<p>HttpRequestFactoryAuthentication.java</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.argos_labs.rpa.la.report.api.model.AuthType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.RequiredArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.HttpHost</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.auth.AuthScheme</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.auth.AuthScope</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.auth.UsernamePasswordCredentials</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.AuthCache</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.CookieStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.CredentialsProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.client.protocol.HttpClientContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.auth.BasicScheme</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.auth.DigestScheme</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.BasicAuthCache</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.BasicCookieStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.BasicCredentialsProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.client.HttpClients</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.impl.cookie.BasicClientCookie</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.protocol.BasicHttpContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.http.protocol.HttpContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.client.HttpComponentsClientHttpRequestFactory</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="o">;</span>
+
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HttpRequestFactoryAuthentication</span> <span class="kd">extends</span> <span class="nc">HttpComponentsClientHttpRequestFactory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">BasicHttpContext</span> <span class="n">context</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">AuthCache</span> <span class="n">cache</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CredentialsProvider</span> <span class="n">credentialsProvider</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">HttpRequestFactoryAuthentication</span><span class="o">(){</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicHttpContext</span><span class="o">();</span>
+        <span class="n">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicAuthCache</span><span class="o">();</span>
+        <span class="n">credentialsProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicCredentialsProvider</span><span class="o">();</span>
+
+        <span class="n">context</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="nc">HttpClientContext</span><span class="o">.</span><span class="na">AUTH_CACHE</span><span class="o">,</span> <span class="n">cache</span><span class="o">);</span>
+
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCredentials</span><span class="o">(</span><span class="nc">HttpHost</span> <span class="n">host</span><span class="o">,</span> <span class="nc">String</span> <span class="n">authType</span><span class="o">,</span> <span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">String</span> <span class="n">password</span><span class="o">){</span>
+
+        <span class="c1">//AuthScheme scheme = null;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">authType</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="nc">AuthType</span><span class="o">.</span><span class="na">BasicType</span><span class="o">.</span><span class="na">value</span><span class="o">())){</span>
+            <span class="nc">AuthScheme</span> <span class="n">scheme</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicScheme</span><span class="o">();</span>
+            <span class="n">cache</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">host</span><span class="o">,</span> <span class="n">scheme</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">authType</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="nc">AuthType</span><span class="o">.</span><span class="na">DigestType</span><span class="o">.</span><span class="na">value</span><span class="o">())){</span>
+            <span class="nc">DigestScheme</span> <span class="n">scheme</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DigestScheme</span><span class="o">();</span>
+            <span class="n">scheme</span><span class="o">.</span><span class="na">overrideParamter</span><span class="o">(</span><span class="s">"realm"</span><span class="o">,</span><span class="s">"admin"</span><span class="o">);</span>
+            <span class="c1">//String nonce = Long.toString(new SecureRandom().nextLong(), 36);</span>
+            <span class="c1">//scheme.overrideParamter("nonce", nonce);</span>
+            <span class="n">cache</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">host</span><span class="o">,</span> <span class="n">scheme</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nc">UsernamePasswordCredentials</span> <span class="n">credentials</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UsernamePasswordCredentials</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+        <span class="n">credentialsProvider</span><span class="o">.</span><span class="na">setCredentials</span><span class="o">(</span><span class="k">new</span> <span class="nc">AuthScope</span><span class="o">(</span><span class="n">host</span><span class="o">),</span> <span class="n">credentials</span><span class="o">);</span>
+
+        <span class="nc">CookieStore</span> <span class="n">cookieStore</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicCookieStore</span><span class="o">();</span>
+        <span class="nc">BasicClientCookie</span> <span class="n">cookie</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicClientCookie</span><span class="o">(</span><span class="s">"cookie"</span><span class="o">,</span><span class="s">"value"</span><span class="o">);</span>
+        <span class="n">cookie</span><span class="o">.</span><span class="na">setDomain</span><span class="o">(</span><span class="n">host</span><span class="o">.</span><span class="na">getHostName</span><span class="o">());</span>
+        <span class="n">cookie</span><span class="o">.</span><span class="na">setPath</span><span class="o">(</span><span class="s">"/"</span><span class="o">);</span>
+        <span class="n">cookieStore</span><span class="o">.</span><span class="na">addCookie</span><span class="o">(</span><span class="n">cookie</span><span class="o">);</span>
+
+        <span class="n">setHttpClient</span><span class="o">(</span><span class="nc">HttpClients</span><span class="o">.</span><span class="na">custom</span><span class="o">().</span><span class="na">setDefaultCookieStore</span><span class="o">(</span><span class="n">cookieStore</span><span class="o">).</span><span class="na">setDefaultCredentialsProvider</span><span class="o">(</span><span class="n">credentialsProvider</span><span class="o">).</span><span class="na">build</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="nc">HttpContext</span> <span class="nf">createHttpContext</span><span class="o">(</span><span class="nc">HttpMethod</span> <span class="n">httpMethod</span><span class="o">,</span> <span class="no">URI</span> <span class="n">uri</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">context</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">HttpClientContext</span> <span class="nf">createHttpClientContext</span><span class="o">(){</span>
+        <span class="nc">HttpClientContext</span> <span class="n">context</span> <span class="o">=</span> <span class="nc">HttpClientContext</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+        <span class="n">context</span><span class="o">.</span><span class="na">setCredentialsProvider</span><span class="o">(</span><span class="n">credentialsProvider</span><span class="o">);</span>
+        <span class="n">context</span><span class="o">.</span><span class="na">setAuthCache</span><span class="o">(</span><span class="n">cache</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">context</span><span class="o">;</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>HttpAuth</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Response</span> <span class="nf">httpAuth</span><span class="o">(</span><span class="nc">PamStatus</span> <span class="n">pamStatus</span><span class="o">,</span> <span class="nc">OpenapiEndpointInfo</span> <span class="n">openapiEndpointInfo</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">openapiEndpointInfo</span><span class="o">.</span><span class="na">getHost</span><span class="o">().</span><span class="na">split</span><span class="o">(</span><span class="s">"://"</span><span class="o">);</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">hostAndPort</span> <span class="o">=</span> <span class="n">domain</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">":"</span><span class="o">);</span>
+            <span class="nc">String</span> <span class="n">hostname</span> <span class="o">=</span> <span class="n">domain</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+            <span class="nc">String</span> <span class="n">scheme</span> <span class="o">=</span> <span class="n">domain</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="o">(</span><span class="n">scheme</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"https"</span><span class="o">)</span> <span class="o">?</span> <span class="mi">443</span> <span class="o">:</span> <span class="mi">80</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">hostAndPort</span><span class="o">.</span><span class="na">length</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">){</span>
+                <span class="n">hostname</span> <span class="o">=</span> <span class="n">hostAndPort</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">port</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">hostAndPort</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+            <span class="o">}</span>
+
+            <span class="nc">HttpHost</span> <span class="n">host</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpHost</span><span class="o">(</span><span class="n">hostname</span><span class="o">,</span> <span class="n">port</span><span class="o">,</span> <span class="n">scheme</span><span class="o">);</span>
+
+            <span class="nc">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RestTemplate</span><span class="o">();</span>
+            <span class="nc">HttpRequestFactoryAuthentication</span> <span class="n">requestFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpRequestFactoryAuthentication</span><span class="o">();</span>
+            <span class="n">requestFactory</span><span class="o">.</span><span class="na">setCredentials</span><span class="o">(</span><span class="n">host</span><span class="o">,</span> <span class="n">openapiEndpointInfo</span><span class="o">.</span><span class="na">getAuthType</span><span class="o">(),</span> <span class="n">openapiEndpointInfo</span><span class="o">.</span><span class="na">getUsername</span><span class="o">(),</span> <span class="n">openapiEndpointInfo</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span>
+            <span class="n">restTemplate</span><span class="o">.</span><span class="na">setRequestFactory</span><span class="o">(</span><span class="n">requestFactory</span><span class="o">);</span>
+
+            <span class="nc">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpHeaders</span><span class="o">();</span>
+            <span class="n">headers</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">);</span>
+
+            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">mapData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="n">mapData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"details"</span><span class="o">,</span> <span class="n">pamStatus</span><span class="o">.</span><span class="na">getDetails</span><span class="o">());</span>
+            <span class="n">mapData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"workId"</span><span class="o">,</span> <span class="n">pamStatus</span><span class="o">.</span><span class="na">getWorkId</span><span class="o">());</span>
+            <span class="n">mapData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"taskId"</span><span class="o">,</span> <span class="n">pamStatus</span><span class="o">.</span><span class="na">getTaskId</span><span class="o">());</span>
+            <span class="n">mapData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"progressStatus"</span><span class="o">,</span> <span class="n">pamStatus</span><span class="o">.</span><span class="na">getProgressStatus</span><span class="o">());</span>
+            <span class="n">mapData</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"updatedDate"</span><span class="o">,</span> <span class="o">(</span><span class="n">pamStatus</span><span class="o">.</span><span class="na">getUpdatedDate</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">pamStatus</span><span class="o">.</span><span class="na">getUpdatedDate</span><span class="o">().</span><span class="na">atZone</span><span class="o">(</span><span class="nc">ZoneId</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"GMT"</span><span class="o">)).</span><span class="na">format</span><span class="o">(</span><span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ISO_DATE_TIME</span><span class="o">)</span> <span class="o">:</span> <span class="kc">null</span><span class="o">));</span>
+            <span class="nc">ObjectWriter</span> <span class="n">ow</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">().</span><span class="na">writer</span><span class="o">().</span><span class="na">withDefaultPrettyPrinter</span><span class="o">();</span>
+            <span class="nc">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">ow</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">mapData</span><span class="o">);</span>
+
+            <span class="nc">HttpEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">entity</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpEntity</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;(</span><span class="n">json</span><span class="o">,</span> <span class="n">headers</span><span class="o">);</span>
+            <span class="n">restTemplate</span><span class="o">.</span><span class="na">getMessageConverters</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">MappingJackson2HttpMessageConverter</span><span class="o">());</span>
+            <span class="nc">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">postForObject</span><span class="o">(</span><span class="n">pamStatus</span><span class="o">.</span><span class="na">getEndPoint</span><span class="o">(),</span> <span class="n">entity</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Response</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">.</span><span class="na">getReasonPhrase</span><span class="o">(),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Response</span><span class="o">(</span><span class="s">"ENDPOINT ERROR :"</span><span class="o">+</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>참고한 출처 : 
+<a href="https://github.com/eugenp/tutorials/tree/master/spring-security-modules/spring-security-web-digest-auth">spring-security-modules/spring-security-web-digest-auth</a>
+<a href="https://attacomsian.com/blog/resttemplate-basic-authentication">RestTemplate Basic Authentication Example</a>
+<a href="https://github.com/kytkemo/preemptive-authentication-rest-template/blob/master/src/main/java/com/kytkemo/preemptiveauthenticationresttemplate/web/client/PreemptiveAuthenticationRestTemplate.java">preemptive-authentication-rest-template</a>
+<a href="https://www.techgeeknext.com/spring-boot-security/digest_authentication_web_security">Spring Boot Security Tutorial_ Digest Authentication</a>
+<a href="https://javadeveloperzone.com/spring-boot/spring-security-digest-authentication-example/">Spring security digest authentication example</a></p>
+:ET

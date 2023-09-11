@@ -2,7 +2,7 @@
 layout: post
 title: "[Security] CORS란?"
 date: 2021-07-01
-excerpt: "Cross-Origin-Resource-Sharing이란? "
+categories: [Language, Spring]
 tags: [CORS, Security]
 comments: true
 ---

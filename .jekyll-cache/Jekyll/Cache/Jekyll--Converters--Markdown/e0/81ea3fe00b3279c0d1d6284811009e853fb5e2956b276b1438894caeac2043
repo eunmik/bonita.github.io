@@ -1,0 +1,200 @@
+I"f<p>https://www.acmicpc.net/problem/14499</p>
+
+<p>특정한 알고리즘을 사용하지 않고 구현하는 문제이다.</p>
+
+<p>공간지각능력이 없어서 직접 주사위를 접어서 계산했다….</p>
+
+<p>손코딩 느낌이 날 정도로 ㅋㅋㅋㅋㅋ</p>
+
+<p>주사위 Array에 윗면을 [0], 아랫면을 [5]라고 정해 놓고</p>
+
+<p>굴러갈때마다 Array의 담은 객체들을 변경해 주었다.</p>
+
+<ol>
+  <li>
+    <p>맨처음에 주사위는 0으로 초기화가 되어있고,</p>
+
+    <p>오른쪽에 주사위 도면도는 인덱스(+1)를 나타낸다.</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/1.JPG" /></p>
+  </li>
+  <li>
+    <p>주사위가 아래로 내려갈때 윗면 아랫면이 바뀌면서 그거에 맞게 주사위 value값이 달라진다.</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/2.JPG" /></p>
+  </li>
+  <li>
+    <p>이런식으로 계속 구현 하였다.</p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/3.JPG" /></p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/4.JPG" /></p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/5.JPG" /></p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/6.JPG" /></p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/7.JPG" /></p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/8.JPG" /></p>
+
+    <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/diceRolling/9.JPG" /></p>
+  </li>
+</ol>
+
+<p>아래는 구현한 코드</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.StringTokenizer</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DiceRolling</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="no">N</span><span class="o">,</span> <span class="no">M</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">diceLoc</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="n">order</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">map</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">dr</span> <span class="o">=</span> <span class="o">{-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">};</span>
+    <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">dc</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,-</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">};</span>
+    <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">dir</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">dice</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">));</span>
+        <span class="nc">StringTokenizer</span> <span class="n">st</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringTokenizer</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">(),</span> <span class="s">" "</span><span class="o">);</span>
+        <span class="no">N</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+        <span class="no">M</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+        <span class="n">diceLoc</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+        <span class="n">diceLoc</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+        <span class="n">diceLoc</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+        <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="no">N</span><span class="o">][</span><span class="no">M</span><span class="o">];</span>
+        <span class="n">dir</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">order</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="no">N</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">().</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">" "</span><span class="o">,</span><span class="s">""</span><span class="o">);;</span>
+
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="no">M</span><span class="o">;</span> <span class="n">j</span><span class="o">++){</span>
+                <span class="kt">char</span> <span class="n">value</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">);</span>
+                <span class="n">map</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">value</span><span class="o">));</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">().</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">" "</span><span class="o">,</span><span class="s">""</span><span class="o">);</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">order</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">dir</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span> <span class="nc">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)));</span>
+        <span class="o">}</span>
+
+       <span class="n">dice</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">};</span>
+        <span class="n">solution</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">solution</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">rr</span> <span class="o">=</span> <span class="n">diceLoc</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+            <span class="kt">int</span> <span class="n">rc</span> <span class="o">=</span> <span class="n">diceLoc</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+            <span class="k">switch</span> <span class="o">(</span><span class="n">dir</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+                <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+                    <span class="n">rr</span> <span class="o">+=</span> <span class="n">dr</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+                    <span class="n">rc</span> <span class="o">+=</span> <span class="n">dc</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+                    <span class="n">rr</span> <span class="o">+=</span> <span class="n">dr</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+                    <span class="n">rc</span> <span class="o">+=</span> <span class="n">dc</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+                    <span class="n">rr</span> <span class="o">+=</span> <span class="n">dr</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                    <span class="n">rc</span> <span class="o">+=</span> <span class="n">dc</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+                    <span class="n">rr</span> <span class="o">+=</span> <span class="n">dr</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+                    <span class="n">rc</span> <span class="o">+=</span> <span class="n">dc</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+                    <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+           <span class="n">getDice</span><span class="o">(</span><span class="n">dir</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">rr</span><span class="o">,</span> <span class="n">rc</span><span class="o">);</span>
+            <span class="n">i</span><span class="o">++;</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">order</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">getDice</span><span class="o">(</span><span class="kt">int</span> <span class="n">dir</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rc</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">rr</span> <span class="o">&gt;=</span> <span class="no">N</span> <span class="o">||</span> <span class="n">rc</span> <span class="o">&gt;=</span> <span class="no">M</span> <span class="o">||</span> <span class="n">rc</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">rr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">switch</span><span class="o">(</span><span class="n">dir</span><span class="o">){</span>
+
+            <span class="k">case</span> <span class="mi">1</span> <span class="o">:</span> 
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+
+            <span class="k">case</span> <span class="mi">2</span> <span class="o">:</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">3</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="c1">//3,2,4,1,5,6</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+
+            <span class="k">case</span> <span class="mi">3</span> <span class="o">:</span> <span class="c1">//위로</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+
+            <span class="k">case</span> <span class="mi">4</span> <span class="o">:</span> <span class="c1">//아래로 //2,6,3,4,1,5</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">4</span><span class="o">];</span>
+                <span class="n">dice</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+
+                <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">map</span><span class="o">[</span><span class="n">rr</span><span class="o">][</span><span class="n">rc</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">map</span><span class="o">[</span><span class="n">rr</span><span class="o">][</span><span class="n">rc</span><span class="o">]</span> <span class="o">=</span> <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">map</span><span class="o">[</span><span class="n">rr</span><span class="o">][</span><span class="n">rc</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">dice</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">map</span><span class="o">[</span><span class="n">rr</span><span class="o">][</span><span class="n">rc</span><span class="o">];</span>
+            <span class="n">map</span><span class="o">[</span><span class="n">rr</span><span class="o">][</span><span class="n">rc</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">diceLoc</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">rr</span><span class="o">;</span>
+        <span class="n">diceLoc</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">rc</span><span class="o">;</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">dice</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

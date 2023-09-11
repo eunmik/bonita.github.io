@@ -1,0 +1,85 @@
+I"&<h2 id="arrayssort-오름차순">Arrays.sort (오름차순)</h2>
+
+<p>Arrays.sort는 java.util.Arrays에 포함되어 있다.</p>
+
+<p>Arrays.sort는 배열을 파라미터로 받는다. (int[], String[], char[], long[] 등등)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">str</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">,</span> <span class="s">"banana"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"B"</span><span class="o">};</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"BEFORE"</span><span class="o">);</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">str</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">s</span><span class="o">+</span><span class="s">" "</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"AFTER"</span><span class="o">);</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">str</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">s</span><span class="o">+</span><span class="s">" "</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>output</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">BEFORE</span>
+<span class="mi">1</span> <span class="n">a</span> <span class="n">banana</span> <span class="mi">2</span> <span class="no">B</span> 
+<span class="no">AFTER</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="no">B</span> <span class="n">a</span> <span class="n">banana</span>
+</code></pre></div></div>
+
+<h2 id="arrayssort내림차순">Arrays.sort(내림차순)</h2>
+
+<p>Array.sort(String[] a, Comparator&lt;? super String&gt; c) c 파라미터 자리에</p>
+
+<p>Collections.reverseOrder()를 넣어주면 내림차순으로 정렬이 된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nc">String</span><span class="o">[]</span> <span class="n">str</span> <span class="o">=</span> <span class="o">{</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"a"</span><span class="o">,</span> <span class="s">"banana"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"B"</span><span class="o">};</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"BEFORE"</span><span class="o">);</span>
+	<span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">str</span><span class="o">){</span>
+	    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">s</span><span class="o">+</span><span class="s">" "</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+	<span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">str</span><span class="o">,</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"AFTER"</span><span class="o">);</span>
+	<span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">str</span><span class="o">){</span>
+	    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">s</span><span class="o">+</span><span class="s">" "</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>output</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">BEFORE</span>
+<span class="mi">1</span> <span class="n">a</span> <span class="n">banana</span> <span class="mi">2</span> <span class="no">B</span> 
+<span class="no">AFTER</span>
+<span class="n">banana</span> <span class="n">a</span> <span class="no">B</span> <span class="mi">2</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<h2 id="collectionssort">Collections.sort</h2>
+
+<p>Collections.sort는 List를 파라미터로 받는다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"1"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"a"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"banana"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
+	<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
+	<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"오름차순"</span><span class="o">);</span>
+	<span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+	    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"내림차순"</span><span class="o">);</span>
+	<span class="nc">Collections</span><span class="o">.</span><span class="na">reverse</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+	<span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+	    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+
+<p>output</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">오름차순</span>
+<span class="mi">1</span> <span class="mi">2</span> <span class="no">B</span> <span class="n">a</span> <span class="n">banana</span> 
+<span class="n">내림차순</span>
+<span class="n">banana</span> <span class="n">a</span> <span class="no">B</span> <span class="mi">2</span> <span class="mi">1</span>
+</code></pre></div></div>
+:ET

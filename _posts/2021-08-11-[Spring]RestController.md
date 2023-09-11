@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring] @RestController vs @Controller"
 date: 2021-08-11
-excerpt: "@RestController와 @Controller의 차이"
+categories: [Language, Spring]
 tags: [Spring, Controller]
 comments: true
 ---

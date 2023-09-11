@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] 조합을 사용해 경우의 수 구하기"
 date: 2021-07-16
-excerpt: "경우의 수를 구해보자."
+categories: [CS, Algorithm]
 tags: [Java, Combination, number_of_cases]
 comments: true
 ---

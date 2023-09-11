@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] 로그인 시도 횟수 제한하기"
 date: 2021-07-21
-excerpt: "로그인 시도 횟수를 제한하여 계정을 보호하자"
+categories: [Language, Java]
 tags: [Java, Login]
 comments: true
 ---

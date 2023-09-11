@@ -1,0 +1,56 @@
+I":<p>최근에 Enum 클래스를 몇번 사용하게 되었는데</p>
+
+<p>enum 클래스에 같은 종류의 값들이 모여있다는 점 말고</p>
+
+<p>다른이유가 있어서 사용하는지 궁금하게 되었다.</p>
+
+<h2 id="enum-이란">Enum 이란?</h2>
+
+<p>Enum은 Enumerated Type으로 ‘서로 연관된 상수( final 같은 바꿀수 없는 변수들 값들의 집합’ 이다.</p>
+
+<p>Enum is short for “enumerations”, which means “specifically listed”.</p>
+
+<h2 id="주로-언제-사용이-될까">주로 언제 사용이 될까?</h2>
+
+<p>Enums은 컴파일 할 때 모든 경우의 값들을 알 때 사용된다. 예를 들어 메뉴선택, 모드선택 등등.</p>
+
+<p>항상 enum type의 상수들이 고정되어 사용할 필요는 없다.</p>
+
+<h2 id="enum-class-만들어-보기">Enum Class 만들어 보기</h2>
+
+<p>enum 을 사용하기 위해서는 class 나 interface 대신 enum 이라는 키워드를 사용하면 된다.</p>
+
+<p>상수들은 쉼표로 구분하며 대문자로 되어야 한다.</p>
+
+<p>Example</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">Level</span> <span class="o">{</span>
+  <span class="no">LOW</span><span class="o">,</span>
+  <span class="no">MEDIUM</span><span class="o">,</span>
+  <span class="no">HIGH</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>enum 클래스에 있는 상수에 접근 할 때는</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Level</span> <span class="n">myLevel</span> <span class="o">=</span> <span class="nc">Level</span><span class="o">.</span><span class="na">MEDIUM</span><span class="o">;</span> 
+</code></pre></div></div>
+
+<p>클래스안에 enum을 사용할 수 도 있다.</p>
+
+<p>Example</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+  <span class="kd">enum</span> <span class="nc">Level</span> <span class="o">{</span>
+    <span class="no">LOW</span><span class="o">,</span>
+    <span class="no">MEDIUM</span><span class="o">,</span>
+    <span class="no">HIGH</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Level</span> <span class="n">myVar</span> <span class="o">=</span> <span class="nc">Level</span><span class="o">.</span><span class="na">MEDIUM</span><span class="o">;</span> 
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">myVar</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

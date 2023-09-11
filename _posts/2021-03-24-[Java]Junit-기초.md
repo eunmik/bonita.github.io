@@ -2,7 +2,7 @@
 layout: post
 title: "[Java]Junit 기초"
 date: 2021-03-24
-excerpt: "Java 테스트를 위한 Junit"
+categories: [Language, Java]
 tags: [Java, TestCode, Junit]
 comments: true
 ---

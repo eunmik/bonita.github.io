@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] Dijkstra 다익스트라 알고리즘"
 date: 2021-09-09
-excerpt: "최단경로 다익스트라 알고리즘"
+categories: [CS, Algorithm]
 tags: [Java, Algorithm]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring] Spring Security 주요 아키텍처 이해 (2) "
 date: 2021-06-24
-excerpt: "Spring Security의 기본 이해 4탄"
+categories: [Language, Spring]
 tags: [Java, Spring, Spring Security]
 comments: true
 ---

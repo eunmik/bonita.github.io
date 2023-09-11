@@ -1,0 +1,41 @@
+I"e<h2 id="java-8-stream-api에-두가지-메소드-findany-vs-findfirst">Java 8 Stream API에 두가지 메소드 findAny() vs findFirst()</h2>
+
+<h2 id="streamfindany">Stream.findAny()</h2>
+
+<p>findAny()는 Stream에서 어떤 요소든 찾을 수 있도록 해준다. 순서와 상관없이 요소를 찾고자 할때 사용된다. 이 메소드는 Optional인스턴스를 리턴한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">createStream_whenFindAnyResultIsPresent_thenCorrect</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"A"</span><span class="o">,</span><span class="s">"B"</span><span class="o">,</span><span class="s">"C"</span><span class="o">,</span><span class="s">"D"</span><span class="o">);</span>
+
+    <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">findAny</span><span class="o">();</span>
+
+    <span class="n">assertTrue</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">isPresent</span><span class="o">());</span>
+    <span class="n">assertThat</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(),</span> <span class="n">anyOf</span><span class="o">(</span><span class="n">is</span><span class="o">(</span><span class="s">"A"</span><span class="o">),</span> <span class="n">is</span><span class="o">(</span><span class="s">"B"</span><span class="o">),</span> <span class="n">is</span><span class="o">(</span><span class="s">"C"</span><span class="o">),</span> <span class="n">is</span><span class="o">(</span><span class="s">"D"</span><span class="o">)));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>non-parallel 작업에서는 대부분 첫번째 요소를 반환할 것이지만 보장되지는 않는다.</p>
+
+<h2 id="streamfindfirst">Stream.findFirst()</h2>
+
+<p>Stream에서 첫번째 요소를 찾는다. 그래서 시퀀스에서 첫번째 요소를 찾을 때 사용된다.</p>
+
+<p>발생 순서가 없을때는 아무 요소를 반환한다. 문서에 따르면 Stream은 정의된 발생순서가 있을수도 있고 없을수도 있다. 소스와 중간작업에 따라 달라진다.</p>
+
+<p>이 메소드도 Optional 인스턴스를 반환한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">createStream_whenFindFirstResultIsPresent_thenCorrect</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"A"</span><span class="o">,</span> <span class="s">"B"</span><span class="o">,</span> <span class="s">"C"</span><span class="o">,</span> <span class="s">"D"</span><span class="o">);</span>
+
+    <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">findFirst</span><span class="o">();</span>
+
+    <span class="n">assertTrue</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">isPresent</span><span class="o">());</span>
+    <span class="n">assertThat</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(),</span> <span class="n">is</span><span class="o">(</span><span class="s">"A"</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>출처 : <a href="https://www.baeldung.com/java-stream-findfirst-vs-findany">java-stream-findfirst-vs-findany</a></p>
+:ET

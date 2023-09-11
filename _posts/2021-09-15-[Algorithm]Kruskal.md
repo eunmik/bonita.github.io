@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] Krusukal 크루스칼 알고리즘"
 date: 2021-09-15
-excerpt: "최소 비용 신장 트리 크루스칼 알고리즘"
+categories: [CS, Algorithm]
 tags: ["Algorithm", "Kruskal", "Java"]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring Security] ExceptionTranslationFilter로 에러 처리"
 date: 2021-08-04
-excerpt: "Spring Security에서 발생하는 AccessDeniedException, AuthenticationException 처리"
+categories: [Language, Spring]
 tags: [Java, Oauth2, Spring Security, Exception]
 comments: true
 ---

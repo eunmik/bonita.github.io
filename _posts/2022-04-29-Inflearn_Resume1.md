@@ -2,7 +2,7 @@
 layout: post
 title: "[인프런 이력서 오픈 마이크] 1회차/나의 역량과 장점 뽑아내기"
 date: 2022-04-29
-excerpt: "나의 역량과 장점을 이력서에 잘 뽑아낼 수 있을까?"
+categories: [Memoir]
 tags: ["Resume", "Inflearn"]
 comments: true
 ---

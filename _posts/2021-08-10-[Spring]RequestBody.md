@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring] @RequestBody 어노테이션"
 date: 2021-08-10
-excerpt: "@RequestBody 어노테이션 활용하기"
+categories: [Language, Spring]
 tags: [Spring, RequestBody]
 comments: true
 ---

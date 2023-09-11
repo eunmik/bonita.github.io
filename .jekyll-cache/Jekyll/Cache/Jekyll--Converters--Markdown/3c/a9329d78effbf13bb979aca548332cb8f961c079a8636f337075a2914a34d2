@@ -1,0 +1,180 @@
+I"�E<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0804/img1.png" /></p>
+
+<p>Debugging 걸어서 흐름을 한번 그려보았는데 아닐수도 있다……. 나도 다른 블로거들 처럼 작동 원리를 이해하고 싶다!!!</p>
+
+<p>Spring Seucurity에 OauthException을 커스터마이징 해서 배포하니깐 Custom Message는 원래 잘 나왔던 다른 AccessDeniedExcception이 Forbidden 메시지만 뱉어내기 시작했다.</p>
+
+<p>그래서 ExceptionTranslationFilter로 Customized AccessDeniedHandler를 만들어 보자!</p>
+
+<ol>
+  <li>
+    <p>CustomAccessDeniedHandler를 생성한다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.json.JSONObject</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.security.access.AccessDeniedException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.security.web.access.AccessDeniedHandler</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+ <span class="c1">//AccessDeniedException을 Customizing 하기 위한 Handler</span>
+ <span class="nd">@Slf4j</span>
+ <span class="nd">@Component</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomAccessDeniedHandler</span>  <span class="kd">implements</span> <span class="nc">AccessDeniedHandler</span> <span class="o">{</span>
+     <span class="nd">@Autowired</span>
+     <span class="kd">private</span> <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span><span class="o">;</span>
+
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handle</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">AccessDeniedException</span> <span class="n">accessDeniedException</span><span class="o">)</span>
+     <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ServletException</span> <span class="o">{</span>
+         <span class="k">if</span><span class="o">(!</span><span class="n">response</span><span class="o">.</span><span class="na">isCommitted</span><span class="o">())</span> <span class="o">{</span> <span class="c1">//response가 이미 client에 commited가 되어있는지 확인한다. Committed된 response는 HTTP Status와 Headers를 가지고 있고 당신이 수정할 수 있다.</span>
+
+             <span class="nc">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONObject</span><span class="o">(</span><span class="n">accessDeniedException</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+             <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">jsonMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+             <span class="n">jsonMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"locked_time"</span><span class="o">,</span> <span class="n">json</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"locked_time"</span><span class="o">));</span>
+
+             <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"application/json;charset=UTF-8"</span><span class="o">);</span>
+             <span class="nc">Map</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">();</span>
+             <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timestamp"</span><span class="o">,</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
+             <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"status"</span><span class="o">,</span> <span class="s">"403"</span><span class="o">);</span>
+             <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"error"</span><span class="o">,</span> <span class="s">"Access_Denied"</span><span class="o">);</span>
+             <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="n">json</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"message"</span><span class="o">));</span>
+             <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="n">jsonMap</span><span class="o">);</span>
+             <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+             <span class="n">response</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">HttpServletResponse</span><span class="o">.</span><span class="na">SC_UNAUTHORIZED</span><span class="o">);</span>
+             <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">write</span><span class="o">(</span><span class="n">objectMapper</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">map</span><span class="o">));</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>AuthEntryPoint 클래스를 생성한다.</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.codehaus.jackson.map.ObjectMapper</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.security.core.AuthenticationException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.security.web.AuthenticationEntryPoint</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+ <span class="c1">//CustomAuthException Entry Point for token Check Failure (401 unauthorized)</span>
+ <span class="nd">@Component</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomAuthenticationEntryPoint</span> <span class="kd">implements</span> <span class="nc">AuthenticationEntryPoint</span> <span class="o">{</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">commence</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">AuthenticationException</span> <span class="n">authenticationException</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">{</span>
+         <span class="nc">Map</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">();</span>
+         <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"timestamp"</span><span class="o">,</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
+         <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"status"</span><span class="o">,</span> <span class="s">"401"</span><span class="o">);</span>
+         <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"error"</span><span class="o">,</span> <span class="s">"Unauthorized"</span><span class="o">);</span>
+         <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"message"</span><span class="o">,</span> <span class="n">authenticationException</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+            
+         <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+         <span class="n">response</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">HttpServletResponse</span><span class="o">.</span><span class="na">SC_UNAUTHORIZED</span><span class="o">);</span>
+         <span class="k">try</span><span class="o">{</span>
+             <span class="nc">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
+             <span class="n">mapper</span><span class="o">.</span><span class="na">writeValue</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">(),</span> <span class="n">map</span><span class="o">);</span>
+         <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="nf">ServletException</span><span class="o">();</span>
+         <span class="o">}</span>
+
+     <span class="o">}</span>
+
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>WebSeucrityConfig에 설정한다.</p>
+  </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span>
+<span class="kd">class</span> <span class="nc">SecurityConfigurer</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
+
+		<span class="nd">@Bean</span>
+			<span class="kd">public</span> <span class="nc">AccessDeniedHandler</span> <span class="nf">accessDeniedHandler</span><span class="o">(){</span>
+				<span class="k">return</span> <span class="k">new</span> <span class="nf">CustomAccessDeniedHandler</span><span class="o">();</span>
+			<span class="o">}</span>
+		
+		<span class="nd">@Bean</span>
+		<span class="kd">public</span> <span class="nc">CustomExceptionTranslationFilter</span> <span class="nf">customExceptionTranslationFilter</span><span class="o">()</span> <span class="o">{</span>
+			<span class="nc">CustomExceptionTranslationFilter</span> <span class="n">customExceptionTranslationFilter</span> <span class="o">=</span>  <span class="k">new</span> <span class="nc">CustomExceptionTranslationFilter</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomAuthenticationEntryPoint</span><span class="o">());</span>
+			<span class="k">return</span> <span class="n">customExceptionTranslationFilter</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="nd">@Component</span>
+		<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomExceptionTranslationFilter</span> <span class="kd">extends</span> <span class="nc">ExceptionTranslationFilter</span> <span class="o">{</span>
+			<span class="kd">public</span> <span class="nf">CustomExceptionTranslationFilter</span><span class="o">(</span><span class="nc">AuthenticationEntryPoint</span> <span class="n">authenticationEntryPoint</span><span class="o">)</span> <span class="o">{</span>
+				<span class="kd">super</span><span class="o">(</span><span class="n">authenticationEntryPoint</span><span class="o">);</span>
+				<span class="k">this</span><span class="o">.</span><span class="na">setAccessDeniedHandler</span><span class="o">(</span><span class="n">accessDeniedHandler</span><span class="o">());</span>
+
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>설정 전에는</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+    <span class="s">"timestamp"</span><span class="o">:</span> <span class="s">"2021-07-29T05:17:04.461+0000"</span><span class="o">,</span>
+    <span class="s">"status"</span><span class="o">:</span> <span class="mi">403</span><span class="o">,</span>
+    <span class="s">"error"</span><span class="o">:</span> <span class="s">"Forbidden"</span><span class="o">,</span>
+    <span class="s">"message"</span><span class="o">:</span> <span class="s">"Forbidden"</span><span class="o">,</span>
+    <span class="s">"path"</span><span class="o">:</span> <span class="s">"/oauth/token"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>설정 후에는</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+    <span class="s">"timestamp"</span><span class="o">:</span> <span class="s">"2021-07-29T14:25:37.56"</span><span class="o">,</span>
+    <span class="s">"status"</span><span class="o">:</span> <span class="s">"403"</span><span class="o">,</span>
+    <span class="s">"error"</span><span class="o">:</span> <span class="s">"Access_Denied"</span><span class="o">,</span>
+    <span class="s">"message"</span><span class="o">:</span> <span class="s">"account_locked"</span><span class="o">,</span>
+    <span class="s">"data"</span><span class="o">:</span> <span class="o">{</span>
+        <span class="s">"locked_time"</span><span class="o">:</span> <span class="s">"2021-07-29T14:51:28.811"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>인증과 인가 과정에서 발생하는 예외 2가지</p>
+
+<ul>
+  <li>AuthenticationException (인증) 401</li>
+  <li>AccessDeniedException (인가) 403</li>
+</ul>
+
+<p>ExceptionTranslationFilter는</p>
+
+<p>FilterChainProxy가 호출하는 도중 발생하는 예외를 처리하는 예외처리기이다.</p>
+
+<p>AccessDeniedException과 AuthenticationException을 처리하는 필터이다.</p>
+
+<p>핵심 메서드는 HandleSpringSecurityException()</p>
+
+<ul>
+  <li>인증 과정 중 AuthenticationException이 발생한다면, AuthenticationEntryPoint를 실행하여 인증을 유도한다.</li>
+  <li>인가 과정 중 AccessDeniedException예외가 발생하면 먼저 현재 Authentication이 익명 사용자인지 확인한다. 만약 익명이라면 AuthenticationEntryPoint를 실행하여 인증을 유도하고 아니라면 AccessDeniedHandler에게 위임한다.</li>
+</ul>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0804/img1.png" />
+ExceptionTranslationFilter.handleSpringSecurityException</p>
+:ET

@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring] jpa-hibernate-dll 옵션"
 date: 2021-07-22
-excerpt: "jpa-hibernate-dll 옵션 종류"
+categories: [Language, Spring]
 tags: [jpa, hibernate]
 comments: true
 ---

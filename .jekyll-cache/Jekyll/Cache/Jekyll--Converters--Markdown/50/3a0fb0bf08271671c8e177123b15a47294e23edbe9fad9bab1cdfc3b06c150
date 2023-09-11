@@ -1,0 +1,210 @@
+I"�d<p>현재(2022년 기준) 다니고 있는 회사에 코드에는 테스크 코드가 없다. 전에 계셨던 이사님이 테스트 코드를 작성하려고 하신 흔적은 있지만 대부분의 기능에는 테스트 코드가 없다. 
+사실 나도 이 회사에서 개발자로서는 처음 입사했고 중소기업 특성 상 제대로 된 사수도 없었기에 초기에는 테스트 코드가 얼마나 중요한지 자각하지 못하였다.</p>
+
+<p>그리고 테스트 서버도 없었다. 내가 입사하고 1년이 지나고 나서 생겼다. 그 전에는 Postman으로 API를 호출해서 잘 나오면 실서버에 배포하고 배포 하고 나서 문제 생기면 롤백하고 이런 식으로 프로세스가 있었다. 지금보면 정말 위험하고 고객에 제공하는 서비스인데 무책임하다고 느껴지기도 한다.</p>
+
+<p>재직하면서 인프런 강의나 다양한 유투브 채널, 클린 코드 북클럽, 스터디를 통해서 테스트 코드의 중요성을 깨닫고 현재 하는 업무는 혼자하는 작업이고 코드리뷰를 해줄 사람이 없기 때문에 더욱더 테스트 코드는 필수라고 생각이 들었다. 그래서 나는 퇴사하기 전에 회사 코드에 <strong>테스트 코드를 적용하기로 결심 했다!</strong></p>
+
+<p>왜 이 생각을 하는데 1년이 넘게 걸렸을까? 조금 더 빨리 했으면 좋았을 텐데.. 싶지만 그래도 <strong>BETTER LATE THAN NEVER!</strong> 나의 업무를 인수인계 받으시는 분이 좀더 나은 개발환경에서 개발을 할 수 있도록 제공하고 싶다.</p>
+
+<p>SpringBoot에서 JUnit5를 사용해서 테스트코드를 작성해 보았다.</p>
+
+<h2 id="unit-tests">Unit Tests</h2>
+
+<h3 id="파일-업로드-관련-서비스-테스트-코드">파일 업로드 관련 서비스 테스트 코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Assertions</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.DisplayName</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.InjectMocks</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.junit.jupiter.MockitoExtension</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.mock.web.MockMultipartFile</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+
+<span class="nd">@ExtendWith</span><span class="o">(</span><span class="nc">MockitoExtension</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">class</span> <span class="nc">FileServerServiceTest</span> <span class="o">{</span>
+
+    <span class="nd">@InjectMocks</span>
+    <span class="nc">FileServerService</span> <span class="n">fileServerService</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="nd">@DisplayName</span><span class="o">(</span><span class="s">"파일 업로드 테스트"</span><span class="o">)</span>
+    <span class="kt">void</span> <span class="nf">uploadFileWithData</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+        <span class="c1">//given</span>
+        <span class="nc">String</span> <span class="n">filePath</span> <span class="o">=</span> <span class="s">"D:\\tmp"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="s">"Test_File"</span><span class="o">;</span>
+        <span class="nc">MockMultipartFile</span> <span class="n">imageData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MockMultipartFile</span><span class="o">(</span><span class="s">"data"</span><span class="o">,</span> <span class="s">"filename.png"</span><span class="o">,</span> <span class="s">"image/png"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"testImg\\test.png"</span><span class="o">));</span>
+
+        <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">fileServerService</span><span class="o">.</span><span class="na">uploadFileWithData</span><span class="o">(</span><span class="n">filePath</span><span class="o">,</span> <span class="n">fileName</span><span class="o">,</span> <span class="n">imageData</span><span class="o">);</span>
+        <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="s">"Success"</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>@ExtendWith(MockitoExtention.class) : Mockito의 Mock 객체를 사용하기 위한 Annotation</li>
+  <li>@InjectMocks : 실제 객체를 생성하고 mock 의존성을 주입하는 Annotation. 테스트 클래스에서 테스트의 대상이 되는 인스턴스를 생성할 때 사용한다.</li>
+  <li>MockMultipartFile : MultipartFile 인터페이스의 Mock 구현.</li>
+  <li>Aseertions.assertEquals(expected, actual) : 기대한 값과 실제 값이 같은지 비교하는 함수</li>
+</ul>
+
+<h3 id="resttemplate관련-서비스-테스트-코드">RestTemplate관련 서비스 테스트 코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">lombok.SneakyThrows</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Assertions</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.InjectMocks</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.Mock</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.junit.jupiter.MockitoExtension</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.web.client.TestRestTemplate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpHeaders</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">;</span>
+
+<span class="nd">@ExtendWith</span><span class="o">(</span><span class="nc">MockitoExtension</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">class</span> <span class="nc">RestTemplateClientTest</span> <span class="o">{</span>
+    <span class="nd">@InjectMocks</span>
+    <span class="nc">RestTemplateClient</span> <span class="n">restTemplateClient</span> <span class="o">;</span>
+
+    <span class="nd">@Mock</span>
+    <span class="kd">private</span> <span class="nc">TestRestTemplate</span> <span class="n">testRestTemplate</span><span class="o">;</span>
+
+    <span class="nd">@Mock</span>
+    <span class="nc">ServiceConfiguration</span> <span class="n">config</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">LICENSE_UNREG_SCENARIO_URL_FORMAT</span> <span class="o">=</span> <span class="s">"call/{userId}"</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="nd">@SneakyThrows</span>
+    <span class="kt">void</span> <span class="nf">unregisterScenario</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">//given</span>
+        <span class="nc">String</span> <span class="n">userId</span> <span class="o">=</span> <span class="s">"eunmi@test.com"</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">scenarioId</span> <span class="o">=</span> <span class="mi">123456</span><span class="o">;</span> 
+        <span class="k">this</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">licenseManagerUrl</span> <span class="o">=</span> <span class="s">"https://localhost:2135"</span><span class="o">;</span>
+
+        <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">UpdateResult</span><span class="o">&gt;</span> <span class="n">responseEntity</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+        <span class="nc">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpHeaders</span><span class="o">();</span>
+        <span class="n">headers</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span> <span class="s">"Bearer Authorization_code"</span><span class="o">);</span>
+        <span class="n">when</span><span class="o">(</span><span class="n">testRestTemplate</span><span class="o">.</span><span class="na">exchange</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">licenseManagerUrl</span> <span class="o">+</span> <span class="no">LICENSE_UNREG_SCENARIO_URL_FORMAT</span><span class="o">,</span> <span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="nc">UpdateResult</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">userId</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">scenarioId</span><span class="o">))).</span><span class="na">thenReturn</span><span class="o">(</span><span class="n">responseEntity</span><span class="o">);</span>
+
+        <span class="c1">//when</span>
+        <span class="kt">boolean</span> <span class="n">actualResult</span> <span class="o">=</span> <span class="n">restTemplateClient</span><span class="o">.</span><span class="na">unregisterScenario</span><span class="o">(</span><span class="n">userId</span><span class="o">,</span> <span class="n">scenarioId</span><span class="o">);</span>
+
+        <span class="c1">//then</span>
+        <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">actualResult</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>@Mock : 가짜 객체인 Mock 객체</li>
+  <li>@SneakyThrows : throws 선언을 하지 않고도 checked exception을 던질 수 있도록 해주는 annotation</li>
+  <li>when() :Mock객체를 위해 RestTemplate이 호출이 됐을 때 어떤 return값을 반환해야 하는지 설정하는 메소드</li>
+</ul>
+
+<p>Unit Test를 작성하면서 지금까지는 발견하지 못했던 부분에서 nullPointerException이 날 수 있는 경우를 발견 했다. 서비스하면서 아직 문제가 발견되지 못했지만 테스트 코드를 통해 그 경우의 수를 발견 했기 때문에 테스트 코드의 중요성을 다시한번 깨닫게 되는 순간이 되었다.</p>
+
+<p>이번엔 통합 테스트를 살펴 보겠다</p>
+
+<h2 id="integration-tests">Integration Tests</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.argos_labs.rpa.stu.ServiceConfiguration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.*</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.LinkedMultiValueMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.MultiValueMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.client.RestTemplate</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">MockMvcRequestBuilders</span><span class="o">.</span><span class="na">get</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">result</span><span class="o">.</span><span class="na">MockMvcResultHandlers</span><span class="o">.</span><span class="na">print</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">result</span><span class="o">.</span><span class="na">MockMvcResultMatchers</span><span class="o">.</span><span class="na">status</span><span class="o">;</span>
+
+<span class="nd">@SpringBootTest</span><span class="o">()</span>
+<span class="nd">@AutoConfigureMockMvc</span>
+<span class="kd">class</span> <span class="nc">AppScenarioEditorControllerTest</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="nc">ServiceConfiguration</span> <span class="n">config</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="kt">void</span> <span class="nf">aliveTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">token</span> <span class="o">=</span> <span class="n">getAccessToken</span><span class="o">(</span><span class="n">config</span><span class="o">.</span><span class="na">authServerUri</span><span class="o">);</span>
+        <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">get</span><span class="o">(</span><span class="s">"/AppScenarioEditorService/aliveTest"</span><span class="o">).</span><span class="na">header</span><span class="o">(</span><span class="nc">HttpHeaders</span><span class="o">.</span><span class="na">AUTHORIZATION</span><span class="o">,</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">token</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">print</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isOk</span><span class="o">());</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">RestTemplate</span> <span class="n">restTemplate</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAccessToken</span><span class="o">(</span><span class="nc">String</span> <span class="n">configUrl</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RestTemplate</span><span class="o">();</span>
+        <span class="nc">String</span> <span class="n">clientId</span> <span class="o">=</span> <span class="s">"clientId"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">grant_type</span> <span class="o">=</span> <span class="s">"password"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">userid</span> <span class="o">=</span> <span class="s">"test@test.com"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"encoded_password"</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">seed</span> <span class="o">=</span> <span class="s">"seed_value"</span><span class="o">;</span>
+
+        <span class="nc">MultiValueMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">parameters</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedMultiValueMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"grant_type"</span><span class="o">,</span> <span class="n">grant_type</span><span class="o">);</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"client_id"</span><span class="o">,</span> <span class="n">clientId</span><span class="o">);</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"userid"</span><span class="o">,</span> <span class="n">userid</span><span class="o">);</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"password"</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"seed"</span><span class="o">,</span> <span class="n">seed</span><span class="o">);</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span> <span class="n">userid</span><span class="o">);</span>
+
+        <span class="nc">HttpHeaders</span> <span class="n">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpHeaders</span><span class="o">();</span>
+        <span class="n">headers</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="nc">HttpHeaders</span><span class="o">.</span><span class="na">AUTHORIZATION</span><span class="o">,</span> <span class="s">"Basic Authorization_Code"</span><span class="o">);</span>
+
+        <span class="nc">HttpEntity</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpEntity</span><span class="o">(</span><span class="n">parameters</span><span class="o">,</span> <span class="n">headers</span><span class="o">);</span>
+
+        <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">postForEntity</span><span class="o">(</span><span class="n">configUrl</span> <span class="o">+</span> <span class="s">"oauth/token"</span><span class="o">,</span> <span class="n">request</span><span class="o">,</span> <span class="nc">Map</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">result</span><span class="o">.</span><span class="na">getBody</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"access_token"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>@SpringBootTest : 통합테스트를 할때 사용되는 Annotation. 실제 어플리케이션을 기동하며 포트주소가 주어지고 실제 데이터베이서에 연결되는 테스트를 수행하도록 한다.</li>
+  <li>@AutoConfigureMockMvc : MockMvc의 auto-configuration을 테스트 클래스에 적용하고 설정하기 위해 사용되는 Annotation.</li>
+</ul>
+
+<h2 id="통합테스트에서-느낌-어려웠던-점">통합테스트에서 느낌 어려웠던 점</h2>
+
+<h3 id="authorization-token">Authorization Token</h3>
+
+<p>통합 테스트를 할 때는 Spring Security가 적용이 되어있어서 Authorization이 필요했다. 이 부분을 어떻게 적용해야 할 지 많이 헤맸던 구간이다. 그렇다고 테스트할 때만 security 적용을 뺄 수 없고.. 그건 전혀 통합테스트와 맞지 않는 행동이니깐! 
+그래서 RestTemplate으로 oauth2 서버를 호출해서 token을 받아서 적용해서 사용하기로 했다!</p>
+
+<h3 id="nullpointerexception">NullPointerException</h3>
+
+<p>통합테스트에서 Service 클래스에서 Mapper가 가져오는 데이터에서 자꾸 NullPointerException이 났다. 그래서 통합테스트에서도 Unit Test처럼 Mock 객체를 만들어줘야 하는건가 고민했었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span><span class="o">(</span><span class="n">pcScenarioEditorMapper</span><span class="o">.</span><span class="na">select_company_code_from_scenario_hash_key</span><span class="o">(</span><span class="n">scenario</span><span class="o">.</span><span class="na">getHashKey</span><span class="o">(),</span> <span class="kc">null</span><span class="o">)).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
+<span class="n">given</span><span class="o">(</span><span class="n">pcScenarioEditorMapper</span><span class="o">.</span><span class="na">select_company_code_using_userId</span><span class="o">(</span><span class="n">authUserId</span><span class="o">)).</span><span class="na">willReturn</span><span class="o">(</span><span class="s">"ABCD"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>하지만 문제의 원인은! 단위 테스틑 Mock 객체를 사용함으로써 실제 데이터를 사용하는게 아니라 가짜로 정의한 데이터와 bean 객체를 사용하는데 통합테스트에서는 실제 애플리케이션이 작동되는 flow를 확인 하기 위해 실제 데이터를 사용한다.</p>
+
+<p>근데 나는 이걸 이해 못하고 통합테스트에서도 단위 테스트에서 썼던 데이터(가짜)를 그대로 가져와서 쓰다보니깐 실제 DB에 없는 데이터를 가져오려고 하다보니 nullpointerexception이 발생하였다!</p>
+
+<p>이번 기회로 확실히 단위테스트와 통합테스트를 이해할 수 있었다!!</p>
+:ET

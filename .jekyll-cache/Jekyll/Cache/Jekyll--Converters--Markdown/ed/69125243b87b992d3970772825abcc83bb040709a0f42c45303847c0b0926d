@@ -1,0 +1,134 @@
+I"�&<p><a href="https://www.acmicpc.net/problem/1181">https://www.acmicpc.net/problem/1181</a></p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0509/Untitled.png" /></p>
+
+<p>알고리즘 분류 : 문자열, 정렬</p>
+
+<p>이번 문제를 통해 Java Comparator를 제대로 다시 익힐 수 있었다.</p>
+
+<h1 id="java-comparator란">Java Comparator란</h1>
+
+<p>자바 오브젝트를 정렬하기 위한 인터페이스이다.  Comprators는 compare 함수를 통해 직접 정의한 정렬을 구현할 수 있다.</p>
+
+<h3 id="compare">Compare()</h3>
+
+<p>compare함수는 두개의 argument를 비교하여 음수, 0,양수를 리턴하는데 각각의 의미는</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Returns</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>음수</td>
+      <td>첫번째 argument가 왼쪽에 있어야 한다.</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>첫번째, 두번째 argument는 같다</td>
+    </tr>
+    <tr>
+      <td>양수</td>
+      <td>첫번째 argument가 오른쪽에 있어야 한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>reserved() : <strong>default method (java 8이상 지원)</strong> , 역순으로 비교하고 싶을 때</p>
+
+<h2 id="예제-caebcd">예제 [c,a,eb,cd]</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">String</span> <span class="n">o1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">o2</span><span class="o">.</span><span class="na">length</span><span class="o">()){</span>
+                    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span> <span class="c1">//sort ascending </span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="k">return</span>  <span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>o1</th>
+      <th>o2</th>
+      <th>return</th>
+      <th>meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>a</td>
+      <td>양수</td>
+      <td>c 는 오른쪽</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>c</td>
+      <td>음수</td>
+      <td>a 는 왼쪽</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td>eb</td>
+      <td>음수</td>
+      <td>c 는 왼쪽</td>
+    </tr>
+    <tr>
+      <td>eb</td>
+      <td>cd</td>
+      <td>양수</td>
+      <td>eb 는 오른쪽</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Result</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">c</span><span class="o">,</span> <span class="n">cd</span><span class="o">,</span> <span class="n">eb</span><span class="o">]</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">단어정렬</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+        <span class="nc">BufferedReader</span> <span class="n">br</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="nc">InputStreamReader</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">in</span><span class="o">));</span>
+        <span class="kt">int</span> <span class="no">N</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">());</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="no">N</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">word</span> <span class="o">=</span> <span class="n">br</span><span class="o">.</span><span class="na">readLine</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(!</span><span class="n">list</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">word</span><span class="o">)){</span>
+                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">word</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="no">N</span><span class="o">--;</span>
+        <span class="o">}</span>
+
+        <span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">String</span> <span class="n">o1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">o2</span><span class="o">.</span><span class="na">length</span><span class="o">()){</span>
+                    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+                        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span> <span class="c1">//오름차순으로 정렬</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+                <span class="k">return</span>  <span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+        <span class="nc">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">list</span><span class="o">){</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">"\n"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

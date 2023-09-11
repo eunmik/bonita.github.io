@@ -2,7 +2,7 @@
 layout: post
 title: "How to implement Social login - Step 1. Register Oauth Service (Google, Github, Facebook, Kakao, Naver)"
 date: 2022-03-30
-excerpt: "How to implement Social Login into your webservice"
+categories: [Language, Java]
 tags: ["API", "Login", "Oauth2", "Java"]
 comments: true
 ---

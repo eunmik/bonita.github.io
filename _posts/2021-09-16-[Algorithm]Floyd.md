@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm] Floyd 플로이드 와샬 알고리즘"
 date: 2021-09-15
-excerpt: "Floyd 플로이드 알고리즘"
+categories: [CS, Algorithm]
 tags: ["Algorithm", "Floyd", "Java"]
 comments: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "[Spring Security] Refresh Token 갱신하기"
 date: 2021-08-12
-excerpt: "Refresh Token이란? 갱신할수있을까?"
+categories: [Language, Spring]
 tags: [Spring Security, Refresh Token]
 comments: true
 ---

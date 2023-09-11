@@ -1,0 +1,56 @@
+I"G<h2 id="스프링부트에서-도커-이미지-만들기">스프링부트에서 도커 이미지 만들기</h2>
+
+<h3 id="1-jar파일-생성-하기">1. jar파일 생성 하기</h3>
+
+<p>maven clean과 pacakge를 순서대로 실행해준다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210617-img1.png" /></p>
+
+<p>package 실행 후에 target 디렉토리에 jar파일이 생성 된다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210617-img2.png" /></p>
+
+<p>생성된 jar 파일을 아래 명령어로 실행하여 동작하는지 확인해 보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">target</span><span class="o">/</span><span class="n">webhook</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">.</span><span class="na">jar</span>
+</code></pre></div></div>
+
+<h3 id="2-jar로-도커-이미지-만들기">2. jar로 도커 이미지 만들기</h3>
+
+<p>프로젝트 아래에 Dokerfile을 만들어 준다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">FROM</span> <span class="nl">openjdk:</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span><span class="o">-</span><span class="n">alpine</span>
+<span class="no">ADD</span> <span class="n">target</span><span class="o">/</span><span class="n">webhook</span><span class="o">-</span><span class="n">demo</span><span class="o">-</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">.</span><span class="na">jar</span> <span class="n">app</span><span class="o">.</span><span class="na">jar</span>
+<span class="no">ENV</span> <span class="no">JAVA_OPTS</span><span class="o">=</span><span class="s">""</span>
+<span class="no">ENTRYPOINT</span> <span class="o">[</span><span class="s">"java"</span><span class="o">,</span> <span class="s">"-jar"</span><span class="o">,</span> <span class="s">"/app.jar"</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>아래 명령어로 Dockerfile을 이용해서 DockerImage를 생성하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">build</span> <span class="o">--</span><span class="n">tag</span> <span class="n">webhook</span><span class="o">-</span><span class="nl">demo:</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span> <span class="o">.</span> 
+</code></pre></div></div>
+
+<p>이미지가 만들어 졌는지 확인한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">images</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">demo</span>
+</code></pre></div></div>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210617-img3.png" /></p>
+
+<h3 id="3-도커-이미지-파일로-만들기">3. 도커 이미지 파일로 만들기</h3>
+
+<p>도커 이미지 파일을 tar파일로 저장하기</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">save</span> <span class="o">-</span><span class="n">o</span> <span class="n">webhook</span><span class="o">-</span><span class="n">demo</span><span class="o">.</span><span class="na">tar</span> <span class="n">webhook</span><span class="o">-</span><span class="nl">demo:</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>tar파일로 저장된 도커 이미지를 실행하기</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">load</span> <span class="o">-</span><span class="n">i</span> <span class="n">webhook</span><span class="o">-</span><span class="n">demo</span><span class="o">.</span><span class="na">tar</span>
+</code></pre></div></div>
+
+<p>잘 실행 되는지 확인하기</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mi">4021</span><span class="o">:</span><span class="mi">4021</span> <span class="n">webhook</span><span class="o">-</span><span class="nl">demo:</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span>
+</code></pre></div></div>
+:ET

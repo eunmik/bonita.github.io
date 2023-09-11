@@ -2,7 +2,7 @@
 layout: post
 title: "[TDD] 4장 TDD with mock"
 date: 2021-04-09
-excerpt: "TDD 개발을 위한 기본서4"
+categories: [Language, Java]
 tags: [Java, TDD]
 comments: true
 ---

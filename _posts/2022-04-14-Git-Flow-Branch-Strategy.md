@@ -2,7 +2,7 @@
 layout: post
 title: "Git flow branch strategy"
 date: 2022-04-14
-excerpt: "Have you heard of git flow?"
+categories: [Tool, Git]
 tags: ["git", "strategy"]
 comments: true
 ---

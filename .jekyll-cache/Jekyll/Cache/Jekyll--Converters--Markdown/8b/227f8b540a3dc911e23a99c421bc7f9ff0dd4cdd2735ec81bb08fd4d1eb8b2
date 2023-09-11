@@ -1,0 +1,9 @@
+I"�<p>Mybatis에서 resultType을 boolean으로 사용하고 싶을 때는 아래처럼 사용하면 된다.</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="k">select</span> <span class="n">id</span><span class="o">=</span><span class="nv">"isExist"</span> <span class="n">resultType</span><span class="o">=</span><span class="nv">"boolean"</span><span class="o">&gt;</span>
+  <span class="k">SELECT</span>    <span class="n">IF</span><span class="p">(</span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="k">FROM</span>    <span class="n">test</span>
+  <span class="k">WHERE</span>    <span class="n">testId</span> <span class="o">=</span> <span class="o">#</span><span class="p">{</span><span class="n">testId</span><span class="p">}</span>
+<span class="o">&lt;/</span><span class="k">select</span><span class="o">&gt;</span>
+</code></pre></div></div>
+:ET

@@ -2,7 +2,7 @@
 layout: post
 title: "[Java] Integer vs int 차이"
 date: 2021-03-18
-excerpt: "Interger와 int의 차이를 알아보자."
+categories: [Language, Java]
 tags: [java, Integer]
 comments: true
 ---

@@ -1,0 +1,28 @@
+I"�<p>*args : to pass a variable number of arguments to a function.</p>
+
+<p>**kwargs : to pass a keywarded, variable-length argument list.</p>
+
+<h3 id="example-code">Example Code</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+  <span class="c1">#(1,2,3,1,2,3,1,2,3)
+</span>  <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+  <span class="c1">#&lt;class 'tuple'&gt;
+</span>  <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+  <span class="c1">#1,2,3,1,2,3,1,2,3
+</span>  <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span>
+  <span class="c1">#TypeError: type() takes 1 or 3 arguments
+</span>  <span class="k">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="c1">#{'elfd': 123, 'leof': True, 'alwkr': 'awer'}
+</span>  <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+  <span class="c1">#&lt;class 'dict'&gt;
+</span>  <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+<span class="err">​</span>    <span class="n">result</span> <span class="o">+=</span> <span class="n">number</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">plus</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span>
+<span class="err">​</span>      <span class="n">elfd</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span><span class="n">leof</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">alwkr</span><span class="o">=</span><span class="s">"awer"</span><span class="p">)</span></code></pre></figure>
+
+:ET

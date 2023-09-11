@@ -1,0 +1,389 @@
+I"ڊ<h1 id="algorithm-dfsbfs">[Algorithm] DFS/BFS</h1>
+
+<h2 id="bstbinary-search-tree-이진트리탐색">BST(Binary Search Tree) 이진트리탐색</h2>
+
+<p>이진탐색과 연결리스트를 결합한 자료구조의 일종이다. 이진 탐색의 효율적인 탐색능력을 유지하면서도, 빈번한 삭제와 입력이 가능하게 끔 고안되었다.</p>
+
+<p>이진 탐색 트리는 아래의 속성을 가지고 있다.</p>
+
+<ul>
+  <li>각 노드의 왼쪽 서브트리에는 해당 노드의 값보다 작은 값을 지닌 노드들로 이루어져 있다.</li>
+  <li>각 노드의 오른쪽 서브트리에는 해당 노드의 값보다 큰 값을 지닌 노드들로 이루어져 있다.</li>
+  <li>중복된 노드가 없어야 한다.</li>
+  <li>왼쪽 서브트리, 오른쪽 서브트리 또한 이진탐색트리이다.</li>
+</ul>
+
+<p>이진탐색트리를 순회 할 때는 3가지 방식이있다.</p>
+
+<p>(근데 이거 완전탐색할 때 했는데 기억안남.. 쏘 스튜핏)</p>
+
+<ul>
+  <li>전위 순회 (Pre-Order Traversal) : root → left → right</li>
+  <li>중위 순회 (Inorder Traversal) : left → root → right</li>
+  <li>후위 순회 (Post-Order Traversal) : left → right → root</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeNode</span> <span class="o">{</span>
+	<span class="kt">int</span> <span class="n">data</span><span class="o">;</span>
+	<span class="nc">TreeNode</span> <span class="n">left</span><span class="o">;</span>
+	<span class="nc">TreeNode</span> <span class="n">right</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">TreeNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="전위-순회-pre-order-traversal">전위 순회 (Pre-Order Traversal)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">data</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+		<span class="n">preorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+		<span class="n">preorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://miro.medium.com/max/625/1*UGoV21qO6N8JED-ozsbXWw.gif" /></p>
+
+<p>PreOrder Traversal</p>
+
+<h3 id="중위-순회in-order-traversal">중위 순회(In-Order Traversal)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">){</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+								<span class="n">inorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+								<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">data</span><span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+								<span class="n">inorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+			<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://miro.medium.com/max/625/1*bxQlukgMC9cGv_MFUllX2Q.gif" /></p>
+
+<p>Inorder Traversal</p>
+
+<h3 id="후위-순회postorder-traversal">후위 순회(Postorder Traversal)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">postorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">postorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+		<span class="n">postorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">data</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><img src="https://miro.medium.com/max/625/1*UGrzA4qtLCaaCiNAKZyj_w.gif" /></p>
+
+<p>PostOrder Traversal</p>
+
+<p>그래프 탐색의 목적은 모든 정점을 한 번씩 방문 하는 것이다. 크게 두가지로 나누는데</p>
+
+<ul>
+  <li>DFS (Depth First Search, 깊이 우선 탐색)
+    <ul>
+      <li>구현 방법 : Stack</li>
+    </ul>
+  </li>
+  <li>BFS (Beneath First Search, 너비 우선 탐색)
+    <ul>
+      <li>구현 방법 : Queue</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://t1.daumcdn.net/cfile/tistory/2254723E588084F830" /></p>
+
+<h3 id="dfs-vs-bfs">DFS vs BFS</h3>
+
+<h2 id="dfsdepth-first-search-깊이-우선-탐색">DFS(Depth First Search, 깊이 우선 탐색)</h2>
+
+<p>DFS는 트리와 그래프를 순회하거나 탐색하는 알고리즘 중에 하나이다.  DFS의 기본 동작은 Stack을 이용해서 갈 수 있는 만큼 최대한 깊이 가고, 더 이상 갈곳이 없다면 이전 정점으로 돌아간다는 것이다. 그래프와 트리의 다른 점은 그래프는 싸이클이 생겨 두 번 방문하는 일이 생길 수 있다는 것이다.</p>
+
+<p>노드를 두 번방문하는 것을 피하기 위해서 array를 사용해서 방문한 노드를 저장한다.</p>
+
+<h3 id="dfs-장점과-단점">DFS 장점과 단점</h3>
+
+<h1 id="장점">장점</h1>
+
+<ul>
+  <li>현 경로상의 노드를 기억하기 때문에 적은 메모리를 사용한다.</li>
+  <li>찾으려는 노드가 깊은 단계에 있는 경우 BFS 보다 빠르게 찾을 수 있다.</li>
+</ul>
+
+<h1 id="단점">단점</h1>
+
+<ul>
+  <li>해가 없는 경로를 탐색 할 경우 단계가 끝날 때까지 탐색한다. 효율성을 높이기 위해서 미리 지정한 임의 깊이까지만 탐색하고 해를 발견하지 못하면 빠져나와 다른 경로를 탐색하는 방법을 사용한다.</li>
+  <li>DFS를 통해서 얻어진 해가 최단 경로라는 보장은 없다. DFS는 해에 도착하면 탐색을 종료하기 때문이다.</li>
+</ul>
+
+<p>example.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">Input:</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">6</span> 
+<span class="o">~~</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">2</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">2</span> <span class="o">-&gt;</span> <span class="mi">3</span><span class="o">~~,</span> <span class="mi">3</span> <span class="o">-&gt;</span> <span class="mi">3</span> 
+<span class="nl">Output:</span> <span class="no">DFS</span> <span class="n">from</span> <span class="n">vertex</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">3</span> 
+<span class="nl">Explanation:</span> 
+<span class="no">DFS</span> <span class="nl">Diagram:</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">DFS</span><span class="o">(</span><span class="n">u</span><span class="o">)</span>
+<span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">v</span> <span class="n">of</span> <span class="n">u</span>
+  <span class="k">if</span> <span class="n">v</span> <span class="n">is</span> <span class="n">unvisited</span><span class="o">,</span> <span class="n">tree</span> <span class="n">edge</span><span class="o">,</span> <span class="no">DFS</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">v</span> <span class="n">is</span> <span class="n">explored</span><span class="o">,</span> <span class="n">bidirectional</span><span class="o">/</span><span class="n">back</span> <span class="n">edge</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="n">v</span> <span class="n">is</span> <span class="n">visited</span><span class="o">,</span> <span class="n">forward</span><span class="o">/</span><span class="n">cross</span> <span class="n">edge</span>
+<span class="n">u</span> <span class="o">:</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="no">DFS</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> 
+<span class="n">u</span> <span class="o">:</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="no">DFS</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+<span class="n">u</span> <span class="o">:</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">v</span> <span class="o">:</span> <span class="mi">1</span> <span class="n">is</span> <span class="n">exlpored</span><span class="o">,</span> <span class="nl">v:</span> <span class="mi">2</span> <span class="n">is</span> <span class="n">explored</span><span class="o">,</span> <span class="n">사이클이</span> <span class="n">생김</span>
+<span class="n">backtrack을</span> <span class="n">한다</span> 
+<span class="n">u</span> <span class="o">:</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="no">DFS</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200507074112/ezgif.com-gif-maker61.gif" /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">Input:</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">6</span> 
+<span class="mi">2</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">3</span> <span class="o">-&gt;</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="mi">3</span> 
+<span class="nl">Output:</span> <span class="no">DFS</span> <span class="n">from</span> <span class="n">vertex</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span> 
+<span class="nl">Explanation:</span> 
+<span class="no">DFS</span> <span class="nl">Diagram:</span>
+</code></pre></div></div>
+
+<p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200507075041/ezgif.com-gif-maker7.gif" /></p>
+
+<h3 id="dfs-for-a-graph-예제">DFS FOR A GRAPH 예제</h3>
+
+<p>Practice : <a href="https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1">https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1</a></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Java program to print DFS</span>
+<span class="c1">//mtraversal from a given given</span>
+<span class="c1">// graph</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="c1">// This class represents a</span>
+<span class="c1">// directed graph using adjacency</span>
+<span class="c1">// list representation</span>
+<span class="kd">class</span> <span class="nc">Graph</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="no">V</span><span class="o">;</span> <span class="c1">// No. of vertices</span>
+
+    <span class="c1">// Array of lists for</span>
+    <span class="c1">// Adjacency List Representation</span>
+    <span class="kd">private</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">adj</span><span class="o">[];</span>
+
+    <span class="c1">// Constructor</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span> <span class="nc">Graph</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="no">V</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">[</span><span class="n">v</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span>
+            <span class="n">adj</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Function to add an edge into the graph</span>
+    <span class="kt">void</span> <span class="nf">addEdge</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">,</span> <span class="kt">int</span> <span class="n">w</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="n">adj</span><span class="o">[</span><span class="n">v</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span> <span class="c1">// Add w to v's list.</span>
+    <span class="o">}</span>
+
+    <span class="c1">// A function used by DFS</span>
+    <span class="kt">void</span> <span class="nf">DFSUtil</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">visited</span><span class="o">[])</span>
+    <span class="o">{</span>
+        <span class="c1">// Mark the current node as visited and print it</span>
+        <span class="n">visited</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">v</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+
+        <span class="c1">// Recur for all the vertices adjacent to this</span>
+        <span class="c1">// vertex</span>
+        <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">adj</span><span class="o">[</span><span class="n">v</span><span class="o">].</span><span class="na">listIterator</span><span class="o">();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+        <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">visited</span><span class="o">[</span><span class="n">n</span><span class="o">])</span>
+                <span class="nc">DFSUtil</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">visited</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// The function to do DFS traversal.</span>
+    <span class="c1">// It uses recursive</span>
+    <span class="c1">// DFSUtil()</span>
+    <span class="kt">void</span> <span class="nf">DFS</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="c1">// Mark all the vertices as</span>
+        <span class="c1">// not visited(set as</span>
+        <span class="c1">// false by default in java)</span>
+        <span class="kt">boolean</span> <span class="n">visited</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="no">V</span><span class="o">];</span>
+
+        <span class="c1">// Call the recursive helper</span>
+        <span class="c1">// function to print DFS</span>
+        <span class="c1">// traversal</span>
+        <span class="nc">DFSUtil</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">visited</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Driver Code</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span>
+    <span class="o">{</span>
+        <span class="nc">Graph</span> <span class="n">g</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Graph</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                <span class="s">"Following is Depth First Traversal "</span>
+                        <span class="o">+</span> <span class="s">"(starting from vertex 2)"</span><span class="o">);</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="na">DFS</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// This code is contributed by Aakash Hasija</span>
+</code></pre></div></div>
+
+<h3 id="dfs의-시간-복잡도">DFS의 시간 복잡도</h3>
+
+<p>DFS는 총 V번 부르게 된다. 그러나, 인접 행렬로 구현한 경우와 달리 인접 리스트로 구현한 DFS는 DFS 하나당 각 정점에 연결되어 있는 간선의 개수만큼 탐색을 하게 되어 DFS 하나의 수행 시간이 일정하지 않다.</p>
+
+<p>전체 DFS가 다 끝난 이후를 생각해 보면, DFS가 다 끝났을 시점에는 모든 정점을 한번씩 방문하고, 모든 간선을 한번 씩 검사하게 되므로 O(V+E)의 시간이 걸린다고 말할 수 있다.</p>
+
+<p>따라서, 인접리스트로 구현할 경우 DFS의 시간 복잡도는 O(V+E)이다.</p>
+
+<h2 id="bfsbreadth-first-search-너비-우선-탐색">BFS(Breadth First Search, 너비 우선 탐색)</h2>
+
+<p>BFS의 기본 동작 방식은 queue를 이용하여 지금 위치에서 갈 수 있는 것들을 모두 큐에 넣는 방식이다. 이때, queue에 넣을 시점에 해당 노드를 방문했다고 체크해야한다. (DFS는 일단 들어가서 체크한다)</p>
+
+<p>BFS도 DFS와 마찬가지로 그래프에서는 싸이클이 생겨 두 번 방문하는 일이 생길 수 있다. 그래서 노드를 두 번방문하는 것을 피하기 위해서 array를 사용해서 방문한 노드를 저장한다.</p>
+
+<h3 id="bfs-for-a-graph-예제">BFS FOR A GRAPH 예제</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Java program to print DFS</span>
+<span class="c1">//traversal from a given given</span>
+<span class="c1">// graph</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="c1">// This class represents a</span>
+<span class="c1">// directed graph using adjacency</span>
+<span class="c1">// list representation</span>
+<span class="kd">class</span> <span class="nc">ConnectedGraph</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="no">V</span><span class="o">;</span> <span class="c1">// No. of vertices</span>
+
+    <span class="c1">// Array of lists for</span>
+    <span class="c1">// Adjacency List Representation</span>
+    <span class="kd">private</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">adj</span><span class="o">[];</span>
+
+    <span class="c1">// Constructor</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+    <span class="nc">ConnectedGraph</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="no">V</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">[</span><span class="n">v</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span>
+            <span class="n">adj</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Function to add an edge into the graph</span>
+    <span class="kt">void</span> <span class="nf">addEdge</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">,</span> <span class="kt">int</span> <span class="n">w</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="n">adj</span><span class="o">[</span><span class="n">v</span><span class="o">].</span><span class="na">add</span><span class="o">(</span><span class="n">w</span><span class="o">);</span> <span class="c1">// Add w to v's list.</span>
+    <span class="o">}</span>
+
+    <span class="c1">// prints BFS traversal from a given source s</span>
+    <span class="kt">void</span> <span class="nf">BFS</span><span class="o">(</span><span class="kt">int</span> <span class="n">s</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="c1">// Mark all the vertices as not visited(By default</span>
+        <span class="c1">// set as false)</span>
+        <span class="kt">boolean</span> <span class="n">visited</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="no">V</span><span class="o">];</span>
+
+        <span class="c1">// Create a queue for BFS</span>
+        <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;();</span>
+
+        <span class="c1">// Mark the current node as visited and enqueue it</span>
+        <span class="n">visited</span><span class="o">[</span><span class="n">s</span><span class="o">]=</span><span class="kc">true</span><span class="o">;</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">queue</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="o">{</span>
+            <span class="c1">// Dequeue a vertex from queue and print it</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">s</span><span class="o">+</span><span class="s">" "</span><span class="o">);</span>
+
+            <span class="c1">// Get all adjacent vertices of the dequeued vertex s</span>
+            <span class="c1">// If a adjacent has not been visited, then mark it</span>
+            <span class="c1">// visited and enqueue it</span>
+            <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">adj</span><span class="o">[</span><span class="n">s</span><span class="o">].</span><span class="na">listIterator</span><span class="o">();</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">i</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+            <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">visited</span><span class="o">[</span><span class="n">n</span><span class="o">])</span>
+                <span class="o">{</span>
+                    <span class="n">visited</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                    <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Driver Code</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span>
+    <span class="o">{</span>
+        <span class="nc">ConnectedGraph</span> <span class="n">g</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ConnectedGraph</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">addEdge</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span>
+                <span class="s">"Following is Breadth First Traversal "</span>
+                        <span class="o">+</span> <span class="s">"(starting from vertex 2)"</span><span class="o">);</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="na">BFS</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// This code is contributed by Aakash Hasija</span>
+</code></pre></div></div>
+
+<p><img src="https://ksshlee.github.io/assets/img/al_lib/2019_12_31/how_bfs_works.gif" /></p>
+
+<h3 id="bfs-시간-복잡도">BFS 시간 복잡도</h3>
+
+<p>연결 리스트를 바탕으로 구현된 DFS의 시간 복잡도를 구할 때와 비슷한 논리로 시간 복잡도를 구할 수 있다.</p>
+
+<p>BFS가 끝난 뒤를 생각해 보면, 해당 라인은 모든 간선에 대해서 한 번씩 비교할 것이기 때문에 총 E번 반복할 것이고, 각 정점을 하 번씩 모두 방문하여 V의 시간이 걸릴 것이다.</p>
+
+<p>따라서, 인접 리스트로 구현한 BFS의 시간 복잡도는 O(V+E)이다.</p>
+
+<h3 id="어디에-쓰일까">어디에 쓰일까?</h3>
+
+<ul>
+  <li>웹 크롤링 - 동적으로 생성되는 무한한 인터넷 페이지를 구글이 크롤링 하기 위해서 BFS를 한다.</li>
+  <li>네트워크 브로드 캐스트</li>
+  <li>가비지 컬렉션 -</li>
+</ul>
+
+<h3 id="bfs의-장점과-단점">BFS의 장점과 단점</h3>
+
+<h1 id="장점-1">장점</h1>
+
+<ul>
+  <li>답이 되는 경로가 여러 개인 경우에도 최단 경로임을 보장한다.</li>
+  <li>최단 경로가 존재하면 깊이가 무한정 깊어진다고 해도 답을 찾을 수 있다.</li>
+</ul>
+
+<h1 id="단점-1">단점</h1>
+
+<ul>
+  <li>경로가 매우 길 경우에는 탐색 가지가 급격히 증가함에 따라 보다 많은 기억 공간을 필요로 하게 된다.</li>
+  <li>해가 존재하지 않는다면 유한 그래프의 경우에는 모든 그래프를 탐색한 후에 실패로 끝난다.</li>
+  <li>무한 그래프의 경우에는 결코 해를 찾지도 못하고, 끝내지도 못한다.</li>
+</ul>
+
+<h2 id="잘-정리-되어있는-블로그">잘 정리 되어있는 블로그</h2>
+
+<p><a href="https://covenant.tistory.com/132">https://covenant.tistory.com/132</a></p>
+:ET

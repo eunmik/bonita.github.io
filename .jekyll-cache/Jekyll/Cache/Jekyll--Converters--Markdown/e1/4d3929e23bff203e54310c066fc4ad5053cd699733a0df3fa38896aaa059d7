@@ -1,0 +1,162 @@
+I"�:<p>@RequestBody 메소드 파라미터 어노테이션은 HTTP request body안에 있는 json value를 HttpMessageConverter를 사용해서 java ovject로 bind 한다.</p>
+
+<p>HttpMessageConverter는 Http request message를 연관된 java ovject로 변환하는 작업을 한다.</p>
+
+<p>여기에서는 요청이 있을 때 JSON을 java object로 변환한다. spring boot가 자동적으로 설정 하기 때문에 jackson이 클래스에 있으면, MappingJackson2MessageConverter가 사용된다.</p>
+
+<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0810/img1.png" /></p>
+
+<h3 id="requestbody를-사용한-모습">@RequestBody를 사용한 모습</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span><span class="s">"/"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;</span> <span class="nf">update</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">Car</span> <span class="n">car</span><span class="o">)</span> <span class="o">{</span>
+	<span class="o">....</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="json-to-java-object">Json to Java Object</h3>
+
+<p>@RequestMapping을 만들고 method=RequestMethod.POST로 정의한 다음에 post 요청이 들어 올때 miles의 값을 100 올려보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;</span> <span class="nf">update</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">Car</span> <span class="n">car</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">car</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">car</span><span class="o">.</span><span class="na">setMiles</span><span class="o">(</span><span class="n">car</span><span class="o">.</span><span class="na">getMiles</span><span class="o">()</span> <span class="o">+</span> <span class="mi">100</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// TODO: call persistence layer to update</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;(</span><span class="n">car</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>request요청할 때 request body 안에는 아래 Json이 담겨져 보내진다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Blue"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1234"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>output result는 아래 json이다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Blue"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1234"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="json-to-arraylist">Json to arraylist</h3>
+
+<p>여러개의 car가 있을 때 json array를 파라미터로 맵핑할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/cars"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;&gt;</span> <span class="nf">update</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;</span> <span class="n">cars</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">cars</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">setMiles</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getMiles</span><span class="o">()</span> <span class="o">+</span> <span class="mi">100</span><span class="o">));</span>
+
+    <span class="c1">// TODO: call persistence layer to update</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;&gt;(</span><span class="n">cars</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>request요청할 때 request body 안에는 아래 Json이 담겨져 보내진다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Blue"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1234"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1235"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p>output result는 아래 json이다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Blue"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1234"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1235"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="여러개-json-objects를-전달할-때">여러개 json objects를 전달할 때</h3>
+
+<p>여러개의 json objects를 전달하고 싶다면 전체 JSON 내용을 담고 있는 요청을 의미하는 wrapper object를 만들 필요가 있다.  Truck 예제를 만들어 보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Truck</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="no">VIN</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">miles</span><span class="o">;</span>
+
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>RequestWrapper object</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RequestWrapper</span> <span class="o">{</span>
+
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Car</span><span class="o">&gt;</span> <span class="n">cars</span><span class="o">;</span>
+    <span class="nc">Truck</span> <span class="n">truck</span><span class="o">;</span>
+
+    <span class="c1">//...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>new @RequestMapping</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/carsandtrucks"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">RequestWrapper</span><span class="o">&gt;</span> <span class="nf">updateWithMultipleObjects</span><span class="o">(</span>
+        <span class="nd">@RequestBody</span> <span class="nc">RequestWrapper</span> <span class="n">requestWrapper</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="n">requestWrapper</span><span class="o">.</span><span class="na">getCars</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="o">.</span><span class="na">setMiles</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getMiles</span><span class="o">()</span> <span class="o">+</span> <span class="mi">100</span><span class="o">));</span>
+
+    <span class="c1">// TODO: call persistence layer to update</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">RequestWrapper</span><span class="o">&gt;(</span><span class="n">requestWrapper</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>요청 보내기</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"cars"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Blue"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1234"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1235"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"truck"</span><span class="p">:{</span><span class="w">
+    </span><span class="nl">"color"</span><span class="p">:</span><span class="s2">"Red"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"miles"</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vin"</span><span class="p">:</span><span class="s2">"1235"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>출처 : <a href="https://www.leveluplunch.com/java/tutorials/014-post-json-to-spring-rest-webservice/">https://www.leveluplunch.com/java/tutorials/014-post-json-to-spring-rest-webservice/</a></p>
+
+:ET

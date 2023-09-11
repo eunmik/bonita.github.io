@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm]완전 탐색 이란?"
 date: 2021-03-27
-excerpt: "무식해보여도 사실은 최고의 방법일때가 있지요."
+categories: [CS, Algorithm]
 tags: [Algorithm, Brute-force, BFS, DFS]
 comments: true
 ---

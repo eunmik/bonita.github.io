@@ -2,7 +2,7 @@
 layout: post
 title: "[인프런 이력서 오픈 마이크] 이력서 피드백"
 date: 2022-05-16
-excerpt: "처음 받아보는 프로페셔널한 피드백"
+categories: [Memoir]
 tags: ["Resume"]
 comments: true
 ---

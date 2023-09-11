@@ -2,7 +2,7 @@
 layout: post
 title: "[Algorithm]정렬(Sorting)란?"
 date: 2021-03-21
-excerpt: "알고리즘의 다양한 정렬에 대해 알아보자."
+categories: [CS, Algorithm]
 tags: [Algorithm, Selection, Insertion, Heap, Bubble, Merge]
 comments: true
 ---
