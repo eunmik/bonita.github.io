@@ -4,7 +4,7 @@ date: 2020-08-17
 categories: [Language, Python]
 tags: [python, code]
 comments: true
-pin: true
+pin: false
 math: true
 mermaid: true
 ---
