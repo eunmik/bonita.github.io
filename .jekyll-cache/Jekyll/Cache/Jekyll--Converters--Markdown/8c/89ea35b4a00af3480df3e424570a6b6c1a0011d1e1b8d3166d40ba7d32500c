@@ -1,4 +1,4 @@
-I":<p>최근에 Enum 클래스를 몇번 사용하게 되었는데</p>
+I"8<p>최근에 Enum 클래스를 몇번 사용하게 되었는데</p>
 
 <p>enum 클래스에 같은 종류의 값들이 모여있다는 점 말고</p>
 
@@ -24,23 +24,41 @@
 
 <p>Example</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">Level</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">enum</span> <span class="nc">Level</span> <span class="o">{</span>
   <span class="no">LOW</span><span class="o">,</span>
   <span class="no">MEDIUM</span><span class="o">,</span>
   <span class="no">HIGH</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>enum 클래스에 있는 상수에 접근 할 때는</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Level</span> <span class="n">myLevel</span> <span class="o">=</span> <span class="nc">Level</span><span class="o">.</span><span class="na">MEDIUM</span><span class="o">;</span> 
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nc">Level</span> <span class="n">myLevel</span> <span class="o">=</span> <span class="nc">Level</span><span class="o">.</span><span class="na">MEDIUM</span><span class="o">;</span> 
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>클래스안에 enum을 사용할 수 도 있다.</p>
 
 <p>Example</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
   <span class="kd">enum</span> <span class="nc">Level</span> <span class="o">{</span>
     <span class="no">LOW</span><span class="o">,</span>
     <span class="no">MEDIUM</span><span class="o">,</span>
@@ -52,5 +70,5 @@
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">myVar</span><span class="o">);</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 :ET

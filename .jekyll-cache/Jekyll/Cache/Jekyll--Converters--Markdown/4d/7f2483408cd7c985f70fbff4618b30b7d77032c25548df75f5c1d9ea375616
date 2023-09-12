@@ -1,4 +1,4 @@
-I"�'<p>#MultiThreading</p>
+I"�*<p>#MultiThreading</p>
 
 <p>하나의 프로그램이 두 개의 메소드를 호출할때 두번째 메소드가 첫번째 메소드가 종료가 된 후에 실행이 된다면 이건 프로그램이 오직 하나의 thread를 가지고 있다고 할 수 있다. 
 오늘날엔, 옛날 컴퓨터만이 하나의 프로세서를 가지고 있다. 대부분의 컴퓨터에는 적어도 두 개의 CPU와 하나의 GPU를 가지고 있다.</p>
@@ -26,7 +26,21 @@
 
 <p>SingleThreadedDemo.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleThreadedDemo</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleThreadedDemo</span> <span class="o">{</span>
   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
@@ -40,11 +54,21 @@
 
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>output:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The value of i in power of 4 is 0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>The value of i in power of 4 is 0
 The value of i in power of 4 is 1
 The value of i in power of 4 is 32
 The value of i in power of 4 is 243
@@ -54,11 +78,29 @@ The value of i in power of 4 is 1024
 *** The value of k is 2!
 *** The value of k is 3!
 *** The value of k is 4!
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>MultiThreadedDemo.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultiThreadedDemo</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MultiThreadedDemo</span> <span class="o">{</span>
   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
    <span class="nc">Thread</span> <span class="n">myThread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span>          <span class="o">(</span><span class="mi">1</span><span class="o">)</span>
@@ -76,7 +118,7 @@ The value of i in power of 4 is 1024
    <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>Thread 인스턴스를 만든다.</li>
@@ -89,7 +131,17 @@ The value of i in power of 4 is 1024
 
 <p>만약 MultiThreadedDemo를 여러번 돌렸다면, 출력결과가 매번 달라질 것이다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** The value of k is 0!
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>*** The value of k is 0!
 *** The value of k is 1!
 The value of i in power of 4 is 0
 The value of i in power of 4 is 1
@@ -99,7 +151,7 @@ The value of i in power of 4 is 1
 The value of i in power of 4 is 32
 The value of i in power of 4 is 243
 The value of i in power of 4 is 1024
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>첫번째 두 라인은 두번째 for문에서 수행된 것이다. 이것은 start 메서드를 부르고 나서 myThread 프로그램이 첫번째 포문이 끝나기를 기다리지 않았다는 것을 의미한다. 
 그때 첫번째 반복문에 프린트해야할 것이 있었다. 그리고 두번째, 등등. 전체 콘솔 출력은 두 개의 평행 threads의 믹스이다.</p>

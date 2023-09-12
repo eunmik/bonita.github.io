@@ -1,5 +1,4 @@
-I"�
-<p>서버 버전정보를 header에 노출 시키기 되면 웹 공격에 사용될 우려가 있기 때문에</p>
+I"�<p>서버 버전정보를 header에 노출 시키기 되면 웹 공격에 사용될 우려가 있기 때문에</p>
 
 <p>서버 정보를 숨겨야 할 필요가 있다.</p>
 
@@ -10,10 +9,13 @@
   <li>설청파일의 내용중 아래와 같은 내용이 주석이 되어있다면, 해제하고 없으면 추가로 작성한다.</li>
 </ol>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">http</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="n">http</span><span class="o">{</span>
 	<span class="n">server_tokens</span> <span class="n">off</span><span class="o">;</span>
 <span class="o">...</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>nginx 재시작</li>
@@ -23,17 +25,23 @@
 
 <p>Dockerfile 에 tomcat 에러리포팅 끄기, 서버정보 끄기 설정을 추가한다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN <span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s,&lt;/Host&gt;,&lt;Valve className=</span><span class="se">\"</span><span class="s2">org.apache.catalina.valves.ErrorReportValve</span><span class="se">\"</span><span class="s2"> showReport=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> showServerInfo=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> /&gt;&lt;/Host&gt;,g"</span> /usr/local/tomcat/conf/server.xml
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>RUN <span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s,&lt;/Host&gt;,&lt;Valve className=</span><span class="se">\"</span><span class="s2">org.apache.catalina.valves.ErrorReportValve</span><span class="se">\"</span><span class="s2"> showReport=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> showServerInfo=</span><span class="se">\"</span><span class="s2">false</span><span class="se">\"</span><span class="s2"> /&gt;&lt;/Host&gt;,g"</span> /usr/local/tomcat/conf/server.xml
 RUN <span class="nb">echo</span> <span class="s2">"tomcat.util.http.parser.HttpParser.requestTargetAllow=|{}"</span>  <span class="o">&gt;&gt;</span> /usr/local/tomcat/conf/catalina.properties
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>sed : Stream Editor. 파일에서 찾기, 바꾸기, 삽입, 지우기 등 다양한 기능을 수행한다. sed 명령어를 사용해서 파일을 열지않고도 수정할 수 있다.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed </span>OPTIONS... <span class="o">[</span>SCRIPT] <span class="o">[</span>INPUTFILE...]
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nb">sed </span>OPTIONS... <span class="o">[</span>SCRIPT] <span class="o">[</span>INPUTFILE...]
 
 <span class="nt">-i</span><span class="o">[</span>SUFFIX], <span class="nt">--in-place</span><span class="o">[=</span>SUFFIX]
                  edit files <span class="k">in </span>place <span class="o">(</span>makes backup <span class="k">if </span>SUFFIX supplied<span class="o">)</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>아래껀 특수문자가 URL 에 넘어와서 공격하는걸 막는 것이다. 
 <a href="https://youngclown.github.io/2017/12/TOMCAT8_5">https://youngclown.github.io/2017/12/TOMCAT8_5</a> 참고하면 좋을 듯</p>

@@ -1,4 +1,4 @@
-I"ڊ<h1 id="algorithm-dfsbfs">[Algorithm] DFS/BFS</h1>
+I"��<h1 id="algorithm-dfsbfs">[Algorithm] DFS/BFS</h1>
 
 <h2 id="bstbinary-search-tree-이진트리탐색">BST(Binary Search Tree) 이진트리탐색</h2>
 
@@ -23,7 +23,17 @@
   <li>후위 순회 (Post-Order Traversal) : left → right → root</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeNode</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeNode</span> <span class="o">{</span>
 	<span class="kt">int</span> <span class="n">data</span><span class="o">;</span>
 	<span class="nc">TreeNode</span> <span class="n">left</span><span class="o">;</span>
 	<span class="nc">TreeNode</span> <span class="n">right</span><span class="o">;</span>
@@ -33,18 +43,25 @@
 		<span class="k">this</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="전위-순회-pre-order-traversal">전위 순회 (Pre-Order Traversal)</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">preorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
 	<span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">data</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
 		<span class="n">preorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
 		<span class="n">preorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://miro.medium.com/max/625/1*UGoV21qO6N8JED-ozsbXWw.gif" /></p>
 
@@ -52,14 +69,21 @@
 
 <h3 id="중위-순회in-order-traversal">중위 순회(In-Order Traversal)</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">inorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">){</span>
 				<span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 								<span class="n">inorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
 								<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">data</span><span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
 								<span class="n">inorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
 			<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://miro.medium.com/max/625/1*bxQlukgMC9cGv_MFUllX2Q.gif" /></p>
 
@@ -67,14 +91,21 @@
 
 <h3 id="후위-순회postorder-traversal">후위 순회(Postorder Traversal)</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">postorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">postorderTraversal</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
 	<span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 		<span class="n">postorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
 		<span class="n">postorderTraversal</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
 		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">data</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://miro.medium.com/max/625/1*UGrzA4qtLCaaCiNAKZyj_w.gif" /></p>
 
@@ -123,14 +154,29 @@
 
 <p>example.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">Input:</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">6</span> 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nl">Input:</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">6</span> 
 <span class="o">~~</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">2</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">~~,</span> <span class="o">~~</span><span class="mi">2</span> <span class="o">-&gt;</span> <span class="mi">3</span><span class="o">~~,</span> <span class="mi">3</span> <span class="o">-&gt;</span> <span class="mi">3</span> 
 <span class="nl">Output:</span> <span class="no">DFS</span> <span class="n">from</span> <span class="n">vertex</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">3</span> 
 <span class="nl">Explanation:</span> 
 <span class="no">DFS</span> <span class="nl">Diagram:</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">DFS</span><span class="o">(</span><span class="n">u</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="no">DFS</span><span class="o">(</span><span class="n">u</span><span class="o">)</span>
 <span class="k">for</span> <span class="n">each</span> <span class="n">neighbor</span> <span class="n">v</span> <span class="n">of</span> <span class="n">u</span>
   <span class="k">if</span> <span class="n">v</span> <span class="n">is</span> <span class="n">unvisited</span><span class="o">,</span> <span class="n">tree</span> <span class="n">edge</span><span class="o">,</span> <span class="no">DFS</span><span class="o">(</span><span class="n">v</span><span class="o">)</span>
   <span class="k">else</span> <span class="k">if</span> <span class="n">v</span> <span class="n">is</span> <span class="n">explored</span><span class="o">,</span> <span class="n">bidirectional</span><span class="o">/</span><span class="n">back</span> <span class="n">edge</span>
@@ -140,16 +186,21 @@
 <span class="n">u</span> <span class="o">:</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="n">v</span> <span class="o">:</span> <span class="mi">1</span> <span class="n">is</span> <span class="n">exlpored</span><span class="o">,</span> <span class="nl">v:</span> <span class="mi">2</span> <span class="n">is</span> <span class="n">explored</span><span class="o">,</span> <span class="n">사이클이</span> <span class="n">생김</span>
 <span class="n">backtrack을</span> <span class="n">한다</span> 
 <span class="n">u</span> <span class="o">:</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="no">DFS</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200507074112/ezgif.com-gif-maker61.gif" /></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">Input:</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">6</span> 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nl">Input:</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">6</span> 
 <span class="mi">2</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">3</span> <span class="o">-&gt;</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="mi">3</span> 
 <span class="nl">Output:</span> <span class="no">DFS</span> <span class="n">from</span> <span class="n">vertex</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span> 
 <span class="nl">Explanation:</span> 
 <span class="no">DFS</span> <span class="nl">Diagram:</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200507075041/ezgif.com-gif-maker7.gif" /></p>
 
@@ -157,7 +208,91 @@
 
 <p>Practice : <a href="https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1">https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1</a></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Java program to print DFS</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+</pre></td><td class="rouge-code"><pre><span class="c1">// Java program to print DFS</span>
 <span class="c1">//mtraversal from a given given</span>
 <span class="c1">// graph</span>
 <span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
@@ -241,7 +376,7 @@
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">// This code is contributed by Aakash Hasija</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="dfs의-시간-복잡도">DFS의 시간 복잡도</h3>
 
@@ -259,7 +394,94 @@
 
 <h3 id="bfs-for-a-graph-예제">BFS FOR A GRAPH 예제</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Java program to print DFS</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+</pre></td><td class="rouge-code"><pre><span class="c1">// Java program to print DFS</span>
 <span class="c1">//traversal from a given given</span>
 <span class="c1">// graph</span>
 <span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
@@ -346,7 +568,7 @@
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">// This code is contributed by Aakash Hasija</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://ksshlee.github.io/assets/img/al_lib/2019_12_31/how_bfs_works.gif" /></p>
 

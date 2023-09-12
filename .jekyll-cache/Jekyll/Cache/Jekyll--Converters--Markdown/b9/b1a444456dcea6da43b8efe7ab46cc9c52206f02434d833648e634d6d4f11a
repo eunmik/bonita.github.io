@@ -1,4 +1,4 @@
-I"`�<h2 id="http-인증-이란">HTTP 인증 이란?</h2>
+I"n�<h2 id="http-인증-이란">HTTP 인증 이란?</h2>
 
 <p>Authentication(인증) 이란 시스템이 사용자가 시스템에 접근 가능한 허용을 가지고 있는지 없는지 결정하는 프로세스이다. HTTP는 액세스 제어와 인증을 위한 프레임워크를 제공한다.</p>
 
@@ -57,7 +57,43 @@
 
 <p>CustomBasicAuthWebSecurityConfig.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="o">;</span>
@@ -93,13 +129,91 @@
     <span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="digest-authentication-1">Digest Authentication</h3>
 
 <p>CustomDigestAuthWebSecurityConfig.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.core.annotation.Order</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder</span><span class="o">;</span>
@@ -177,13 +291,91 @@
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="server쪽-http-인증-요청-구현">Server쪽 Http 인증 요청 구현</h2>
 
 <p>HttpRequestFactoryAuthentication.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.argos_labs.rpa.la.report.api.model.AuthType</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">com.argos_labs.rpa.la.report.api.model.AuthType</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">lombok.RequiredArgsConstructor</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.http.HttpHost</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.http.auth.AuthScheme</span><span class="o">;</span>
@@ -261,11 +453,53 @@
 
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>HttpAuth</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Response</span> <span class="nf">httpAuth</span><span class="o">(</span><span class="nc">PamStatus</span> <span class="n">pamStatus</span><span class="o">,</span> <span class="nc">OpenapiEndpointInfo</span> <span class="n">openapiEndpointInfo</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="nc">Response</span> <span class="nf">httpAuth</span><span class="o">(</span><span class="nc">PamStatus</span> <span class="n">pamStatus</span><span class="o">,</span> <span class="nc">OpenapiEndpointInfo</span> <span class="n">openapiEndpointInfo</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
         <span class="k">try</span> <span class="o">{</span>
             <span class="nc">String</span><span class="o">[]</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">openapiEndpointInfo</span><span class="o">.</span><span class="na">getHost</span><span class="o">().</span><span class="na">split</span><span class="o">(</span><span class="s">"://"</span><span class="o">);</span>
             <span class="nc">String</span><span class="o">[]</span> <span class="n">hostAndPort</span> <span class="o">=</span> <span class="n">domain</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">":"</span><span class="o">);</span>
@@ -307,7 +541,7 @@
         <span class="o">}</span>
 
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>참고한 출처 : 
 <a href="https://github.com/eugenp/tutorials/tree/master/spring-security-modules/spring-security-web-digest-auth">spring-security-modules/spring-security-web-digest-auth</a>

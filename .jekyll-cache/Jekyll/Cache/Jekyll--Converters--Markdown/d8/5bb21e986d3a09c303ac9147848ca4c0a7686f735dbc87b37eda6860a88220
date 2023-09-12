@@ -1,6 +1,16 @@
-I"ä!<p>index.js</p>
+I"`#<p>index.js</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">export</span> <span class="kd">const</span> <span class="no">API_BASE_URL</span> <span class="o">=</span> <span class="err">'</span><span class="nl">http:</span><span class="c1">//localhost:8080';</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="n">export</span> <span class="kd">const</span> <span class="no">API_BASE_URL</span> <span class="o">=</span> <span class="err">'</span><span class="nl">http:</span><span class="c1">//localhost:8080';</span>
 <span class="n">export</span> <span class="kd">const</span> <span class="no">ACCESS_TOKEN</span> <span class="o">=</span> <span class="err">'</span><span class="n">accessToken</span><span class="err">'</span><span class="o">;</span>
 
 <span class="n">export</span> <span class="kd">const</span> <span class="no">OAUTH2_REDIRECT_URI</span> <span class="o">=</span> <span class="err">'</span><span class="nl">http:</span><span class="c1">//localhost:3000/oauth2/redirect'</span>
@@ -10,11 +20,29 @@
 <span class="n">export</span> <span class="kd">const</span> <span class="no">GITHUB_AUTH_URL</span> <span class="o">=</span> <span class="no">API_BASE_URL</span> <span class="o">+</span> <span class="err">'</span><span class="o">/</span><span class="n">oauth2</span><span class="o">/</span><span class="n">authorize</span><span class="o">/</span><span class="n">github</span><span class="o">?</span><span class="n">redirect_uri</span><span class="o">=</span><span class="err">'</span> <span class="o">+</span> <span class="no">OAUTH2_REDIRECT_URI</span><span class="o">;</span>
 <span class="n">export</span> <span class="kd">const</span> <span class="no">NAVER_AUTH_URL</span> <span class="o">=</span> <span class="no">API_BASE_URL</span> <span class="o">+</span> <span class="err">'</span><span class="o">/</span><span class="n">oauth2</span><span class="o">/</span><span class="n">authorize</span><span class="o">/</span><span class="n">naver</span><span class="o">?</span><span class="n">redirect_uri</span><span class="o">=</span><span class="err">'</span> <span class="o">+</span> <span class="no">OAUTH2_REDIRECT_URI</span><span class="o">;</span>
 <span class="n">export</span> <span class="kd">const</span> <span class="no">KAKAO_AUTH_URL</span> <span class="o">=</span> <span class="no">API_BASE_URL</span> <span class="o">+</span> <span class="err">'</span><span class="o">/</span><span class="n">oauth2</span><span class="o">/</span><span class="n">authorize</span><span class="o">/</span><span class="n">kakao</span><span class="o">?</span><span class="n">redirect_uri</span><span class="o">=</span><span class="err">'</span> <span class="o">+</span> <span class="no">OAUTH2_REDIRECT_URI</span><span class="o">;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Login.js</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">SocialLogin</span> <span class="kd">extends</span> <span class="nc">Component</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">SocialLogin</span> <span class="kd">extends</span> <span class="nc">Component</span> <span class="o">{</span>
     <span class="n">render</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="o">(</span>
             <span class="o">&lt;</span><span class="n">div</span> <span class="n">className</span><span class="o">=</span><span class="s">"social-login"</span><span class="o">&gt;</span>
@@ -32,7 +60,7 @@
         <span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>ðŸ”– reference
 <a href="https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo," title="spring-boot-react-oauth2-social-login-demo">spring-boot-react-oauth2-social-login-demo</a></p>

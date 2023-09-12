@@ -1,4 +1,4 @@
-I"�<h2 id="cors란">CORS란?</h2>
+I"�<h2 id="cors란">CORS란?</h2>
 
 <p>Cross-Origin Resource Sharing(CORS)은 추가적인 HTTP header를 사용해서 어플리케이션이 다른 rogin의 리소스에 접근할 수 있도록 하는 메커니즘이다.</p>
 
@@ -14,11 +14,16 @@
 
 <p>@CrossOrigin 어노테이션을 통해 해당 출처에서도 스크립트를 통해 자원을 획득할 수 있도록 허용한다.   ex. @CrossOrigin(origins=”http://localhost:7070”)</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nd">@Slf4j</span>
 <span class="nd">@RestController</span>
 <span class="c1">//@CrossOrigin(origins = "*")</span>
 <span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">"${argos.rpa.api-url}"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">UxRobotCommandController</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 :ET

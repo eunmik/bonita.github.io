@@ -1,10 +1,25 @@
-I"Ü<ol>
+I"9
+<ol>
   <li>
     <p>Make launch.json right under root directory</p>
 
     <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled.png" /></p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">{</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre> <span class="o">{</span>
      <span class="s">"version"</span><span class="o">:</span> <span class="s">"0.2.0"</span><span class="o">,</span>
      <span class="s">"configurations"</span><span class="o">:</span> <span class="o">[</span>
          <span class="o">{</span>
@@ -18,13 +33,14 @@
          <span class="o">}</span>
      <span class="o">]</span>
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>start project on terminal</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">npm</span> <span class="n">start</span>
-</code></pre></div>    </div>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> <span class="n">npm</span> <span class="n">start</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0401/Untitled%201.png" /></p>
   </li>

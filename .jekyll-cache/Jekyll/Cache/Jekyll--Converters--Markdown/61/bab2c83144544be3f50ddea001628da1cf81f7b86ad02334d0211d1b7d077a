@@ -1,4 +1,4 @@
-I"�*<p>보안을 위해서 로그인 횟수를 제한할 필요가 있다.</p>
+I")-<p>보안을 위해서 로그인 횟수를 제한할 필요가 있다.</p>
 
 <p>로그인 횟수 제한을 위해 고려해야 할 사항은</p>
 
@@ -14,7 +14,15 @@
   <li>
     <p>로그인 데이터를 저장한 DB 테이블을 만들어준다.</p>
 
-    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`login_info`</span> <span class="p">(</span>
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`login_info`</span> <span class="p">(</span>
    <span class="nv">`userid`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
    <span class="nv">`count`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">'0'</span><span class="p">,</span>
    <span class="nv">`locked_time`</span> <span class="nb">timestamp</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
@@ -22,7 +30,7 @@
    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`userid`</span><span class="p">),</span>
    <span class="k">KEY</span> <span class="nv">`userid`</span> <span class="p">(</span><span class="nv">`userid`</span><span class="p">)</span>
  	<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>count : 로그인 시도 횟수</p>
 
@@ -33,7 +41,39 @@
   <li>
     <p>login Entity를 만들어준다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">lombok.Data</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">lombok.Data</span><span class="o">;</span>
 
  <span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
@@ -65,12 +105,42 @@
      <span class="o">}</span>
 
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>Login 할 때 로그인 횟수/시간을 확인한다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">user</span> <span class="o">=</span> <span class="n">userService</span><span class="o">.</span><span class="na">loadUserByUsername</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre> <span class="n">user</span> <span class="o">=</span> <span class="n">userService</span><span class="o">.</span><span class="na">loadUserByUsername</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>
              <span class="n">lockedTime</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">getLoginCounts</span><span class="o">().</span><span class="na">getLockedTime</span><span class="o">();</span>
              <span class="n">isLocked</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="na">getLoginCounts</span><span class="o">().</span><span class="na">getIsLocked</span><span class="o">();</span>
              <span class="k">if</span><span class="o">(</span><span class="n">isLocked</span><span class="o">)</span> <span class="o">{</span>
@@ -100,7 +170,7 @@
  	<span class="nc">UserLogin</span> <span class="n">ulogin</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserLogin</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">getUsername</span><span class="o">(),</span> <span class="n">loginAttempts</span><span class="o">,</span> <span class="n">lockedTime</span><span class="o">,</span> <span class="n">isLocked</span><span class="o">);</span>
    <span class="n">userLoginRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">ulogin</span><span class="o">);</span>
                  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
 </ol>
 :ET

@@ -1,4 +1,4 @@
-I"bg<h2 id="8-익명사용자-인증-필터--anonymousauthenticationfilter">8. 익명사용자 인증 필터 : AnonymousAuthenticationFilter</h2>
+I"�k<h2 id="8-익명사용자-인증-필터--anonymousauthenticationfilter">8. 익명사용자 인증 필터 : AnonymousAuthenticationFilter</h2>
 
 <p>어떤 사용자가 인증을 받으면 session에 user객체가 저장 되고</p>
 
@@ -79,25 +79,31 @@
 
 <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210614-img3.JPG" /></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">http</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="n">http</span>
 <span class="o">.</span><span class="na">sessionManagement</span><span class="o">()</span>
 <span class="o">.</span><span class="na">maximumSessions</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="c1">//동시 세션 최대 허용 개수</span>
 <span class="o">.</span><span class="na">maxSessionsPreventsLogin</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span> <span class="c1">// true일 경우 현재 사용자가 로그인을 못하게 만든다, default는 false</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>maxSessionPreventsLogin이 false일 경우에</p>
 
 <p>다른 계정에서 로그인하면 전 계정은 아래와 같은 에러 메시지가 발생한다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This session has been expired (possibly due to multiple concurrent logins being attempted as the same user).
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>This session has been expired (possibly due to multiple concurrent logins being attempted as the same user).
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>maxSessionPreventsLogin이 true일 경우에</p>
 
 <p>다른 게정을 로그인 하면 현재 계정에서 아래와 같은 에러 메시지가 발생한다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exception : Maximum sessions of 1 for this principal exceeded
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>exception : Maximum sessions of 1 for this principal exceeded
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="세션-고정-보호">세션 고정 보호</h3>
 
@@ -128,10 +134,13 @@
 
 <p>newSession() : 새로운 세션 ID가 발급 되면서 새로운 값들의 속성을 설정한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">http</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="n">http</span>
 <span class="o">.</span><span class="na">sessionManagement</span><span class="o">()</span>
 <span class="o">.</span><span class="na">sessionFixation</span><span class="o">().</span><span class="na">changeSessionId</span><span class="o">();</span> <span class="c1">//none : 무방비 상태, changeSessionId() : default</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="세션-정책">세션 정책</h3>
 
@@ -218,7 +227,30 @@
 
 <p>SpEL : Spring Expression Language 스프링 표현식</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="nd">@Override</span>
     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
 
         <span class="n">http</span> <span class="c1">//인증정책</span>
@@ -241,7 +273,7 @@
         <span class="n">auth</span><span class="o">.</span><span class="na">inMemoryAuthentication</span><span class="o">().</span><span class="na">withUser</span><span class="o">(</span><span class="s">"sys"</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">"{noop}1111"</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">"SYS"</span><span class="o">);</span>
         <span class="n">auth</span><span class="o">.</span><span class="na">inMemoryAuthentication</span><span class="o">().</span><span class="na">withUser</span><span class="o">(</span><span class="s">"admin"</span><span class="o">).</span><span class="na">password</span><span class="o">(</span><span class="s">"{noop}1111"</span><span class="o">).</span><span class="na">roles</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">);</span>
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="12-예외-처리-및-요청-캐시-필터--exceptiontranslationfilter-requestcacheawarefilter">12. 예외 처리 및 요청 캐시 필터 : ExceptionTranslationFilter, RequestCacheAwareFilter</h2>
 
@@ -282,7 +314,42 @@
 
 <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210614-img16.JPG" /></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">http</span> <span class="c1">//인증정책</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre></td><td class="rouge-code"><pre><span class="n">http</span> <span class="c1">//인증정책</span>
                 <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span> <span class="c1">//formLogin방식으로 인증을 할 수 있도록 설정</span>
                 <span class="o">.</span><span class="na">successHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">AuthenticationSuccessHandler</span><span class="o">()</span> <span class="o">{</span>
                     <span class="nd">@Override</span>
@@ -317,7 +384,7 @@
                         <span class="o">}</span>
                     <span class="o">})</span> <span class="c1">//인가 예외 발생시</span>
         <span class="o">;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210614-img17.JPG" /></p>
 

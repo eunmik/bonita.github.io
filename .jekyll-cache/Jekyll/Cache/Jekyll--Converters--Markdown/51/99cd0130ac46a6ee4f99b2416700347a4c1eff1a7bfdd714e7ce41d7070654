@@ -1,4 +1,4 @@
-I"Œ<h1 id="what-is-java-comparator">What is Java Comparator?</h1>
+I"<<h1 id="what-is-java-comparator">What is Java Comparator?</h1>
 
 <p>Java Comparator is a interface for sorting Java objects. Comparators can be passed to a sort method (such as Collections.sort or Arrays.sort) to allow precise control over the sort order.</p>
 
@@ -45,7 +45,19 @@
 
 <h2 id="example-caebcd">Example [c,a,eb,cd]</h2>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
             <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">String</span> <span class="n">o1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
                 <span class="k">if</span><span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">o2</span><span class="o">.</span><span class="na">length</span><span class="o">()){</span>
@@ -57,7 +69,7 @@
 
             <span class="o">}</span>
         <span class="o">});</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <table>
   <thead>
@@ -98,8 +110,9 @@
 
 <p>Result</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">c</span><span class="o">,</span> <span class="n">cd</span><span class="o">,</span> <span class="n">eb</span><span class="o">]</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">c</span><span class="o">,</span> <span class="n">cd</span><span class="o">,</span> <span class="n">eb</span><span class="o">]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h1 id="what-is-java-string-compareto">What is Java String compareTo()?</h1>
 
@@ -107,7 +120,19 @@
 
 <h3 id="example">Example</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaExample</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
 	<span class="nc">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="s">"Cow"</span><span class="o">;</span> 
 	<span class="c1">//This is an empty string</span>
@@ -119,13 +144,15 @@
 	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str2</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">str3</span><span class="o">));</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Output</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">3</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="mi">3</span>
 <span class="o">-</span><span class="mi">4</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>reference :</p>
 

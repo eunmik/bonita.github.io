@@ -1,4 +1,4 @@
-I"s,<p>다익스트라 알고리즘은 하나의 정점에서 출발했을 때 다른 모든 정점의 최단 경로를 구하는 알고리즘이다. 하지만 만약에 ‘모든 정점’에서 ‘모든 정점’으로의 최단 경로를 구하고 싶다면 플로이드 와샬 알고리즘을 사용해야 한다.</p>
+I"-<p>다익스트라 알고리즘은 하나의 정점에서 출발했을 때 다른 모든 정점의 최단 경로를 구하는 알고리즘이다. 하지만 만약에 ‘모든 정점’에서 ‘모든 정점’으로의 최단 경로를 구하고 싶다면 플로이드 와샬 알고리즘을 사용해야 한다.</p>
 
 <p>다익스트라 알고리즘은 가장 적은 비용을 하나씩 선택해야 했다면 플로이드 와샬 알고리즘은 기본적으로 ‘거쳐가는 정점’을 기준으로 알고리즘을 수행한다는 특징이 있다.</p>
 
@@ -54,7 +54,47 @@
 
 <p>Java Code :</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">floydWarshall</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">floydWarshall</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
         <span class="n">number</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
         <span class="no">INF</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
@@ -94,7 +134,7 @@
 
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>출처 : <a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&amp;blogId=ndb796&amp;logNo=221234427842">24. 플로이드 와샬 알고리즘</a></p>
 :ET

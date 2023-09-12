@@ -1,7 +1,8 @@
-I"U<p>Application 시작하는데 Redis에서 에러 메시지를 뱉어냈다.</p>
+I"�<p>Application 시작하는데 Redis에서 에러 메시지를 뱉어냈다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Caused</span> <span class="nl">by:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">RuntimeException</span><span class="o">:</span> <span class="nc">Can</span><span class="err">'</span><span class="n">t</span> <span class="n">start</span> <span class="n">redis</span> <span class="n">server</span><span class="o">.</span> <span class="nc">Check</span> <span class="n">logs</span> <span class="k">for</span> <span class="n">details</span><span class="o">.</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nc">Caused</span> <span class="nl">by:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">RuntimeException</span><span class="o">:</span> <span class="nc">Can</span><span class="err">'</span><span class="n">t</span> <span class="n">start</span> <span class="n">redis</span> <span class="n">server</span><span class="o">.</span> <span class="nc">Check</span> <span class="n">logs</span> <span class="k">for</span> <span class="n">details</span><span class="o">.</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>그 이유는 다른 redis Instance가 중복해서 떠있기 때문이다.</p>
 
@@ -11,13 +12,19 @@
   <li>Windows에서는 netstat 명령어를 사용해서 프로세스 이름을 찾는다.</li>
 </ol>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">netstat</span> <span class="o">-</span><span class="n">anb</span> <span class="o">|</span> <span class="n">grep</span> <span class="mi">6379</span> <span class="o">-</span><span class="no">B</span> <span class="mi">2</span> <span class="o">-</span><span class="no">A</span> <span class="mi">2</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="o">&gt;</span> <span class="n">netstat</span> <span class="o">-</span><span class="n">anb</span> <span class="o">|</span> <span class="n">grep</span> <span class="mi">6379</span> <span class="o">-</span><span class="no">B</span> <span class="mi">2</span> <span class="o">-</span><span class="no">A</span> <span class="mi">2</span>
   <span class="no">TCP</span>    <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">5939</span>         <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">:</span><span class="mi">0</span>              <span class="no">LISTENING</span>
  <span class="o">[</span><span class="n">TeamViewer_Service</span><span class="o">.</span><span class="na">exe</span><span class="o">]</span>
   <span class="no">TCP</span>    <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">6379</span>         <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">:</span><span class="mi">0</span>              <span class="no">LISTENING</span>
  <span class="o">[</span><span class="n">redis</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mf">2.8</span><span class="o">.</span><span class="mi">19</span><span class="o">.</span><span class="na">exe</span><span class="o">]</span>
   <span class="no">TCP</span>    <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">:</span><span class="mi">6942</span>         <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="o">:</span><span class="mi">0</span>              <span class="no">LISTENING</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>작업관리자에서 해당 프로세스를 끝낸다.</li>

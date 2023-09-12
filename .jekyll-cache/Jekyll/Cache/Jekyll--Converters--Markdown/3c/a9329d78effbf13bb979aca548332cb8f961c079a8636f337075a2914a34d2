@@ -1,4 +1,4 @@
-I"�E<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0804/img1.png" /></p>
+I"�I<p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0804/img1.png" /></p>
 
 <p>Debugging 걸어서 흐름을 한번 그려보았는데 아닐수도 있다……. 나도 다른 블로거들 처럼 작동 원리를 이해하고 싶다!!!</p>
 
@@ -10,7 +10,54 @@
   <li>
     <p>CustomAccessDeniedHandler를 생성한다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.json.JSONObject</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
@@ -57,12 +104,47 @@
      <span class="o">}</span>
 
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>AuthEntryPoint 클래스를 생성한다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.codehaus.jackson.map.ObjectMapper</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">org.codehaus.jackson.map.ObjectMapper</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.security.core.AuthenticationException</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.security.web.AuthenticationEntryPoint</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
@@ -97,14 +179,39 @@
      <span class="o">}</span>
 
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>WebSeucrityConfig에 설정한다.</p>
   </li>
 </ol>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre><span class="nd">@Configuration</span>
 <span class="nd">@EnableWebSecurity</span>
 <span class="kd">class</span> <span class="nc">SecurityConfigurer</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
 
@@ -129,22 +236,38 @@
 		<span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>설정 전에는</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="o">{</span>
     <span class="s">"timestamp"</span><span class="o">:</span> <span class="s">"2021-07-29T05:17:04.461+0000"</span><span class="o">,</span>
     <span class="s">"status"</span><span class="o">:</span> <span class="mi">403</span><span class="o">,</span>
     <span class="s">"error"</span><span class="o">:</span> <span class="s">"Forbidden"</span><span class="o">,</span>
     <span class="s">"message"</span><span class="o">:</span> <span class="s">"Forbidden"</span><span class="o">,</span>
     <span class="s">"path"</span><span class="o">:</span> <span class="s">"/oauth/token"</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>설정 후에는</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="o">{</span>
     <span class="s">"timestamp"</span><span class="o">:</span> <span class="s">"2021-07-29T14:25:37.56"</span><span class="o">,</span>
     <span class="s">"status"</span><span class="o">:</span> <span class="s">"403"</span><span class="o">,</span>
     <span class="s">"error"</span><span class="o">:</span> <span class="s">"Access_Denied"</span><span class="o">,</span>
@@ -153,7 +276,7 @@
         <span class="s">"locked_time"</span><span class="o">:</span> <span class="s">"2021-07-29T14:51:28.811"</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>인증과 인가 과정에서 발생하는 예외 2가지</p>
 

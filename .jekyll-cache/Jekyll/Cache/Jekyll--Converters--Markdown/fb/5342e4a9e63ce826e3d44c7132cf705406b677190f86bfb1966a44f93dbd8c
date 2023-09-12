@@ -1,8 +1,9 @@
-I"�<h2 id="integer-vs-int의-차이">Integer vs int의 차이</h2>
+I"?<h2 id="integer-vs-int의-차이">Integer vs int의 차이</h2>
 
 <p>API를 만들면서 Controller에서 client에서 파라미터를 받았을 때 필수적인 파라미터가 아님에도 불구 하고 null이 들어오면 에러가 발생했다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Optional int parameter 'size' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>Optional int parameter 'size' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>파라미터 type을 int대신 Integer로 변경되니깐 해결이 되었다. 왜그런지 한번 알아보자!</p>
 
 <h3 id="primitive-자료형---wrapper-클래스-관계">Primitive 자료형 - Wrapper 클래스 관계</h3>
@@ -82,12 +83,19 @@ char, byte, short, int, long, flolat, double, boolean 등이 존재한다.</p>
 <p><img src="../assets/img/210318-boxing-unboxing.png" />
 기본 타입의 값을 포장 객체로 만드는 과정을 박싱, 반대로 포장객체에서 기본 타입의 값을 얻어내는 과정을 언박싱</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Wrapper_Ex</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Wrapper_Ex</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  <span class="o">{</span>
         <span class="nc">Integer</span> <span class="n">num</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="mi">17</span><span class="o">);</span> <span class="c1">// 박싱</span>
         <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">intValue</span><span class="o">();</span> <span class="c1">//언박싱</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 :ET

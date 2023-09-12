@@ -1,4 +1,4 @@
-I"F<p>크루스칼 알고리즘과 같은 원리로 동작하는 또 다른 스패닝 트리 알고리즘으로 프림의 최소 스패닝 트리 알고리즘이 있다.</p>
+I"nG<p>크루스칼 알고리즘과 같은 원리로 동작하는 또 다른 스패닝 트리 알고리즘으로 프림의 최소 스패닝 트리 알고리즘이 있다.</p>
 
 <p>크루스칼 알고리즘에서는 여기저기서 산발적으로 만들어진 트리의 조각들을 합쳐 스패닝 트리를 만드는 반면, 프림 알고리즘에서는 하나의 시작점으로 구성된 트리에 간선을 하나씩 추가하며 스패닝 트리가 될 때까지 키워 간다. 따라서 항상 선택된 간선들은 중간 과정에서도 항상 연결된 트리를 이루게 된다.</p>
 
@@ -74,7 +74,79 @@
 
 <p>Java Code :</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.PriorityQueue</span><span class="o">;</span>
@@ -146,7 +218,7 @@
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>출처 : 알고리즘 문제 해결 전략 책</p>
 :ET

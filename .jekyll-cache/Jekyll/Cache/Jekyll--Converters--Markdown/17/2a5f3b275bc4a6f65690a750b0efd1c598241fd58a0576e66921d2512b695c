@@ -1,4 +1,4 @@
-I"<p>Spring MVC에서 @RestController는 @Controller 와 @ResponseBody 어노테이션을 합한 것 이다. Spring 5.0에서 RESTful 웹서비스 개발을 더 쉽게 하기 위해서 추가 되었다.</p>
+I"\<p>Spring MVC에서 @RestController는 @Controller 와 @ResponseBody 어노테이션을 합한 것 이다. Spring 5.0에서 RESTful 웹서비스 개발을 더 쉽게 하기 위해서 추가 되었다.</p>
 
 <p>웹 어플리케이션과 Rest API의 기본적인 차이는</p>
 
@@ -15,18 +15,27 @@
 
 <p>아래 두개의 코드는 같은 역할을 한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Controller</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nd">@Controller</span>
 <span class="nd">@ResponseBody</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MVCController</span> <span class="o">{</span>
 	<span class="o">....</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nd">@RestController</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RestFulController</span> <span class="o">{</span>
 	<span class="o">....</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>출처 : <a href="https://www.javacodegeeks.com/2017/08/difference-restcontroller-controller-annotation-spring-mvc-rest.html#:~:text=The%20%40Controller%20is%20a%20common,of%20%40Controller%20%2B%20%40ResponseBody%20">difference-restcontroller-controller-annotation-spring-mvc-rest</a></p>
 :ET

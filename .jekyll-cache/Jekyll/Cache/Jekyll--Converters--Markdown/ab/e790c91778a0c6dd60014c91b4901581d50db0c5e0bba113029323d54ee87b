@@ -1,10 +1,33 @@
-I"�v<h2 id="mock-객체란-무엇인가">Mock 객체란 무엇인가?</h2>
+I"�<h2 id="mock-객체란-무엇인가">Mock 객체란 무엇인가?</h2>
 
 <p>조작하기 쉬운 재료(보통 나무나 점토 등)를 이용해 추후 만들어질 제품의 외양을 흉내 낸 모조품을 말한다. 마찬가지로 소프트웨어 개발에 있어서도 모듈의 겉모양이 실제 모듈과 비슷하게 보이도록 만든 가짜 객체를 Mock 객체라고 한다.</p>
 
 <p>example.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSavePassword</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
         <span class="nc">UserRegister</span> <span class="n">register</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserResgister</span><span class="o">();</span>
         <span class="nc">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MockMD5Cipher</span><span class="o">()</span> <span class="o">;</span>
@@ -27,7 +50,7 @@
         <span class="o">}</span>
 
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="언제-mock-객체를-만들-것인가">언제 Mock 객체를 만들 것인가?</h2>
 
@@ -142,14 +165,17 @@
   <li>
     <p>Mock 객체 만들기</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nc">Mockito</span><span class="o">.</span><span class="na">mock</span><span class="o">(</span><span class="n">타깃</span> <span class="n">인터페이스</span><span class="o">);</span> 
-</code></pre></div>    </div>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> <span class="nc">Mockito</span><span class="o">.</span><span class="na">mock</span><span class="o">(</span><span class="n">타깃</span> <span class="n">인터페이스</span><span class="o">);</span> 
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>example</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.*;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.*;</span>
  <span class="nc">List</span> <span class="n">mokedList</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>Mockito 클래스의 static 메소드인 mock을 이용해 인터페이스나 클래스를 지정한다.</p>
 
@@ -166,13 +192,33 @@
   <li>테스트에 사용할 스텁 만들기</li>
 </ol>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">when</span><span class="o">(</span><span class="n">Mock_객체의_메소드</span><span class="o">).</span><span class="na">thenReturn</span><span class="o">(</span><span class="n">리턴값</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">when</span><span class="o">(</span><span class="n">Mock_객체의_메소드</span><span class="o">).</span><span class="na">thenReturn</span><span class="o">(</span><span class="n">리턴값</span><span class="o">);</span>
 <span class="n">when</span><span class="o">(</span><span class="n">Mock_객체의_메소드</span><span class="o">).</span><span class="na">thenThrow</span><span class="o">(</span><span class="n">예외</span><span class="o">);</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>단, 스텁은 필요할 때만 만드는 것이 원칙이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span> <span class="n">mockedList</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="nc">List</span> <span class="n">mockedList</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
 <span class="c1">//Mock 객체를 사용한다. </span>
 <span class="n">mockedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"item"</span><span class="o">);</span>
@@ -190,15 +236,17 @@
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">mockedList</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">mockedList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">mockedList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>검증</li>
 </ol>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">verify</span><span class="o">(</span><span class="n">Mock_객체</span><span class="o">).</span><span class="na">Mock_객체의_메소드</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">verify</span><span class="o">(</span><span class="n">Mock_객체</span><span class="o">).</span><span class="na">Mock_객체의_메소드</span><span class="o">;</span>
 <span class="n">verify</span><span class="o">(</span><span class="n">Mock_객체</span><span class="o">,</span> <span class="n">호출횟수지정_메소드</span><span class="o">).</span><span class="na">Mock_객체의_메소드</span><span class="o">;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Mock 객체의 특정 메소드가 호출됐는지 확인한다.</p>
 
@@ -213,14 +261,21 @@
 | atLeast(n) | 적어도 n번은 호출됐어야 함 | 
 | atMost(n) | 최대 n번은 호출되면 안 됨 |</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"item"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"item"</span><span class="o">);</span>
 <span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">,</span> <span class="n">times</span><span class="o">(</span><span class="mi">1</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="s">"item"</span><span class="o">);</span>
 <span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">,</span> <span class="n">times</span><span class="o">(</span><span class="mi">2</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="n">box</span><span class="o">);</span>
 <span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">,</span> <span class="n">never</span><span class="o">()).</span><span class="na">add</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
 <span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">,</span> <span class="n">atLeastOnce</span><span class="o">()).</span><span class="na">removeAll</span><span class="o">();</span>
 <span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">,</span> <span class="n">atLeast</span><span class="o">(</span><span class="mi">2</span><span class="o">)).</span><span class="na">size</span><span class="o">();</span>
 <span class="n">verify</span><span class="o">(</span><span class="n">mockedList</span><span class="o">,</span> <span class="n">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="n">box</span><span class="o">);</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>a.  Argument Matcher</p>
 
@@ -289,14 +344,21 @@
 
 <p>만일 Stub으로 만들어진 Mock 객체 메소드의 호출 순서까지 검증하고 싶다면 InOrder클래스를 이용한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span> <span class="n">firstMock</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nc">List</span> <span class="n">firstMock</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="nc">List</span> <span class="n">secondMock</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="n">firstMock</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"item1"</span><span class="o">);</span>
 <span class="n">secondMock</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"item2"</span><span class="o">);</span>
 <span class="nc">InOrder</span> <span class="n">inOrder</span> <span class="o">=</span> <span class="n">inOrder</span><span class="o">(</span><span class="n">firstMock</span><span class="o">,</span> <span class="n">secondMock</span><span class="o">);</span>
 <span class="n">inOrder</span><span class="o">.</span><span class="na">verify</span><span class="o">(</span><span class="n">firstMock</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"item1"</span><span class="o">);</span>
 <span class="n">inOrder</span><span class="o">.</span><span class="na">verify</span><span class="o">(</span><span class="n">secondMock</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"item2"</span><span class="o">);</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="mockito의-특징적인-기능">Mockito의 특징적인 기능</h2>
 
@@ -304,29 +366,46 @@
   <li>
     <p>void 메소드를 Stub으로 만들기</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">doThrow</span><span class="o">(</span><span class="n">예외</span><span class="o">).</span><span class="na">when</span><span class="o">(</span><span class="n">Mock_객체</span><span class="o">).</span><span class="na">voidMethod</span><span class="o">();</span>
-</code></pre></div>    </div>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> <span class="n">doThrow</span><span class="o">(</span><span class="n">예외</span><span class="o">).</span><span class="na">when</span><span class="o">(</span><span class="n">Mock_객체</span><span class="o">).</span><span class="na">voidMethod</span><span class="o">();</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>콜백으로 Stub 만들기: thenAnswer</p>
 
     <p>특정 Mock 메소드에 대해 실제 로직을 구현하고자 할 때 콜백 기법을 사용한다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">when</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"no"</span><span class="o">)).</span><span class="na">thenAnswer</span><span class="o">(</span> <span class="k">new</span> <span class="nc">Answer</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;(){</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre> <span class="n">when</span><span class="o">(</span><span class="n">rs</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">"no"</span><span class="o">)).</span><span class="na">thenAnswer</span><span class="o">(</span> <span class="k">new</span> <span class="nc">Answer</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;(){</span>
  <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">answer</span><span class="o">(</span><span class="nc">InvocationOnMock</span> <span class="n">invocation</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
  <span class="k">if</span> <span class="o">(</span><span class="n">currentRecord</span> <span class="o">=</span> <span class="o">=</span> <span class="kc">null</span><span class="o">)</span>
  <span class="k">throw</span> <span class="k">new</span> <span class="nf">SQLException</span><span class="o">(</span><span class="s">"access fields is empty"</span><span class="o">);</span>
  <span class="k">return</span> <span class="o">((</span><span class="nc">Integer</span><span class="o">)</span><span class="n">currentRecord</span><span class="o">[</span><span class="mi">0</span><span class="o">]).</span><span class="na">intValue</span><span class="o">();</span>
  <span class="o">}</span>
  <span class="o">});</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>실체 객체를 Stub으로 만들기: SPY</p>
 
     <p>Mockito는 실 객체도 Mock으로 만들 수 있다. Mockito의 강력한 기능 중 하나인데, 너무 강력해서 오히려 문제가 될 수도 있는 기능이다</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">realList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">realList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
  <span class="n">realList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Hello"</span><span class="o">);</span>
  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">realList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
  <span class="nc">List</span> <span class="n">mockedList</span> <span class="o">=</span> <span class="n">spy</span><span class="o">(</span> <span class="n">realList</span> <span class="o">);</span>
@@ -335,7 +414,7 @@
  <span class="o">-----</span><span class="n">실행</span> <span class="n">결과</span><span class="o">-----</span>
  <span class="nc">Hello</span>
  <span class="n">item</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>똑똑한 NULL 처리: SMART NULLS</p>
@@ -344,14 +423,21 @@
 
 <p>필요에 따라, 좀 더 유용한 값이 기본 값으로 찍히게 만드는 것이 SMART NULLS라는 방식이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span> <span class="n">mockedList</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nc">List</span> <span class="n">mockedList</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="nc">List</span> <span class="n">smartMockedList</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="no">RETURNS_SMART_NULLS</span><span class="o">);</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">mockedList</span><span class="o">.</span><span class="na">toArray</span><span class="o">());</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">smartMockedList</span><span class="o">.</span><span class="na">toArray</span><span class="o">());</span>
 <span class="o">-----</span><span class="n">실행</span> <span class="n">결과</span><span class="o">-----</span>
 <span class="kc">null</span>
 <span class="o">[</span><span class="nc">LJava</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Object</span><span class="o">;</span><span class="err">@</span><span class="mi">3</span><span class="n">eca90</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>SMART NULLS 규칙</p>
 <ul>
@@ -367,7 +453,18 @@
 
 <p>Mockito는 <a href="//given">//given</a> <a href="//when">//when</a> <a href="//then">//then</a> 식의 행위 주도 개발(Behabiour-Driven Development, BDD) 스타일로 테스트 케이스 작성할 수 있게 지원해준다. BDD 스타일을 사용하려면 Mockito 클래스 대신 BDDMockito를 static import 한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">BDDMockito</span><span class="o">.*;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">BDDMockito</span><span class="o">.*;</span>
 <span class="nc">Seller</span> <span class="n">seller</span> <span class="o">=</span> <span class="n">mock</span><span class="o">(</span><span class="nc">Seller</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="nc">Shop</span> <span class="n">shop</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Shop</span><span class="o">(</span><span class="n">seller</span><span class="o">);</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shouldBuyBread</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
@@ -378,5 +475,5 @@
 	<span class="c1">// then</span>
 	<span class="n">assertThat</span><span class="o">(</span><span class="n">goods</span><span class="o">,</span> <span class="n">containBread</span><span class="o">());</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 :ET

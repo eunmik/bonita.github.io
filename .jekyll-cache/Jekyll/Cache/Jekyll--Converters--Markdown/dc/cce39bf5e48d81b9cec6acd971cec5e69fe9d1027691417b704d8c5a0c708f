@@ -1,4 +1,4 @@
-I"<h2 id="햄크레스트hamcrest-란">햄크레스트(Hamcrest) 란?</h2>
+I"�<h2 id="햄크레스트hamcrest-란">햄크레스트(Hamcrest) 란?</h2>
 
 <p>테스트 코드 내에서는 assertEquals 같은 비교 문장이 종종 사용되는데, 등호, 부등호, 비교 수준의 간략한 형태의 비교에는 한계가 있다. 또한 부등호 비교나 객체 안의 값 찾기, 문자열 안의 특정 값 찾기 등의 좀 더 다양한 판단 조건이 필요한 경우에는, 자칫 문장이 복잡해져서 판단 조건이 무엇인지 혼란스러워지기 쉽다. 이럴때 Hamcrest라는 라이브러리를 사용하면 좀 더 이해하기 쉽고 우하한 비교 문장을 만들 수 있다.</p>
 
@@ -31,9 +31,11 @@
 
 <h2 id="assertthat의-일반적인-사용-방법">AssertThat의 일반적인 사용 방법</h2>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">assertThat</span><span class="o">(</span><span class="n">테스트</span> <span class="n">대상</span><span class="o">,</span> <span class="nc">Matcher구문</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">assertThat</span><span class="o">(</span><span class="n">테스트</span> <span class="n">대상</span><span class="o">,</span> <span class="nc">Matcher구문</span><span class="o">);</span>
 <span class="n">assertThat</span><span class="o">(</span><span class="s">"메시지"</span><span class="o">,</span> <span class="n">테스트대상</span><span class="o">,</span> <span class="nc">Matcher구문</span><span class="o">);</span> 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><img src="../assets/img/210407-junit.png" /></p>
 

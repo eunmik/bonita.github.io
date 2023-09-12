@@ -1,4 +1,4 @@
-I"�k<p><span style="font-family:Papyrus; font-size:4em;"></span></p>
+I"!t<p><span style="font-family:Papyrus; font-size:4em;"></span></p>
 <blockquote>
   <p>📢 
 Test the program before you write it.</p>
@@ -31,11 +31,15 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <h2 id="실습-예제--은행-계좌account-클래스-만들기">실습 예제 — 은행 계좌(Account) 클래스 만들기</h2>
 
-<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code>은행 계좌 클래스 
+<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>은행 계좌 클래스 
 - 계좌 잔고 조회
 - 입금/출금
 - 예상 복리 이자(추가 개발) 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="1-첫번째-질문-계좌-생성-테스트">1. 첫번째 질문: 계좌 생성 테스트</h3>
 
@@ -79,7 +83,29 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>계좌 생성 테스트 케이스를 통과하는 코드를 작성한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountTest</span> <span class="o">{</span>
     <span class="c1">//계좌를 생성한다 -&gt; 계좌가 정상적으로 생성됐는지 확인한다</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAccount</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span> <span class="c1">//1. 테스트 메소드를 만든다.</span>
         <span class="nc">Account</span> <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">();</span> <span class="c1">//에러가 나도 넘어가자. 테스트 케이스 작성 시 흐름을 읽지 않기 위해서</span>
@@ -101,7 +127,7 @@ TDD의 목적은 Clean code that works 이다.</p>
     <span class="o">}</span>
 <span class="o">}</span>
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="1-2-최초의-정제-단계-refine">1-2. 최초의 정제 단계 (refine)</h3>
 
@@ -125,7 +151,15 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>Junit 프레임워크를 이용하는 코드로 전환했다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//계좌를 생성한다 -&gt; 계좌가 정상적으로 생성됐는지 확인한다</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c1">//계좌를 생성한다 -&gt; 계좌가 정상적으로 생성됐는지 확인한다</span>
     <span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAccount</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span> <span class="c1">//1. 테스트 메소드를 만든다.</span>
         <span class="nc">Account</span> <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">();</span> <span class="c1">//에러가 나도 넘어가자. 테스트 케이스 작성 시 흐름을 읽지 않기 위해서</span>
@@ -133,7 +167,7 @@ TDD의 목적은 Clean code that works 이다.</p>
 <span class="c1">//            throw new Exception("계좌생성 실패");</span>
 <span class="c1">//        }</span>
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="2-두번째-질문--잔고-조회">2. 두번째 질문 : 잔고 조회</h3>
 
@@ -144,18 +178,33 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>AccountTest.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetBalance</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="nc">Account</span> <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">(</span><span class="mi">100000</span><span class="o">);</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">account</span><span class="o">.</span><span class="na">getBalance</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">100000</span><span class="o">)</span> <span class="o">{</span>
 <span class="n">fail</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Account.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="nf">Account</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
     <span class="o">}</span>
 
@@ -163,7 +212,7 @@ TDD의 목적은 Clean code that works 이다.</p>
         <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="2-1-두번째-응답--잔고-조회-기능-구현">2-1. 두번째 응답 : 잔고 조회 기능 구현</h3>
 
@@ -174,7 +223,23 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>AccountTest.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetBalance</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
         <span class="nc">Account</span> <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">(</span><span class="mi">100000</span><span class="o">);</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">account</span><span class="o">.</span><span class="na">getBalance</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">100000</span><span class="o">)</span> <span class="o">{</span>
@@ -190,11 +255,21 @@ TDD의 목적은 Clean code that works 이다.</p>
             <span class="n">fail</span><span class="o">();</span>
         <span class="o">}</span>
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Account.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">balance</span><span class="o">;</span>
     <span class="kd">public</span> <span class="nf">Account</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">balance</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
@@ -204,7 +279,7 @@ TDD의 목적은 Clean code that works 이다.</p>
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">balance</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <blockquote>
   <p>📘 Account 클래스 생성에 대한 테스트 케이스,</p>
@@ -237,7 +312,19 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>AccountTest.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetBalance</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
         <span class="nc">Account</span> <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">(</span><span class="mi">100000</span><span class="o">);</span>
         <span class="c1">//예상값과 실제값을 비교하는 조건을 만족하지 않으면 실패!</span>
@@ -249,7 +336,7 @@ TDD의 목적은 Clean code that works 이다.</p>
         <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">account</span><span class="o">.</span><span class="na">getBalance</span><span class="o">());</span>
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="3-세-번째-질문-입금과-출금-테스트">3. 세 번째 질문: 입금과 출금 테스트</h3>
 
@@ -259,7 +346,21 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>AccountTest.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testDeposit</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
         <span class="nc">Account</span> <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">(</span><span class="mi">10000</span><span class="o">);</span>
         <span class="n">account</span><span class="o">.</span><span class="na">deposit</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
@@ -273,7 +374,7 @@ TDD의 목적은 Clean code that works 이다.</p>
         <span class="n">assertEquals</span><span class="o">(</span><span class="mi">9000</span><span class="o">,</span> <span class="n">account</span><span class="o">.</span><span class="na">getBalance</span><span class="o">());</span>
 
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="3-1-세-번째-응답-입금과-출급-기능-구현">3-1. 세 번째 응답: 입금과 출급 기능 구현</h3>
 
@@ -283,14 +384,21 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>Account.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">deposit</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">deposit</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">balance</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withdraw</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">balance</span> <span class="o">-=</span> <span class="n">i</span><span class="o">;</span>
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="3-2-세-번째-정제">3-2. 세 번째 정제</h3>
 
@@ -302,7 +410,51 @@ TDD의 목적은 Clean code that works 이다.</p>
 
 <p>AccountTest.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountTest</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Account</span> <span class="n">account</span><span class="o">;</span>
 
@@ -346,7 +498,7 @@ TDD의 목적은 Clean code that works 이다.</p>
         <span class="n">account</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Account</span><span class="o">(</span><span class="mi">10000</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="tdd의-장점">TDD의 장점</h2>
 

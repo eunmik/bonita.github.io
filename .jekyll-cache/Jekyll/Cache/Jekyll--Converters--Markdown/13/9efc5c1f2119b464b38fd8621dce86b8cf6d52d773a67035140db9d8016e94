@@ -1,37 +1,88 @@
-I"�.<p>친구가 만든 똥피하기 게임을 exe파일로 만들어달라는 부탁을 받았다. 
+I"L2<p>친구가 만든 똥피하기 게임을 exe파일로 만들어달라는 부탁을 받았다. 
 한번도 해보진 않았지만…!! 만들어서 보내주었다. 뿌듯해 ☺</p>
 
 <ol>
   <li>py파일을 exe 파일로 만들어 주기 위한 pyinstaller 패키지를 설치 한다.</li>
 </ol>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">pyinstaller</span>
-</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">pyinstaller</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>pyinstaller를 사용해서 exe 파일을 만든다.</li>
 </ol>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pyinstaller</span> <span class="o">-</span><span class="n">F</span> <span class="n">game</span><span class="p">.</span><span class="n">py</span>
-</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">pyinstaller</span> <span class="o">-</span><span class="n">F</span> <span class="n">game</span><span class="p">.</span><span class="n">py</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>실행했을 때 아래와 같은 메시지가 나온다면 데이터 경로가 문제일 수 있다.</li>
 </ol>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pygame</span> <span class="mf">2.0</span><span class="p">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">SDL</span> <span class="mf">2.0</span><span class="p">.</span><span class="mi">14</span><span class="p">,</span> <span class="n">Python</span> <span class="mf">3.8</span><span class="p">.</span><span class="mi">10</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="n">pygame</span> <span class="mf">2.0</span><span class="p">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">SDL</span> <span class="mf">2.0</span><span class="p">.</span><span class="mi">14</span><span class="p">,</span> <span class="n">Python</span> <span class="mf">3.8</span><span class="p">.</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">Hello</span> <span class="k">from</span> <span class="n">the</span> <span class="n">pygame</span> <span class="n">community</span><span class="p">.</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">pygame</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">contribute</span><span class="p">.</span><span class="n">html</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="n">File</span> <span class="s">"game.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">51</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="nb">TypeError</span><span class="p">:</span> <span class="n">expected</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span> <span class="ow">or</span> <span class="n">os</span><span class="p">.</span><span class="n">PathLike</span> <span class="nb">object</span><span class="p">,</span> <span class="ow">not</span> <span class="n">_io</span><span class="p">.</span><span class="n">BytesIO</span>
 <span class="p">[</span><span class="mi">132844</span><span class="p">]</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">script</span> <span class="s">'game'</span> <span class="n">due</span> <span class="n">to</span> <span class="n">unhandled</span> <span class="n">exception</span><span class="err">!</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>py에 사용되는 이미지 파일을 spec 파일에 더 해준다.</li>
 </ol>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- mode: python ; coding: utf-8 -*-
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+</pre></td><td class="rouge-code"><pre><span class="c1"># -*- mode: python ; coding: utf-8 -*-
 </span>
 <span class="n">block_cipher</span> <span class="o">=</span> <span class="bp">None</span>
 
@@ -74,13 +125,21 @@
           <span class="n">target_arch</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
           <span class="n">codesign_identity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
           <span class="n">entitlements_file</span><span class="o">=</span><span class="bp">None</span> <span class="p">)</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>py 코드에서는 절대경로로 찾을 수 있도록 아래 코드를 추가한다.</li>
 </ol>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">os</span> 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">os</span> 
 
 <span class="k">def</span> <span class="nf">resource_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s">'_MEIPASS'</span><span class="p">):</span>
@@ -88,7 +147,7 @@
     <span class="k">return</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">"."</span><span class="p">),</span> <span class="n">relative_path</span><span class="p">)</span>
 
 <span class="n">background</span> <span class="o">=</span> <span class="n">pygame</span><span class="p">.</span><span class="n">image</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">resource_path</span><span class="p">(</span><span class="s">"background.png"</span><span class="p">))</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>출처 : <a href="https://datatofish.com/executable-pyinstaller/">https://datatofish.com/executable-pyinstaller/</a></p>
 :ET

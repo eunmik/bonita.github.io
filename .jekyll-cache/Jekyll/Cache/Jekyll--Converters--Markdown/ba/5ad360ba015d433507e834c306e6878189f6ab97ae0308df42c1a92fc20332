@@ -1,4 +1,4 @@
-I"�<h2 id="multipart란">MultiPart란?</h2>
+I"3<h2 id="multipart란">MultiPart란?</h2>
 
 <p>웹 클라이언트가 요청을 보낼 때, http 프로토콜의 바디 부분에 데이터를 여러 부분으로 나눠서 보내는 것으로 파일을 한번에 여러개 전송을 하면 body 부분에 파일이 여러개의 부분으로 연결되어 전송된다. 이렇게 전송되는 것을 Multipart data라고 한다.</p>
 
@@ -10,11 +10,15 @@
 
 <p>Spring Boot에서 MultiPartFile은 아래처럼 사용한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/uploadFile"</span><span class="o">,</span> <span class="n">consumes</span> <span class="o">=</span> <span class="o">{</span> <span class="s">"multipart/form-data"</span> <span class="o">})</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nd">@PostMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/uploadFile"</span><span class="o">,</span> <span class="n">consumes</span> <span class="o">=</span> <span class="o">{</span> <span class="s">"multipart/form-data"</span> <span class="o">})</span>
     <span class="kd">public</span> <span class="nc">Response</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">uploadFileData</span><span class="o">(</span>                                                            <span class="nd">@RequestPart</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="s">"file"</span><span class="o">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">false</span><span class="o">)</span> <span class="nc">MultipartFile</span> <span class="n">imageData</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Response</span><span class="o">(</span><span class="n">fileServerService</span><span class="o">.</span><span class="na">uploadFile</span><span class="o">(</span><span class="n">imageData</span><span class="o">));</span>
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ul>
   <li>파일 업로드 시에 content-type은 multipart/form-data; 이어야 한다.</li>

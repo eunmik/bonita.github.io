@@ -1,5 +1,4 @@
-I"
-E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중 하나인 Redis를 사용해 보았다.</p>
+I"�J<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중 하나인 Redis를 사용해 보았다.</p>
 
 <p>Redis는 RDBMS가 아니라  Key-Value 구조 데이터인 NoSQL이다.</p>
 
@@ -11,7 +10,18 @@ E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중
   <li>
     <p>pom.xml에 라이브러리를 추가한다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&lt;!--</span> <span class="nc">Redis</span> <span class="o">:</span> <span class="n">inmemory</span> <span class="no">DB</span> <span class="o">--&gt;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre> <span class="o">&lt;!--</span> <span class="nc">Redis</span> <span class="o">:</span> <span class="n">inmemory</span> <span class="no">DB</span> <span class="o">--&gt;</span>
      <span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
        <span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
        <span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">redis</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
@@ -22,12 +32,23 @@ E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중
  			<span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">0.7</span><span class="o">.</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span>
  			<span class="o">&lt;</span><span class="n">scope</span><span class="o">&gt;</span><span class="n">compile</span><span class="o">&lt;/</span><span class="n">scope</span><span class="o">&gt;</span>
  		<span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>application.yaml 파일에 redis db 정보 설정한다.  embedded db 니깐 host는 127.0.0.1</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="err">##</span><span class="n">redis</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre> <span class="err">##</span><span class="n">redis</span>
  <span class="nl">spring:</span>
    <span class="nl">redis:</span>
      <span class="nl">lettuce:</span>
@@ -38,12 +59,55 @@ E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중
      <span class="nl">host:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
    <span class="nl">main:</span>
      <span class="n">allow</span><span class="o">-</span><span class="n">bean</span><span class="o">-</span><span class="n">definition</span><span class="o">-</span><span class="nl">overriding:</span> <span class="kc">true</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>Redis 설정을 위한 자바 클래스를 만든다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.data.redis.connection.RedisConnectionFactory</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory</span><span class="o">;</span>
@@ -86,9 +150,39 @@ E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중
      <span class="o">}</span>
 
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">redis.embedded.RedisServer</span><span class="o">;</span>
@@ -118,12 +212,50 @@ E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중
          <span class="n">redisServer</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
      <span class="o">}</span>
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>Redis DB를 사용하기 위해서는 Entity에 @RedisHash 어노테이션이 필요하다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">lombok.Data</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">lombok.Data</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.data.redis.core.RedisHash</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.data.redis.core.index.Indexed</span><span class="o">;</span>
 
@@ -161,7 +293,7 @@ E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중
      <span class="o">}</span>
 
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <ul>
       <li>@Id 어노테이션 붙은 변수의 이름이 Id가 아니면 @Id가없다고 에러가 난다.</li>
@@ -172,18 +304,24 @@ E<p>InMemory에 데이터를 저장해야 할 경우가 생겨서 InMemory DB중
   <li>
     <p>Repository 생성한다.  CrudRepository는 Redis 전용 Repositorys는 아니다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Repository</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre> <span class="nd">@Repository</span>
  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserLoginRepository</span>  <span class="kd">extends</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="nc">UserLogin</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="o">{</span>
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>Redis DB에 데이터가 잘 들어오는지 확인 하기 위해서는 cmd 창에서 아래 명령어를 친다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">&gt;</span> <span class="n">telnet</span> <span class="n">localhost</span> <span class="mi">6379</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre> <span class="o">&gt;</span> <span class="n">telnet</span> <span class="n">localhost</span> <span class="mi">6379</span>
  <span class="o">&gt;</span> <span class="n">monitor</span> 
 
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>그러면 데이터가 생성되거나 검색될 때마다 로그를 확인할 수 있다.</p>
 

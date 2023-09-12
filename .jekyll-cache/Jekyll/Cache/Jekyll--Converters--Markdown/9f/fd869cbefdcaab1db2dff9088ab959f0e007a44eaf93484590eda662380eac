@@ -1,4 +1,4 @@
-I"�c<h2 id="jax-rs란">JAX-RS란?</h2>
+I"h<h2 id="jax-rs란">JAX-RS란?</h2>
 
 <p>JAX-RS(Java API for RESTful Web Services)는 자바 플랫폼에서 경량화된 REST 방식의 웹 애플리케이션 구현을 지원하는 자바 API이다.</p>
 
@@ -10,7 +10,92 @@
 
 <h3 id="1-pomxml에-dependency를-추가한다--솔직히-다-필요한지는-모르겠음">1. pom.xml에 dependency를 추가한다.  (솔직히 다 필요한지는 모르겠음..)</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;!--</span>  <span class="n">jersey</span> <span class="n">dependency</span> <span class="o">--&gt;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+</pre></td><td class="rouge-code"><pre><span class="o">&lt;!--</span>  <span class="n">jersey</span> <span class="n">dependency</span> <span class="o">--&gt;</span>
 		<span class="o">&lt;!--</span> <span class="n">jersey</span> <span class="mi">1</span> <span class="n">버전</span> <span class="o">--&gt;</span>	
 		<span class="o">&lt;!--</span> 		<span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
 								<span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">com</span><span class="o">.</span><span class="na">sun</span><span class="o">.</span><span class="na">jersey</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
@@ -95,11 +180,24 @@
 		    <span class="o">&lt;!--</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">2.0</span><span class="o">-</span><span class="n">m02</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span> <span class="o">--&gt;</span>
 		    <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span><span class="mf">2.0</span><span class="o">.</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">version</span><span class="o">&gt;</span>
 		<span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="2-resource-config를-정의한다">2. Resource Config를 정의한다.</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.epis.outdoor.controllers</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">org.epis.outdoor.controllers</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.glassfish.jersey.server.ResourceConfig</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.glassfish.jersey.server.ServerProperties</span><span class="o">;</span>
@@ -112,11 +210,41 @@
     <span class="n">property</span><span class="o">(</span><span class="nc">ServerProperties</span><span class="o">.</span><span class="na">BV_SEND_ERROR_IN_RESPONSE</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="3-resource에-validation-annotation을-추가한다">3. Resource에 Validation Annotation을 추가한다.</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.validation.constraints.NotNull</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">javax.validation.constraints.NotNull</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlRootElement</span><span class="o">;</span>
 
 <span class="nd">@XmlRootElement</span>
@@ -146,11 +274,42 @@
 		<span class="k">this</span><span class="o">.</span><span class="na">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="4-controller에서-valid-어노테이션을-추가한다">4. Controller에서 @valid 어노테이션을 추가한다.</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">javax.validation.Valid</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">javax.validation.Valid</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.Consumes</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.POST</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.ws.rs.Path</span><span class="o">;</span>
@@ -181,7 +340,7 @@
 	<span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="5-controller를-호출할-때-a-값-없이-호출-하면-메시지가-return-된다">5. Controller를 호출할 때 a 값 없이 호출 하면 메시지가 return 된다.</h3>
 

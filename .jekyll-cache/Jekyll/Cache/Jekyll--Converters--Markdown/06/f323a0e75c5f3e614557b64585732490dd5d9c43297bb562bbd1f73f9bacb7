@@ -1,4 +1,4 @@
-I"�}<h1 id="table-of-contents">Table of contents</h1>
+I"Ȉ<h1 id="table-of-contents">Table of contents</h1>
 
 <ul>
   <li><a href="#---">오류 코드보다 예외를 사용하라</a></li>
@@ -19,7 +19,23 @@
 
 <p>bad👎 : 함수를 호출한 즉시 오류를 확인하지 않으면 문제가 발생할 확률이 높음</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DeviceController</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DeviceController</span><span class="o">{</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendShuitDown</span><span class="o">(){</span>
 		<span class="nc">DeviceHandle</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">getHandle</span><span class="o">(</span><span class="no">DEV1</span><span class="o">);</span> 
 		<span class="k">if</span><span class="o">(</span><span class="n">handle</span> <span class="o">!=</span> <span class="nc">DeviceHandle</span><span class="o">.</span><span class="na">INVALID</span><span class="o">)</span> <span class="o">{</span>
@@ -35,11 +51,35 @@
 		<span class="o">}</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Good👍 : 오류가 발생하면 예외를 던지는 편이 낫다. 그러면 호출자 코드가 더 깔끔해진다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DeviceController</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DeviceController</span><span class="o">{</span>
 	<span class="o">...</span>
 	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendShutDown</span><span class="o">(){</span>
 		<span class="k">try</span><span class="o">{</span>
@@ -63,7 +103,7 @@
 		<span class="o">...</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="try-catch-finally-문-부터-작성하라">Try-Catch-Finally 문 부터 작성하라</h2>
 
@@ -73,7 +113,18 @@
 
 <h3 id="step-1">Step 1</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Step 1: StorageException을 던지지 않으므로 이 테스트는 실패한다.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c1">// Step 1: StorageException을 던지지 않으므로 이 테스트는 실패한다.</span>
 
 <span class="nd">@Test</span><span class="o">(</span><span class="n">expected</span> <span class="o">=</span> <span class="nc">StorageException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">retrieveSectionShouldThrowOnInvalidFileName</span><span class="o">()</span> <span class="o">{</span>
@@ -84,11 +135,20 @@
   <span class="c1">// dummy return until we have a real implementation</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">RecordedGrip</span><span class="o">&gt;();</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="step-2">Step 2</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Step 2: 이제 테스트는 통과한다.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c1">// Step 2: 이제 테스트는 통과한다.</span>
 <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">RecordedGrip</span><span class="o">&gt;</span> <span class="nf">retrieveSection</span><span class="o">(</span><span class="nc">String</span> <span class="n">sectionName</span><span class="o">){</span>
   <span class="k">try</span><span class="o">{</span>
     <span class="nc">FileInputStream</span> <span class="n">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">sectionName</span><span class="o">);</span>
@@ -97,11 +157,21 @@
   <span class="o">}</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">RecordedGrip</span><span class="o">&gt;();</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="step-3">Step 3</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Step 3: Exception의 범위를 FileNotFoundException으로 줄여 정확히 어떤 Exception이 발생한지 체크하자.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c1">// Step 3: Exception의 범위를 FileNotFoundException으로 줄여 정확히 어떤 Exception이 발생한지 체크하자.</span>
 <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">RecordedGrip</span><span class="o">&gt;</span> <span class="nf">retrieveSection</span><span class="o">(</span><span class="nc">String</span> <span class="n">sectionName</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">try</span> <span class="o">{</span>
     <span class="nc">FileInputStream</span> <span class="n">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">sectionName</span><span class="o">);</span>
@@ -111,7 +181,7 @@
   <span class="o">}</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">RecordedGrip</span><span class="o">&gt;();</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="미확인unchecked-예외를-사용하라">미확인(unchecked) 예외를 사용하라</h2>
 
@@ -127,7 +197,22 @@
   </li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(){</span>
 	<span class="k">try</span><span class="o">{</span>
 		
 	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InvalidGetException</span> <span class="n">e</span><span class="o">){</span>
@@ -142,7 +227,7 @@
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">InvalidGetException</span> <span class="o">{</span>
 	<span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidGetException</span><span class="o">();</span> 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="예외에-의미를-제공하라">예외에 의미를 제공하라</h2>
 
@@ -156,7 +241,26 @@
 
 <p>Bad👎 : 다른 종류의 예외를 처리 로직은 모두 같으므로 의미가 없음</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 외부 라이브러리가 던질 예외를 모두 잡아 낸다. </span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="c1">// 외부 라이브러리가 던질 예외를 모두 잡아 낸다. </span>
 <span class="c1">// 같은 에러 잡아 내는 코드가 많다. </span>
 <span class="c1">// 변경하기 어렵다.</span>
 
@@ -175,11 +279,43 @@
 <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
   <span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Good👍 :</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 호출하는 라이브러리 API를 감싸면서 예외 유형 하나를 반환.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre><span class="c1">// 호출하는 라이브러리 API를 감싸면서 예외 유형 하나를 반환.</span>
 <span class="c1">// Wrapper클래스 덕분에 의존성이 크게 감소.</span>
 
 <span class="nc">LocalPort</span> <span class="n">port</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LocalPort</span><span class="o">(</span><span class="mi">12</span><span class="o">);</span>
@@ -211,7 +347,7 @@
   <span class="o">}</span>
   <span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="정상-흐름을-정의하라">정상 흐름을 정의하라.</h2>
 
@@ -227,7 +363,15 @@
 
 <p>Bad👎</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 식비비용 조회를 실패하면 일일 기본 식비를 총계에 더한다.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c1">// 식비비용 조회를 실패하면 일일 기본 식비를 총계에 더한다.</span>
 <span class="c1">// 특수 상황을 처리할 필요가 없다면 더 코드는 간결해진다.</span>
 <span class="k">try</span> <span class="o">{</span> 
   <span class="nc">MealExpenses</span> <span class="n">expenses</span> <span class="o">=</span> <span class="n">expenseReportDAO</span><span class="o">.</span><span class="na">getMeals</span><span class="o">(</span><span class="n">employee</span><span class="o">.</span><span class="na">getID</span><span class="o">());</span>
@@ -235,11 +379,22 @@
 <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">MealExpensesNotFound</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
    <span class="n">m_total</span> <span class="o">+=</span> <span class="n">getMealPerDiem</span><span class="o">();</span> 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Good👍</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// caller logic.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c1">// caller logic.</span>
 <span class="nc">MealExpenses</span> <span class="n">expenses</span> <span class="o">=</span> <span class="n">expenseReportDAO</span><span class="o">.</span><span class="na">getMeals</span><span class="o">(</span><span class="n">employee</span><span class="o">.</span><span class="na">getID</span><span class="o">());</span>
 <span class="n">m_total</span> <span class="o">+=</span> <span class="n">expenses</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span>
 
@@ -250,7 +405,7 @@
 		<span class="k">return</span> <span class="no">MEAL_EXPENSES_DEFAULT</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="null을-반환하지-마라">null을 반환하지 마라</h2>
 
@@ -258,7 +413,25 @@
 
 <p>Bad👎</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">registerItem</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span> 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">registerItem</span><span class="o">(</span><span class="nc">Item</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span> 
   <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
     <span class="nc">ItemRegistry</span> <span class="n">registry</span> <span class="o">=</span> <span class="n">peristentStore</span><span class="o">.</span><span class="na">getItemRegistry</span><span class="o">();</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">registry</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
@@ -276,11 +449,22 @@
       <span class="n">totalPay</span> <span class="o">+=</span> <span class="n">e</span><span class="o">.</span><span class="na">getPay</span><span class="o">();</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Good👍</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 더 읽기 쉬운 코드.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c1">// 더 읽기 쉬운 코드.</span>
   <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="n">getEmployees</span><span class="o">();</span>
   <span class="k">for</span><span class="o">(</span><span class="nc">Employee</span> <span class="n">e</span> <span class="o">:</span> <span class="n">employees</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">totalPay</span> <span class="o">+=</span> <span class="n">e</span><span class="o">.</span><span class="na">getPay</span><span class="o">();</span>
@@ -291,7 +475,7 @@
       <span class="k">return</span> <span class="nc">Collections</span><span class="o">.</span><span class="na">emptyList</span><span class="o">();</span>
     <span class="o">}</span>
   <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="null을-전환하지-마라">null을 전환하지 마라</h2>
 
@@ -301,17 +485,31 @@
 
 <p>Bad👎</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Parameter에 null값이 들어오면 NullPointerException 발생.</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="c1">// Parameter에 null값이 들어오면 NullPointerException 발생.</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MetricsCalculator</span> <span class="o">{</span> 
   <span class="kd">public</span> <span class="kt">double</span> <span class="nf">xProjection</span><span class="o">(</span><span class="nc">Point</span> <span class="n">p1</span><span class="o">,</span> <span class="nc">Point</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span> 
     <span class="k">return</span> <span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">x</span> <span class="err">–</span> <span class="n">p1</span><span class="o">.</span><span class="na">x</span><span class="o">)</span> <span class="o">*</span> <span class="mf">1.5</span><span class="o">;</span> 
   <span class="o">}</span> 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Better</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MetricsCalculator</span> <span class="o">{</span> 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MetricsCalculator</span> <span class="o">{</span> 
   <span class="kd">public</span> <span class="kt">double</span> <span class="nf">xProjection</span><span class="o">(</span><span class="nc">Point</span> <span class="n">p1</span><span class="o">,</span> <span class="nc">Point</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span> 
     <span class="k">if</span><span class="o">(</span><span class="n">p1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">p2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
       <span class="k">throw</span> <span class="nf">InvalidArgumentException</span><span class="o">(</span><span class="s">"Invalid argument for MetricsCalculator.xProjection"</span><span class="o">);</span> 
@@ -319,16 +517,23 @@
     <span class="k">return</span> <span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">x</span> <span class="err">–</span> <span class="n">p1</span><span class="o">.</span><span class="na">x</span><span class="o">)</span> <span class="o">*</span> <span class="mf">1.5</span><span class="o">;</span> 
   <span class="o">}</span> 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Good👍</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MetricsCalculator</span> <span class="o">{</span> 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MetricsCalculator</span> <span class="o">{</span> 
   <span class="kd">public</span> <span class="kt">double</span> <span class="nf">xProjection</span><span class="o">(</span><span class="nc">Point</span> <span class="n">p1</span><span class="o">,</span> <span class="nc">Point</span> <span class="n">p2</span><span class="o">)</span> <span class="o">{</span> 
     <span class="k">assert</span> <span class="n">p1</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">:</span> <span class="s">"p1 should not be null"</span><span class="o">;</span>
     <span class="k">assert</span> <span class="n">p2</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">:</span> <span class="s">"p2 should not be null"</span><span class="o">;</span>
     <span class="k">return</span> <span class="o">(</span><span class="n">p2</span><span class="o">.</span><span class="na">x</span> <span class="err">–</span> <span class="n">p1</span><span class="o">.</span><span class="na">x</span><span class="o">)</span> <span class="o">*</span> <span class="mf">1.5</span><span class="o">;</span> 
   <span class="o">}</span> 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 :ET

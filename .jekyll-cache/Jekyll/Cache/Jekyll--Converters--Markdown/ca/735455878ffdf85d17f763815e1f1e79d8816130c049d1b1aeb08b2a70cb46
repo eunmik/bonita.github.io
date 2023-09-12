@@ -1,4 +1,4 @@
-I"�;<h1 id="algorithm-이분-탐색">[Algorithm] 이분 탐색</h1>
+I"B><h1 id="algorithm-이분-탐색">[Algorithm] 이분 탐색</h1>
 
 <h2 id="이진-탐색-알고리즘">이진 탐색 알고리즘</h2>
 
@@ -28,7 +28,51 @@
 
 <h2 id="이진-탐색-코드-java">이진 탐색 코드 (JAVA)</h2>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Java implementation of recursive Binary Search</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td><td class="rouge-code"><pre><span class="c1">// Java implementation of recursive Binary Search</span>
 <span class="kd">class</span> <span class="nc">BinarySearch</span> <span class="o">{</span>
     <span class="c1">// Returns index of x if it is present in arr[l..</span>
     <span class="c1">// r], else return -1</span>
@@ -72,7 +116,7 @@
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="cm">/* This code is contributed by Rajat Mishra */</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="파라메트릭-서치parametric-search">파라메트릭 서치(Parametric Search)</h2>
 
@@ -89,7 +133,22 @@
 
 <h3 id="-떡볶이-떡-만들기"><문제> 떡볶이 떡 만들기</문제></h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>떡볶이 떡 만들기
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre>떡볶이 떡 만들기
 오늘 동빈이는 여행 가신 부모님을 대신해서 떡집 일을 하기로 했습니다.
 동빈이네 떡볶이 떡은 재밌게도 떡볶이 떡의 길이가 일정하지 않습니다.
 대신에 한 봉지 안에 들어가는 떡의 총 길이는 절단기로 잘라서 맞춰줍니다.
@@ -104,7 +163,7 @@
 둘째 줄에는 떡의 개별 높이가 주어집니다.
 떡 높이의 총합은 항상M이상이므로,손님은 필요한 양만큼 떡을 사갈 수 있습니다.
 높이는10억보다 작거나 같은 양의 정수 또는0입니다.
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="문제-해결-아이디어">문제 해결 아이디어</h3>
 
@@ -131,7 +190,15 @@
 
 <h3 id="-정렬된-배열에서-특정-수의-개수-구하기"><문제> 정렬된 배열에서 특정 수의 개수 구하기</문제></h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">N개의</span> <span class="n">원소를</span> <span class="n">포함하고</span> <span class="n">있는</span> <span class="n">수열이</span> <span class="n">오름차순으로</span> <span class="n">정렬되어</span> <span class="n">있습니다</span><span class="o">.</span> <span class="n">이때</span> <span class="n">이</span> <span class="n">수열에서</span> <span class="nc">X가</span> <span class="n">등장하는</span> <span class="n">횟수를</span> <span class="n">계산하세요</span><span class="o">.</span> <span class="n">예를</span> <span class="n">들어</span> <span class="n">수열</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">}</span><span class="n">이</span> <span class="n">있을</span> <span class="n">때</span> <span class="n">x</span><span class="o">=</span><span class="mi">2</span><span class="n">라면</span><span class="o">,</span> <span class="n">현재</span> <span class="n">수열에서</span> <span class="n">값이</span> <span class="mi">2</span><span class="n">인</span> <span class="n">원소가</span> <span class="mi">4</span><span class="n">개이므로</span> <span class="mi">4</span><span class="n">를</span> <span class="n">출력합니다</span><span class="o">.</span> 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="nc">N개의</span> <span class="n">원소를</span> <span class="n">포함하고</span> <span class="n">있는</span> <span class="n">수열이</span> <span class="n">오름차순으로</span> <span class="n">정렬되어</span> <span class="n">있습니다</span><span class="o">.</span> <span class="n">이때</span> <span class="n">이</span> <span class="n">수열에서</span> <span class="nc">X가</span> <span class="n">등장하는</span> <span class="n">횟수를</span> <span class="n">계산하세요</span><span class="o">.</span> <span class="n">예를</span> <span class="n">들어</span> <span class="n">수열</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">}</span><span class="n">이</span> <span class="n">있을</span> <span class="n">때</span> <span class="n">x</span><span class="o">=</span><span class="mi">2</span><span class="n">라면</span><span class="o">,</span> <span class="n">현재</span> <span class="n">수열에서</span> <span class="n">값이</span> <span class="mi">2</span><span class="n">인</span> <span class="n">원소가</span> <span class="mi">4</span><span class="n">개이므로</span> <span class="mi">4</span><span class="n">를</span> <span class="n">출력합니다</span><span class="o">.</span> 
 <span class="n">단</span><span class="o">,</span> <span class="n">이문제는</span> <span class="n">시간</span> <span class="n">복잡도O</span><span class="o">(</span><span class="n">logN</span><span class="o">)</span><span class="n">으로</span> <span class="n">알고리즘을</span> <span class="n">설계하지</span> <span class="n">않으면</span> <span class="n">시간</span> <span class="n">초과</span> <span class="n">판정을</span> <span class="n">받습니다</span><span class="o">.</span> 
 
 <span class="n">입력</span> <span class="n">조건</span>
@@ -139,7 +206,7 @@
 <span class="n">둘째줄에</span> <span class="nc">N개의</span> <span class="n">원소가</span> <span class="n">정수</span> <span class="n">형태로</span> <span class="n">공백으로</span> <span class="n">구분되어</span> <span class="n">입력됩니다</span><span class="o">.</span> 
 <span class="n">수열의</span> <span class="n">원소</span> <span class="n">중에서</span> <span class="n">값이</span> <span class="n">x인</span> <span class="n">원소의</span> <span class="n">개수를</span> <span class="n">출력합니다</span><span class="o">.</span> 
 <span class="n">단</span><span class="o">,</span> <span class="n">값이</span> <span class="n">x인</span> <span class="n">원소가</span> <span class="n">하나도</span> <span class="n">없다면</span> <span class="o">-</span><span class="mi">1</span><span class="n">을</span> <span class="n">출력합니다</span><span class="o">.</span> 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="문제-해결-아이디어-1">문제 해결 아이디어</h3>
 

@@ -1,4 +1,4 @@
-I"b<ol>
+I"G<ol>
   <li>
     <p>Eclipse에서 Help → Eclipse MarketPlace  → STS4 설치 하기</p>
 
@@ -31,30 +31,74 @@
   <li>
     <p>pom.xml에서 버전을 확인 한다.</p>
 
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;properties&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre> <span class="nt">&lt;properties&gt;</span>
  		<span class="nt">&lt;java-version&gt;</span>1.7<span class="nt">&lt;/java-version&gt;</span>
  		<span class="nt">&lt;org.springframework-version&gt;</span>4.0.0.RELEASE<span class="nt">&lt;/org.springframework-version&gt;</span>
  		<span class="nt">&lt;org.aspectj-version&gt;</span>1.6.10<span class="nt">&lt;/org.aspectj-version&gt;</span>
  		<span class="nt">&lt;org.slf4j-version&gt;</span>1.6.6<span class="nt">&lt;/org.slf4j-version&gt;</span>
  	<span class="nt">&lt;/properties&gt;</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>서버에서 기동이 되는지 확인한다. Run As → Run on Server</li>
   <li>
     <p>JDBC Tests를 위해 Oracle Driver를 설치한다.</p>
 
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!-- JDBC --&gt;</span>
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre> <span class="c">&lt;!-- JDBC --&gt;</span>
  		<span class="nt">&lt;dependency&gt;</span>
  		    <span class="nt">&lt;groupId&gt;</span>com.oracle.database.jdbc<span class="nt">&lt;/groupId&gt;</span>
  		    <span class="nt">&lt;artifactId&gt;</span>ojdbc6<span class="nt">&lt;/artifactId&gt;</span>
  		    <span class="nt">&lt;version&gt;</span>11.2.0.4<span class="nt">&lt;/version&gt;</span>
  		<span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p><a href="http://jdbctests.java">JDBCTests.java</a></p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">package</span> <span class="nn">org.epis.outdoor</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre> <span class="kn">package</span> <span class="nn">org.epis.outdoor</span><span class="o">;</span>
 
  <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">fail</span><span class="o">;</span>
 
@@ -86,14 +130,15 @@
  	<span class="o">}</span>
 
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>7-1. Run As → JUnit Test</p>
 
     <p>7-2. Output</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="no">INFO</span> <span class="o">:</span> <span class="n">org</span><span class="o">.</span><span class="na">epis</span><span class="o">.</span><span class="na">outdoor</span><span class="o">.</span><span class="na">JDBCTests</span> <span class="o">-</span> <span class="n">oracle</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">driver</span><span class="o">.</span><span class="na">T4CConnection</span><span class="err">@</span><span class="mi">5</span><span class="n">cc96746</span>
-</code></pre></div>    </div>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> <span class="no">INFO</span> <span class="o">:</span> <span class="n">org</span><span class="o">.</span><span class="na">epis</span><span class="o">.</span><span class="na">outdoor</span><span class="o">.</span><span class="na">JDBCTests</span> <span class="o">-</span> <span class="n">oracle</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">driver</span><span class="o">.</span><span class="na">T4CConnection</span><span class="err">@</span><span class="mi">5</span><span class="n">cc96746</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
 </ol>
 :ET

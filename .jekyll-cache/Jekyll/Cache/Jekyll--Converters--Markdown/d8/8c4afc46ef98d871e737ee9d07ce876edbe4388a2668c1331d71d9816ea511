@@ -1,4 +1,4 @@
-I"E<p>Currently I am working alone on RPA API project. At first I didn’t realize for the need of git strategy for Gitlab (we are using Github) but as time passes, even though I am the only one who pushes to and pulls from main branches, I sometimes have conflicts and get confused.</p>
+I"�<p>Currently I am working alone on RPA API project. At first I didn’t realize for the need of git strategy for Gitlab (we are using Github) but as time passes, even though I am the only one who pushes to and pulls from main branches, I sometimes have conflicts and get confused.</p>
 
 <p>Even before I started to work here, there was only one person who manages the project. So no strategy was made.</p>
 
@@ -47,12 +47,17 @@
 
 <p>Finished features may be merged into the develop branch to definitely add them to the upcoming release :</p>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span> <span class="nx">git</span> <span class="nx">checkout</span> <span class="nx">develop</span>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nx">$</span> <span class="nx">git</span> <span class="nx">checkout</span> <span class="nx">develop</span>
 <span class="nx">$</span> <span class="nx">git</span> <span class="nx">merge</span> <span class="o">--</span><span class="nx">no</span><span class="o">-</span><span class="nx">ff</span> <span class="nx">myfeature</span>
 <span class="nx">$</span> <span class="nx">git</span> <span class="nx">branch</span> <span class="o">-</span><span class="nx">d</span> <span class="nx">myfeature</span>
 <span class="nx">Delete</span> <span class="nx">branch</span> <span class="nx">myfeature</span>
 <span class="nx">$</span> <span class="nx">git</span> <span class="nx">push</span> <span class="nx">origin</span> <span class="nx">develop</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">--no-ff</code> flag cuases the merge to always create a new commit object, event if the merge could be performed with a fast-forward. This avoids losing information about the historical existence of a feature branch and groups together all commits that together added the feature. Compare:</p>
 

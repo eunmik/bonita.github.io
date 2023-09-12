@@ -1,4 +1,4 @@
-I"�d<p>현재(2022년 기준) 다니고 있는 회사에 코드에는 테스크 코드가 없다. 전에 계셨던 이사님이 테스트 코드를 작성하려고 하신 흔적은 있지만 대부분의 기능에는 테스트 코드가 없다. 
+I"�h<p>현재(2022년 기준) 다니고 있는 회사에 코드에는 테스크 코드가 없다. 전에 계셨던 이사님이 테스트 코드를 작성하려고 하신 흔적은 있지만 대부분의 기능에는 테스트 코드가 없다. 
 사실 나도 이 회사에서 개발자로서는 처음 입사했고 중소기업 특성 상 제대로 된 사수도 없었기에 초기에는 테스트 코드가 얼마나 중요한지 자각하지 못하였다.</p>
 
 <p>그리고 테스트 서버도 없었다. 내가 입사하고 1년이 지나고 나서 생겼다. 그 전에는 Postman으로 API를 호출해서 잘 나오면 실서버에 배포하고 배포 하고 나서 문제 생기면 롤백하고 이런 식으로 프로세스가 있었다. 지금보면 정말 위험하고 고객에 제공하는 서비스인데 무책임하다고 느껴지기도 한다.</p>
@@ -13,7 +13,37 @@
 
 <h3 id="파일-업로드-관련-서비스-테스트-코드">파일 업로드 관련 서비스 테스트 코드</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Assertions</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Assertions</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.DisplayName</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="o">;</span>
@@ -43,7 +73,7 @@
     <span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ul>
   <li>@ExtendWith(MockitoExtention.class) : Mockito의 Mock 객체를 사용하기 위한 Annotation</li>
@@ -54,7 +84,55 @@
 
 <h3 id="resttemplate관련-서비스-테스트-코드">RestTemplate관련 서비스 테스트 코드</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">lombok.SneakyThrows</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">lombok.SneakyThrows</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Assertions</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.extension.ExtendWith</span><span class="o">;</span>
@@ -102,7 +180,7 @@
         <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">actualResult</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ul>
   <li>@Mock : 가짜 객체인 Mock 객체</li>
@@ -116,7 +194,71 @@
 
 <h2 id="integration-tests">Integration Tests</h2>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.argos_labs.rpa.stu.ServiceConfiguration</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">com.argos_labs.rpa.stu.ServiceConfiguration</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.jupiter.api.Test</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc</span><span class="o">;</span>
@@ -180,7 +322,7 @@
         <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">result</span><span class="o">.</span><span class="na">getBody</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"access_token"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ul>
   <li>@SpringBootTest : 통합테스트를 할때 사용되는 Annotation. 실제 어플리케이션을 기동하며 포트주소가 주어지고 실제 데이터베이서에 연결되는 테스트를 수행하도록 한다.</li>
@@ -198,9 +340,11 @@
 
 <p>통합테스트에서 Service 클래스에서 Mapper가 가져오는 데이터에서 자꾸 NullPointerException이 났다. 그래서 통합테스트에서도 Unit Test처럼 Mock 객체를 만들어줘야 하는건가 고민했었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span><span class="o">(</span><span class="n">pcScenarioEditorMapper</span><span class="o">.</span><span class="na">select_company_code_from_scenario_hash_key</span><span class="o">(</span><span class="n">scenario</span><span class="o">.</span><span class="na">getHashKey</span><span class="o">(),</span> <span class="kc">null</span><span class="o">)).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">given</span><span class="o">(</span><span class="n">pcScenarioEditorMapper</span><span class="o">.</span><span class="na">select_company_code_from_scenario_hash_key</span><span class="o">(</span><span class="n">scenario</span><span class="o">.</span><span class="na">getHashKey</span><span class="o">(),</span> <span class="kc">null</span><span class="o">)).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
 <span class="n">given</span><span class="o">(</span><span class="n">pcScenarioEditorMapper</span><span class="o">.</span><span class="na">select_company_code_using_userId</span><span class="o">(</span><span class="n">authUserId</span><span class="o">)).</span><span class="na">willReturn</span><span class="o">(</span><span class="s">"ABCD"</span><span class="o">);</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>하지만 문제의 원인은! 단위 테스틑 Mock 객체를 사용함으로써 실제 데이터를 사용하는게 아니라 가짜로 정의한 데이터와 bean 객체를 사용하는데 통합테스트에서는 실제 애플리케이션이 작동되는 flow를 확인 하기 위해 실제 데이터를 사용한다.</p>
 

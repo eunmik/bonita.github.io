@@ -1,4 +1,4 @@
-I"�C<h2 id="1-위임-필터-및-필터-빈-초기화---delegatingproxychain-filterchainproxy">1. 위임 필터 및 필터 빈 초기화 - DelegatingProxyChain, FilterChainProxy</h2>
+I"F<h2 id="1-위임-필터-및-필터-빈-초기화---delegatingproxychain-filterchainproxy">1. 위임 필터 및 필터 빈 초기화 - DelegatingProxyChain, FilterChainProxy</h2>
 
 <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img1.JPG" /></p>
 
@@ -58,7 +58,31 @@
 
 <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/210616-img6.JPG" /></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre><span class="nd">@Configuration</span>
 <span class="nd">@EnableWebSecurity</span> <span class="c1">//웹보안 활성화를 위한 어노테이션</span>
 <span class="nd">@Order</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
@@ -82,7 +106,7 @@
                     <span class="o">.</span><span class="na">formLogin</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="3-인증-개념-이해---authentication">3. 인증 개념 이해 - Authentication</h2>
 
@@ -127,7 +151,33 @@
 
 <p>TestController.java</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="nd">@RestController</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestController</span> <span class="o">{</span>
 
     <span class="nd">@GetMapping</span>
@@ -153,13 +203,15 @@
         <span class="o">).</span><span class="na">start</span><span class="o">();</span>
         <span class="k">return</span> <span class="s">"thread"</span><span class="o">;</span>
     <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>securityconfig.java MODE를 변경할 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">setStrategyName</span><span class="o">(</span><span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">MODE_INHERITABLETHREADLOCAL</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">setStrategyName</span><span class="o">(</span><span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">MODE_INHERITABLETHREADLOCAL</span><span class="o">)</span>
 <span class="o">;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="5-인증-저장소-필터---securitycontextpersistencefilter">5. 인증 저장소 필터 - SecurityContextPersistenceFilter</h2>
 

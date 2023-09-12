@@ -1,16 +1,29 @@
-I"�H<p>Spring Security에서 반환하는 에러 메시지는 아래처럼 형식이 달라서 필요한 데이터가 있을때는 코드를 작성해 줘야한다.</p>
+I"N<p>Spring Security에서 반환하는 에러 메시지는 아래처럼 형식이 달라서 필요한 데이터가 있을때는 코드를 작성해 줘야한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="o">{</span>
     <span class="s">"error"</span><span class="o">:</span> <span class="s">"invalid_grant"</span><span class="o">,</span>
     <span class="s">"error_description"</span><span class="o">:</span> <span class="s">"Invalid username or password"</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ol>
   <li>
     <p>Oauth2Exception을 상속받은 class를 만든다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.annotation.JsonSerialize</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.annotation.JsonSerialize</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.common.exceptions.OAuth2Exception</span><span class="o">;</span>
 
  <span class="nd">@JsonSerialize</span><span class="o">(</span><span class="n">using</span>  <span class="o">=</span> <span class="nc">CustomOauthExceptionSerializer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
@@ -19,7 +32,7 @@
          <span class="kd">super</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
      <span class="o">}</span>
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>@JsonSerialize : marshalling 과정에서 custom serializer를 사용하도록 지정한다.</p>
 
@@ -30,7 +43,47 @@
   <li>
     <p>JsonSerialize 어노테이션을 추가 했기 때문에 우리는 CustomOauthExceptionSerializer를 사용할 것이다.</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonGenerator</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonGenerator</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.SerializerProvider</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ser.std.StdSerializer</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.json.JSONObject</span><span class="o">;</span>
@@ -70,12 +123,38 @@
 
      <span class="o">}</span>
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>CustomOauthException를 Oauth2 Config에 설정한다. (WebResponseExceptionTranslator를 설정해주는 건데 따로 class를 만들어서 적용할 수도 있다.)</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Configuration</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre> <span class="nd">@Configuration</span>
  <span class="nd">@EnableAuthorizationServer</span>
  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationServerConfig</span> <span class="kd">extends</span> <span class="nc">AuthorizationServerConfigurerAdapter</span> <span class="o">{</span>
 
@@ -101,11 +180,29 @@
  				<span class="o">});**</span>
 
  	<span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>따로 class를 만들어서 적용할 경우</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre> <span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.common.exceptions.OAuth2Exception</span><span class="o">;</span>
  <span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator</span><span class="o">;</span>
 
@@ -123,11 +220,26 @@
 
      <span class="o">}</span>
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>AuthorizationServerConfig.java</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Bean</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre> <span class="nd">@Bean</span>
  	<span class="kd">public</span> <span class="nc">WebResponseExceptionTranslator</span> <span class="nf">webResponseExceptionTranslator</span><span class="o">(){</span>
  		<span class="k">return</span> <span class="k">new</span> <span class="nf">CustomWebResponseExceptionTranslator</span><span class="o">();</span>
  	<span class="o">}</span>
@@ -142,12 +254,22 @@
  				<span class="c1">//for authentication error exception</span>
  				<span class="o">.</span><span class="na">exceptionTranslator</span><span class="o">(</span><span class="n">webResponseExceptionTranslator</span><span class="o">());</span>
  	<span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>적용 후 나오는 에러 메시지는 아래와 같다</p>
 
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">{</span>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre> <span class="o">{</span>
      <span class="s">"timestamp"</span><span class="o">:</span> <span class="s">"2021-07-29T11:07:42.427"</span><span class="o">,</span>
      <span class="s">"status"</span><span class="o">:</span> <span class="mi">400</span><span class="o">,</span>
      <span class="s">"error"</span><span class="o">:</span> <span class="s">"invalid_request"</span><span class="o">,</span>
@@ -157,7 +279,7 @@
          <span class="s">"login_attempts"</span><span class="o">:</span> <span class="mi">1</span>
      <span class="o">}</span>
  <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
     <p><img src="https://eunmik.github.io/bonita.github.io/assets/img/2021/0803/img1.png" /></p>
 
     <p>출처 : https://medium.com/@beladiyahardik7/spring-security-custom-oauth2exception-in-spring-b35a62af4d34</p>

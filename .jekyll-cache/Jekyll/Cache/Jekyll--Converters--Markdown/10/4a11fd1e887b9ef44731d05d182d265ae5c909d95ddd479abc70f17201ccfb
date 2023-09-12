@@ -1,4 +1,4 @@
-I"HL<p><strong>다익스트라(Dijkstra)</strong> 알고리즘은 단일 시작점 최단 경로 알고리즘으로 시작 정점 s에서부터 다른 정점들까지의 최단거리를 계산한다. 다익스트라는 방향 가중 그래프에 최단 경로 문제를 해결한다.</p>
+I"�N<p><strong>다익스트라(Dijkstra)</strong> 알고리즘은 단일 시작점 최단 경로 알고리즘으로 시작 정점 s에서부터 다른 정점들까지의 최단거리를 계산한다. 다익스트라는 방향 가중 그래프에 최단 경로 문제를 해결한다.</p>
 
 <p>이때 음의 간선은 포함할 수 없다. 음수 사이클이 있는 경우 최단 경로를 정확하게 찾아줄 수 없기 때문이다.</p>
 
@@ -34,11 +34,15 @@
 
 <p>dist[2] 보다 작으면 최소 비용 노드를 갱신한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">d</span><span class="o">[</span><span class="n">next</span><span class="o">.</span><span class="na">destination</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">d</span><span class="o">[</span><span class="n">destination</span><span class="o">]</span> <span class="o">+</span> <span class="n">next</span><span class="o">.</span><span class="na">weight</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">if</span><span class="o">(</span><span class="n">d</span><span class="o">[</span><span class="n">next</span><span class="o">.</span><span class="na">destination</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">d</span><span class="o">[</span><span class="n">destination</span><span class="o">]</span> <span class="o">+</span> <span class="n">next</span><span class="o">.</span><span class="na">weight</span><span class="o">){</span>
 	<span class="n">d</span><span class="o">[</span><span class="n">next</span><span class="o">.</span><span class="na">destination</span><span class="o">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">[</span><span class="n">destination</span><span class="o">]</span> <span class="o">+</span> <span class="n">next</span><span class="o">.</span><span class="na">weight</span><span class="o">;</span>
   <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Edge</span><span class="o">(</span><span class="n">next</span><span class="o">.</span><span class="na">destination</span><span class="o">,</span> <span class="n">d</span><span class="o">[</span><span class="n">next</span><span class="o">.</span><span class="na">destination</span><span class="o">]));</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>갱신하고 비용이 짧은 순으로 찾을 수 있게 우선순위 큐에 add 한다.</p>
 
@@ -66,7 +70,95 @@
 
 <p>전체 JAVA 코드</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.io.BufferedReader</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.io.InputStreamReader</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
@@ -154,7 +246,7 @@
 
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>출처 :</p>
 

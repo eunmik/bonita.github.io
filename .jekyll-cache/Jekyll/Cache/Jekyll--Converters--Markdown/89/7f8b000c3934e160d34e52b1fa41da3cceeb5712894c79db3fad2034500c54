@@ -1,4 +1,4 @@
-I"%�<table>
+I"��<table>
   <tbody>
     <tr>
       <td>[Module One - Containerize the Monolith</td>
@@ -29,8 +29,9 @@
 
 <h3 id="2-install-docker-macos">2. Install Docker (macOS)</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install</span> <span class="nt">--cask</span> docker
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>brew <span class="nb">install</span> <span class="nt">--cask</span> docker
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>–cask : to install GUI application</p>
 
@@ -38,20 +39,25 @@
 
 <p><a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">Installing or updating the latest version of the AWS CLI</a></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"https://awscli.amazonaws.com/AWSCLIV2.pkg"</span> <span class="nt">-o</span> <span class="s2">"AWSCLIV2.pkg"</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>curl <span class="s2">"https://awscli.amazonaws.com/AWSCLIV2.pkg"</span> <span class="nt">-o</span> <span class="s2">"AWSCLIV2.pkg"</span>
 <span class="nb">sudo </span>installer <span class="nt">-pkg</span> ./AWSCLIV2.pkg <span class="nt">-target</span> /
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>% aws <span class="nt">--version</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>% aws <span class="nt">--version</span>
 aws-cli/2.4.27 Python/3.8.8 Darwin/21.4.0 exe/x86_64 prompt/off
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="step-2-download--open-the-project">Step 2. Download &amp; Open the project</h2>
 
 <p><a href="https://github.com/awslabs/amazon-ecs-nodejs-microservices">https://github.com/awslabs/amazon-ecs-nodejs-microservices</a></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/awslabs/amazon-ecs-nodejs-microservices.git
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git clone https://github.com/awslabs/amazon-ecs-nodejs-microservices.git
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="step-3-provision-a-repository">Step 3. Provision a Repository</h2>
 
@@ -110,8 +116,9 @@ aws-cli/2.4.27 Python/3.8.8 Darwin/21.4.0 exe/x86_64 prompt/off
   <li>
     <p>configure aws cli</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  aws configure 
-</code></pre></div>    </div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  aws configure 
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>![스크린샷 2022-03-22 오전 10.19.01.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오전_10.19.01.png" /></p>
   </li>
@@ -119,8 +126,9 @@ aws-cli/2.4.27 Python/3.8.8 Darwin/21.4.0 exe/x86_64 prompt/off
 
 <h3 id="2-docker-log-in">2. Docker Log in</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws ecr get-login-password <span class="nt">--region</span> us-west-2 | docker login <span class="nt">--username</span> AWS <span class="nt">--password-stdin</span> 431072036772.dkr.ecr.us-west-2.amazonaws.com/api
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>aws ecr get-login-password <span class="nt">--region</span> us-west-2 | docker login <span class="nt">--username</span> AWS <span class="nt">--password-stdin</span> 431072036772.dkr.ecr.us-west-2.amazonaws.com/api
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>If the authentication was successful, you will receive the confirmation message: <strong>Login Succeeded</strong>.</p>
 
@@ -132,10 +140,34 @@ aws-cli/2.4.27 Python/3.8.8 Darwin/21.4.0 exe/x86_64 prompt/off
 
 <p><strong>⚐ Note:</strong> <strong>The period (</strong>.<em>*) after </em>api* is needed.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> api <span class="nb">.</span>
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>docker build <span class="nt">-t</span> api <span class="nb">.</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>+] Building 22.9s <span class="o">(</span>9/9<span class="o">)</span> FINISHED                                                                                                                             
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="o">[</span>+] Building 22.9s <span class="o">(</span>9/9<span class="o">)</span> FINISHED                                                                                                                             
  <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile                                                                                                     0.2s
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 149B                                                                                                                     0.0s
  <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore                                                                                                                        0.1s
@@ -158,7 +190,7 @@ aws-cli/2.4.27 Python/3.8.8 Darwin/21.4.0 exe/x86_64 prompt/off
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> exporting layers                                                                                                                                  0.5s
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> writing image sha256:023ee736e7eb3a93a1c1d0a265de19dd4979b982b718b7cdb48a97885ceb10bf                                                             0.0s 
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/api
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="4-tag-the-image">4. Tag the Image</h3>
 
@@ -166,19 +198,25 @@ aws-cli/2.4.27 Python/3.8.8 Darwin/21.4.0 exe/x86_64 prompt/off
 
 <p><strong>⚐ Note:</strong> Replace the <em>[account-ID]</em> and <em>[region]</em> placeholders with your specific information.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag api:latest <span class="o">[</span>account-ID].dkr.ecr.[region].amazonaws.com/api:v1
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>docker tag api:latest <span class="o">[</span>account-ID].dkr.ecr.[region].amazonaws.com/api:v1
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag api:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/api:v1
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>docker tag api:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/api:v1
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>you check if the images is built successfully following command <em>docker images</em></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker images
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>docker images
 REPOSITORY                                         TAG       IMAGE ID       CREATED         SIZE
 431072036772.dkr.ecr.us-west-2.amazonaws.com/api   v1        023ee736e7eb   3 minutes ago   59.9MB
 api                                                latest    023ee736e7eb   3 minutes ago   59.9MB
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="5-push-the-image-to-the-repository">5. Push the Image to the Repository</h3>
 
@@ -186,19 +224,27 @@ api                                                latest    023ee736e7eb   3 mi
 
 <p><strong>⚐ Note:</strong> replace the [account-ID] and [region] placeholders with your specific information.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push <span class="o">[</span>account-id].dkr.ecr.[region].amazonaws.com/api:v1
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>docker push <span class="o">[</span>account-id].dkr.ecr.[region].amazonaws.com/api:v1
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/api:v1
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/api:v1
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The push refers to repository <span class="o">[</span>431072036772.dkr.ecr.us-west-2.amazonaws.com/api]
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>The push refers to repository <span class="o">[</span>431072036772.dkr.ecr.us-west-2.amazonaws.com/api]
 dfed9ca1db03: Pushed 
 43fccc911ce1: Pushed 
 5f70bf18a086: Pushed 
 3e893534526a: Pushed 
 040fd7841192: Pushed
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>If you navigate to your Amazon ECR repository, you should see your image tagged <em>v1</em>.</p>
 
@@ -250,12 +296,17 @@ dfed9ca1db03: Pushed
 
 <p>Or You can use command line to create stack</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> aws cloudformation deploy \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre> aws cloudformation deploy \
    --template-file infrastructure/ecs.yml \
    --region [region] \
    --stack-name BreakTheMonolith-Demo \
    --capabilities CAPABILITY_NAMED_IAM
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="step-2-check-your-cluster-is-running">Step 2. Check your cluster is running</h2>
 
@@ -452,35 +503,47 @@ dfed9ca1db03: Pushed
   <li>
     <p>Build Images</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker build <span class="nt">-t</span> <span class="o">[</span>service-name] ./[service-name]
-</code></pre></div>    </div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  docker build <span class="nt">-t</span> <span class="o">[</span>service-name] ./[service-name]
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker build <span class="nt">-t</span> posts ./posts
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>  docker build <span class="nt">-t</span> posts ./posts
   docker build <span class="nt">-t</span> <span class="nb">users</span> ./users
   docker build <span class="nt">-t</span> threads ./threads
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>Tag Images</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker tag <span class="o">[</span>service-name]:latest <span class="o">[</span>account-ID].dkr.ecr.[region].amazonaws.com/[service-name]:v1
-</code></pre></div>    </div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  docker tag <span class="o">[</span>service-name]:latest <span class="o">[</span>account-ID].dkr.ecr.[region].amazonaws.com/[service-name]:v1
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker tag posts:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/posts:v1
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>  docker tag posts:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/posts:v1
   docker tag <span class="nb">users</span>:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/users:v1
   docker tag threads:latest 431072036772.dkr.ecr.us-west-2.amazonaws.com/threads:v1
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
     <p>Push Images</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker push <span class="o">[</span>account-id].dkr.ecr.[region].amazonaws.com/[service-name]:v1
-</code></pre></div>    </div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  docker push <span class="o">[</span>account-id].dkr.ecr.[region].amazonaws.com/[service-name]:v1
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/posts:v1
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>  docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/posts:v1
   docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/threads:v1
   docker push 431072036772.dkr.ecr.us-west-2.amazonaws.com/users:v1
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p># Module 4 : Deploy Microservices</p>
 
@@ -502,7 +565,29 @@ dfed9ca1db03: Pushed
 
     <p>![스크린샷 2022-03-22 오후 10.46.04.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-22_오후_10.46.04.png" /></p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">{</span>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre>  <span class="o">{</span>
       <span class="s2">"containerDefinitions"</span>: <span class="o">[</span>
           <span class="o">{</span>
               <span class="s2">"name"</span>: <span class="s2">"[service-name]"</span>,
@@ -524,7 +609,7 @@ dfed9ca1db03: Pushed
       <span class="s2">"placementConstraints"</span>: <span class="o">[]</span>,
       <span class="s2">"family"</span>: <span class="s2">"[service-name]"</span>
   <span class="o">}</span>
-</code></pre></div>    </div>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
 </ul>
 
@@ -537,11 +622,13 @@ dfed9ca1db03: Pushed
   <li>
     <p>Configure the target group</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  aws elbv2 create-target-group <span class="nt">--region</span> <span class="o">[</span>region] <span class="nt">--name</span> <span class="o">[</span>service-name] <span class="nt">--healthy-threshold-count</span> 2 <span class="nt">--unhealthy-threshold-count</span> 2 <span class="nt">--health-check-timeout-seconds</span> 5 <span class="nt">--health-check-interval-seconds</span> 6 <span class="nt">--protocol</span> HTTP <span class="nt">--port</span> 80 <span class="nt">--vpc-id</span> <span class="o">[</span>vpc-attribute] 
-</code></pre></div>    </div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  aws elbv2 create-target-group <span class="nt">--region</span> <span class="o">[</span>region] <span class="nt">--name</span> <span class="o">[</span>service-name] <span class="nt">--healthy-threshold-count</span> 2 <span class="nt">--unhealthy-threshold-count</span> 2 <span class="nt">--health-check-timeout-seconds</span> 5 <span class="nt">--health-check-interval-seconds</span> 6 <span class="nt">--protocol</span> HTTP <span class="nt">--port</span> 80 <span class="nt">--vpc-id</span> <span class="o">[</span>vpc-attribute] 
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  aws elbv2 create-target-group <span class="nt">--region</span> us-west-2 <span class="nt">--name</span> threads  <span class="nt">--healthy-threshold-count</span> 2 <span class="nt">--unhealthy-threshold-count</span> 2 <span class="nt">--health-check-timeout-seconds</span> 5 <span class="nt">--health-check-interval-seconds</span> 6 <span class="nt">--protocol</span> HTTP <span class="nt">--port</span> 80 <span class="nt">--vpc-id</span> vpc-0a2ebb545b80b6307
-</code></pre></div>    </div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  aws elbv2 create-target-group <span class="nt">--region</span> us-west-2 <span class="nt">--name</span> threads  <span class="nt">--healthy-threshold-count</span> 2 <span class="nt">--unhealthy-threshold-count</span> 2 <span class="nt">--health-check-timeout-seconds</span> 5 <span class="nt">--health-check-interval-seconds</span> 6 <span class="nt">--protocol</span> HTTP <span class="nt">--port</span> 80 <span class="nt">--vpc-id</span> vpc-0a2ebb545b80b6307
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
     <p>![스크린샷 2022-03-23 오전 10.16.46.png]<img src="https://eunmik.github.io/bonita.github.io/assets/img/2022/0325/스크린샷_2022-03-23_오전_10.16.46.png" /></p>
   </li>

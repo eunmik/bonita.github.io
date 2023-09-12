@@ -1,4 +1,4 @@
-I"v<p>reference : <a href="https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html">https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html</a></p>
+I"Ù<p>reference : <a href="https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html">https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html</a></p>
 
 <p>prerequisite :</p>
 
@@ -9,10 +9,40 @@
 
 <h1 id="getting-started">getting started</h1>
 
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">git</span> <span class="nx">flow</span> <span class="nx">init</span>
-</code></pre></div></div>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nx">git</span> <span class="nx">flow</span> <span class="nx">init</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Which branch should be used <span class="k">for </span>bringing forth production releases?
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="rouge-code"><pre>Which branch should be used <span class="k">for </span>bringing forth production releases?
    - heads/1.2201.1
    - 1.2204.1
    - 1.2204.1-1
@@ -41,12 +71,13 @@ Hotfix branches? <span class="o">[</span>hotfix/]
 Support branches? <span class="o">[</span>support/] 
 Version tag prefix? <span class="o">[]</span>
 Hooks and filters directory? <span class="o">[</span>/mnt/d/IdeaProjects/backend/argos-rpa-la-report-api/.git/hooks]
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>TroubleShooting :</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Fatal: Working tree contains unstaged changes. Aborting.
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>Fatal: Working tree contains unstaged changes. Aborting.
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <blockquote>
   <p>git stash</p>
@@ -54,61 +85,73 @@ Hooks and filters directory? <span class="o">[</span>/mnt/d/IdeaProjects/backend
 
 <h3 id="to-change-branch-name">To change branch name</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi .git/config
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>vi .git/config
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="features">Features</h2>
 
 <h3 id="start-a-new-feature">start a new feature</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow feature start MYFEATURE
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git flow feature start MYFEATURE
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="finish-up-a-feature">finish up a feature</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow feature finish MYFEATURE
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git flow feature finish MYFEATURE
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="publish-a-feature">publish a feature</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow feature publish MYFEATURE
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git flow feature publish MYFEATURE
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="getting-a-published-feature">Getting a published feature</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow feature pull origin MYFEATURE
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>git flow feature pull origin MYFEATURE
 git flow feature track MYFEATURE
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="make-a-release">Make a release</h2>
 
 <h3 id="start-a-release">start a release</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow release start RELEASE <span class="o">[</span>BASE]
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>git flow release start RELEASE <span class="o">[</span>BASE]
 git flow release publish RELEASE
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="finish-up-a-release">Finish up a release</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow release finish RELEASE
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git flow release finish RELEASE
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="hotfixes">Hotfixes</h2>
 
 <h3 id="git-flow-hotfix-start">git flow hotfix start</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow hotfix start VERSION <span class="o">[</span>BASENAME]
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git flow hotfix start VERSION <span class="o">[</span>BASENAME]
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="finish-a-hotfix">finish a hotfix</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git flow hotfix finish VERSION
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git flow hotfix finish VERSION
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>###</p>
 
 <h3 id="how-to-delete-branch">How to delete branch</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch <span class="nt">-d</span> MYFEATURE
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git branch <span class="nt">-d</span> MYFEATURE
+</pre></td></tr></tbody></table></code></pre></div></div>
 :ET
