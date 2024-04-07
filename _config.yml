@@ -20,7 +20,7 @@ timezone: Asia/Seoul
 
 title: Bonita's Botari # the main title
 
-tagline: my brain is out of storage # it will display as the sub-title
+tagline: my brain is out of memory # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   journal of a junior java developer for technical writing. 
