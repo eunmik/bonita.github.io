@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My First Memoir of 2025"
+title: "MyBatis와 @Builder 어노테이션 사용 시 주의해야할 점"
 date: 2025-01-14
 categories: ["memoir, troubleshooting"]
 tags: ["memoir, mybatis, builder, annotation"]
